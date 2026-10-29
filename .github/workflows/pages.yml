@@ -28,7 +28,8 @@ jobs:
       - name: Montar artefato
         run: |
           mkdir _site
-          cp -r index.html teste.html .nojekyll css js assets _site/
+          cp -r index.html teste.html .nojekyll css js _site/
+          [ -d assets ] && cp -r assets _site/ || true
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
