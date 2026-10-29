@@ -1,7 +1,7 @@
 # DESIGN.md: fundação do site de apresentação
 
 > Workshop de Desenvolvimento com IA. Slides servidos como site no GitHub Pages.
-> Versão 1.9 · 2026-10-29 · Leandro Amaral
+> Versão 1.12 · 2026-10-29 · Leandro Amaral
 
 Este arquivo é a **fonte da verdade** do projeto. Ele vale para quem escreve código à mão e para agentes de IA (OpenCode, Claude, Copilot). Faça o `AGENTS.md` do repositório apontar para cá, com a linha: *"Antes de criar ou alterar qualquer slide, leia o DESIGN.md e siga-o à risca."*
 
@@ -50,9 +50,11 @@ URLs base (cdnjs, reveal.js 6.0.1):
 
 ```
 /
-├── index.html            # página inicial: título do workshop + links para Dia 1 e Dia 2
+├── index.html            # página inicial: título do workshop + dois cartões, um para cada dia
 ├── dia-1.html            # apresentação do Dia 1 (O jeito rápido)
-├── dia-2.html            # apresentação do Dia 2 (O jeito maduro)
+├── dia-2.html            # apresentação do Dia 2 (O jeito estruturado)
+├── referencia-ui.html    # deck de referência de UI (todas as peças); NÃO apagar, NÃO linkar: acesso só pela URL
+├── certificado-b.html    # certificado de participação (seção 18)
 ├── css/
 │   ├── tokens.css        # variáveis: cores, tipografia, espaços, movimento (seção 5)
 │   ├── base.css          # neutraliza padrões do reveal.js + estilos globais (seção 6)
@@ -62,7 +64,9 @@ URLs base (cdnjs, reveal.js 6.0.1):
 ├── js/
 │   ├── main.js           # Reveal.initialize + liga/desliga efeitos por slide
 │   └── efeitos/
-│       ├── esfera.js     # esfera pontilhada (canvas)
+│       ├── esfera.js     # esfera pontilhada (canvas): referência de UI e certificado
+│       ├── codigo.js     # prompt que vira cascata de código (canvas): capa do Dia 1
+│       ├── planta.js     # peças traçadas e construídas em sequência (canvas): capa do Dia 2
 │       └── flutuantes.js # quadrados flutuantes
 ├── assets/
 │   ├── img/              # imagens e capturas (PNG/WebP/SVG)
@@ -74,6 +78,7 @@ URLs base (cdnjs, reveal.js 6.0.1):
 
 Regras:
 
+- **Referência de UI:** `referencia-ui.html` guarda o deck de validação visual. Antes de criar um slide, procure ali a peça equivalente e copie o padrão. Ele não aparece na home nem em nenhum outro link.
 - **Uma apresentação por arquivo HTML.** Os slides ficam em `<section>` dentro de `.slides`, com um comentário antes de cada bloco do roteiro, por exemplo `<!-- 1.3 Harness -->`.
 - **Nunca** coloque estilo inline nos slides. Exceções: posição de um elemento fixado num layout e variáveis CSS locais (`style="--delay: 200ms"`).
 - Os arquivos CSS são carregados nesta ordem: `tokens` → `base` → `componentes` → `layouts` → `animacoes`.
@@ -399,6 +404,7 @@ Para links clicáveis (repositório, QR code, "ver exemplo"):
 - `.card--dark`: fundo `--c-basalt`, texto `--c-sand`, h3 `--c-tint`.
 - `.card--accent`: fundo `--c-accent`, texto `--c-ink`. É o destaque do grupo, **no máximo 1 por slide**.
 - Estrutura interna fixa: `chip` → `h3` → `p` (1 ou 2 linhas) → lista opcional (até 4 itens).
+- **Cartão clicável** (home): o cartão inteiro é o link. A moldura vira `<a class="hatch hatch--link" href="…">` e o botão dentro dele é um `<span class="btn-hex card__action">` no pé do cartão (nunca um `<a>` dentro de outro). No hover, a borda da moldura escurece para `--c-basalt` e o cartão sobe 4px na diagonal (`transform`); no foco de teclado, contorno tracejado de 2px.
 
 ### 8.6 Moldura tracejada com losangos
 
@@ -498,7 +504,7 @@ Cada slide usa **um** layout, num `div` wrapper que ocupa o slide inteiro. A ár
 
 | Layout | Estrutura | Superfície típica |
 |---|---|---|
-| `layout-cover` | eyebrow (topo) · display + subtítulo + pílula (meio) · linha de rodapé tracejada (base) · esfera à direita | light |
+| `layout-cover` | eyebrow (topo) · display + subtítulo + pílula (meio) · linha de rodapé tracejada (base) · figura animada à direita (`.layout-cover__fig`, 640×620): **cada dia tem a sua**, código no Dia 1 e planta no Dia 2 | light |
 | `layout-title` | eyebrow + h2 no topo, conteúdo livre abaixo (`gap: 64px`) | light |
 | `layout-two-cards` | `layout-title` + 2 cartões lado a lado (`gap: 96px`) ligados por conector com nós | light |
 | `layout-statement` | eyebrow (topo) · frase display em até 2 linhas · linha de apoio (base) · moldura + flutuantes | accent ou dark |
@@ -571,7 +577,9 @@ Também há **entrada automática** ao chegar no slide, sem clique: elementos co
 | `ping` | ponta da antena do robô crescendo 18%, em loop | `layout-robots` |
 | `wave-run` | tracejado correndo na onda da tela do robô | `layout-robots` |
 | `digita` | linha de código revelada da esquerda para a direita (`clip-path` + `steps()`), escalonada por `--i` | `layout-code` |
-| `esfera` | esfera pontilhada (dithering Bayer 4×4) girando, em canvas, com brilho do acento | capa e encerramento |
+| `esfera` | esfera pontilhada (dithering Bayer 4×4) girando, em canvas, com brilho do acento | referência de UI e certificado |
+| `codigo` | um prompt curto é digitado num cartão, "enviado" com um piscar âmbar, e dispara uma cascata rápida de linhas de código num painel escuro; no fim, as linhas com defeito piscam em laranja | capa do Dia 1 |
+| `planta` | composição abstrata de 6 peças: primeiro as cotas, depois cada peça é traçada em tracejado azul e construída em degraus, uma de cada vez, com um marcador âmbar levando a vez para a próxima | capa do Dia 2 |
 
 Keyframes de referência, adaptados do CSS da Greptile:
 
@@ -591,6 +599,10 @@ Keyframes de referência, adaptados do CSS da Greptile:
 ```
 
 **Esfera** (`js/efeitos/esfera.js`): um canvas de 560×560 com grade de células de 7px. Para cada célula dentro do círculo, calcule a iluminação de Lambert com uma luz que gira, misture 20% de um padrão de faixas de longitude e latitude e acenda a célula se o valor passar o limiar da matriz Bayer 4×4. As células são quadrados de 5px na cor `--s-dot` da superfície (`--c-blue` no claro, `--c-tint` no escuro), lida do CSS do canvas, e o canvas leva `filter: drop-shadow(0 0 6px var(--s-glow))` (brilho azul no claro, âmbar no escuro). A rotação é de cerca de 0,015 rad por quadro.
+
+**Código** (`js/efeitos/codigo.js`, capa do Dia 1, "o jeito rápido"): canvas de 640×620. No topo, um cartão `--c-white` com borda `--c-ink` onde o prompt `> faz um sistema` é digitado em Space Mono 28px com cursor âmbar (1,4s); ao "enviar", o cartão pisca em `--c-accent` e o nó que o liga ao painel acende. Embaixo, um painel `--c-basalt` recebe 34 linhas de código em 2,6s (barras em `--c-tint`, `--c-blue`, `--c-pink`, `--c-green`, `--c-accent` e `--c-eggshell`, com recuo e numeração em quadradinhos), rolando quando enche. Terminada a cascata, ~14% das linhas ficam `--c-orange` e piscam com faixa laranja: o one-shot gera muito, rápido, e com defeito. O ciclo dura ~7,5s. Linhas geradas por semente fixa (sempre as mesmas). No PDF e com movimento reduzido, mostra o código pronto com os defeitos marcados.
+
+**Planta** (`js/efeitos/planta.js`, capa do Dia 2, "o jeito estruturado"): canvas de 640×620 com uma composição abstrata de 6 peças retangulares (lembra uma tela, sem ser literal), uma por etapa do SDD do roteiro, sem rótulos. Primeiro surgem as cotas (linhas `--c-muted` com marcas nas pontas): mede antes de construir. Depois, para cada peça, em ordem: um quadrado âmbar com borda `--c-ink` sai da peça anterior até a próxima, deixando um fio tracejado; a peça é traçada em tracejado `--c-blue` (lido do `color` do canvas) e então preenchida em 6 degraus com a sua cor (`--c-blue`, `--c-violet`, `--c-pink`, `--c-accent`, `--c-eggshell`, `--c-green`), ganhando contorno `--c-ink`. Ciclo de ~11s, ritmo calmo. No PDF e com movimento reduzido, mostra a composição pronta.
 
 ### 10.4 Desempenho e acessibilidade do movimento
 
@@ -679,6 +691,8 @@ Um slide ou mudança só está **pronto** quando:
 | 2026-10-29 | v1.8: Harness vira humanoide alto com capacete, arnês em X e cinto de ferramentas; Modelo com cabeça e tronco em proporção |
 | 2026-10-29 | v1.9: certificado de participação (seção 18), A4 paisagem; proposta B escolhida e exibida em tela cheia no deck |
 | 2026-10-29 | v1.10: robôs com acabamento fino (8.12): hierarquia de traço 2,5 / 2 / 1,25px e detalhes de superfície (hachura, brilho, emendas com rebites, pontos de luz), na linha das ilustrações da Mux; silhuetas, cores e traços de pessoa inalterados |
+| 2026-10-29 | v1.11: home (`index.html`) com dois cartões apontando para `dia-1.html` e `dia-2.html` (por enquanto só a capa); o deck de validação vira `referencia-ui.html`, acessível só pela URL; Dia 2 passa a "O jeito estruturado", como no roteiro |
+| 2026-10-29 | v1.12: cartões da home inteiramente clicáveis (8.5); capas dos dias com figura própria (prompt que vira código no Dia 1, planta construída etapa por etapa no Dia 2) no lugar da esfera, que fica na referência de UI e no certificado |
 
 ## 17. Referências
 

@@ -28,6 +28,15 @@
   color: var(--s-dot);
   filter: drop-shadow(0 0 6px var(--s-glow));
 }
+/* Figura animada da capa de cada dia (código no Dia 1, planta no Dia 2) */
+.layout-cover__fig {
+  position: absolute;
+  right: 0;
+  top: 120px;
+  width: 640px;
+  height: 620px;
+}
+.layout-cover__fig--planta { color: var(--c-blue); } /* traçado da planta */
 
 /* Título no topo, conteúdo abaixo */
 .layout-title,
