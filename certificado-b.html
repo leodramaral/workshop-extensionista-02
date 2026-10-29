@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Certificado, proposta B</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&family=DM+Sans:ital,wght@0,400..700;1,400..700&family=Space+Mono:wght@400;700&display=swap">
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/componentes.css">
+  <link rel="stylesheet" href="css/layouts.css">
+  <link rel="stylesheet" href="css/certificado.css">
+</head>
+<body>
+  <div class="reveal">
+    <div class="cert-viewport">
+      <div class="cert-stage">
+
+        <!-- Proposta B: escuro, faixa âmbar com esfera -->
+        <main class="cert cert--b surface-dark">
+          <div class="cert__body">
+            <aside class="cert__band surface-accent">
+              <p class="eyebrow">[ WORKSHOP · 2 DIAS ]</p>
+              <canvas data-efeito="esfera" aria-hidden="true"></canvas>
+              <p class="cert__meta">[ DESENVOLVIMENTO COM IA ]</p>
+              <i class="mark mark--a" aria-hidden="true"></i>
+              <i class="mark mark--b" aria-hidden="true"></i>
+            </aside>
+
+            <div class="cert__main">
+              <div class="frame" aria-hidden="true">
+                <i class="frame__diamond frame__diamond--tl"></i>
+                <i class="frame__diamond frame__diamond--tr"></i>
+                <i class="frame__diamond frame__diamond--bl"></i>
+                <i class="frame__diamond frame__diamond--br"></i>
+              </div>
+
+              <p class="eyebrow">[ CERTIFICADO DE PARTICIPAÇÃO ]<span class="cursor" aria-hidden="true"></span></p>
+
+              <div class="cert__who">
+                <p class="cert__lead">Certificamos que</p>
+                <h1 class="cert__name" data-slot="nome">Nome do participante</h1>
+                <p class="cert__text">participou do Workshop de Desenvolvimento com IA, em dois encontros de 190 minutos.</p>
+              </div>
+
+              <div class="cert__days">
+                <article class="cert__day">
+                  <span class="chip chip--hex chip--accent">DIA 1</span>
+                  <h3>O jeito rápido</h3>
+                  <p>Vibe coding em one-shot.</p>
+                </article>
+                <article class="cert__day">
+                  <span class="chip chip--hex chip--blue">DIA 2</span>
+                  <h3>O jeito maduro</h3>
+                  <p>Spec-Driven Development, feito à mão.</p>
+                </article>
+              </div>
+
+              <div class="cert__facts">
+                <span class="pill">CARGA HORÁRIA · 6H20</span>
+                <span class="cert__meta" data-slot="datas">DD/MM/2026 e DD/MM/2026</span>
+              </div>
+
+              <div class="cert-sigs">
+                <div class="cert-sigs__item"><div class="cert-sigs__space"></div><span class="cert-sigs__name">[ ASSINATURA ]</span></div>
+                <div class="cert-sigs__item"><div class="cert-sigs__space"></div><span class="cert-sigs__name">[ ASSINATURA ]</span></div>
+              </div>
+            </div>
+          </div>
+        </main>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="js/efeitos/esfera.js"></script>
+  <script src="js/certificado.js"></script>
+</body>
+</html>

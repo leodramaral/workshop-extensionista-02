@@ -1,0 +1,98 @@
+/* Certificado (DESIGN.md, seção 18). Canvas de 1920×1358 (A4 paisagem), escalado para a tela e para a impressão */
+
+html, body { margin: 0; background: var(--c-basalt); }
+
+.cert-viewport {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+.cert-stage {
+  width: calc(1920px * var(--k, 0.5));
+  height: calc(1358px * var(--k, 0.5));
+}
+.cert {
+  width: 1920px;
+  height: 1358px;
+  transform: scale(var(--k, 0.5));
+  transform-origin: 0 0;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  font-family: var(--f-body);
+  font-size: var(--t-body);
+  line-height: 1.45;
+  color: var(--c-basalt);
+}
+.cert > .cert__body { width: 100%; height: 100%; position: relative; display: flex; }
+.cert p, .cert h1, .cert h3 { margin: 0; }
+
+/* Nome do participante: em caixa alta e largo; nomes muito longos viram título longo (seção 5.2) */
+.cert__name { max-width: 1664px; overflow-wrap: anywhere; }
+.cert__name--long { font-weight: 700; font-stretch: 100%; text-transform: none; letter-spacing: -0.02em; }
+.cert__bar { width: 480px; height: 14px; background: var(--c-accent); }
+.cert__lead { font-size: var(--t-lead); line-height: 1.35; color: var(--s-sub); }
+.cert__text { font-size: var(--t-lead); line-height: 1.35; color: var(--s-title); }
+.cert__meta { font-family: var(--f-mono); font-size: var(--t-label); text-transform: uppercase; letter-spacing: 0.08em; color: var(--s-meta); }
+
+/* ---------- Proposta A: claro, equipe de robôs assina ---------- */
+.cert--a { padding: var(--slide-pad); }
+.cert--a .cert__body { flex-direction: column; }
+.cert--a .cert__top { display: flex; justify-content: space-between; align-items: center; }
+.cert--a .cert__who { margin-top: 40px; }
+.cert--a .cert__name { margin-top: var(--s-2); }
+.cert--a .cert__bar { margin-top: var(--s-3); }
+.cert--a .cert__text { margin-top: var(--s-4); max-width: 1380px; }
+.cert--a .cert__facts { margin-top: var(--s-4); display: flex; align-items: center; gap: var(--s-3); flex-wrap: wrap; }
+
+.cert-team { margin-top: auto; display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--s-4); }
+.cert-sig { display: flex; flex-direction: column; align-items: center; }
+.cert-sig__stage { height: 250px; width: 100%; display: flex; align-items: flex-end; justify-content: center; }
+.cert-sig__stage .robot { width: 165px; }
+.cert-sig__ground { width: 100%; height: 2px; background: var(--c-basalt); }
+.cert-sig__space { width: 100%; height: 56px; border-bottom: 1px solid var(--c-basalt); }
+.cert-sig .chip { align-self: center; margin-top: var(--s-2); }
+
+/* ---------- Proposta B: escuro com faixa âmbar e esfera ---------- */
+.cert--b .cert__band {
+  width: 600px;
+  flex: none;
+  box-sizing: border-box;
+  padding: var(--s-7) var(--s-6) var(--s-7);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+.cert--b .cert__band canvas { display: block; width: 472px; height: 472px; color: var(--c-ink); filter: none; }
+.cert--b .cert__band .eyebrow { color: var(--c-ink); }
+.cert--b .cert__band .cert__meta { color: var(--c-basalt); }
+.cert--b .cert__band .mark { position: absolute; border: 2px solid var(--c-basalt); }
+.cert--b .cert__band .mark--a { right: 64px; top: 360px; width: 24px; height: 24px; background: var(--c-blue); }
+.cert--b .cert__band .mark--b { left: 64px; bottom: 260px; width: 16px; height: 16px; background: var(--c-pink); }
+
+.cert--b .frame { inset: var(--s-5); }
+.cert--b .cert__main { flex: 1; padding: var(--s-7) 80px var(--s-7) 80px; display: flex; flex-direction: column; position: relative; }
+.cert--b .cert__who { margin-top: 56px; }
+.cert--b .cert__name { margin-top: var(--s-2); }
+.cert--b .cert__text { margin-top: var(--s-4); }
+.cert--b .cert__days { margin-top: var(--s-5); display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-4); }
+.cert--b .cert__day { border: 1px solid var(--frame-dark); padding: var(--s-4); display: flex; flex-direction: column; gap: var(--s-2); }
+.cert--b .cert__day p { color: var(--c-eggshell); }
+.cert--b .cert__facts { margin-top: var(--s-5); display: flex; align-items: center; gap: var(--s-3); flex-wrap: wrap; }
+
+.cert-sigs { margin-top: auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-7); }
+.cert-sigs__item { display: flex; flex-direction: column; }
+.cert-sigs__space { height: 72px; border-bottom: 1px solid var(--c-eggshell); }
+.cert-sigs__name { margin-top: var(--s-2); display: flex; align-items: center; gap: var(--s-1); color: var(--c-eggshell); font-family: var(--f-mono); font-size: var(--t-label); text-transform: uppercase; letter-spacing: 0.08em; }
+
+/* ---------- Impressão: A4 paisagem, 1 página ---------- */
+@page { size: 297mm 210mm; margin: 0; }
+@media print {
+  html, body { background: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .cert-viewport { display: block; width: auto; height: auto; overflow: visible; }
+  .cert-stage { width: auto; height: auto; }
+  .cert { transform: none; zoom: 0.5845; }
+}

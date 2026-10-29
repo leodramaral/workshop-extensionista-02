@@ -166,3 +166,22 @@
 .layout-robots__six .robot { width: 240px; }
 .layout-robots__six .robot-card__stage { min-height: 334px; }
 .layout-robots__six .robot-card p { font-size: var(--t-label); line-height: 1.4; }
+
+/* Certificado em tela cheia: iframe de 1920×1358 reduzido a 79,53% para ocupar a altura do slide */
+.layout-certfull__stage {
+  position: absolute;
+  inset: calc(0px - var(--slide-pad));
+  display: flex;
+  justify-content: center;
+}
+.cert-full { width: 1528px; height: 1080px; overflow: hidden; }
+.cert-full iframe {
+  display: block;
+  width: 1920px;
+  height: 1358px;
+  border: 0;
+  transform: scale(0.7953);
+  transform-origin: 0 0;
+  pointer-events: none;
+}
+.layout-certfull > a.layout-certfull__open { position: absolute; top: calc(32px - var(--slide-pad)); right: calc(32px - var(--slide-pad)); }

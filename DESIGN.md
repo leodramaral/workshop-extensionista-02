@@ -1,7 +1,7 @@
 # DESIGN.md: fundação do site de apresentação
 
 > Workshop de Desenvolvimento com IA. Slides servidos como site no GitHub Pages.
-> Versão 1.8 · 2026-10-29 · Leandro Amaral
+> Versão 1.9 · 2026-10-29 · Leandro Amaral
 
 Este arquivo é a **fonte da verdade** do projeto. Ele vale para quem escreve código à mão e para agentes de IA (OpenCode, Claude, Copilot). Faça o `AGENTS.md` do repositório apontar para cá, com a linha: *"Antes de criar ou alterar qualquer slide, leia o DESIGN.md e siga-o à risca."*
 
@@ -676,6 +676,7 @@ Um slide ou mudança só está **pronto** quando:
 | 2026-10-29 | v1.6: robôs com silhuetas diversas (arquétipos por papel, como na Mux); Modelo deixa de ser escuro e passa a rosa; corpo sempre claro e com uma cor só |
 | 2026-10-29 | v1.7: Harness redesenhado como pórtico com núcleo, ferramentas e cadeado (deixa de ser cópia do mascote da Mux); painel inferior do Plan com onda lisa; Modelo passa a violeta (sexta cor de apoio, `--c-violet`) para nenhum robô repetir cor |
 | 2026-10-29 | v1.8: Harness vira humanoide alto com capacete, arnês em X e cinto de ferramentas; Modelo com cabeça e tronco em proporção |
+| 2026-10-29 | v1.9: certificado de participação (seção 18), A4 paisagem; proposta B escolhida e exibida em tela cheia no deck |
 
 ## 17. Referências
 
@@ -684,3 +685,13 @@ Um slide ou mudança só está **pronto** quando:
 - reveal.js, documentação e configuração: https://revealjs.com/ e https://revealjs.com/config/
 - reveal.js, notas de versão (mudanças da 6.0): https://github.com/hakimel/reveal.js/releases
 - Protótipo visual (deck de 5 slides no Claude), que serviu de primeira validação deste estilo.
+
+## 18. Certificado
+
+Certificado de participação (proposta B, escolhida), em `certificado-b.html` com `css/certificado.css` e `js/certificado.js`. Reaproveita tokens, superfícies, chips, pílula, moldura, marcadores e esfera.
+
+- **Canvas:** 1920×1358 (A4 paisagem), escalado para a janela. Impressão: `@page` A4 paisagem, 1 página, com fundos ligados.
+- **Visual (escuro, faixa âmbar):** `surface-dark` com faixa `surface-accent` à esquerda (esfera pontilhada e 2 marcadores), cartões dos dois dias e duas linhas de assinatura em branco (sem nomes de pessoas).
+- **No deck:** um slide em tela cheia logo após a capa (`layout-certfull`): iframe do certificado reduzido a 79,53% para ocupar a altura de 1080, centralizado sobre `surface-dark`, com botão "Abrir" para o tamanho real. Dentro do iframe a esfera fica parada.
+- **Parâmetros de URL:** `?nome=…&dia1=…&dia2=…`. Nome com mais de 28 caracteres usa o título longo (seção 5.2).
+- **Pendente de confirmação:** datas, nome do projeto de extensão e da instituição, e carga horária (6h20 = 2 × 190 min, derivada do roteiro).
