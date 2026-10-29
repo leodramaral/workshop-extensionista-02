@@ -23,7 +23,7 @@
     { robo: 'plan',    nome: 'Leandro',   papel: 'Propõe o plano',                 traco: { cabelo: 'regua', porte: 'largo' } },
     { robo: 'build',   nome: 'Kaio',      papel: 'Escreve e executa',              traco: { oculos: true, cabelo: 'crespo' } },
     { robo: 'harness', nome: 'Daniel',    papel: 'Ferramentas, loop e permissões', traco: { bigode: true, porte: 'alto' } },
-    { robo: 'agents',  nome: 'Gabriel',   papel: 'Contexto fixo do projeto',       traco: { oculos: true, cabelo: 'medio', porte: 'maior' } },
+    { robo: 'agents',  nome: 'Gabriel',   papel: 'Contexto fixo do projeto',       traco: { porte: 'maior' } },
     { robo: 'skills',  nome: 'Joelson',   papel: 'Capacidades extras',             traco: { oculos: true, tatuagem: 'zigzag' } },
     { robo: 'modelo',  nome: 'Jackeline', papel: 'Prevê o próximo token',          traco: { oculos: true, tatuagem: 'vinha' } },
   ];
