@@ -16,6 +16,7 @@ Reveal.initialize({
   backgroundTransition: 'fade',
   autoAnimate: true,
   fragments: true,
+  pdfSeparateFragments: false, // uma página por slide, já com todos os fragments visíveis
   plugins: [RevealNotes]
 });
 
@@ -31,4 +32,13 @@ function syncEffects() {
 }
 
 Reveal.on('ready', syncEffects);
+
+// No PDF todos os slides são impressos de uma vez: desenha um quadro de cada efeito
+Reveal.on('ready', () => {
+  if (!Reveal.isPrintView()) return;
+  document.querySelectorAll('[data-efeito]').forEach((el) => {
+    const efeito = window.Efeitos && window.Efeitos[el.dataset.efeito];
+    if (efeito && efeito.quadro) efeito.quadro(el);
+  });
+});
 Reveal.on('slidechanged', syncEffects);

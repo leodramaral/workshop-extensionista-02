@@ -85,3 +85,84 @@
   letter-spacing: 0.08em;
   color: var(--s-meta);
 }
+
+/* Layouts novos (validação visual v1.4) */
+.layout-robots,
+.layout-code,
+.layout-catalog { gap: var(--s-6); }
+
+/* Robôs: 3 colunas, cada robô sobre uma linha de chão */
+.layout-robots__row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-6);
+  align-items: start;
+}
+.robot-card { display: flex; flex-direction: column; gap: var(--s-3); }
+.robot-card__stage {
+  display: flex;
+  justify-content: center;
+  border-bottom: 2px solid var(--c-basalt);
+}
+.robot-card p { max-width: 480px; }
+
+/* Texto à esquerda, figura à direita */
+.layout-text-figure__row {
+  display: flex;
+  gap: var(--s-7);
+  flex: 1;
+  min-height: 0;
+  margin-bottom: var(--s-7);
+}
+.layout-text-figure__text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--s-4);
+}
+.layout-text-figure__figure { width: 850px; flex: none; }
+.panel--light { position: relative; background: var(--c-white); padding: 32px; }
+.panel--light canvas { display: block; color: var(--c-blue); }
+
+/* Cartão de código com coluna lateral */
+.layout-code__row {
+  display: grid;
+  grid-template-columns: 1000px 1fr;
+  gap: var(--s-7);
+  align-items: start;
+}
+.layout-code__card { position: relative; }
+.layout-code__card .stamp { position: absolute; z-index: 1; }
+.layout-code__card .stamp--vago { right: 28px; top: 8px; }
+.layout-code__card .stamp--ok { right: 28px; bottom: -36px; }
+.layout-code__added { position: relative; }
+.layout-code__side { display: flex; flex-direction: column; gap: var(--s-3); }
+.layout-code__side .chip { align-self: flex-start; }
+
+/* Catálogo de peças (só validação) */
+.layout-catalog__row {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  align-items: center;
+}
+.layout-catalog__label {
+  font-family: var(--f-mono);
+  font-size: var(--t-label);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--c-muted);
+}
+.layout-catalog__items { display: flex; flex-wrap: wrap; gap: var(--s-3); align-items: center; }
+
+/* Robôs v1.5: palco alinhado pelo chão e variante de 6 colunas */
+.robot-card__stage { align-items: flex-end; }
+.layout-robots__six {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--s-4);
+  align-items: start;
+}
+.layout-robots__six .robot { width: 240px; }
+.layout-robots__six .robot-card__stage { min-height: 334px; }
+.layout-robots__six .robot-card p { font-size: var(--t-label); line-height: 1.4; }

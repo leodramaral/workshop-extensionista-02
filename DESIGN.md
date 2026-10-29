@@ -1,7 +1,7 @@
 # DESIGN.md: fundação do site de apresentação
 
 > Workshop de Desenvolvimento com IA. Slides servidos como site no GitHub Pages.
-> Versão 1.3 · 2026-10-29 · Leandro Amaral
+> Versão 1.8 · 2026-10-29 · Leandro Amaral
 
 Este arquivo é a **fonte da verdade** do projeto. Ele vale para quem escreve código à mão e para agentes de IA (OpenCode, Claude, Copilot). Faça o `AGENTS.md` do repositório apontar para cá, com a linha: *"Antes de criar ou alterar qualquer slide, leia o DESIGN.md e siga-o à risca."*
 
@@ -115,7 +115,7 @@ O canvas é sempre **1920×1080**, e o reveal.js escala para a tela. Todas as me
 
 ### 5.1 Cores
 
-A paleta segue o site da Mux: carvão e cinza-esverdeado de base, com um acento principal âmbar e quatro cores de apoio (laranja, rosa, azul e verde). O quadriculado também vem da Mux.
+A paleta segue o site da Mux: carvão e cinza-esverdeado de base, com um acento principal âmbar e cinco cores de apoio (laranja, rosa, azul, verde e violeta). O quadriculado também vem da Mux.
 
 ```css
 :root {
@@ -138,6 +138,7 @@ A paleta segue o site da Mux: carvão e cinza-esverdeado de base, com um acento 
   --c-pink:       #FA50B5;  /* marcador rosa; "zona de perda" */
   --c-blue:       #0091FF;  /* marcador azul; links e informação */
   --c-green:      #00BE43;  /* marcador verde; "funcionou" */
+  --c-violet:     #A77BFF;  /* sexta cor de apoio; usada para dar cor própria ao 6º robô (Modelo) */
 
   /* Linhas utilitárias */
   --grid-line-light:  rgba(36, 38, 40, 0.07);
@@ -160,8 +161,8 @@ A paleta segue o site da Mux: carvão e cinza-esverdeado de base, com um acento 
 | `--c-muted-dark` | `--c-basalt` | 6.6:1 | texto terciário escuro |
 | `--c-accent` | `--c-basalt` | 8.4:1 | rótulos e destaques no escuro |
 | `--c-ink` | `--c-accent` | 10.0:1 | texto em slide de acento e pílulas |
-| `--c-ink` | `--c-orange` / `--c-pink` / `--c-blue` / `--c-green` | 6.0 / 5.9 / 5.6 / 7.3:1 | texto em chips e marcadores coloridos |
-| `--c-orange`, `--c-green`, `--c-pink`, `--c-blue` | `--c-basalt` | 5.0 / 6.1 / 5.0 / 4.7:1 | texto de alerta ou rótulo colorido no escuro (a partir de 24px) |
+| `--c-ink` | `--c-orange` / `--c-pink` / `--c-blue` / `--c-green` / `--c-violet` | 6.0 / 5.9 / 5.6 / 7.3 / 6.0:1 | texto em chips e marcadores coloridos |
+| `--c-orange`, `--c-green`, `--c-pink`, `--c-blue`, `--c-violet` | `--c-basalt` | 5.0 / 6.1 / 5.0 / 4.7 / 5.0:1 | texto de alerta ou rótulo colorido no escuro (a partir de 24px) |
 
 **Proibido:** texto na cor de acento (ou de qualquer cor de apoio) sobre fundo claro (âmbar sobre paper: 1.4:1). No claro, essas cores só aparecem como **preenchimento** (pílula, chip, marcador, cartão destaque) com texto `--c-ink` por cima.
 
@@ -345,6 +346,16 @@ Space Mono 24px, maiúsculas, tracking 0.08em, cor `--s-eyebrow` da superfície 
 
 Space Mono 24px, padding `4px 14px`, cantos retos. Padrão: fundo `--c-basalt` com texto `--c-sand`. Em `surface-dark`: fundo `--c-basalt-2`. `chip--accent`: fundo `--c-accent` com texto `--c-ink`.
 
+**Formas.** O chip pode ter pontas geométricas (mesmos `clip-path` do botão hexagonal, seção 8.4), com padding horizontal de 32px para o texto não encostar na ponta:
+
+```html
+<span class="chip chip--hex">STEP 01</span>   <!-- hexágono: pontas dos dois lados -->
+<span class="chip chip--back">STEP 02</span>  <!-- ponta à esquerda, entalhe à direita -->
+<span class="chip chip--arrow">STEP 03</span> <!-- seta para a direita -->
+```
+
+Formas combinam com as cores `chip--accent|orange|pink|blue|green|violet` (texto sempre `--c-ink`). **Glifos:** um marcador geométrico de 14px antes do texto, `<i class="glyph glyph--square|diamond|triangle glyph--accent" aria-hidden="true"></i>`. Círculo não entra: a regra de cantos retos só admite arredondar pílulas e nós de conector.
+
 ### 8.3 Pílula (Mux)
 
 ```html
@@ -369,6 +380,7 @@ Para links clicáveis (repositório, QR code, "ver exemplo"):
 }
 .btn-hex:hover { filter: brightness(1.08); }
 .btn-hex--dark { background: var(--c-basalt); color: var(--c-sand); }
+/* Par de botões (referência Greptile): `.btn-pair` > `.btn-hex.btn-hex--dark.btn-hex--back` + `.btn-hex` */
 /* Seta para a esquerda (botão "voltar"): */
 .btn-hex--back { clip-path: polygon(16px 0, 100% 0, calc(100% - 16px) 50%,
                                    100% 100%, 16px 100%, 0 50%); }
@@ -429,7 +441,7 @@ Liga cartões ou etapas de um fluxo. É um SVG em camada absoluta sobre o layout
 
 ### 8.9 Cartão de código / diff (Greptile)
 
-Para mostrar prompts, specs e trechos de código: cabeçalho com o caminho do arquivo (Space Mono, `--c-muted-dark`) e linhas numeradas com marcadores `01-` e `01+`. Linhas removidas têm fundo `--c-pink` a 25%; adicionadas, `--c-tint` a 25%. Fonte Space Mono 24px, no máximo 12 linhas por cartão.
+Para mostrar prompts, specs e trechos de código: cabeçalho com o caminho do arquivo (Space Mono, `--c-muted-dark`) e linhas numeradas com marcadores `01-` e `01+`. Linhas removidas têm fundo `--c-pink` a 25%; adicionadas, `--c-green` a 25%. Fonte Space Mono 24px, no máximo 12 linhas por cartão. As linhas adicionadas podem aparecer uma a uma (animação `digita`, seção 10.3) e o bloco pode ganhar a borda `marching-ants` enquanto "processa".
 
 ### 8.10 Rodapé
 
@@ -438,6 +450,46 @@ Para mostrar prompts, specs e trechos de código: cabeçalho com o caminho do ar
 ### 8.11 Marcadores decorativos
 
 Quadrados soltos de 12 a 24px em `--c-blue`, `--c-pink` ou `--c-accent`, com borda de 2px basalt quando sobre `surface-accent`. Use **no máximo 3 por slide**, sempre `aria-hidden`.
+
+### 8.12 Robôs (mascotes)
+
+Ilustrações planas em **SVG inline**, **geradas por `js/robos.js`** (sem build): uma camada base compartilhada mais uma configuração por robô. Inline porque a animação é por CSS, e CSS não alcança dentro de `<img>`. Os robôs são montados no carregamento da página, então também aparecem no `?print-pdf`.
+
+**Silhuetas diversas (arquétipos).** Cada papel tem um **molde próprio**, como nos mascotes da Mux. Robôs com o mesmo formato são proibidos: dois robôs só podem repetir a cor, nunca a silhueta.
+
+| Papel | Silhueta | Cor | Tela / marca |
+|---|---|---|---|
+| Plan | monitor alto e estreito, com coluna lateral | `--c-pink` | olho na tela; painel inferior com onda |
+| Build | gordinho e baixo, dois bulbos de olho, mãos flutuantes | `--c-green` | `/` pulsando; mostrador |
+| Harness | humanoide alto com capacete: arnês cruzado no peito (fivela com cadeado) e cinto com ferramentas penduradas | `--c-orange` | viseira com olhos; lâmpada do capacete e fivela pulsando |
+| AGENTS.md | microfone na cabeça, fones e garras em C | `--c-blue` | visor `< _ >` com **cursor piscando** |
+| Skills | bola sobre esteira, com garras | `--c-accent` (âmbar) | painel com 3 **cartuchos**, um encaixando |
+| Modelo | orbe flutuante com propulsor | `--c-violet` | **rede de nós** pulsando |
+
+- **Cada robô tem a própria cor** (6 robôs, 6 cores de apoio, incluindo o violeta). O corpo é sempre claro (`--c-sand`, metade direita `--c-muted-dark`) com **uma cor só**: nunca corpo escuro nem duas cores de apoio misturadas.
+- **Nunca copie um mascote existente** (da Mux ou de qualquer marca): use o estilo como referência e invente o desenho a partir do conceito do papel. O Harness, por exemplo, é "a estrutura que prende e carrega as ferramentas", então vira um robô de capacete com arnês e cinto de ferramentas, e não um monitor em pedestal.
+- Peças comuns: corpo em dois tons com contorno `--c-ink` de 4px, parafusos, tela com moldura dupla e reflexo, LEDs, ranhuras de alto-falante, antena (`quadrado`, `losango`, `bandeira`, esfera ou dupla), mãos de 3 dedos ou garras em C, e sombra no chão.
+- Cada robô é alinhado pelo chão e tem o próprio tamanho (um gordinho é mais baixo que um monitor alto).
+
+**Duas versões de cada robô** (decidimos depois qual usar):
+- **Neutra:** só a identidade do papel; legenda é o papel, sem nome de pessoa.
+- **Com traços de pessoa** (`traco` em `EQUIPE`; cada arquétipo declara onde ficam a cabeça, os olhos, o queixo e os braços, e a camada de pessoa se ancora ali): óculos, cabelo (`regua`, `crespo`, `medio`), bigode, tatuagens (`zigzag`, `vinha`) e porte (`largo`, `maior`, `alto`). "Mais alto" é um `viewBox` maior com a mesma largura em px, para os robôs ficarem alinhados pelo chão. A legenda passa a ser o nome em chip + o papel em uma linha. Sem cargo de apresentador ou monitor.
+- Trocar de versão é trocar `data-traco="off|on"`; trocar quem é qual robô é editar `EQUIPE` em `js/robos.js` (único lugar).
+- Os robôs são de metal: **cor de pele e etnia não são representadas**. Traço não descrito pela pessoa (por exemplo, cabelo) fica de fora; nada é inventado.
+
+**Regras gerais.**
+- **Exceção à regra de cantos retos:** ilustrações podem usar raio de até 8px.
+- Sem `<text>` dentro do SVG. Cada SVG leva `role="img"` e `aria-label` gerado (papel, e nome e traços quando há).
+- Legenda em chip HTML abaixo do robô, sobre uma linha de chão de 2px.
+- Classes de animação: `.bob` (tronco e cabeça), `.r-eye`, `.r-arm--acena`, `.r-wave`, `.r-pulse`, `.r-cursor`, `.r-insere`, `.r-no`, `.r-ping`. Todas só rodam no slide ativo e param com `prefers-reduced-motion`.
+
+### 8.13 Malha (wireframe em canvas)
+
+Efeito de duas esferas tangentes em wireframe (anéis de latitude e meridianos que deslizam, com leve oscilação 3D), desenhado em canvas dentro de uma moldura `.hatch` > `.panel` clara. Linhas na cor `--c-blue` (lida do `color` do canvas) a ~50% de opacidade. No centro, uma imagem de 72px em dithering Bayer na cor `--c-orange`, e 2 a 3 `.mark` flutuando. Largura da figura: ~850px (`layout-text-figure`).
+
+### 8.14 Selo
+
+`<span class="stamp">VAGO</span>`: Anybody 800, 44px, caixa alta, fundo em cor de apoio (`--c-orange` para problema, `--c-green` para ok), texto `--c-ink`, borda de 4px `--c-ink`, rotação de −5°. Entra como fragment com a animação `stamp`. Texto colorido sobre fundo claro é proibido (seção 5.1), por isso o selo é sempre preenchido.
 
 ## 9. Layouts (`css/layouts.css`)
 
@@ -450,6 +502,8 @@ Cada slide usa **um** layout, num `div` wrapper que ocupa o slide inteiro. A ár
 | `layout-two-cards` | `layout-title` + 2 cartões lado a lado (`gap: 96px`) ligados por conector com nós | light |
 | `layout-statement` | eyebrow (topo) · frase display em até 2 linhas · linha de apoio (base) · moldura + flutuantes | accent ou dark |
 | `layout-text-figure` | `layout-title` + linha com texto (flex 1) e painel/figura (largura fixa de ~850px) | light |
+| `layout-robots` | `layout-title` + 3 colunas, cada uma com robô sobre linha de chão e legenda (chip + 1 a 2 linhas). Variante `layout-robots--six`: 6 colunas, robô de 240px, legenda em 24px com até 3 linhas | light |
+| `layout-code` | `layout-title` + cartão de código/diff (~1000px) e coluna lateral com chips e selos | light |
 | `layout-steps` | `layout-title` + grade 3×2 (colunas de 512px, linhas de 276px, gap de 64px) + conectores em serpentina | light |
 | `layout-table` | `layout-title` + tabela (Space Mono nos cabeçalhos, DM Sans 28px nas células, linhas de 1px `--c-line`) | light |
 | `layout-quote` | aspas grandes `--c-accent`, citação DM Sans 600 48px, autor em chip | light |
@@ -505,6 +559,17 @@ Também há **entrada automática** ao chegar no slide, sem clique: elementos co
 | `draw` | conector se desenhando (`stroke-dashoffset` → 0), 600ms cada, em sequência | `layout-two-cards`, `layout-steps` |
 | `marching-ants` | borda tracejada andando (`stroke-dashoffset: -10px`, loop) | destacar algo "em processamento" |
 | `stamp` | escala 2→1 com leve rotação | marcador "quebrou", "ok" |
+| `malha` | duas esferas tangentes em wireframe girando, em canvas, com imagem pixelada central | `layout-text-figure` |
+| `bob` | robô flutua 5px, 3,2s em loop | `layout-robots` |
+| `onda-move` | onda lisa da tela do robô Plan correndo, 1,2s linear em loop | `layout-robots` |
+| `blink-eye` | olho do robô pisca (`scaleY`), 4s em loop | `layout-robots` |
+| `wave` | mão do robô acena (±14°), 1,6s em loop | `layout-robots` |
+| `cursor-r` | cursor do robô AGENTS.md piscando, 1s em `steps` | `layout-robots` |
+| `insere` | cartucho do robô Skills deslizando para dentro da ranhura, 3s em loop | `layout-robots` |
+| `no-pulse` | nós da rede do robô Modelo pulsando, escalonados por `--i` | `layout-robots` |
+| `ping` | ponta da antena do robô crescendo 18%, em loop | `layout-robots` |
+| `wave-run` | tracejado correndo na onda da tela do robô | `layout-robots` |
+| `digita` | linha de código revelada da esquerda para a direita (`clip-path` + `steps()`), escalonada por `--i` | `layout-code` |
 | `esfera` | esfera pontilhada (dithering Bayer 4×4) girando, em canvas, com brilho do acento | capa e encerramento |
 
 Keyframes de referência, adaptados do CSS da Greptile:
@@ -606,6 +671,11 @@ Um slide ou mudança só está **pronto** quando:
 | 2026-10-29 | v1.1: paleta azul e violeta; tokens renomeados (`green`→`accent`, `lichen`→`tint`, `pollen`→`sky`, `orchid`→`lilac`) e `surface-green`→`surface-accent` |
 | 2026-10-29 | v1.2: paleta inspirada no site da Mux (carvão, cinza-esverdeado, acento âmbar; laranja, rosa, azul e verde de apoio). Tokens: `lilac`→`pink`, `sky`→`blue`, `newt`→`orange`, `pond` removido, `green` (ok) novo; chips e marcadores coloridos |
 | 2026-10-29 | v1.3: tema predominantemente claro (capa e quote passam a `surface-light`; `surface-dark` só em abertura de bloco e demos). Variáveis de tema por superfície (`--s-*`) para os layouts funcionarem em qualquer fundo. Esfera azul no claro |
+| 2026-10-29 | v1.4: formas e glifos geométricos nos chips; par de botões; robôs (8.12); malha (8.13); selo (8.14); layouts `layout-robots` e `layout-code`; novas animações no catálogo; diff adicionado passa a verde |
+| 2026-10-29 | v1.5: robôs passam a ser gerados por `js/robos.js` (cabeça e tronco, mais detalhes), 6 papéis (Plan, Build, Harness, AGENTS.md, Skills, Modelo), versões neutra e com traços de pessoa, layout de 6 colunas |
+| 2026-10-29 | v1.6: robôs com silhuetas diversas (arquétipos por papel, como na Mux); Modelo deixa de ser escuro e passa a rosa; corpo sempre claro e com uma cor só |
+| 2026-10-29 | v1.7: Harness redesenhado como pórtico com núcleo, ferramentas e cadeado (deixa de ser cópia do mascote da Mux); painel inferior do Plan com onda lisa; Modelo passa a violeta (sexta cor de apoio, `--c-violet`) para nenhum robô repetir cor |
+| 2026-10-29 | v1.8: Harness vira humanoide alto com capacete, arnês em X e cinto de ferramentas; Modelo com cabeça e tronco em proporção |
 
 ## 17. Referências
 

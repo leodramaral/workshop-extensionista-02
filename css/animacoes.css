@@ -85,3 +85,59 @@
   .reveal .slides section .connector--dashed { opacity: 1 !important; }
   .reveal .slides section .connector { stroke-dashoffset: 0 !important; }
 }
+
+/* Robôs, tela, digitação e borda tracejada (v1.4). Tudo roda só no slide ativo. */
+@keyframes bob { 50% { transform: translateY(-5px); } }
+@keyframes blink-eye { 0%, 92%, 100% { transform: scaleY(1); } 96% { transform: scaleY(0.1); } }
+@keyframes wave { 0%, 100% { transform: rotate(-14deg); } 50% { transform: rotate(14deg); } }
+@keyframes wave-run { to { stroke-dashoffset: -48; } }
+@keyframes pulse { 50% { opacity: 0.35; } }
+@keyframes typing { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes line-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ants { to { stroke-dashoffset: -42; } }
+
+.robot .r-wave { stroke-dasharray: 14 10; }
+.robot .r-eye, .robot .r-hand { transform-box: fill-box; transform-origin: center; }
+.robot .r-hand { transform-origin: 50% 0; }
+
+.reveal .slides section.present .robot .bob { animation: bob 3.2s ease-in-out infinite; }
+.reveal .slides section.present .robot--green .bob { animation-delay: -1s; }
+.reveal .slides section.present .robot--orange .bob { animation-delay: -2s; }
+.reveal .slides section.present .robot .r-eye { animation: blink-eye 4s infinite; }
+.reveal .slides section.present .robot .r-hand { animation: wave 1.6s ease-in-out infinite; }
+.reveal .slides section.present .robot .r-hand--r { animation-delay: -0.8s; }
+.reveal .slides section.present .robot .r-wave { animation: wave-run 1.2s linear infinite; }
+.reveal .slides section.present .robot .r-pulse { animation: pulse 1.4s ease-in-out infinite; }
+
+/* Linhas de código digitadas uma a uma quando o bloco (fragment) aparece */
+.reveal .fragment.digita.visible .diff__line span {
+  animation: typing 700ms steps(32) both;
+  animation-delay: calc(var(--i, 0) * 650ms);
+}
+.reveal .fragment.digita.visible .diff__line {
+  animation: line-in 200ms linear both;
+  animation-delay: calc(var(--i, 0) * 650ms);
+}
+.reveal .slides section .fragment .ants rect { animation-play-state: paused; }
+.reveal .slides section.present .fragment.visible .ants rect { animation: ants 700ms linear infinite; }
+
+/* Robôs v1.5: cursor, cartucho, nós e antena. Só no slide ativo. */
+@keyframes cursor-r { 50% { opacity: 0; } }
+@keyframes insere {
+  0%   { transform: translateY(-18px); opacity: 0; }
+  35%, 80% { transform: none; opacity: 1; }
+  100% { transform: translateY(-18px); opacity: 0; }
+}
+@keyframes no-pulse { 50% { transform: scale(1.5); } }
+@keyframes ping { 50% { transform: scale(1.18); } }
+
+.reveal .slides section.present .robot .r-cursor { animation: cursor-r 1s steps(1) infinite; }
+.reveal .slides section.present .robot .r-insere { animation: insere 3s ease-in-out infinite; }
+.reveal .slides section.present .robot .r-no { animation: no-pulse 1.8s ease-in-out infinite; animation-delay: calc(var(--i, 0) * 0.3s); }
+.reveal .slides section.present .robot .r-ping { animation: ping 2s ease-in-out infinite; }
+.reveal .slides section.present .robot .r-arm--acena.r-arm--e { animation: wave 1.6s ease-in-out infinite; }
+.reveal .slides section.present .robot .r-arm--acena.r-arm--d { animation: wave 1.6s ease-in-out infinite; animation-delay: -0.8s; }
+
+/* Plan (onda lisa): só no slide ativo */
+@keyframes onda-move { to { transform: translateX(-24px); } }
+.reveal .slides section.present .robot .r-onda-move { animation: onda-move 1.2s linear infinite; }

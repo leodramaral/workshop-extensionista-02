@@ -85,5 +85,11 @@
   }
 
   window.Efeitos = window.Efeitos || {};
-  window.Efeitos.esfera = { iniciar, parar };
+  // um quadro estático, usado no modo de impressão (?print-pdf)
+  function quadro(canvas) {
+    const s = estado.get(canvas) || preparar(canvas);
+    desenhar(canvas, s.ctx, s.angulo);
+  }
+
+  window.Efeitos.esfera = { iniciar, parar, quadro };
 })();

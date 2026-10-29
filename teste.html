@@ -72,7 +72,7 @@
           <div class="layout-two-cards__row">
             <div class="hatch fragment rise">
               <article class="card">
-                <span class="chip chip--blue">NO CHAT</span>
+                <span class="chip chip--back chip--blue">NO CHAT</span>
                 <h3>Você é a ponte</h3>
                 <p>A IA sugere o código. Você leva o erro de volta.</p>
                 <ul>
@@ -85,7 +85,7 @@
 
             <div class="hatch fragment rise">
               <article class="card card--accent">
-                <span class="chip">NO HARNESS</span>
+                <span class="chip chip--hex">NO HARNESS</span>
                 <h3>A IA executa</h3>
                 <p>Ela lê o projeto, escreve os arquivos e roda os comandos.</p>
                 <ul>
@@ -110,30 +110,213 @@
         </aside>
       </section>
 
-      <!-- 1.4 Técnicas de prompt -->
+      <!-- 1.3 Harness: agentes Plan e Build do OpenCode -->
       <section class="surface-light" data-background-color="#E2E4DD">
-        <div class="layout-table">
+        <div class="layout-robots">
           <div class="layout-title__head">
-            <p class="eyebrow">[ 1.4 · PROMPT ]</p>
-            <h2>Técnicas de prompt</h2>
+            <p class="eyebrow">[ 1.3 · OPENCODE ]</p>
+            <h2>Agentes Plan e Build</h2>
           </div>
 
-          <table class="table">
-            <thead>
-              <tr><th>Técnica</th><th>O que é</th><th>Ponte com o workshop</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Zero-shot</td><td>Pedir direto, sem exemplos</td><td>É o one-shot do Dia 1</td></tr>
-              <tr><td>Few-shot</td><td>Dar exemplos de entrada e saída</td><td>Templates de spec no Dia 2</td></tr>
-              <tr><td>Prompt chaining</td><td>A saída de um prompt alimenta o próximo</td><td>É o esqueleto do SDD</td></tr>
-              <tr><td>Meta-prompting</td><td>Pedir à IA que faça perguntas antes de responder</td><td>Vira a clarificação no Dia 2</td></tr>
-            </tbody>
-          </table>
+          <div class="layout-robots__row">
+            <article class="robot-card">
+              <div class="robot-card__stage">
+                <div class="robot-slot" data-robo="plan"></div>
+              </div>
+              <span class="chip chip--hex chip--pink">PLAN</span>
+              <p>Propõe um plano. O humano ajusta.</p>
+            </article>
 
-          <p class="footer"><span>1.4 · TÉCNICAS</span><span>Outras técnicas ficam no cheat sheet</span></p>
+            <article class="robot-card">
+              <div class="robot-card__stage">
+                <div class="robot-slot" data-robo="build"></div>
+              </div>
+              <span class="chip chip--hex chip--green">BUILD</span>
+              <p>Escreve os arquivos e roda os comandos.</p>
+            </article>
+
+            <article class="robot-card">
+              <div class="robot-card__stage">
+                <div class="robot-slot" data-robo="harness"></div>
+              </div>
+              <span class="chip chip--hex chip--orange">HARNESS</span>
+              <p>Ferramentas, loop, contexto e permissões.</p>
+            </article>
+          </div>
+
+          <p class="footer"><span>1.3 · OPENCODE</span><span>Demo: com ou sem o modo Plan</span></p>
         </div>
         <aside class="notes">
-          [10 min] Um a dois minutos por técnica, com um exemplo curto. Self-consistency, tree of thoughts e step-back ficam no cheat sheet.
+          [5 min] Plan propõe, o humano ajusta, o Build executa. O harness é a estrutura em volta do modelo: ferramentas, loop de execução, gestão de contexto e permissões.
+        </aside>
+      </section>
+
+
+      <!-- 1.2 e 1.3: os papéis (versão neutra dos robôs) -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-robots">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ 1.2 E 1.3 · PAPÉIS ]</p>
+            <h2>Os papéis</h2>
+          </div>
+
+          <div class="layout-robots__six" data-robos="papeis"></div>
+
+          <p class="footer"><span>VERSÃO NEUTRA</span><span>Legendas provisórias</span></p>
+        </div>
+        <aside class="notes">
+          [3 min] Os seis papéis do Dia 1: Plan, Build, Harness, AGENTS.md, Skills e Modelo. Versão neutra, sem traços de pessoa.
+        </aside>
+      </section>
+
+      <!-- Equipe: os mesmos robôs, com traços de pessoa -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-robots">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ EQUIPE ]</p>
+            <h2>Quem é quem</h2>
+          </div>
+
+          <div class="layout-robots__six" data-robos="equipe"></div>
+
+          <p class="footer"><span>VERSÃO COM TRAÇOS</span><span>Atribuição provisória</span></p>
+        </div>
+        <aside class="notes">
+          [2 min] Apresentação da equipe. Cada robô carrega os traços de uma pessoa; a atribuição é provisória.
+        </aside>
+      </section>
+
+      <!-- 1.2 Tokens: janela de contexto -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-text-figure">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ 1.2 · TOKENS ]</p>
+            <h2>Janela de contexto</h2>
+          </div>
+
+          <div class="layout-text-figure__row">
+            <div class="layout-text-figure__text">
+              <p class="lead">Prompt, arquivos e histórico: tudo o que o modelo enxerga de uma vez cabe numa janela com limite.</p>
+              <span class="chip chip--arrow chip--accent">CABER NÃO É SER BEM USADO</span>
+            </div>
+
+            <div class="layout-text-figure__figure">
+              <div class="hatch">
+                <div class="panel--light">
+                  <canvas data-efeito="malha" width="762" height="420" aria-hidden="true"></canvas>
+                  <i class="mark mark--pink float float--1" style="left: 150px; top: 110px" aria-hidden="true"></i>
+                  <i class="mark mark--pink float float--2" style="left: 640px; top: 130px" aria-hidden="true"></i>
+                  <i class="mark mark--pink float float--3" style="left: 560px; top: 330px" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p class="footer"><span>1.2 · TOKENS</span><span>Semente do Dia 2</span></p>
+        </div>
+        <aside class="notes">
+          [4 min] Janela de contexto: tudo o que o modelo enxerga de uma vez tem limite. Semente para o Dia 2: caber na janela não significa ser bem usado.
+        </aside>
+      </section>
+
+      <!-- 1.4 Demo ao vivo: refatorar um prompt vago em 5 pilares -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-code">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ 1.4 · DEMO AO VIVO ]</p>
+            <h2>Do prompt vago aos 5 pilares</h2>
+          </div>
+
+          <div class="layout-code__row">
+            <div class="layout-code__card">
+              <span class="stamp stamp--vago fragment stamp" data-fragment-index="1">VAGO</span>
+              <div class="hatch">
+                <article class="code">
+                  <div class="code__head">dia-1/prompts-demos.md</div>
+                  <div class="code__body">
+                    <div class="diff__line diff__line--del"><b>01-</b><span>faz um sistema de tarefas</span></div>
+                    <div class="layout-code__added fragment digita" data-fragment-index="2">
+                      <svg class="ants" aria-hidden="true"><rect /></svg>
+                      <div class="diff__line diff__line--add" style="--i: 0"><b>01+</b><span>PAPEL: dev backend sênior</span></div>
+                      <div class="diff__line diff__line--add" style="--i: 1"><b>02+</b><span>TAREFA: criar um sistema de tarefas</span></div>
+                      <div class="diff__line diff__line--add" style="--i: 2"><b>03+</b><span>CONTEXTO: alunos iniciantes</span></div>
+                      <div class="diff__line diff__line--add" style="--i: 3"><b>04+</b><span>RESTRIÇÕES: rodar no laboratório, direto ou via Docker</span></div>
+                      <div class="diff__line diff__line--add" style="--i: 4"><b>05+</b><span>SAÍDA: código rodando e como executar</span></div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <span class="stamp stamp--green stamp--ok fragment stamp" data-fragment-index="3">OK</span>
+            </div>
+
+            <div class="layout-code__side fragment rise" data-fragment-index="2">
+              <p class="eyebrow">[ OS 5 PILARES ]</p>
+              <span class="chip chip--hex chip--blue"><i class="glyph glyph--square" aria-hidden="true"></i>PAPEL</span>
+              <span class="chip chip--hex chip--pink"><i class="glyph glyph--diamond" aria-hidden="true"></i>TAREFA</span>
+              <span class="chip chip--hex chip--orange"><i class="glyph glyph--triangle" aria-hidden="true"></i>CONTEXTO</span>
+              <span class="chip chip--hex chip--green"><i class="glyph glyph--square" aria-hidden="true"></i>RESTRIÇÕES</span>
+              <span class="chip chip--hex chip--accent"><i class="glyph glyph--diamond" aria-hidden="true"></i>SAÍDA</span>
+            </div>
+          </div>
+
+          <p class="footer"><span>1.4 · PROMPT</span><span>Exemplo ilustrativo</span></p>
+        </div>
+        <aside class="notes">
+          [8 min] Refatorar o prompt vago nos 5 pilares: papel, tarefa, contexto, restrições e formato de saída. Mostrar sem julgar; a crítica fica para o Dia 2.
+        </aside>
+      </section>
+
+      <!-- Validação: catálogo de peças (fora do deck final) -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-catalog">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ VALIDAÇÃO ]</p>
+            <h2>Catálogo de peças</h2>
+          </div>
+
+          <div class="layout-catalog__row">
+            <span class="layout-catalog__label">Formas</span>
+            <div class="layout-catalog__items">
+              <span class="chip">RETO</span>
+              <span class="chip chip--hex">HEX</span>
+              <span class="chip chip--back">VOLTAR</span>
+              <span class="chip chip--arrow">SETA</span>
+              <span class="pill">PÍLULA</span>
+            </div>
+          </div>
+
+          <div class="layout-catalog__row">
+            <span class="layout-catalog__label">Cores</span>
+            <div class="layout-catalog__items">
+              <span class="chip chip--hex chip--accent">ACENTO</span>
+              <span class="chip chip--hex chip--orange">ALERTA</span>
+              <span class="chip chip--hex chip--pink">CATEGORIA</span>
+              <span class="chip chip--hex chip--blue">INFO</span>
+              <span class="chip chip--hex chip--green">OK</span>
+            </div>
+          </div>
+
+          <div class="layout-catalog__row">
+            <span class="layout-catalog__label">Glifos</span>
+            <div class="layout-catalog__items">
+              <span class="chip chip--hex"><i class="glyph glyph--square glyph--accent" aria-hidden="true"></i>QUADRADO</span>
+              <span class="chip chip--hex"><i class="glyph glyph--diamond glyph--pink" aria-hidden="true"></i>LOSANGO</span>
+              <span class="chip chip--hex"><i class="glyph glyph--triangle glyph--green" aria-hidden="true"></i>TRIÂNGULO</span>
+            </div>
+          </div>
+
+          <div class="layout-catalog__row">
+            <span class="layout-catalog__label">Botões</span>
+            <div class="layout-catalog__items">
+              <div class="btn-pair">
+                <a class="btn-hex btn-hex--dark btn-hex--back" href="#/0">Voltar</a>
+                <a class="btn-hex" href="#/0">Ver repositório</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          Slide só de validação visual; sai do deck final.
         </aside>
       </section>
 
@@ -167,6 +350,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/6.0.1/plugin/notes.min.js"></script>
   <script src="js/efeitos/esfera.js"></script>
   <script src="js/efeitos/flutuantes.js"></script>
+  <script src="js/efeitos/malha.js"></script>
+  <script src="js/robos.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
