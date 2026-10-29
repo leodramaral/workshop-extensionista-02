@@ -1,0 +1,37 @@
+/* Página inicial: título e links (DESIGN.md, seção 3) */
+body {
+  margin: 0;
+  font-family: var(--f-body);
+  font-size: var(--t-lead);
+}
+.home {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 8vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--s-4);
+  background-color: var(--c-basalt);
+  background-image:
+    linear-gradient(var(--grid-line-dark) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line-dark) 1px, transparent 1px);
+  background-size: var(--grid-cell) var(--grid-cell);
+  color: var(--c-sand);
+}
+.home h1 {
+  margin: 0;
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-stretch: 125%;
+  text-transform: uppercase;
+  font-size: clamp(40px, 6vw, 96px);
+  line-height: 1.05;
+  color: var(--c-tint);
+}
+.home .lead { margin: 0; color: var(--c-eggshell); max-width: 900px; }
+.home__links { display: flex; gap: var(--s-3); margin-top: var(--s-3); }
+.eyebrow { color: var(--c-accent); }
+.cursor { animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .cursor { animation: none; } }

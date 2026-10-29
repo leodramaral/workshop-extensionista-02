@@ -1,0 +1,87 @@
+/* Movimento (DESIGN.md, seção 10) */
+
+@keyframes blink { 50% { opacity: 0; } }
+@keyframes float-square-1 {
+  0%, 100% { transform: translate(0, 0) rotate(0); }
+  25% { transform: translate(30px, -20px) rotate(15deg); }
+  50% { transform: translate(-20px, 30px) rotate(-10deg); }
+}
+@keyframes float-square-2 {
+  0%, 100% { transform: translate(0, 0) rotate(0); }
+  33% { transform: translate(-30px, 20px) rotate(-12deg); }
+  66% { transform: translate(25px, 35px) rotate(10deg); }
+}
+@keyframes float-square-3 {
+  0%, 100% { transform: translate(0, 0) rotate(0); }
+  50% { transform: translate(20px, -40px) rotate(20deg); }
+}
+@keyframes stamp {
+  0% { opacity: 0; transform: scale(2) rotate(-15deg); }
+  60% { opacity: 1; transform: scale(1) rotate(-5deg); }
+  100% { transform: scale(1) rotate(-5deg); }
+}
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes enter-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.cursor { animation: blink 1s steps(1) infinite; }
+
+/* Fragments customizados */
+.reveal .fragment.blur-in {
+  opacity: 0; filter: blur(12px); transform: translateY(16px);
+  transition: opacity var(--d-slow) var(--ease-out),
+              filter var(--d-slow) var(--ease-out),
+              transform var(--d-slow) var(--ease-out);
+}
+.reveal .fragment.blur-in.visible { opacity: 1; filter: blur(0); transform: none; }
+
+.reveal .fragment.rise {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity var(--d-base) var(--ease-out), transform var(--d-base) var(--ease-out);
+}
+.reveal .fragment.rise.visible { opacity: 1; transform: none; }
+
+.reveal .fragment.stamp.visible { animation: stamp var(--d-base) var(--ease-out) both; }
+
+/* Entrada automática ao chegar no slide */
+.reveal .slides section .enter { opacity: 0; }
+.reveal .slides section.present .enter {
+  animation: enter-up var(--d-slow) var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * var(--stagger));
+}
+
+/* Quadrados flutuantes: só rodam no slide ativo */
+.float { animation-play-state: paused; }
+.float--1 { animation: float-square-1 9s ease-in-out infinite; }
+.float--2 { animation: float-square-2 12s ease-in-out infinite; }
+.float--3 { animation: float-square-3 7s ease-in-out infinite; }
+.reveal .slides section .float { animation-play-state: paused; }
+.reveal .slides section.present .float { animation-play-state: running; }
+
+/* Conectores se desenham quando o slide fica ativo */
+.reveal .slides section .connector { stroke-dasharray: var(--len, 400); stroke-dashoffset: var(--len, 400); }
+.reveal .slides section .connector--dashed { stroke-dasharray: 8 6; stroke-dashoffset: 0; opacity: 0; }
+.reveal .slides section .node { opacity: 0; }
+.reveal .slides section.present .connector {
+  animation: draw 600ms var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 600ms + 600ms);
+}
+.reveal .slides section.present .connector--dashed {
+  animation: enter-up 600ms var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 600ms + 600ms);
+}
+.reveal .slides section.present .node {
+  animation: enter-up var(--d-base) var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 600ms + 600ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal .fragment { filter: none !important; transform: none !important; }
+  .reveal .slides section .enter,
+  .reveal .slides section .node,
+  .reveal .slides section .connector--dashed { opacity: 1 !important; }
+  .reveal .slides section .connector { stroke-dashoffset: 0 !important; }
+}

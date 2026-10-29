@@ -1,0 +1,200 @@
+/* Componentes reutilizáveis (DESIGN.md, seção 8) */
+
+/* 8.1 Eyebrow */
+.reveal .eyebrow {
+  font-family: var(--f-mono);
+  font-size: var(--t-label);
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--s-eyebrow);
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+
+.cursor {
+  display: inline-block;
+  width: 14px;
+  height: 30px;
+  background: var(--c-accent);
+}
+
+/* 8.2 Chip */
+.chip {
+  display: inline-block;
+  align-self: flex-start;
+  font-family: var(--f-mono);
+  font-size: var(--t-label);
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 4px 14px;
+  background: var(--c-basalt);
+  color: var(--c-sand);
+}
+.surface-dark .chip { background: var(--c-basalt-2); }
+.chip--accent { background: var(--c-accent); color: var(--c-ink); }
+.surface-dark .chip--accent { background: var(--c-accent); }
+.chip--orange, .surface-dark .chip--orange { background: var(--c-orange); color: var(--c-ink); }
+.chip--pink,   .surface-dark .chip--pink   { background: var(--c-pink);   color: var(--c-ink); }
+.chip--blue,   .surface-dark .chip--blue   { background: var(--c-blue);   color: var(--c-ink); }
+.chip--green,  .surface-dark .chip--green  { background: var(--c-green);  color: var(--c-ink); }
+
+/* 8.3 Pílula */
+.pill {
+  display: inline-block;
+  align-self: flex-start;
+  font-family: var(--f-mono);
+  font-size: var(--t-label);
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 10px 28px;
+  border-radius: var(--radius-pill);
+  background: var(--c-accent);
+  color: var(--c-ink);
+}
+.pill--outline { background: transparent; color: inherit; border: 1px solid currentColor; }
+
+/* 8.4 Botão hexagonal */
+.btn-hex {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 36px;
+  font: 500 var(--t-label)/1 var(--f-body);
+  background: var(--c-accent);
+  color: var(--c-ink);
+  text-decoration: none;
+  clip-path: polygon(16px 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 16px 100%, 0 50%);
+  transition: filter var(--d-fast) var(--ease-out);
+}
+.btn-hex:hover { filter: brightness(1.08); }
+.btn-hex--dark { background: var(--c-basalt); color: var(--c-sand); }
+
+/* 8.5 Cartão e moldura hachurada */
+.hatch {
+  padding: 12px;
+  border: 1px solid var(--c-line);
+  background: var(--hatch);
+}
+.card {
+  background: var(--c-white);
+  color: var(--c-basalt);
+  padding: 44px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  height: 100%;
+  box-sizing: border-box;
+}
+.card--dark { background: var(--c-basalt); color: var(--c-sand); }
+.card--dark h3 { color: var(--c-tint); }
+.card--accent { background: var(--c-accent); color: var(--c-ink); }
+.card ul { margin: 0; }
+.card li + li { margin-top: var(--s-1); }
+
+/* 8.6 Moldura tracejada com losangos */
+.frame {
+  position: absolute;
+  inset: calc(var(--frame-inset) - var(--slide-pad));
+  border: 1px dashed var(--s-rule);
+  pointer-events: none;
+}
+
+.frame__diamond {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: var(--s-eyebrow);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.frame__diamond--tl { left: 0; top: 0; }
+.frame__diamond--tr { left: 100%; top: 0; }
+.frame__diamond--bl { left: 0; top: 100%; }
+.frame__diamond--br { left: 100%; top: 100%; }
+
+/* 8.7 Conectores */
+.connectors {
+  position: absolute;
+  inset: calc(0px - var(--slide-pad));
+  width: 1920px;
+  height: 1080px;
+  pointer-events: none;
+}
+.connector {
+  fill: none;
+  stroke: var(--c-basalt);
+  stroke-width: 2;
+}
+.connector--dashed { stroke-dasharray: 8 6; }
+.node { fill: var(--c-basalt); }
+.node--last { fill: var(--c-green); stroke: var(--c-basalt); stroke-width: 2; }
+
+/* 8.10 Rodapé */
+.reveal .footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(64px - var(--slide-pad));
+  font-family: var(--f-mono);
+  font-size: var(--t-label);
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--c-muted);
+  display: flex;
+  justify-content: space-between;
+}
+.surface-dark .footer { color: var(--c-muted-dark); }
+
+/* 8.11 Marcadores decorativos */
+.mark {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: var(--c-blue);
+}
+.mark--pink { background: var(--c-pink); }
+.mark--accent { background: var(--c-accent); }
+.mark--green { background: var(--c-green); }
+.mark--orange { background: var(--c-orange); }
+.surface-accent .mark { border: 2px solid var(--c-basalt); box-sizing: border-box; }
+
+/* Tabela */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+.table th {
+  font-family: var(--f-mono);
+  font-size: var(--t-label);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--c-muted);
+  padding: var(--s-2) var(--s-3) var(--s-2) 0;
+  border-bottom: 1px solid var(--c-basalt);
+}
+.table td {
+  font-size: var(--t-body);
+  line-height: 1.45;
+  padding: var(--s-3) var(--s-3) var(--s-3) 0;
+  border-bottom: 1px solid var(--c-line);
+  vertical-align: top;
+}
+.table td:first-child { font-weight: 600; white-space: nowrap; }
+.table td:first-child::before {
+  content: '';
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-right: var(--s-2);
+  background: var(--c-blue);
+}
+.table tr:nth-child(2) td:first-child::before { background: var(--c-pink); }
+.table tr:nth-child(3) td:first-child::before { background: var(--c-orange); }
+.table tr:nth-child(4) td:first-child::before { background: var(--c-green); }

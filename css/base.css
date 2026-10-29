@@ -1,0 +1,111 @@
+/* Neutraliza os padrões do reveal.js e define estilos globais (DESIGN.md, seção 6 e 7) */
+.reveal-viewport { background: var(--c-paper); }
+
+.reveal {
+  font-family: var(--f-body);
+  font-size: var(--t-body);
+  color: var(--c-basalt);
+  line-height: 1.45;
+}
+
+.reveal .slides { text-align: left; }
+
+.reveal .slides > section,
+.reveal .slides > section > section {
+  width: 1920px;
+  height: 1080px;
+  padding: var(--slide-pad);
+  box-sizing: border-box;
+  /* display fica com o reveal.js; o layout vive no wrapper interno */
+}
+
+.reveal .slides section > [class^="layout-"] {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.reveal h1, .reveal h2, .reveal h3, .reveal p, .reveal ul, .reveal ol {
+  margin: 0;
+  line-height: inherit;
+  text-transform: none;
+  text-shadow: none;
+  letter-spacing: 0;
+  word-wrap: normal;
+}
+
+.reveal ul, .reveal ol { padding-left: 1.2em; display: block; }
+.reveal img { max-width: none; max-height: none; margin: 0; }
+.reveal a { color: inherit; }
+
+.reveal .controls { color: var(--c-accent); }
+.reveal .progress { color: var(--c-accent); height: 4px; }
+
+/* Tipografia dos títulos */
+.reveal h1, .reveal h2, .reveal h3 {
+  color: var(--s-title);
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-stretch: 125%;
+  text-transform: uppercase;
+}
+.reveal h1 { font-size: var(--t-display); line-height: 1.02; }
+.reveal h2 { font-size: var(--t-h2); line-height: 1.1; }
+.reveal h3 { font-size: var(--t-h3); line-height: 1.1; font-weight: 700; }
+.reveal .title-long { font-weight: 700; font-stretch: 100%; text-transform: none; letter-spacing: -0.02em; }
+
+.reveal .lead { font-size: var(--t-lead); line-height: 1.35; }
+
+/* Superfícies (seção 7) */
+.surface-light {
+  background-color: var(--c-paper);
+  background-image:
+    linear-gradient(var(--grid-line-light) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line-light) 1px, transparent 1px);
+  background-size: var(--grid-cell) var(--grid-cell);
+  color: var(--c-basalt);
+  --s-title:   var(--c-basalt);
+  --s-sub:     var(--c-muted);
+  --s-meta:    var(--c-muted);
+  --s-rule:    var(--frame-light);
+  --s-eyebrow: var(--c-basalt);
+  --s-num:     var(--c-basalt);
+  --s-dot:     var(--c-blue);
+  --s-glow:    var(--c-blue);
+}
+
+.surface-dark {
+  background-color: var(--c-basalt);
+  background-image:
+    linear-gradient(var(--grid-line-dark) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line-dark) 1px, transparent 1px);
+  background-size: var(--grid-cell) var(--grid-cell);
+  color: var(--c-sand);
+  --s-title:   var(--c-tint);
+  --s-sub:     var(--c-eggshell);
+  --s-meta:    var(--c-muted-dark);
+  --s-rule:    var(--frame-dark);
+  --s-eyebrow: var(--c-accent);
+  --s-num:     var(--c-accent);
+  --s-dot:     var(--c-tint);
+  --s-glow:    var(--c-accent);
+}
+
+.surface-accent {
+  background-color: var(--c-accent);
+  background-image:
+    linear-gradient(var(--grid-line-accent) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line-accent) 1px, transparent 1px);
+  background-size: var(--grid-cell) var(--grid-cell);
+  color: var(--c-ink);
+  --s-title:   var(--c-ink);
+  --s-sub:     var(--c-basalt);
+  --s-meta:    var(--c-basalt);
+  --s-rule:    var(--c-basalt);
+  --s-eyebrow: var(--c-ink);
+  --s-num:     var(--c-ink);
+  --s-dot:     var(--c-ink);
+  --s-glow:    var(--c-ink);
+}

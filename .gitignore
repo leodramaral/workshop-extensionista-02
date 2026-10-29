@@ -1,0 +1,33 @@
+# Playwright MCP (capturas, snapshots e logs)
+.playwright-mcp/
+
+# Claude Code: estado e preferências locais (o .mcp.json do projeto é versionado)
+.claude/settings.local.json
+.claude/plans/
+.claude/worktrees/
+
+# Sistema operacional e editores
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+.vscode/
+.idea/
+
+# Ambiente e segredos
+.env
+.env.*
+*.pem
+*.key
+
+# Dependências, build e logs (o projeto não usa build, mas por precaução)
+node_modules/
+dist/
+.cache/
+*.log
+
+# Temporários de validação visual
+*.tmp
+/screenshots/
+/shots/

@@ -1,0 +1,87 @@
+/* Esqueletos de slide (DESIGN.md, seção 9). Área útil: 1664×824 */
+
+/* Capa */
+.layout-cover { justify-content: space-between; }
+.layout-cover__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  max-width: 1100px;
+}
+.layout-cover h1 { font-size: var(--t-h1); line-height: 1.05; }
+.layout-cover__sub { color: var(--s-sub); max-width: 900px; }
+.layout-cover__rule {
+  border-top: 1px dashed var(--s-rule);
+  padding-top: var(--s-3);
+  font-family: var(--f-mono);
+  font-size: var(--t-label);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--s-meta);
+  display: flex;
+  justify-content: space-between;
+}
+.layout-cover__sphere {
+  position: absolute;
+  right: 0;
+  top: 200px;
+  color: var(--s-dot);
+  filter: drop-shadow(0 0 6px var(--s-glow));
+}
+
+/* Título no topo, conteúdo abaixo */
+.layout-title,
+.layout-two-cards,
+.layout-table,
+.layout-text-figure {
+  gap: var(--s-6);
+}
+.layout-title__head { display: flex; flex-direction: column; gap: var(--s-3); }
+.layout-title__head h2 { color: var(--c-basalt); }
+
+.layout-two-cards__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-7);
+  flex: 1;
+  min-height: 0;
+  margin-bottom: var(--s-7);
+}
+
+.layout-table { padding-bottom: 0; }
+
+/* Frase de efeito */
+.layout-statement { justify-content: space-between; }
+.layout-statement h1 { font-size: var(--t-h1); line-height: 1.05; }
+.layout-statement__support {
+  font-size: var(--t-lead);
+  line-height: 1.35;
+  font-weight: 600;
+}
+
+/* Abertura de bloco */
+.layout-section { justify-content: space-between; }
+.layout-section__num {
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-stretch: 125%;
+  font-size: 320px;
+  line-height: 0.9;
+  color: var(--s-num);
+}
+.layout-section__num::after {
+  content: '';
+  display: block;
+  width: 160px;
+  height: 24px;
+  margin-top: var(--s-4);
+  background: var(--c-accent);
+}
+.layout-section__body { display: flex; flex-direction: column; gap: var(--s-3); }
+.layout-section__time {
+  font-family: var(--f-mono);
+  font-size: var(--t-label);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--s-meta);
+}

@@ -1,0 +1,63 @@
+/* Tokens do projeto (DESIGN.md, seção 5) */
+:root {
+  /* Base */
+  --c-ink:        #151617;
+  --c-basalt:     #242628;
+  --c-basalt-2:   #3B3E42;
+  --c-paper:      #E2E4DD;
+  --c-sand:       #F4F6F4;
+  --c-white:      #FFFFFF;
+  --c-line:       #C4C7BB;
+  --c-eggshell:   #C2CBD5;
+  --c-muted:      #4A525A;
+  --c-muted-dark: #A3ACB6;
+
+  /* Acentos */
+  --c-accent:     #FFB200;
+  --c-tint:       #FFF1CC;
+  --c-orange:     #FF6100;
+  --c-pink:       #FA50B5;
+  --c-blue:       #0091FF;
+  --c-green:      #00BE43;
+
+  /* Linhas utilitárias */
+  --grid-line-light: rgba(36, 38, 40, 0.07);
+  --grid-line-dark:  rgba(244, 246, 244, 0.06);
+  --grid-line-accent: rgba(36, 38, 40, 0.10);
+  --frame-dark:      rgba(244, 246, 244, 0.25);
+  --frame-light:      rgba(36, 38, 40, 0.30);
+
+  /* Tipografia */
+  --f-display: 'Anybody', 'Arial Black', sans-serif;
+  --f-body:    'DM Sans', Arial, sans-serif;
+  --f-mono:    'Space Mono', ui-monospace, monospace;
+
+  --t-display: 120px;
+  --t-h1:      96px;
+  --t-h2:      64px;
+  --t-h3:      44px;
+  --t-lead:    36px;
+  --t-body:    28px;
+  --t-label:   24px;
+
+  /* Espaço, grade e forma */
+  --s-1: 8px;  --s-2: 16px; --s-3: 24px; --s-4: 32px;
+  --s-5: 48px; --s-6: 64px; --s-7: 96px; --s-8: 128px;
+
+  --slide-pad: 128px;
+  --slide-pad-bottom: 160px;
+  --frame-inset: 64px;
+  --grid-cell: 48px;
+
+  --radius-0: 0;
+  --radius-pill: 999px;
+  --hatch: repeating-linear-gradient(45deg, var(--c-line) 0 2px, transparent 2px 9px);
+
+  /* Movimento */
+  --ease-out:  cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-io:   cubic-bezier(0.65, 0, 0.35, 1);
+  --d-fast:    200ms;
+  --d-base:    450ms;
+  --d-slow:    900ms;
+  --stagger:   120ms;
+}
