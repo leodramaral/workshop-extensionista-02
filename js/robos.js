@@ -34,18 +34,45 @@
   let contador = 0;
 
   // ---------- peças compartilhadas ----------
-  // corpo em dois tons (metade direita mais escura) com contorno
+  // hachura diagonal fina num retângulo, recortada também pelo clip do corpo
+  function hachura(x, y, w, h, clipCorpo, c) {
+    const id = `k${c.id}-${c.n++}`;
+    let d = '';
+    for (let k = 4; k < w + h; k += 7) d += `M${x + k} ${y} l${-h} ${h} `;
+    return `<defs><clipPath id="${id}"><rect x="${x}" y="${y}" width="${w}" height="${h}"/></clipPath></defs>` +
+      `<g clip-path="url(#${clipCorpo})"><g clip-path="url(#${id})"><path class="r-hachura" d="${d}"/></g></g>`;
+  }
+
+  // reflexo que acompanha o canto superior esquerdo, por dentro do contorno
+  function brilho(x, y, w, h, r) {
+    const i = 4, rr = Math.max(r, 8);
+    const ext = Math.min(8, (h - rr) / 3, (w - rr) / 3);
+    return `<path class="r-brilho" d="M${x + i} ${y + rr + ext} V${y + rr} A${rr - i} ${rr - i} 0 0 1 ${x + rr} ${y + i} h${ext}"/>` +
+      `<circle class="r-white" cx="${x + rr + ext + 5}" cy="${y + i}" r="1"/>`;
+  }
+
+  // corpo em dois tons (metade direita mais escura) com contorno, brilho e hachura na sombra
   function corpo(x, y, w, h, r, c) {
     const id = `k${c.id}-${c.n++}`;
     return `<defs><clipPath id="${id}"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}"/></clipPath></defs>` +
       `<rect class="r-body" x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}"/>` +
       `<rect class="r-shade" x="${x + w / 2}" y="${y}" width="${w / 2}" height="${h}" clip-path="url(#${id})"/>` +
+      hachura(x + w / 2, y + h * 0.55, w / 2, h * 0.45, id, c) +
+      brilho(x, y, w, h, r) +
       `<rect class="r-outline r-line" x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}"/>`;
   }
 
+  // emenda de painel: linha fina com mini-rebites logo abaixo
+  function emenda(x1, y, x2, n) {
+    let s = `<path class="r-thin" d="M${x1} ${y} H${x2}"/>`;
+    for (let i = 0; i < n; i++) s += `<circle class="r-rebite" cx="${x1 + ((i + 0.5) * (x2 - x1)) / n}" cy="${y + 4}" r="1.3"/>`;
+    return s;
+  }
+
   function pe(x, y, w, h) {
-    let s = `<rect class="r-ink r-line" x="${x}" y="${y}" width="${w}" height="${h}" rx="5"/>`;
-    for (let i = 1; i <= 3; i++) s += `<path class="r-thin" d="M${x + (w * i) / 4} ${y + h - 4} v-6"/>`;
+    let s = `<rect class="r-ink r-line" x="${x}" y="${y}" width="${w}" height="${h}" rx="4"/>`;
+    s += `<path class="r-elo" d="M${x + 4} ${y + 5} H${x + w - 4}"/>`;
+    for (let i = 1; i <= 3; i++) s += `<path class="r-elo" d="M${x + (w * i) / 4} ${y + h - 3} v-5"/>`;
     return s;
   }
 
@@ -54,12 +81,24 @@
     const rr = r == null ? 6 : r;
     return `<rect class="r-bezel" x="${x - 5}" y="${y - 5}" width="${w + 10}" height="${h + 10}" rx="${rr + 4}"/>` +
       `<rect class="r-screen" x="${x}" y="${y}" width="${w}" height="${h}" rx="${rr}"/>` +
-      (pilula ? '' : `<path class="r-shine" d="M${x} ${y} h30 l-30 30 z"/>`);
+      (pilula ? '' : `<path class="r-shine" d="M${x + 4} ${y + 14} L${x + 14} ${y + 4} M${x + 4} ${y + 23} L${x + 23} ${y + 4}"/>`);
   }
 
+  // parafuso com fenda
   function parafusos(x, y, w, h) {
     return [[x + 9, y + 9], [x + w - 9, y + 9], [x + 9, y + h - 9], [x + w - 9, y + h - 9]]
-      .map(([cx, cy]) => `<circle class="r-rline" cx="${cx}" cy="${cy}" r="3"/>`).join('');
+      .map(([cx, cy]) => `<circle class="r-rline" cx="${cx}" cy="${cy}" r="2.4"/><path class="r-paraf" d="M${cx - 1.4} ${cy + 1.4} l2.8 -2.8"/>`).join('');
+  }
+
+  // ponto de brilho (olhos, antenas, LEDs)
+  function luz(cx, cy, r) {
+    return `<circle class="r-white" cx="${cx}" cy="${cy}" r="${r || 1.6}"/>`;
+  }
+
+  // ponto de uma curva cúbica [p0, c1, c2, p3] em t
+  function bezier(p, t) {
+    const u = 1 - t, k = [u * u * u, 3 * u * u * t, 3 * u * t * t, t * t * t];
+    return [0, 1].map((e) => p.reduce((acc, q, i) => acc + k[i] * q[e], 0));
   }
 
   function leds(x, y) {
@@ -77,13 +116,16 @@
   function mao(cx, cy, lado) {
     return `<g class="r-arm r-arm--${lado < 0 ? 'e' : 'd'} r-arm--acena">` +
       `<circle class="r-accent r-line" cx="${cx}" cy="${cy}" r="10"/>` +
-      `<circle class="r-accent r-line" cx="${cx - 7}" cy="${cy + 9}" r="4"/><circle class="r-accent r-line" cx="${cx}" cy="${cy + 12}" r="4"/><circle class="r-accent r-line" cx="${cx + 7}" cy="${cy + 9}" r="4"/></g>`;
+      `<circle class="r-accent r-line" cx="${cx - 7}" cy="${cy + 9}" r="4"/><circle class="r-accent r-line" cx="${cx}" cy="${cy + 12}" r="4"/><circle class="r-accent r-line" cx="${cx + 7}" cy="${cy + 9}" r="4"/>` +
+      `<path class="r-thin" d="M${cx - 6} ${cy + 2} q6 4 12 0"/>${luz(cx - 4, cy - 4, 1.8)}</g>`;
   }
 
   // garra em C flutuante (sem braço); lado -1 abre para a direita, 1 para a esquerda
   function garra(cx, cy, lado) {
     const d = lado < 0 ? `M${cx + 8} ${cy - 14} a14 14 0 1 0 0 28` : `M${cx - 8} ${cy - 14} a14 14 0 1 1 0 28`;
-    return `<path class="r-garra-borda" d="${d}"/><path class="r-garra" d="${d}"/>`;
+    const fundo = lado < 0 ? cx - 6 : cx + 6;
+    return `<path class="r-garra-borda" d="${d}"/><path class="r-garra" d="${d}"/>` +
+      `<path class="r-junta" d="M${fundo - 3} ${cy} h6"/>${luz(lado < 0 ? cx + 8 : cx - 8, cy - 14, 1.2)}`;
   }
 
   // ---------- arquétipos: cada um devolve { fixo, s, bottom, anchors } ----------
@@ -93,13 +135,16 @@
       const w = 140 + c.dx, x0 = 110 - w / 2;
       const sw = w - 80;
       let s = `<line class="r-line" x1="${x0 + 16}" y1="72" x2="${x0 + 16}" y2="42"/><rect class="r-accent r-line r-ping" x="${x0 + 8}" y="26" width="16" height="16"/>`;
+      s += `<rect class="r-body r-line-fino" x="${x0 + 12}" y="50" width="8" height="4" rx="1"/><rect class="r-body r-line-fino" x="${x0 + 12}" y="60" width="8" height="4" rx="1"/>${luz(x0 + 12, 30, 1.4)}`;
       s += corpo(x0, 70, w, 204, 10, c);
-      s += `<path class="r-thin" d="M${x0 + 2} 172 H${x0 + w - 2}"/>`;
+      s += emenda(x0 + 2, 172, x0 + w - 2, 4);
+      s += `<path class="r-thin" d="M${x0 + 57} 78 V166"/>`;
       s += `<rect class="r-white r-line" x="${x0 + 12}" y="86" width="40" height="68" rx="5"/>`;
-      s += `<path class="r-thin" d="M${x0 + 22} 100 h12 v22 h-12 M${x0 + 22} 136 h20"/>`;
+      s += `<path class="r-thin" d="M${x0 + 22} 100 h12 v22 h-12 M${x0 + 22} 136 h20 M${x0 + 22} 144 h12"/>`;
       s += `<rect class="r-accent r-line" x="${x0 + 12}" y="158" width="14" height="10"/>`;
+      for (let i = 0; i < 3; i++) for (let j = 0; j < 2; j++) s += `<circle class="r-rebite" cx="${x0 + 34 + i * 6}" cy="${160 + j * 6}" r="1.2"/>`;
       s += tela(x0 + 66, 88, sw, 66, 8);
-      s += `<ellipse class="r-stroke r-pulse" cx="${x0 + 66 + sw / 2}" cy="121" rx="22" ry="13"/><circle class="r-accent" cx="${x0 + 66 + sw / 2}" cy="121" r="6"/>`;
+      s += `<ellipse class="r-stroke r-pulse" cx="${x0 + 66 + sw / 2}" cy="121" rx="22" ry="13"/><circle class="r-accent" cx="${x0 + 66 + sw / 2}" cy="121" r="6"/>${luz(x0 + 64 + sw / 2, 119, 1.8)}`;
       // painel de onda: moldura, tela rosa e onda lisa correndo (recortada no painel)
       const pid = `k${c.id}-${c.n++}`;
       const px = x0 + 14, pw = w - 28;
@@ -122,11 +167,17 @@
     build(c) {
       const w = 176 + c.dx, x0 = 110 - w / 2;
       let s = `<rect class="r-shade r-line" x="${x0 - 12}" y="140" width="14" height="46" rx="5"/><rect class="r-shade r-line" x="${x0 + w - 2}" y="140" width="14" height="46" rx="5"/>`;
+      [x0 - 5, x0 + w + 5].forEach((x) => {
+        s += `<path class="r-thin" d="M${x - 4} 150 h8 M${x - 4} 176 h8"/><circle class="r-body r-line-fino" cx="${x}" cy="163" r="3.5"/><circle class="r-rebite" cx="${x}" cy="163" r="1.2"/>`;
+      });
       s += corpo(x0, 92, w, 148, 18, c);
-      s += `<g class="r-eye"><circle class="r-white r-line" cx="${x0 + 48}" cy="122" r="19"/><circle class="r-accent" cx="${x0 + 48}" cy="122" r="9"/></g>`;
-      s += `<g class="r-eye"><circle class="r-white r-line" cx="${x0 + w - 48}" cy="122" r="19"/><circle class="r-accent" cx="${x0 + w - 48}" cy="122" r="9"/></g>`;
+      [x0 + 48, x0 + w - 48].forEach((x) => {
+        s += `<g class="r-eye"><circle class="r-white r-line" cx="${x}" cy="122" r="19"/><circle class="r-thin" cx="${x}" cy="122" r="14"/><circle class="r-accent" cx="${x}" cy="122" r="9"/><circle class="r-screen" cx="${x}" cy="122" r="3.5"/>${luz(x - 4, 118, 2.2)}</g>`;
+      });
       s += tela(x0 + 46, 158, w - 92, 46, 6);
+      for (let i = 0; i < 5; i++) s += `<path class="r-fino-cor" d="M${x0 + 60 + (i * (w - 120)) / 4} 162 v${i % 2 ? 2.5 : 4}"/>`;
       s += `<path class="r-stroke r-pulse" d="M105 194 l11 -26"/><path class="r-stroke r-stroke--tenue" d="M${x0 + 58} 170 h18 M${x0 + w - 76} 192 h18"/>`;
+      s += emenda(x0 + 2, 214, x0 + w - 2, 5);
       s += leds(x0 + 26, 226) + fendas(x0 + w - 56, 219, 5, 8);
       s += parafusos(x0, 92, w, 148);
       s += mao(x0 - 6, 250, -1) + mao(x0 + w + 6, 250, 1);
@@ -154,7 +205,8 @@
       let s = '';
       // braços e punhos
       s += `<rect class="r-body r-line" x="40" y="108" width="16" height="62" rx="8"/><rect class="r-body r-line" x="164" y="108" width="16" height="62" rx="8"/>`;
-      s += `<circle class="r-accent r-line" cx="48" cy="178" r="10"/><circle class="r-accent r-line" cx="172" cy="178" r="10"/>`;
+      s += `<path class="r-thin" d="M41 140 h14 M165 140 h14"/><path class="r-brilho" d="M44 116 v18 M168 116 v18"/>`;
+      s += `<circle class="r-accent r-line" cx="48" cy="178" r="10"/><circle class="r-accent r-line" cx="172" cy="178" r="10"/>${luz(45, 175)}${luz(169, 175)}`;
       // tronco com o arnês cruzado
       s += corpo(60, 100, 100, 96, 12, c);
       s += `<defs><clipPath id="${id}"><rect x="60" y="100" width="100" height="96" rx="12"/></clipPath></defs>`;
@@ -163,15 +215,19 @@
       s += parafusos(60, 100, 100, 96);
       // cinto e ferramentas penduradas
       s += `<rect class="r-ink r-line" x="58" y="184" width="104" height="14" rx="3"/><rect class="r-accent" x="104" y="187" width="12" height="8" rx="2"/>`;
+      [70, 82, 94, 126, 138, 150].forEach((x) => { s += `<circle class="r-body" cx="${x}" cy="191" r="1.5"/>`; });
       s += `<rect class="r-accent r-line" x="56" y="198" width="9" height="26" rx="3"/><circle class="r-accent r-line" cx="60.5" cy="230" r="9"/><rect class="r-screen" x="57.5" y="232" width="6" height="9"/>`;
       s += `<rect class="r-accent r-line" x="156" y="198" width="10" height="18" rx="3"/><path class="r-line" d="M161 216 v18"/>`;
       // pescoço, cabeça com viseira e capacete
       s += `<rect class="r-body r-line" x="98" y="90" width="24" height="12"/>`;
       s += corpo(76, 38, 68, 54, 10, c);
       s += `<rect class="r-screen r-line" x="84" y="50" width="52" height="24" rx="7"/>`;
-      s += `<g class="r-eye"><circle class="r-accent" cx="98" cy="62" r="6"/></g><g class="r-eye"><circle class="r-accent" cx="122" cy="62" r="6"/></g>`;
+      s += `<path class="r-shine" d="M88 60 l8 -8 M88 69 l17 -17"/>`;
+      s += `<g class="r-eye"><circle class="r-accent" cx="98" cy="62" r="6"/>${luz(96, 60, 1.6)}</g><g class="r-eye"><circle class="r-accent" cx="122" cy="62" r="6"/>${luz(120, 60, 1.6)}</g>`;
       s += `<path class="r-fendas" d="M100 84 v5 M110 84 v5 M120 84 v5"/>`;
-      s += `<path class="r-accent r-line" d="M70 42 a40 32 0 0 1 80 0 Z"/><rect class="r-accent r-line" x="64" y="40" width="92" height="8" rx="3"/>`;
+      s += `<path class="r-accent r-line" d="M70 42 a40 32 0 0 1 80 0 Z"/>`;
+      s += `<path class="r-thin" d="M84 41 a26 21 0 0 1 52 0"/><path class="r-brilho" d="M77 34 q5 -13 18 -19"/>`;
+      s += `<rect class="r-accent r-line" x="64" y="40" width="92" height="8" rx="3"/><path class="r-thin" d="M68 44 H152"/>`;
       s += `<circle class="r-white r-line r-ping" cx="110" cy="16" r="6"/><path class="r-thin" d="M110 22 v8"/>`;
       return {
         fixo, s, bottom: ly + L + 20, sombra: 74,
@@ -192,18 +248,26 @@
       const dE = `M${x0 + 14} 150 C${x0 - 16} 150 ${x0 - 12} 50 94 62`;
       const dD = `M${x0 + w - 14} 150 C${x0 + w + 16} 150 ${x0 + w + 12} 90 126 80`;
       s += `<path class="r-pipe-borda" d="${dE}"/><path class="r-pipe" d="${dE}"/><path class="r-pipe-borda" d="${dD}"/><path class="r-pipe" d="${dD}"/>`;
-      s += `<line class="r-line" x1="${x0 + 2}" y1="128" x2="${x0 - 8}" y2="104"/><circle class="r-accent r-line r-ping" cx="${x0 - 9}" cy="98" r="6"/>`;
+      // anéis nos tubos, em pontos da própria curva
+      [[[x0 + 14, 150], [x0 - 16, 150], [x0 - 12, 50], [94, 62]], [[x0 + w - 14, 150], [x0 + w + 16, 150], [x0 + w + 12, 90], [126, 80]]].forEach((p) => {
+        [0.3, 0.62].forEach((t) => {
+          const [x, y] = bezier(p, t);
+          s += `<circle class="r-body r-line-fino" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="6"/><circle class="r-rebite" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="1.3"/>`;
+        });
+      });
+      s += `<line class="r-line" x1="${x0 + 2}" y1="128" x2="${x0 - 8}" y2="104"/><circle class="r-accent r-line r-ping" cx="${x0 - 9}" cy="98" r="6"/>${luz(x0 - 11, 96)}`;
       s += corpo(x0, 116, w, 98, 28, c);
       s += tela(x0 + 16, 130, w - 32, 56, 24, true);
       const lx = x0 + 40, rx = x0 + w - 40;
       s += `<path class="r-stroke" d="M${lx + 8} 144 l-14 14 l14 14"/><path class="r-stroke" d="M${rx - 8} 144 l14 14 l-14 14"/>`;
       s += `<rect class="r-accent r-cursor" x="${cx - 5}" y="148" width="10" height="20"/>`;
       s += `<rect class="r-ink r-line" x="${cx - 22}" y="196" width="44" height="8" rx="4"/>`;
-      s += `<circle class="r-accent r-line" cx="${x0 + 8}" cy="170" r="6"/><circle class="r-accent r-line" cx="${x0 + w - 8}" cy="170" r="6"/>`;
-      // cápsula do microfone
+      s += `<circle class="r-accent r-line" cx="${x0 + 8}" cy="170" r="6"/><circle class="r-accent r-line" cx="${x0 + w - 8}" cy="170" r="6"/>${luz(x0 + 6, 168)}${luz(x0 + w - 10, 168)}`;
+      // cápsula do microfone, com grade em malha
       s += `<rect class="r-accent r-line" x="${cx - 18}" y="28" width="36" height="78" rx="18"/>`;
-      s += `<path class="r-thin" d="M${cx - 12} 46 h24 M${cx - 12} 58 h24 M${cx - 12} 70 h24 M${cx - 12} 82 h24"/>`;
-      s += `<rect class="r-body r-line" x="${cx - 24}" y="100" width="48" height="10" rx="3"/><rect class="r-body r-line" x="${cx - 6}" y="108" width="12" height="10"/>`;
+      s += `<path class="r-thin" d="M${cx - 12} 46 h24 M${cx - 12} 58 h24 M${cx - 12} 70 h24 M${cx - 12} 82 h24 M${cx - 6} 40 V90 M${cx} 37 V92 M${cx + 6} 40 V90"/>`;
+      s += `<path class="r-brilho" d="M${cx - 14} 84 V48"/>`;
+      s += `<rect class="r-body r-line" x="${cx - 24}" y="100" width="48" height="10" rx="3"/><path class="r-thin" d="M${cx - 20} 105 h40"/><rect class="r-body r-line" x="${cx - 6}" y="108" width="12" height="10"/>`;
       s += garra(x0 - 10, 232, -1) + garra(x0 + w + 10, 232, 1);
       return {
         fixo, s, bottom: 246, sombra: 84,
@@ -219,20 +283,28 @@
       const cx = 110, cy = 172, r = 62;
       const id = `k${c.id}-${c.n++}`;
       let fixo = `<rect class="r-ink r-line" x="44" y="258" width="132" height="28" rx="14"/>`;
-      [64, 92, 128, 156].forEach((x) => { fixo += `<circle class="r-body r-line" cx="${x}" cy="272" r="8"/>`; });
-      fixo += `<rect class="r-body r-line" x="94" y="232" width="32" height="28"/>`;
+      let elos = '';
+      for (let x = 58; x <= 162; x += 8) elos += `M${x} 260.5 v3 M${x} 280.5 v3 `;
+      fixo += `<path class="r-elo" d="${elos}"/>`;
+      [64, 92, 128, 156].forEach((x) => { fixo += `<circle class="r-body r-line" cx="${x}" cy="272" r="8"/><circle class="r-thin" cx="${x}" cy="272" r="4.5"/><circle class="r-rebite" cx="${x}" cy="272" r="1.4"/>`; });
+      fixo += `<rect class="r-body r-line" x="94" y="232" width="32" height="28"/><path class="r-thin" d="M98 240 h24 M98 246 h24 M98 252 h24"/>`;
       let s = `<rect class="r-body r-line" x="36" y="164" width="14" height="52" rx="7"/><rect class="r-body r-line" x="170" y="164" width="14" height="52" rx="7"/>`;
       s += `<defs><clipPath id="${id}"><circle cx="${cx}" cy="${cy}" r="${r}"/></clipPath></defs>`;
-      s += `<circle class="r-body" cx="${cx}" cy="${cy}" r="${r}"/><rect class="r-shade" x="${cx}" y="${cy - r}" width="${r}" height="${r * 2}" clip-path="url(#${id})"/><circle class="r-outline r-line" cx="${cx}" cy="${cy}" r="${r}"/>`;
-      s += `<path class="r-thin" d="M${cx - r + 6} 176 H${cx + r - 6}"/>`;
-      s += `<line class="r-line" x1="110" y1="110" x2="110" y2="92"/><circle class="r-accent r-line r-ping" cx="110" cy="86" r="9"/>`;
-      s += `<g class="r-eye"><circle class="r-white r-line" cx="86" cy="150" r="15"/><circle class="r-accent" cx="86" cy="150" r="7"/></g>`;
-      s += `<g class="r-eye"><circle class="r-white r-line" cx="134" cy="150" r="15"/><circle class="r-accent" cx="134" cy="150" r="7"/></g>`;
+      s += `<circle class="r-body" cx="${cx}" cy="${cy}" r="${r}"/><rect class="r-shade" x="${cx}" y="${cy - r}" width="${r}" height="${r * 2}" clip-path="url(#${id})"/>`;
+      s += hachura(cx, cy + 12, r, r - 12, id, c);
+      s += `<path class="r-brilho" d="M61 149 A54 54 0 0 1 79 128"/>${luz(91.5, 121.3, 1.1)}`;
+      s += `<circle class="r-outline r-line" cx="${cx}" cy="${cy}" r="${r}"/>`;
+      s += `<path class="r-thin" d="M${cx - r + 6} 176 H${cx + r - 6} M70 126 Q110 116 150 126"/>`;
+      s += `<line class="r-line" x1="110" y1="110" x2="110" y2="92"/><rect class="r-body r-line-fino" x="105" y="100" width="10" height="4" rx="1"/><circle class="r-accent r-line r-ping" cx="110" cy="86" r="9"/>${luz(107, 83, 1.8)}`;
+      [86, 134].forEach((x) => {
+        s += `<g class="r-eye"><circle class="r-white r-line" cx="${x}" cy="150" r="15"/><circle class="r-thin" cx="${x}" cy="150" r="11"/><circle class="r-accent" cx="${x}" cy="150" r="7"/><circle class="r-screen" cx="${x}" cy="150" r="2.8"/>${luz(x - 3, 147, 1.8)}</g>`;
+      });
       s += tela(70, 186, 80, 40, 5);
       for (let i = 0; i < 3; i++) {
         const x = 72 + i * 26;
         s += `<rect class="r-ranhura" x="${x}" y="189" width="22" height="34" rx="3"/>`;
-        const cart = `<rect class="r-accent" x="${x + 2}" y="192" width="18" height="28" rx="2"/><rect class="r-screen" x="${x + 5}" y="195" width="12" height="3"/>`;
+        const cart = `<rect class="r-accent" x="${x + 2}" y="192" width="18" height="28" rx="2"/><rect class="r-screen" x="${x + 5}" y="195" width="12" height="3"/>` +
+          `<rect class="r-white" x="${x + 5}" y="204" width="12" height="8" rx="1" opacity="0.85"/><path class="r-thin" d="M${x + 7} 207 h8 M${x + 7} 210 h5"/>`;
         s += i === 2 ? `<g class="r-insere">${cart}</g>` : cart;
       }
       s += garra(43, 232, -1) + garra(177, 232, 1);
@@ -247,12 +319,14 @@
 
     // orbe flutuante: cabeça e tronco em proporção, peito com rede neural, propulsor
     modelo(c) {
-      let s = `<line class="r-line" x1="84" y1="58" x2="84" y2="38"/><circle class="r-accent r-line r-ping" cx="84" cy="31" r="7"/>`;
-      s += `<line class="r-line" x1="136" y1="58" x2="136" y2="38"/><circle class="r-accent r-line r-ping" cx="136" cy="31" r="7"/>`;
+      let s = `<line class="r-line" x1="84" y1="58" x2="84" y2="38"/><circle class="r-accent r-line r-ping" cx="84" cy="31" r="7"/>${luz(82, 29)}`;
+      s += `<line class="r-line" x1="136" y1="58" x2="136" y2="38"/><circle class="r-accent r-line r-ping" cx="136" cy="31" r="7"/>${luz(134, 29)}`;
       s += `<polygon class="r-accent r-pulse r-line" points="92,246 128,246 110,274"/><polygon class="r-white r-pulse" points="101,246 119,246 110,262"/>`;
+      s += `<path class="r-fino-cor" d="M103 280 v5 M110 282 v8 M117 280 v5"/>`;
       s += `<polygon class="r-ink r-line" points="80,232 140,232 130,248 90,248"/>`;
+      s += `<circle class="r-body" cx="92" cy="240" r="1.5"/><circle class="r-body" cx="128" cy="240" r="1.5"/><path class="r-elo" d="M100 240 h20"/>`;
       s += `<rect class="r-body r-line" x="42" y="166" width="14" height="52" rx="7"/><rect class="r-body r-line" x="164" y="166" width="14" height="52" rx="7"/>`;
-      s += `<rect class="r-body r-line" x="98" y="146" width="24" height="12"/>`;
+      s += `<rect class="r-body r-line" x="98" y="146" width="24" height="12"/><path class="r-thin" d="M102 150 h16 M102 154 h16"/>`;
       s += corpo(56, 156, 108, 78, 16, c);
       s += tela(68, 168, 84, 52, 6);
       const nos = [[84, 184], [106, 178], [130, 186], [92, 206], [116, 208], [138, 200]];
@@ -262,8 +336,10 @@
       nos.forEach(([x, y], i) => { s += `<circle class="r-accent r-no" style="--i: ${i}" cx="${x}" cy="${y}" r="4.5"/>`; });
       s += parafusos(56, 156, 108, 78);
       s += corpo(50, 58, 120, 90, 42, c);
-      s += `<g class="r-eye"><circle class="r-white r-line" cx="88" cy="100" r="15"/><circle class="r-accent" cx="88" cy="100" r="7"/></g>`;
-      s += `<g class="r-eye"><circle class="r-white r-line" cx="132" cy="100" r="15"/><circle class="r-accent" cx="132" cy="100" r="7"/></g>`;
+      s += `<path class="r-thin" d="M64 70 Q110 77 156 70"/>`;
+      [88, 132].forEach((x) => {
+        s += `<g class="r-eye"><circle class="r-white r-line" cx="${x}" cy="100" r="15"/><circle class="r-thin" cx="${x}" cy="100" r="11"/><circle class="r-accent" cx="${x}" cy="100" r="7"/><circle class="r-screen" cx="${x}" cy="100" r="2.8"/>${luz(x - 3, 97, 1.8)}</g>`;
+      });
       s += `<circle class="r-accent" cx="68" cy="124" r="4.5"/><circle class="r-accent" cx="152" cy="124" r="4.5"/>`;
       s += `<path class="r-fendas" d="M100 128 v9 M108 128 v9 M116 128 v9 M124 128 v9"/>`;
       s += garra(49, 238, -1) + garra(171, 238, 1);
@@ -281,37 +357,46 @@
   // ---------- camada de pessoa ----------
   function cabelo(tipo, h) {
     if (tipo === 'regua') {
-      return `<polygon class="r-cabelo" points="${h.x - 2},${h.y + 5} ${h.x + 3},${h.y - 14} ${h.x + h.w - 3},${h.y - 14} ${h.x + h.w + 2},${h.y + 5}"/>`;
+      let fios = '';
+      for (let i = 1; i < 8; i++) fios += `M${h.x + (i * h.w) / 8 - 2} ${h.y - 10} l3 7 `;
+      return `<polygon class="r-cabelo" points="${h.x - 2},${h.y + 5} ${h.x + 3},${h.y - 14} ${h.x + h.w - 3},${h.y - 14} ${h.x + h.w + 2},${h.y + 5}"/>` +
+        `<path class="r-cabelo-fio" d="${fios}"/>`;
     }
     if (tipo === 'crespo') {
       const n = Math.max(4, Math.round(h.w / 26));
-      let s = '';
+      let s = '', fios = '';
       for (let i = 0; i < n; i++) {
         const cx = h.x + 14 + (i * (h.w - 28)) / (n - 1);
-        s += `<circle class="r-cabelo" cx="${cx}" cy="${h.y - 3 - (i % 2 ? 8 : 0)}" r="15"/>`;
+        const cy = h.y - 3 - (i % 2 ? 8 : 0);
+        s += `<circle class="r-cabelo" cx="${cx}" cy="${cy}" r="15"/>`;
+        fios += `M${cx - 7} ${cy - 2} a5 5 0 0 1 8 -4 M${cx + 1} ${cy + 6} a4 4 0 0 1 6 -3 `;
         if (i < n - 1) s += `<circle class="r-cabelo" cx="${cx + (h.w - 28) / (n - 1) / 2}" cy="${h.y + 2}" r="13"/>`;
       }
-      return s;
+      return s + `<path class="r-cabelo-fio" d="${fios}"/>`;
     }
     if (tipo === 'medio') {
       const { x, y, w } = h;
       const b = y + h.h * 0.9;
-      return `<path class="r-cabelo" d="M${x - 3} ${y + 14} Q${x - 3} ${y - 16} ${x + w / 2} ${y - 16} Q${x + w + 3} ${y - 16} ${x + w + 3} ${y + 14} L${x + w + 3} ${b} L${x + w - 5} ${b} L${x + w - 5} ${y + 16} Q${x + w / 2} ${y + 4} ${x + 5} ${y + 16} L${x + 5} ${b} L${x - 3} ${b} Z"/>`;
+      return `<path class="r-cabelo" d="M${x - 3} ${y + 14} Q${x - 3} ${y - 16} ${x + w / 2} ${y - 16} Q${x + w + 3} ${y - 16} ${x + w + 3} ${y + 14} L${x + w + 3} ${b} L${x + w - 5} ${b} L${x + w - 5} ${y + 16} Q${x + w / 2} ${y + 4} ${x + 5} ${y + 16} L${x + 5} ${b} L${x - 3} ${b} Z"/>` +
+        `<path class="r-cabelo-fio" d="M${x + w * 0.3} ${y - 10} q-${w * 0.15} 4 -${w * 0.24} 20 M${x + w * 0.7} ${y - 10} q${w * 0.15} 4 ${w * 0.24} 20 M${x + w / 2} ${y - 12} q-6 6 -10 12"/>`;
     }
     return '';
   }
 
+  // aro fino, ponte em arco e um reflexo diagonal em cada lente
   function oculos(olhos, r) {
-    let s = olhos.map(([x, y]) => `<circle class="r-oculos" cx="${x}" cy="${y}" r="${r}"/>`).join('');
+    let s = olhos.map(([x, y]) => `<circle class="r-oculos" cx="${x}" cy="${y}" r="${r}"/>` +
+      `<path class="r-brilho" d="M${x - r * 0.55} ${y - r * 0.05} l${r * 0.45} ${-r * 0.45}"/>`).join('');
     const [a, b] = olhos;
-    s += `<path class="r-oculos-linha" d="M${a[0] + r} ${a[1]} H${b[0] - r} M${a[0] - r} ${a[1] - 2} l-12 -5 M${b[0] + r} ${b[1] - 2} l12 -5"/>`;
+    s += `<path class="r-oculos-linha" d="M${a[0] + r} ${a[1]} Q${(a[0] + b[0]) / 2} ${a[1] - 7} ${b[0] - r} ${b[1]} M${a[0] - r} ${a[1] - 2} l-12 -5 M${b[0] + r} ${b[1] - 2} l12 -5"/>`;
     return s;
   }
 
   function bigode(p) {
     const { x, y } = p;
     return `<path class="r-cabelo" d="M${x} ${y} C${x - 5} ${y - 7} ${x - 15} ${y - 7} ${x - 19} ${y} C${x - 12} ${y - 3} ${x - 5} ${y - 1} ${x} ${y + 4} Z"/>` +
-      `<path class="r-cabelo" d="M${x} ${y} C${x + 5} ${y - 7} ${x + 15} ${y - 7} ${x + 19} ${y} C${x + 12} ${y - 3} ${x + 5} ${y - 1} ${x} ${y + 4} Z"/>`;
+      `<path class="r-cabelo" d="M${x} ${y} C${x + 5} ${y - 7} ${x + 15} ${y - 7} ${x + 19} ${y} C${x + 12} ${y - 3} ${x + 5} ${y - 1} ${x} ${y + 4} Z"/>` +
+      `<path class="r-cabelo-fio" d="M${x - 4} ${y - 1} l-9 -2 M${x - 5} ${y + 1} l-7 -1 M${x + 4} ${y - 1} l9 -2 M${x + 5} ${y + 1} l7 -1"/>`;
   }
 
   function tatuagem(tipo, r) {

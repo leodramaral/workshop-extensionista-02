@@ -468,7 +468,8 @@ Ilustrações planas em **SVG inline**, **geradas por `js/robos.js`** (sem build
 
 - **Cada robô tem a própria cor** (6 robôs, 6 cores de apoio, incluindo o violeta). O corpo é sempre claro (`--c-sand`, metade direita `--c-muted-dark`) com **uma cor só**: nunca corpo escuro nem duas cores de apoio misturadas.
 - **Nunca copie um mascote existente** (da Mux ou de qualquer marca): use o estilo como referência e invente o desenho a partir do conceito do papel. O Harness, por exemplo, é "a estrutura que prende e carrega as ferramentas", então vira um robô de capacete com arnês e cinto de ferramentas, e não um monitor em pedestal.
-- Peças comuns: corpo em dois tons com contorno `--c-ink` de 4px, parafusos, tela com moldura dupla e reflexo, LEDs, ranhuras de alto-falante, antena (`quadrado`, `losango`, `bandeira`, esfera ou dupla), mãos de 3 dedos ou garras em C, e sombra no chão.
+- Peças comuns: corpo em dois tons com contorno `--c-ink`, parafusos com fenda, tela com moldura dupla e reflexo, LEDs, ranhuras de alto-falante, antena (`quadrado`, `losango`, `bandeira`, esfera ou dupla), mãos de 3 dedos ou garras em C, e sombra no chão.
+- **Acabamento fino (referência: ilustrações da Mux).** Três espessuras de traço, em variáveis no `.robot`: contorno do corpo `--r-sw-contorno` (2,5px), peças `--r-sw` (2px) e detalhes `--r-sw-fino` (1,25px). Detalhes de superfície gerados pelas peças comuns de `js/robos.js`: **hachura** diagonal fina na metade sombreada de baixo (`hachura`), **brilho** branco acompanhando o canto superior esquerdo (`brilho`), **emendas** de painel com mini-rebites (`emenda`), pontos de **luz** em olhos, antenas e LEDs (`luz`), reflexo de tela em duas linhas diagonais, solas e esteiras com elos. Cada arquétipo soma os próprios detalhes (juntas, anéis nos tubos, malha do microfone, ilhoses do cinto, etiquetas dos cartuchos) sem mudar a silhueta. A camada de pessoa segue o mesmo acabamento: fios no cabelo e no bigode, óculos com ponte em arco e reflexo nas lentes.
 - Cada robô é alinhado pelo chão e tem o próprio tamanho (um gordinho é mais baixo que um monitor alto).
 
 **Duas versões de cada robô** (decidimos depois qual usar):
@@ -677,6 +678,7 @@ Um slide ou mudança só está **pronto** quando:
 | 2026-10-29 | v1.7: Harness redesenhado como pórtico com núcleo, ferramentas e cadeado (deixa de ser cópia do mascote da Mux); painel inferior do Plan com onda lisa; Modelo passa a violeta (sexta cor de apoio, `--c-violet`) para nenhum robô repetir cor |
 | 2026-10-29 | v1.8: Harness vira humanoide alto com capacete, arnês em X e cinto de ferramentas; Modelo com cabeça e tronco em proporção |
 | 2026-10-29 | v1.9: certificado de participação (seção 18), A4 paisagem; proposta B escolhida e exibida em tela cheia no deck |
+| 2026-10-29 | v1.10: robôs com acabamento fino (8.12): hierarquia de traço 2,5 / 2 / 1,25px e detalhes de superfície (hachura, brilho, emendas com rebites, pontos de luz), na linha das ilustrações da Mux; silhuetas, cores e traços de pessoa inalterados |
 
 ## 17. Referências
 

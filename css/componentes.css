@@ -300,12 +300,12 @@
 
 /* 8.12 Robôs */
 .robot { display: block; width: 300px; height: auto; overflow: visible; }
-.robot .r-line { stroke: var(--c-ink); stroke-width: 4; stroke-linejoin: round; stroke-linecap: round; }
+.robot .r-line { stroke: var(--c-ink); stroke-width: var(--r-sw); stroke-linejoin: round; stroke-linecap: round; }
 .robot .r-body { fill: var(--c-sand); }
 .robot .r-shade { fill: var(--c-muted-dark); }
 .robot .r-screen { fill: var(--c-ink); }
 .robot .r-accent { fill: var(--rc); }
-.robot .r-stroke { fill: none; stroke: var(--rc); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+.robot .r-stroke { fill: none; stroke: var(--rc); stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
 .robot .r-stroke--ink { stroke: var(--c-ink); }
 .robot .r-white { fill: var(--c-white); }
 .robot--pink   { --rc: var(--c-pink); }
@@ -327,6 +327,10 @@
   --rshade: var(--c-muted-dark);
   --rbezel: var(--c-muted-dark);
   --rc-2: var(--rc);
+  /* hierarquia de traço (v1.8): contorno, peça e detalhe */
+  --r-sw-contorno: 2.5;
+  --r-sw: 2;
+  --r-sw-fino: 1.25;
 }
 .robot--amber { --rc: var(--c-accent); }
 .robot--blue  { --rc: var(--c-blue); }
@@ -345,38 +349,49 @@
 .robot .r-fill2 { fill: var(--rc-2); }
 .robot .r-rline { fill: var(--rline); }
 .robot .r-sombra { fill: var(--c-ink); opacity: 0.12; }
-.robot .r-bezel { fill: var(--rbezel); stroke: var(--rline); stroke-width: 3; }
-.robot .r-shine { fill: #fff; opacity: 0.1; }
-.robot .r-thin { fill: none; stroke: var(--rline); stroke-width: 2; stroke-linecap: round; opacity: 0.55; }
-.robot .r-fenda { stroke: var(--rline); stroke-width: 3; stroke-linecap: round; opacity: 0.8; }
-.robot .r-fendas { fill: none; stroke: var(--rline); stroke-width: 3.5; stroke-linecap: round; }
-.robot .r-line-fino { stroke: var(--rline); stroke-width: 2; }
-.robot .r-stroke--tenue { opacity: 0.45; stroke-width: 4; }
-.robot .r-cabo { fill: none; stroke: var(--rline); stroke-width: 4; stroke-linecap: round; }
-.robot .r-ranhura { fill: none; stroke: var(--c-muted-dark); stroke-width: 2; }
-.robot .r-link { stroke: var(--c-sand); stroke-width: 1.6; opacity: 0.45; }
+.robot .r-outline.r-line { stroke-width: var(--r-sw-contorno); }
+.robot .r-bezel { fill: var(--rbezel); stroke: var(--rline); stroke-width: var(--r-sw); }
+.robot .r-shine { fill: none; stroke: #fff; stroke-width: var(--r-sw-fino); stroke-linecap: round; opacity: 0.35; }
+.robot .r-thin { fill: none; stroke: var(--rline); stroke-width: var(--r-sw-fino); stroke-linecap: round; opacity: 0.55; }
+.robot .r-fenda { stroke: var(--rline); stroke-width: 2; stroke-linecap: round; opacity: 0.8; }
+.robot .r-fendas { fill: none; stroke: var(--rline); stroke-width: 2; stroke-linecap: round; }
+.robot .r-line-fino { stroke: var(--rline); stroke-width: var(--r-sw-fino); }
+.robot .r-stroke--tenue { opacity: 0.45; stroke-width: 2.5; }
+.robot .r-cabo { fill: none; stroke: var(--rline); stroke-width: var(--r-sw); stroke-linecap: round; }
+.robot .r-ranhura { fill: none; stroke: var(--c-muted-dark); stroke-width: var(--r-sw-fino); }
+.robot .r-link { stroke: var(--c-sand); stroke-width: 1; opacity: 0.45; }
 .robot .r-cabelo { fill: var(--c-ink); }
-.robot .r-oculos { fill: rgba(255, 255, 255, 0.28); stroke: var(--rline); stroke-width: 3.5; }
-.robot .r-oculos-linha { fill: none; stroke: var(--rline); stroke-width: 3.5; stroke-linecap: round; }
-.robot .r-tat { fill: none; stroke: var(--c-ink); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; opacity: 0.85; }
+.robot .r-cabelo-fio { fill: none; stroke: var(--c-muted-dark); stroke-width: 1; stroke-linecap: round; opacity: 0.7; }
+.robot .r-oculos { fill: rgba(255, 255, 255, 0.28); stroke: var(--rline); stroke-width: var(--r-sw); }
+.robot .r-oculos-linha { fill: none; stroke: var(--rline); stroke-width: var(--r-sw); stroke-linecap: round; }
+.robot .r-tat { fill: none; stroke: var(--c-ink); stroke-width: var(--r-sw-fino); stroke-linecap: round; stroke-linejoin: round; opacity: 0.85; }
 .robot .r-eye, .robot .r-no, .robot .r-ping, .robot .r-cursor { transform-box: fill-box; transform-origin: center; }
 .robot .r-arm { transform-box: fill-box; transform-origin: 50% 0; }
 
 .robot--dark .r-tat { stroke: var(--c-pink); opacity: 1; }
 
 /* Robôs: garras em C e tubos do fone (arquétipos v1.6) */
-.robot .r-garra-borda { fill: none; stroke: var(--rline); stroke-width: 14; stroke-linecap: round; }
-.robot .r-garra { fill: none; stroke: var(--rc); stroke-width: 7; stroke-linecap: round; }
-.robot .r-pipe-borda { fill: none; stroke: var(--rline); stroke-width: 13; stroke-linecap: round; }
+.robot .r-garra-borda { fill: none; stroke: var(--rline); stroke-width: 10; stroke-linecap: round; }
+.robot .r-garra { fill: none; stroke: var(--rc); stroke-width: 6; stroke-linecap: round; }
+.robot .r-pipe-borda { fill: none; stroke: var(--rline); stroke-width: 10; stroke-linecap: round; }
 .robot .r-pipe { fill: none; stroke: var(--rbody); stroke-width: 6; stroke-linecap: round; }
 
 /* Violeta (sexta cor de apoio) e peças novas dos robôs v1.7 */
 .chip--violet, .surface-dark .chip--violet { background: var(--c-violet); color: var(--c-ink); }
 .glyph--violet { --glyph: var(--c-violet); }
 .robot--violet { --rc: var(--c-violet); }
-.robot .r-onda { fill: none; stroke: var(--c-ink); stroke-width: 4.5; stroke-linecap: round; stroke-linejoin: round; }
-.robot .r-cadeado { fill: none; stroke: var(--rline); stroke-width: 4; stroke-linecap: round; }
+.robot .r-onda { fill: none; stroke: var(--c-ink); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.robot .r-cadeado { fill: none; stroke: var(--rline); stroke-width: var(--r-sw); stroke-linecap: round; }
 
 /* Arnês do Harness (faixas em X com pesponto) */
-.robot .r-faixa { fill: none; stroke: var(--c-ink); stroke-width: 12; }
-.robot .r-pesponto { fill: none; stroke: var(--rc); stroke-width: 2; stroke-dasharray: 5 4; }
+.robot .r-faixa { fill: none; stroke: var(--c-ink); stroke-width: 10; }
+.robot .r-pesponto { fill: none; stroke: var(--rc); stroke-width: var(--r-sw-fino); stroke-dasharray: 4 3; }
+
+/* Acabamento fino v1.8: brilho, hachura da sombra, mini-rebites */
+.robot .r-brilho { fill: none; stroke: var(--c-white); stroke-width: 1.5; stroke-linecap: round; opacity: 0.85; }
+.robot .r-hachura { fill: none; stroke: var(--rline); stroke-width: 1; opacity: 0.22; }
+.robot .r-rebite { fill: var(--rline); opacity: 0.6; }
+.robot .r-fino-cor { fill: none; stroke: var(--rc); stroke-width: var(--r-sw-fino); stroke-linecap: round; }
+.robot .r-paraf { fill: none; stroke: var(--rbody); stroke-width: 0.9; stroke-linecap: round; }
+.robot .r-elo { fill: none; stroke: var(--rbody); stroke-width: 1; stroke-linecap: round; opacity: 0.5; }
+.robot .r-junta { fill: none; stroke: var(--rline); stroke-width: var(--r-sw-fino); stroke-linecap: round; }
