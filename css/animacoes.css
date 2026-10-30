@@ -141,3 +141,15 @@
 /* Plan (onda lisa): só no slide ativo */
 @keyframes onda-move { to { transform: translateX(-24px); } }
 .reveal .slides section.present .robot .r-onda-move { animation: onda-move 1.2s linear infinite; }
+
+/* Barras de probabilidade crescem quando o slide fica ativo (8.16) */
+@keyframes barra { from { transform: scaleX(0); } }
+.reveal .slides section.present .prob__bar {
+  animation: barra var(--d-slow) var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * var(--stagger) + 300ms);
+}
+/* Barras da janela de contexto crescem junto com a entrada das linhas (8.17) */
+.reveal .slides section.present .janela__barra {
+  animation: barra var(--d-slow) var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * var(--stagger) + 300ms);
+}

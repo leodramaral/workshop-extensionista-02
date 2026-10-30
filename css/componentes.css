@@ -410,3 +410,140 @@
 .robot .r-paraf { fill: none; stroke: var(--rbody); stroke-width: 0.9; stroke-linecap: round; }
 .robot .r-elo { fill: none; stroke: var(--rbody); stroke-width: 1; stroke-linecap: round; opacity: 0.5; }
 .robot .r-junta { fill: none; stroke: var(--rline); stroke-width: var(--r-sw-fino); stroke-linecap: round; }
+
+/* 8.8 Painel escuro de gráfico/diagrama */
+.panel { position: relative; background: var(--c-basalt); color: var(--c-sand); padding: 32px; }
+
+/* 8.15 Bloco de token: a cor segue a ordem dentro de .toks e recomeça a cada grupo */
+.toks { display: inline-flex; flex-wrap: wrap; gap: 6px; align-items: flex-start; }
+.tok {
+  display: inline-block;
+  font-family: var(--f-mono);
+  font-size: var(--t-body);
+  line-height: 1.3;
+  padding: 4px 10px;
+  border: 1px solid var(--c-ink);
+  color: var(--c-ink);
+  white-space: pre;
+  background: var(--c-pink);
+}
+.toks > :nth-child(6n+2) .tok, .toks > .tok:nth-child(6n+2) { background: var(--c-blue); }
+.toks > :nth-child(6n+3) .tok, .toks > .tok:nth-child(6n+3) { background: var(--c-green); }
+.toks > :nth-child(6n+4) .tok, .toks > .tok:nth-child(6n+4) { background: var(--c-accent); }
+.toks > :nth-child(6n+5) .tok, .toks > .tok:nth-child(6n+5) { background: var(--c-violet); }
+.toks > :nth-child(6n+6) .tok, .toks > .tok:nth-child(6n+6) { background: var(--c-orange); }
+.tok__sp { font-style: normal; }
+.tok-col { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-1); }
+.tok-id, .tok-n {
+  font-family: var(--f-mono);
+  font-size: var(--t-label);
+  line-height: 1.4;
+  color: var(--c-muted);
+}
+.tok-n { margin-left: var(--s-2); align-self: center; }
+
+/* Tabela de cortes: sem o marcador colorido da primeira coluna (os tokens já têm cor) */
+.table--tok td { padding-top: var(--s-2); padding-bottom: var(--s-2); vertical-align: middle; }
+.table--tok td:first-child::before { content: none; }
+.table--tok td:nth-child(3) { font-weight: 600; white-space: nowrap; }
+.table--tok td > .cut { display: flex; align-items: center; }
+
+/* 8.16 Barras de probabilidade */
+.prob { display: flex; flex-direction: column; gap: var(--s-4); }
+.reveal .prob__legend {
+  font-family: var(--f-mono);
+  font-size: var(--t-label);
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--c-muted-dark);
+}
+.prob__prompt { font-size: var(--t-lead); line-height: 1.35; color: var(--c-sand); display: flex; align-items: center; gap: 12px; }
+.prob__pick { color: var(--c-green); font-weight: 600; }
+.prob__rows { display: flex; flex-direction: column; gap: var(--s-3); }
+.prob__row {
+  display: grid;
+  grid-template-columns: 180px 1fr 80px;
+  gap: var(--s-3);
+  align-items: center;
+  font-family: var(--f-mono);
+  font-size: var(--t-label);
+  line-height: 1.4;
+}
+.prob__tok { color: var(--c-sand); }
+.prob__pct { color: var(--c-tint); text-align: right; }
+.prob__track { display: block; height: 32px; background: rgba(255, 241, 204, 0.15); }
+.prob__bar {
+  display: block;
+  height: 100%;
+  background: var(--c-tint);
+  transform: scaleX(var(--p, 0));
+  transform-origin: left center;
+}
+.prob__row:has(.fragment.visible) .prob__bar { background: var(--c-green); }
+.prob__row .chip { font-size: var(--t-label); }
+
+/* 8.17 Janela de contexto (figura), no estilo do cartão de diff da Greptile */
+.janela {
+  position: relative;
+  background: var(--c-basalt);
+  border: 1px dashed var(--frame-dark);
+  font-family: var(--f-mono);
+  font-size: var(--t-label);
+  line-height: 1.4;
+}
+.janela__head {
+  padding: 16px 28px;
+  color: var(--c-muted-dark);
+  border-bottom: 1px dashed var(--frame-dark);
+  letter-spacing: 0.04em;
+}
+.janela__body { padding: 12px 0; }
+.janela__linha {
+  display: grid;
+  grid-template-columns: 3ch 1ch 9ch 1fr;
+  gap: 20px;
+  align-items: center;
+  padding: 7px 28px;
+  background: rgba(0, 190, 67, 0.07);
+  transition: background var(--d-base) var(--ease-out);
+}
+.janela__linha b { font-weight: 400; color: var(--c-muted-dark); }
+.janela__sinal { font-style: normal; color: var(--c-green); }
+.janela__sinal::before { content: '+'; }
+.janela__rotulo { color: var(--c-eggshell); text-transform: lowercase; white-space: nowrap; }
+/* dois tons apagados, como no diff da Greptile: sálvia entra, malva sai */
+.janela__barra {
+  display: block;
+  width: var(--w, 100%);
+  height: 22px;
+  background: color-mix(in srgb, var(--c-green) 30%, var(--c-muted-dark));
+  transform-origin: left center;
+  transition: background var(--d-base) var(--ease-out);
+}
+.janela__foot {
+  padding: 14px 28px;
+  border-top: 1px dashed var(--frame-dark);
+  background: var(--c-basalt-2);
+  color: var(--c-eggshell);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+/* resumido: as linhas antigas viram "linha removida" do diff */
+.janela:has(.fragment.visible) .janela__linha--velho { background: rgba(250, 80, 181, 0.16); }
+.janela:has(.fragment.visible) .janela__linha--velho .janela__sinal { color: var(--c-pink); }
+.janela:has(.fragment.visible) .janela__linha--velho .janela__sinal::before { content: '-'; }
+.janela:has(.fragment.visible) .janela__linha--velho .janela__barra { background: color-mix(in srgb, var(--c-pink) 35%, var(--c-muted-dark)); }
+.janela .stamp { position: absolute; right: var(--s-5); top: 92px; z-index: 1; }
+
+/* Fileira de chips (sequência de passos) */
+.chip-row { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+
+/* Coluna numérica na tabela de cortes (contagem de caracteres) */
+.table--tok td.table__num {
+  font-family: var(--f-mono);
+  font-size: var(--t-label);
+  font-weight: 400;
+  color: var(--c-muted);
+}

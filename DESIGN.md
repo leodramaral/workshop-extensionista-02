@@ -1,7 +1,7 @@
 # DESIGN.md: fundação do site de apresentação
 
 > Workshop de Desenvolvimento com IA. Slides servidos como site no GitHub Pages.
-> Versão 1.12 · 2026-10-29 · Leandro Amaral
+> Versão 1.16 · 2026-10-30 · Leandro Amaral
 
 Este arquivo é a **fonte da verdade** do projeto. Ele vale para quem escreve código à mão e para agentes de IA (OpenCode, Claude, Copilot). Faça o `AGENTS.md` do repositório apontar para cá, com a linha: *"Antes de criar ou alterar qualquer slide, leia o DESIGN.md e siga-o à risca."*
 
@@ -51,7 +51,7 @@ URLs base (cdnjs, reveal.js 6.0.1):
 ```
 /
 ├── index.html            # página inicial: título do workshop + dois cartões, um para cada dia
-├── dia-1.html            # apresentação do Dia 1 (O jeito rápido)
+├── dia-1.html            # apresentação do Dia 1 (Um prompt só)
 ├── dia-2.html            # apresentação do Dia 2 (O jeito estruturado)
 ├── referencia-ui.html    # deck de referência de UI (todas as peças); NÃO apagar, NÃO linkar: acesso só pela URL
 ├── certificado-b.html    # certificado de participação (seção 18)
@@ -451,7 +451,7 @@ Para mostrar prompts, specs e trechos de código: cabeçalho com o caminho do ar
 
 ### 8.10 Rodapé
 
-`.footer`: linha fixa a `bottom: 64px`, Space Mono 24px, `--c-muted`, com fonte, número do bloco do roteiro (ex.: `2.2 · DOR 02`) ou link. O slide com rodapé usa `padding-bottom: var(--slide-pad-bottom)`.
+`.footer`: linha fixa a `bottom: 64px`, Space Mono 24px, `--c-muted`, com fonte, tema do slide (ex.: `TOKENS`, `DOR 02`) ou link. Sem número do bloco (seção 11). O slide com rodapé usa `padding-bottom: var(--slide-pad-bottom)`.
 
 ### 8.11 Marcadores decorativos
 
@@ -498,6 +498,34 @@ Efeito de duas esferas tangentes em wireframe (anéis de latitude e meridianos q
 
 `<span class="stamp">VAGO</span>`: Anybody 800, 44px, caixa alta, fundo em cor de apoio (`--c-orange` para problema, `--c-green` para ok), texto `--c-ink`, borda de 4px `--c-ink`, rotação de −5°. Entra como fragment com a animação `stamp`. Texto colorido sobre fundo claro é proibido (seção 5.1), por isso o selo é sempre preenchido.
 
+### 8.15 Bloco de token
+
+Mostra como o tokenizer cortou um texto, no estilo do tokenizer da OpenAI (platform.openai.com/tokenizer):
+
+```html
+<span class="toks">
+  <span class="tok"><i class="tok__sp">·</i>am</span><span class="tok">ora</span>
+</span>
+```
+
+- `.tok`: Space Mono 28px, padding `4px 10px`, borda de 1px `--c-ink`, cantos retos, texto `--c-ink`. A cor de fundo segue a ordem dentro de `.toks` (rosa, azul, verde, âmbar, violeta, laranja) e recomeça a cada `.toks`.
+- O espaço que faz parte do token aparece como `·` (`.tok__sp`). O rodapé do slide explica: `· = ESPAÇO`.
+- `.tok-col` empilha o token e o número dele (`.tok-id`, Space Mono 24px, `--c-muted`), para mostrar que o modelo só enxerga números.
+- `.tok-n`: contagem ao lado do corte (Space Mono 24px, `--c-muted`).
+- Cortes e números vêm do tokenizer de verdade (o200k_base, o do GPT-4o), nunca inventados. Palavra solta é cortada diferente da mesma palavra no meio da frase; os exemplos do roteiro usam **espaço antes da palavra**.
+
+### 8.16 Barras de probabilidade
+
+Dentro de `.hatch` > `.panel` (8.8): o texto de entrada no topo (DM Sans 36px, `--c-sand`, com cursor), depois uma linha por token candidato com rótulo (Space Mono, `--c-sand`), barra e porcentagem (Space Mono, `--c-tint`). A barra é `--c-tint` sobre trilho `--c-tint` a 15%, com largura dada por `style="--p: 0.45"` e desenhada com `scaleX` (animação `barra`). O token sorteado é um fragment: a barra dele passa a `--c-green`, um chip `chip--green` diz qual foi o escolhido e o token entra no texto em `--c-green` (verde = a opção escolhida). Os chips dos passos ao lado (prevê → escolhe → acrescenta → repete) ficam todos no padrão, sem destaque. Números ilustrativos levam "ilustrativo" no rodapé.
+
+### 8.17 Janela de contexto (figura)
+
+Segue o cartão de diff da Greptile (8.9), em tons apagados: `.hatch` > `.janela`, painel `--c-basalt` com borda tracejada `--frame-dark`, cabeçalho mono (`janela de contexto`, `--c-muted-dark`) e uma faixa de base `LIMITE DA JANELA` (`--c-basalt-2`, texto `--c-eggshell`).
+
+- Cada linha (`.janela__linha`): número (`--c-muted-dark`), sinal `+` (`--c-green`), rótulo em minúsculas (`--c-eggshell`) e uma barra de comprimento `style="--w: 70%"`. O rótulo diz o tipo (prompt, resposta, arquivo, comando); a barra não usa uma cor por tipo.
+- **Só dois tons, como no diff:** sálvia para o que entrou (`color-mix` de 30% `--c-green` com `--c-muted-dark`, fundo da linha verde a 7%) e malva para o que saiu (35% `--c-pink`, fundo rosa a 16%). Nada de cores de apoio puras nas barras.
+- As linhas entram com `.enter` e as barras crescem com `barra`. Um fragment com o selo `RESUMIDO` faz as linhas antigas (`.janela__linha--velho`) virarem "linha removida": o sinal passa a `-` e a barra e o fundo passam a malva.
+
 ## 9. Layouts (`css/layouts.css`)
 
 Cada slide usa **um** layout, num `div` wrapper que ocupa o slide inteiro. A área útil é de 1664×824 (ou 1664×792 com rodapé).
@@ -510,12 +538,13 @@ Cada slide usa **um** layout, num `div` wrapper que ocupa o slide inteiro. A ár
 | `layout-statement` | eyebrow (topo) · frase display em até 2 linhas · linha de apoio (base) · moldura + flutuantes | accent ou dark |
 | `layout-text-figure` | `layout-title` + linha com texto (flex 1) e painel/figura (largura fixa de ~850px) | light |
 | `layout-robots` | `layout-title` + 3 colunas, cada uma com robô sobre linha de chão e legenda (chip + 1 a 2 linhas). Variante `layout-robots--six`: 6 colunas, robô de 240px, legenda em 24px com até 3 linhas | light |
+| `layout-flow` | `layout-title` + estágios empilhados à esquerda (rótulo mono de 200px + conteúdo), ligados por conectores verticais, e um robô à direita (300px) que recebe o resultado | light |
 | `layout-code` | `layout-title` + cartão de código/diff (~1000px) e coluna lateral com chips e selos | light |
 | `layout-steps` | `layout-title` + grade 3×2 (colunas de 512px, linhas de 276px, gap de 64px) + conectores em serpentina | light |
 | `layout-table` | `layout-title` + tabela (Space Mono nos cabeçalhos, DM Sans 28px nas células, linhas de 1px `--c-line`) | light |
 | `layout-quote` | aspas grandes `--c-accent`, citação DM Sans 600 48px, autor em chip | light |
-| `layout-section` | abertura de bloco do roteiro: número grande (`1.3`) em Anybody, título e horário em mono, com barra `--c-accent` sob o número | dark |
-| `layout-demo` | aviso de demo ao vivo: eyebrow `[ DEMO AO VIVO ]` com cursor piscante, título e o que observar | dark |
+| `layout-section` | abertura de bloco do roteiro: eyebrow do dia no topo · barra `--c-accent` (`.layout-section__bar`), título longo em 96px e horário em mono na base. Sem número do bloco | dark |
+| `layout-demo` | aviso de demo ao vivo: eyebrow `[ DEMO AO VIVO ]` com cursor piscante e título no topo · frase e lista "o que observar" (até 3 itens com glifo) no meio · linha tracejada com botão para a ferramenta e pílula de configuração na base | dark |
 
 Regras:
 
@@ -577,6 +606,7 @@ Também há **entrada automática** ao chegar no slide, sem clique: elementos co
 | `ping` | ponta da antena do robô crescendo 18%, em loop | `layout-robots` |
 | `wave-run` | tracejado correndo na onda da tela do robô | `layout-robots` |
 | `digita` | linha de código revelada da esquerda para a direita (`clip-path` + `steps()`), escalonada por `--i` | `layout-code` |
+| `barra` | barra crescendo da esquerda (`scaleX` a partir de 0), escalonada por `--i` | barras de probabilidade (8.16) e janela de contexto (8.17) |
 | `esfera` | esfera pontilhada (dithering Bayer 4×4) girando, em canvas, com brilho do acento | referência de UI e certificado |
 | `codigo` | um prompt curto é digitado num cartão, "enviado" com um piscar âmbar, e dispara uma cascata rápida de linhas de código num painel escuro; no fim, as linhas com defeito piscam em laranja | capa do Dia 1 |
 | `planta` | composição abstrata de 6 peças: primeiro as cotas, depois cada peça é traçada em tracejado azul e construída em degraus, uma de cada vez, com um marcador âmbar levando a vez para a próxima | capa do Dia 2 |
@@ -600,7 +630,7 @@ Keyframes de referência, adaptados do CSS da Greptile:
 
 **Esfera** (`js/efeitos/esfera.js`): um canvas de 560×560 com grade de células de 7px. Para cada célula dentro do círculo, calcule a iluminação de Lambert com uma luz que gira, misture 20% de um padrão de faixas de longitude e latitude e acenda a célula se o valor passar o limiar da matriz Bayer 4×4. As células são quadrados de 5px na cor `--s-dot` da superfície (`--c-blue` no claro, `--c-tint` no escuro), lida do CSS do canvas, e o canvas leva `filter: drop-shadow(0 0 6px var(--s-glow))` (brilho azul no claro, âmbar no escuro). A rotação é de cerca de 0,015 rad por quadro.
 
-**Código** (`js/efeitos/codigo.js`, capa do Dia 1, "o jeito rápido"): canvas de 640×620. No topo, um cartão `--c-white` com borda `--c-ink` onde o prompt `> faz um sistema` é digitado em Space Mono 28px com cursor âmbar (1,4s); ao "enviar", o cartão pisca em `--c-accent` e o nó que o liga ao painel acende. Embaixo, um painel `--c-basalt` recebe 34 linhas de código em 2,6s (barras em `--c-tint`, `--c-blue`, `--c-pink`, `--c-green`, `--c-accent` e `--c-eggshell`, com recuo e numeração em quadradinhos), rolando quando enche. Terminada a cascata, ~14% das linhas ficam `--c-orange` e piscam com faixa laranja: o one-shot gera muito, rápido, e com defeito. O ciclo dura ~7,5s. Linhas geradas por semente fixa (sempre as mesmas). No PDF e com movimento reduzido, mostra o código pronto com os defeitos marcados.
+**Código** (`js/efeitos/codigo.js`, capa do Dia 1, "um prompt só"): canvas de 640×620. No topo, um cartão `--c-white` com borda `--c-ink` onde o prompt `> faz um sistema` é digitado em Space Mono 28px com cursor âmbar (1,4s); ao "enviar", o cartão pisca em `--c-accent` e o nó que o liga ao painel acende. Embaixo, um painel `--c-basalt` recebe 34 linhas de código em 2,6s (barras em `--c-tint`, `--c-blue`, `--c-pink`, `--c-green`, `--c-accent` e `--c-eggshell`, com recuo e numeração em quadradinhos), rolando quando enche. Terminada a cascata, ~14% das linhas ficam `--c-orange` e piscam com faixa laranja: o one-shot gera muito, rápido, e com defeito. O ciclo dura ~7,5s. Linhas geradas por semente fixa (sempre as mesmas). No PDF e com movimento reduzido, mostra o código pronto com os defeitos marcados.
 
 **Planta** (`js/efeitos/planta.js`, capa do Dia 2, "o jeito estruturado"): canvas de 640×620 com uma composição abstrata de 6 peças retangulares (lembra uma tela, sem ser literal), uma por etapa do SDD do roteiro, sem rótulos. Primeiro surgem as cotas (linhas `--c-muted` com marcas nas pontas): mede antes de construir. Depois, para cada peça, em ordem: um quadrado âmbar com borda `--c-ink` sai da peça anterior até a próxima, deixando um fio tracejado; a peça é traçada em tracejado `--c-blue` (lido do `color` do canvas) e então preenchida em 6 degraus com a sua cor (`--c-blue`, `--c-violet`, `--c-pink`, `--c-accent`, `--c-eggshell`, `--c-green`), ganhando contorno `--c-ink`. Ciclo de ~11s, ritmo calmo. No PDF e com movimento reduzido, mostra a composição pronta.
 
@@ -624,6 +654,7 @@ E no JS: se `matchMedia('(prefers-reduced-motion: reduce)').matches`, a esfera d
 - Idioma **pt-BR**. Termos técnicos consagrados ficam em inglês (*prompt*, *harness*, *one-shot*, *vibe coding*).
 - Os títulos são **substantivos ou frases curtas**, com a mesma gramática ao longo do deck. Nada de títulos de efeito do tipo "Não é X, é Y".
 - O texto vem do roteiro: cada slide começa com um comentário que aponta o bloco de origem (`<!-- 2.2 Dor 2 -->`).
+- **O número do bloco (1.2, 2.3…) não aparece no slide**, só no comentário do HTML. Eyebrow e rodapé levam o tema (`[ TOKENS ]`, `[ HARNESS ]`). Motivo: o deck não percorre todos os blocos em ordem, e um número solto (abrir no 1.2 sem ter passado pelo 1.1) confunde a turma.
 - **Nunca invente número, estatística ou citação.** Gráficos ilustrativos levam no rodapé "ilustrativo".
 - Para o público iniciante, o corpo tem no máximo 25 palavras por bloco. O detalhe vai para as notas.
 
@@ -693,6 +724,10 @@ Um slide ou mudança só está **pronto** quando:
 | 2026-10-29 | v1.10: robôs com acabamento fino (8.12): hierarquia de traço 2,5 / 2 / 1,25px e detalhes de superfície (hachura, brilho, emendas com rebites, pontos de luz), na linha das ilustrações da Mux; silhuetas, cores e traços de pessoa inalterados |
 | 2026-10-29 | v1.11: home (`index.html`) com dois cartões apontando para `dia-1.html` e `dia-2.html` (por enquanto só a capa); o deck de validação vira `referencia-ui.html`, acessível só pela URL; Dia 2 passa a "O jeito estruturado", como no roteiro |
 | 2026-10-29 | v1.12: cartões da home inteiramente clicáveis (8.5); capas dos dias com figura própria (prompt que vira código no Dia 1, planta construída etapa por etapa no Dia 2) no lugar da esfera, que fica na referência de UI e no certificado |
+| 2026-10-30 | v1.13: slides de Tokens do Dia 1 (bloco 1.2). Novas peças: bloco de token (8.15), barras de probabilidade (8.16) e figura da janela de contexto (8.17); painel escuro `.panel` passa a existir no CSS; layouts `layout-flow` (novo) e `layout-demo` (implementado); animação `barra` |
+| 2026-10-30 | v1.14: número do bloco sai dos slides (abertura de bloco, eyebrows e rodapés) e fica só nos comentários do HTML; `layout-section` passa a barra âmbar + título longo em 96px |
+| 2026-10-30 | v1.15: janela de contexto (8.17) refeita no estilo do diff da Greptile: painel escuro, dois tons apagados (sálvia entra, malva sai) e sinais `+`/`-`, no lugar dos blocos em cores de apoio puras |
+| 2026-10-30 | v1.16: Dia 1 passa a se chamar "Um prompt só" (era "O jeito rápido"); o rótulo do dia sai da linha de base da capa e do eyebrow da abertura de bloco, e o corpo da abertura fica preso à base com `margin-top: auto` |
 
 ## 17. Referências
 

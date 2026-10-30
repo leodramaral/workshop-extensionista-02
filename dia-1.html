@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dia 1: o jeito rápido</title>
+  <title>Dia 1: um prompt só</title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/6.0.1/reset.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/6.0.1/reveal.min.css">
@@ -29,14 +29,13 @@
           <p class="eyebrow enter" style="--i: 0">[ DIA 1 · 26/11 ]<span class="cursor" aria-hidden="true"></span></p>
 
           <div class="layout-cover__body">
-            <h1 class="enter" style="--i: 1">O jeito<br>rápido</h1>
+            <h1 class="enter" style="--i: 1">Um prompt<br>só</h1>
             <p class="lead layout-cover__sub enter" style="--i: 2">Do zero a um sistema em one-shot.</p>
             <span class="pill enter" style="--i: 3">18:20–21:40 · 190 MIN</span>
           </div>
 
           <div class="layout-cover__rule">
             <span>[ DESENVOLVIMENTO COM IA ]</span>
-            <span>[ DIA 1 · O JEITO RÁPIDO ]</span>
           </div>
 
           <canvas class="layout-cover__fig" data-efeito="codigo" aria-hidden="true"></canvas>
@@ -46,12 +45,377 @@
         </aside>
       </section>
 
+      <!-- 1.2 Tokens e panorama de modelos: abertura de bloco -->
+      <section class="surface-dark" data-background-color="#242628">
+        <div class="layout-section">
+          <div class="layout-section__body">
+            <i class="layout-section__bar enter" style="--i: 1" aria-hidden="true"></i>
+            <h2 class="title-long enter" style="--i: 2">Como a IA “lê”: tokens e panorama de modelos</h2>
+            <p class="layout-section__time enter" style="--i: 3">18:35–19:00 · 25 min</p>
+          </div>
+        </div>
+        <aside class="notes">
+          [25 min] Abertura do bloco. Primeiro entender como o modelo enxerga o texto (tokens, previsão, janela de contexto); depois o panorama de modelos.
+        </aside>
+      </section>
+
+      <!-- 1.2 Tokens: o tokenizer -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-flow">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ TOKENS ]</p>
+            <h2>Tokenizer</h2>
+          </div>
+
+          <div class="layout-flow__row">
+            <div class="flow">
+              <div class="flow__stage">
+                <span class="flow__label">Texto</span>
+                <p class="lead flow__text">O texto é fatiado em tokens</p>
+              </div>
+
+              <div class="tok-grid">
+                <span class="flow__label fragment rise" data-fragment-index="1">Tokens</span>
+                <span class="tok fragment rise" data-fragment-index="1">O</span>
+                <span class="tok fragment rise" data-fragment-index="1"><i class="tok__sp">·</i>texto</span>
+                <span class="tok fragment rise" data-fragment-index="1"><i class="tok__sp">·</i>é</span>
+                <span class="tok fragment rise" data-fragment-index="1"><i class="tok__sp">·</i>f</span>
+                <span class="tok fragment rise" data-fragment-index="1">ati</span>
+                <span class="tok fragment rise" data-fragment-index="1">ado</span>
+                <span class="tok fragment rise" data-fragment-index="1"><i class="tok__sp">·</i>em</span>
+                <span class="tok fragment rise" data-fragment-index="1"><i class="tok__sp">·</i>tokens</span>
+                <span class="flow__label fragment rise" data-fragment-index="2">Números</span>
+                <span class="tok-id fragment rise" data-fragment-index="2">46</span>
+                <span class="tok-id fragment rise" data-fragment-index="2">26353</span>
+                <span class="tok-id fragment rise" data-fragment-index="2">1212</span>
+                <span class="tok-id fragment rise" data-fragment-index="2">285</span>
+                <span class="tok-id fragment rise" data-fragment-index="2">3009</span>
+                <span class="tok-id fragment rise" data-fragment-index="2">1064</span>
+                <span class="tok-id fragment rise" data-fragment-index="2">863</span>
+                <span class="tok-id fragment rise" data-fragment-index="2">20290</span>
+              </div>
+            </div>
+
+            <article class="robot-card fragment rise" data-fragment-index="3">
+              <div class="robot-card__stage">
+                <div class="robot-slot" data-robo="modelo"></div>
+              </div>
+              <span class="chip chip--hex chip--violet">MODELO</span>
+              <p>Só enxerga os números.</p>
+            </article>
+          </div>
+
+          <svg class="connectors fragment" data-fragment-index="1" viewBox="0 0 1920 1080" aria-hidden="true">
+            <path class="connector" style="--len: 80; --i: 0" d="M386 524 V604" />
+            <circle class="node" style="--i: 0" cx="386" cy="524" r="9" />
+          </svg>
+          <svg class="connectors fragment" data-fragment-index="3" viewBox="0 0 1920 1080" aria-hidden="true">
+            <path class="connector" style="--len: 608; --i: 0" d="M1031 723 H1260 V560 H1476" />
+            <circle class="node" style="--i: 0" cx="1031" cy="723" r="9" />
+            <circle class="node node--last" style="--i: 1" cx="1476" cy="560" r="9" />
+          </svg>
+
+          <p class="footer"><span>TOKENS</span></p>
+        </div>
+        <aside class="notes">
+          [3 min] O texto não é lido em palavras: o tokenizer corta em pedaços (tokens) e troca cada um por um número. Repare que "fatiado" virou três pedaços e que o espaço vai junto com a palavra seguinte. O modelo nunca vê letras, só esses números.
+        </aside>
+      </section>
+
+      <!-- 1.2 Tokens: demo ao vivo no tokenizer da OpenAI -->
+      <section class="surface-dark" data-background-color="#242628">
+        <div class="layout-demo">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ DEMO AO VIVO ]<span class="cursor" aria-hidden="true"></span></p>
+            <h2>OpenAI Tokenizer</h2>
+          </div>
+
+          <div class="layout-demo__body">
+            <p class="lead">Digite uma palavra, troque uma ou duas letras e veja o corte mudar.</p>
+            <ul class="layout-demo__watch">
+              <li><i class="glyph glyph--square glyph--accent" aria-hidden="true"></i>Quantos tokens cada palavra vira</li>
+              <li><i class="glyph glyph--diamond glyph--pink" aria-hidden="true"></i>Acento, plural e maiúsculas mudam o corte</li>
+              <li><i class="glyph glyph--triangle glyph--blue" aria-hidden="true"></i>Espaço antes da palavra, como no meio da frase</li>
+            </ul>
+          </div>
+
+          <div class="layout-demo__foot">
+            <a class="btn-hex" href="https://platform.openai.com/tokenizer" target="_blank" rel="noopener">platform.openai.com/tokenizer</a>
+            <span class="pill pill--outline">MODELO: GPT-4O</span>
+          </div>
+        </div>
+        <aside class="notes">
+          [4 min] Abrir o tokenizer da OpenAI (platform.openai.com/tokenizer) e escolher o GPT-4o (as contagens dos slides usam a codificação dele, a o200k_base). Digitar sempre com um espaço antes da palavra (por exemplo "o amor"), porque é assim que ela aparece numa frase; sem o espaço o corte muda. Ir trocando as palavras do próximo slide e terminar com a frase abreviada ("você é muito especial" vs. "vc é mt especial").
+        </aside>
+      </section>
+
+      <!-- 1.2 Tokens: mudar uma ou duas letras muda o corte -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-table">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ TOKENS ]</p>
+            <h2>Uma letra muda o corte</h2>
+          </div>
+
+          <table class="table table--tok">
+            <thead>
+              <tr><th>Original</th><th>Tokens</th><th>Mudou para</th><th>Tokens</th></tr>
+            </thead>
+            <tbody>
+              <tr class="fragment rise">
+                <td>amor</td>
+                <td><span class="cut"><span class="toks"><span class="tok"><i class="tok__sp">·</i>amor</span></span><span class="tok-n">1</span></span></td>
+                <td>amora</td>
+                <td><span class="cut"><span class="toks"><span class="tok"><i class="tok__sp">·</i>am</span><span class="tok">ora</span></span><span class="tok-n">2</span></span></td>
+              </tr>
+              <tr class="fragment rise">
+                <td>sistema</td>
+                <td><span class="cut"><span class="toks"><span class="tok"><i class="tok__sp">·</i>sistema</span></span><span class="tok-n">1</span></span></td>
+                <td>sitema</td>
+                <td><span class="cut"><span class="toks"><span class="tok"><i class="tok__sp">·</i>s</span><span class="tok">item</span><span class="tok">a</span></span><span class="tok-n">3</span></span></td>
+              </tr>
+              <tr class="fragment rise">
+                <td>funcionalidade</td>
+                <td><span class="cut"><span class="toks"><span class="tok"><i class="tok__sp">·</i>funcional</span><span class="tok">idade</span></span><span class="tok-n">2</span></span></td>
+                <td>funcionalidades</td>
+                <td><span class="cut"><span class="toks"><span class="tok"><i class="tok__sp">·</i>funcionalidades</span></span><span class="tok-n">1</span></span></td>
+              </tr>
+              <tr class="fragment rise">
+                <td>pão</td>
+                <td><span class="cut"><span class="toks"><span class="tok"><i class="tok__sp">·</i>pão</span></span><span class="tok-n">1</span></span></td>
+                <td>pao</td>
+                <td><span class="cut"><span class="toks"><span class="tok"><i class="tok__sp">·</i>pa</span><span class="tok">o</span></span><span class="tok-n">2</span></span></td>
+              </tr>
+              <tr class="fragment rise">
+                <td>obrigado</td>
+                <td><span class="cut"><span class="toks"><span class="tok"><i class="tok__sp">·</i>obrigado</span></span><span class="tok-n">1</span></span></td>
+                <td>obrigadão</td>
+                <td><span class="cut"><span class="toks"><span class="tok"><i class="tok__sp">·</i>obrig</span><span class="tok">ad</span><span class="tok">ão</span></span><span class="tok-n">3</span></span></td>
+              </tr>
+              <tr class="fragment rise">
+                <td>Inteligência</td>
+                <td><span class="cut"><span class="toks"><span class="tok"><i class="tok__sp">·</i>Intelig</span><span class="tok">ência</span></span><span class="tok-n">2</span></span></td>
+                <td>INTELIGÊNCIA</td>
+                <td><span class="cut"><span class="toks"><span class="tok"><i class="tok__sp">·</i>INT</span><span class="tok">EL</span><span class="tok">IG</span><span class="tok">ÊNCIA</span></span><span class="tok-n">4</span></span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p class="footer"><span>TOKENS</span></p>
+        </div>
+        <aside class="notes">
+          [3 min] Uma linha por clique. Palavras comuns viram um token só; um erro de digitação, um acento a menos ou as maiúsculas quebram em vários pedaços. Curiosidade: "funcionalidades", no plural, é um token só, e o singular são dois. O tokenizer aprendeu os pedaços mais frequentes, não as regras do português.
+        </aside>
+      </section>
+
+      <!-- 1.2 Tokens: abreviação -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-table">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ TOKENS ]</p>
+            <h2>E se abreviar?</h2>
+          </div>
+
+          <table class="table table--tok">
+            <thead>
+              <tr><th>Frase</th><th>Tokens</th><th>Caracteres</th></tr>
+            </thead>
+            <tbody>
+              <tr class="fragment rise">
+                <td>você é muito especial</td>
+                <td><span class="cut"><span class="toks"><span class="tok">v</span><span class="tok">ocê</span><span class="tok"><i class="tok__sp">·</i>é</span><span class="tok"><i class="tok__sp">·</i>muito</span><span class="tok"><i class="tok__sp">·</i>especial</span></span><span class="tok-n">5</span></span></td>
+                <td class="table__num">21</td>
+              </tr>
+              <tr class="fragment rise">
+                <td>vc é mt especial</td>
+                <td><span class="cut"><span class="toks"><span class="tok">vc</span><span class="tok"><i class="tok__sp">·</i>é</span><span class="tok"><i class="tok__sp">·</i>mt</span><span class="tok"><i class="tok__sp">·</i>especial</span></span><span class="tok-n">4</span></span></td>
+                <td class="table__num">16</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p class="lead fragment rise">Cinco letras a menos, um token a menos. O modelo conta tokens, não letras: “vc” e “mt” também são pedaços conhecidos.</p>
+
+          <p class="footer"><span>TOKENS</span></p>
+        </div>
+        <aside class="notes">
+          [2 min] A frase abreviada tem 5 caracteres a menos, mas só 1 token a menos. "vc" e "mt" aparecem tanto em texto da internet que viraram um token cada. E repare que "você", no começo da frase, foi cortado em "v" + "ocê". Quem conta é o tokenizer, não o número de letras.
+        </aside>
+      </section>
+
+      <!-- 1.2 Tokens: o modelo prevê o próximo token -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-text-figure">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ TOKENS ]</p>
+            <h2>O próximo token</h2>
+          </div>
+
+          <div class="layout-text-figure__row">
+            <div class="layout-text-figure__text">
+              <p class="lead">A cada passo, o modelo dá uma probabilidade para cada token, escolhe um, acrescenta ao texto e repete.</p>
+              <div class="chip-row">
+                <span class="chip chip--arrow">PREVÊ</span>
+                <span class="chip chip--arrow">ESCOLHE</span>
+                <span class="chip chip--arrow">ACRESCENTA</span>
+                <span class="chip chip--arrow">REPETE</span>
+              </div>
+            </div>
+
+            <div class="layout-text-figure__figure">
+              <div class="hatch">
+                <div class="panel prob" role="img" aria-label="Probabilidades ilustrativas do próximo token depois de 'O céu hoje está': azul 45%, nublado 25%, limpo 12%, cinzento 8%">
+                  <p class="prob__legend">[ Próximo token · probabilidade ]</p>
+                  <p class="prob__prompt">O céu hoje está <span class="prob__pick fragment" data-fragment-index="2">nublado</span><span class="cursor" aria-hidden="true"></span></p>
+                  <div class="prob__rows">
+                    <div class="prob__row"><span class="prob__tok">azul</span><span class="prob__track"><span class="prob__bar" style="--p: 0.45; --i: 0"></span></span><span class="prob__pct">45%</span></div>
+                    <div class="prob__row"><span class="prob__tok">nublado</span><span class="prob__track"><span class="prob__bar" style="--p: 0.25; --i: 1"></span></span><span class="prob__pct">25%<i class="fragment" data-fragment-index="1"></i></span></div>
+                    <div class="prob__row"><span class="prob__tok">limpo</span><span class="prob__track"><span class="prob__bar" style="--p: 0.12; --i: 2"></span></span><span class="prob__pct">12%</span></div>
+                    <div class="prob__row"><span class="prob__tok">cinzento</span><span class="prob__track"><span class="prob__bar" style="--p: 0.08; --i: 3"></span></span><span class="prob__pct">8%</span></div>
+                  </div>
+                  <span class="chip chip--green fragment rise" data-fragment-index="1">SORTEADO: NUBLADO</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p class="footer"><span>TOKENS</span><span>Números ilustrativos</span></p>
+        </div>
+        <aside class="notes">
+          [3 min] O modelo não "sabe" a resposta: a cada passo ele calcula uma probabilidade para cada token do vocabulário, escolhe um, cola no texto e recomeça. Clique 1: ele sorteou "nublado", que nem era o mais provável. Clique 2: o token entra no texto e o ciclo recomeça. Os números são ilustrativos.
+        </aside>
+      </section>
+
+      <!-- 1.2 Tokens: sorteio, temperatura e alucinação -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-two-cards">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ TOKENS ]</p>
+            <h2>Sorteio e alucinação</h2>
+          </div>
+
+          <div class="layout-two-cards__row">
+            <div class="hatch fragment rise">
+              <article class="card">
+                <span class="chip chip--back chip--blue">TEMPERATURA</span>
+                <h3>Sorteia entre os prováveis</h3>
+                <p>Ele não pega sempre o mais provável. A temperatura controla o quanto ele arrisca.</p>
+                <ul>
+                  <li>Mesmo prompt</li>
+                  <li>Respostas diferentes</li>
+                </ul>
+              </article>
+            </div>
+
+            <div class="hatch fragment rise">
+              <article class="card card--accent">
+                <span class="chip chip--hex">ALUCINAÇÃO</span>
+                <h3>Soa provável, não verdadeiro</h3>
+                <p>Quando falta informação, ele preenche com algo plausível, no mesmo tom confiante.</p>
+                <ul>
+                  <li>Escolhe o que soa provável</li>
+                  <li>Não confere se é verdade</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+
+          <svg class="connectors" viewBox="0 0 1920 1080" aria-hidden="true">
+            <path class="connector" style="--len: 96; --i: 0" d="M912 588 H1008" />
+            <circle class="node" style="--i: 0" cx="912" cy="588" r="9" />
+            <circle class="node node--last" style="--i: 1" cx="1008" cy="588" r="9" />
+          </svg>
+
+          <p class="footer"><span>TOKENS</span><span>Por que a IA “inventa” com confiança</span></p>
+        </div>
+        <aside class="notes">
+          [2 min] Por isso o mesmo prompt pode gerar respostas diferentes: há um sorteio, e a temperatura regula o quanto ele arrisca. E o mais importante: ele escolhe o que soa provável, não o que é verdade. Quando falta informação, completa com algo plausível, no mesmo tom confiante. Isso é a alucinação, e ela volta no Dia 2.
+        </aside>
+      </section>
+
+      <!-- 1.2 Tokens: janela de contexto -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-text-figure">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ TOKENS ]</p>
+            <h2>Janela de contexto</h2>
+          </div>
+
+          <div class="layout-text-figure__row">
+            <div class="layout-text-figure__text">
+              <p class="lead">Tudo o que o modelo enxerga de uma vez: o prompt, as respostas, os arquivos lidos e as saídas de comandos.</p>
+              <span class="chip chip--arrow chip--accent">MEMÓRIA DE TRABALHO · EM TOKENS</span>
+            </div>
+
+            <div class="layout-text-figure__figure">
+              <div class="hatch">
+                <div class="panel--light">
+                  <canvas data-efeito="malha" width="762" height="420" aria-hidden="true"></canvas>
+                  <i class="mark mark--pink float float--1" style="left: 150px; top: 110px" aria-hidden="true"></i>
+                  <i class="mark mark--pink float float--2" style="left: 640px; top: 130px" aria-hidden="true"></i>
+                  <i class="mark mark--pink float float--3" style="left: 560px; top: 330px" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p class="footer"><span>TOKENS</span><span>Tudo o que entra ocupa espaço</span></p>
+        </div>
+        <aside class="notes">
+          [2 min] A janela de contexto é a memória de trabalho do modelo, medida em tokens. Não é só o seu prompt: as respostas dele, cada arquivo que ele lê e cada saída de comando entram nela.
+        </aside>
+      </section>
+
+      <!-- 1.2 Tokens: quando a janela enche -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-text-figure">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ TOKENS ]</p>
+            <h2>Quando a janela enche</h2>
+          </div>
+
+          <div class="layout-text-figure__row">
+            <div class="layout-text-figure__text">
+              <p class="lead">O que está fora da janela não existe para o modelo. Quando ela enche, a conversa é resumida ou cortada.</p>
+              <span class="chip chip--arrow chip--blue">DEZENAS DE MIL A +1 MILHÃO</span>
+              <p class="flow__label">O tamanho varia por modelo</p>
+            </div>
+
+            <div class="layout-text-figure__figure">
+              <div class="hatch">
+                  <div class="janela" role="img" aria-label="Janela de contexto cheia: prompt, respostas, arquivos lidos e saídas de comandos; as linhas mais antigas são resumidas">
+                    <div class="janela__head">janela de contexto</div>
+                    <div class="janela__body">
+                      <div class="janela__linha janela__linha--velho enter" style="--i: 0"><b>01</b><i class="janela__sinal" aria-hidden="true"></i><span class="janela__rotulo">prompt</span><i class="janela__barra" style="--w: 62%; --i: 0"></i></div>
+                      <div class="janela__linha janela__linha--velho enter" style="--i: 1"><b>02</b><i class="janela__sinal" aria-hidden="true"></i><span class="janela__rotulo">resposta</span><i class="janela__barra" style="--w: 84%; --i: 1"></i></div>
+                      <div class="janela__linha janela__linha--velho enter" style="--i: 2"><b>03</b><i class="janela__sinal" aria-hidden="true"></i><span class="janela__rotulo">arquivo</span><i class="janela__barra" style="--w: 100%; --i: 2"></i></div>
+                      <div class="janela__linha enter" style="--i: 3"><b>04</b><i class="janela__sinal" aria-hidden="true"></i><span class="janela__rotulo">comando</span><i class="janela__barra" style="--w: 74%; --i: 3"></i></div>
+                      <div class="janela__linha enter" style="--i: 4"><b>05</b><i class="janela__sinal" aria-hidden="true"></i><span class="janela__rotulo">resposta</span><i class="janela__barra" style="--w: 90%; --i: 4"></i></div>
+                      <div class="janela__linha enter" style="--i: 5"><b>06</b><i class="janela__sinal" aria-hidden="true"></i><span class="janela__rotulo">arquivo</span><i class="janela__barra" style="--w: 68%; --i: 5"></i></div>
+                    </div>
+                    <div class="janela__foot">Limite da janela</div>
+                    <span class="stamp fragment stamp">RESUMIDO</span>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+          <p class="footer"><span>TOKENS</span><span>Detalhes se perdem no resumo</span></p>
+        </div>
+        <aside class="notes">
+          [2 min] A janela tem limite. O que está fora dela não existe para o modelo. Quando enche, o harness resume ou corta a conversa (clique: o selo) e os detalhes do começo se perdem. O tamanho varia por modelo, de dezenas de milhares a mais de um milhão de tokens. Guardem isso: é a primeira dor do Dia 2.
+        </aside>
+      </section>
+
     </div>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/6.0.1/reveal.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/6.0.1/plugin/notes.min.js"></script>
   <script src="js/efeitos/codigo.js"></script>
+  <script src="js/efeitos/malha.js"></script>
+  <script src="js/efeitos/flutuantes.js"></script>
+  <script src="js/robos.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
