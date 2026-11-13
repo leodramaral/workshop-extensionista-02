@@ -75,28 +75,28 @@
               </div>
 
               <div class="tok-grid">
-                <span class="flow__label fragment rise" data-fragment-index="1">Tokens</span>
-                <span class="tok fragment rise" data-fragment-index="1">O</span>
-                <span class="tok fragment rise" data-fragment-index="1"><i class="tok__sp">·</i>texto</span>
-                <span class="tok fragment rise" data-fragment-index="1"><i class="tok__sp">·</i>é</span>
-                <span class="tok fragment rise" data-fragment-index="1"><i class="tok__sp">·</i>f</span>
-                <span class="tok fragment rise" data-fragment-index="1">ati</span>
-                <span class="tok fragment rise" data-fragment-index="1">ado</span>
-                <span class="tok fragment rise" data-fragment-index="1"><i class="tok__sp">·</i>em</span>
-                <span class="tok fragment rise" data-fragment-index="1"><i class="tok__sp">·</i>tokens</span>
-                <span class="flow__label fragment rise" data-fragment-index="2">Números</span>
-                <span class="tok-id fragment rise" data-fragment-index="2">46</span>
-                <span class="tok-id fragment rise" data-fragment-index="2">26353</span>
-                <span class="tok-id fragment rise" data-fragment-index="2">1212</span>
-                <span class="tok-id fragment rise" data-fragment-index="2">285</span>
-                <span class="tok-id fragment rise" data-fragment-index="2">3009</span>
-                <span class="tok-id fragment rise" data-fragment-index="2">1064</span>
-                <span class="tok-id fragment rise" data-fragment-index="2">863</span>
-                <span class="tok-id fragment rise" data-fragment-index="2">20290</span>
+                <span class="flow__label enter" style="--i: 0">Tokens</span>
+                <span class="tok enter" style="--i: 1">O</span>
+                <span class="tok enter" style="--i: 2"><i class="tok__sp">·</i>texto</span>
+                <span class="tok enter" style="--i: 3"><i class="tok__sp">·</i>é</span>
+                <span class="tok enter" style="--i: 4"><i class="tok__sp">·</i>f</span>
+                <span class="tok enter" style="--i: 5">ati</span>
+                <span class="tok enter" style="--i: 6">ado</span>
+                <span class="tok enter" style="--i: 7"><i class="tok__sp">·</i>em</span>
+                <span class="tok enter" style="--i: 8"><i class="tok__sp">·</i>tokens</span>
+                <span class="flow__label enter" style="--i: 9">Números</span>
+                <span class="tok-id enter" style="--i: 10">46</span>
+                <span class="tok-id enter" style="--i: 11">26353</span>
+                <span class="tok-id enter" style="--i: 12">1212</span>
+                <span class="tok-id enter" style="--i: 13">285</span>
+                <span class="tok-id enter" style="--i: 14">3009</span>
+                <span class="tok-id enter" style="--i: 15">1064</span>
+                <span class="tok-id enter" style="--i: 16">863</span>
+                <span class="tok-id enter" style="--i: 17">20290</span>
               </div>
             </div>
 
-            <article class="robot-card fragment rise" data-fragment-index="3">
+            <article class="robot-card enter" style="--i: 18">
               <div class="robot-card__stage">
                 <div class="robot-slot" data-robo="modelo"></div>
               </div>
@@ -105,17 +105,15 @@
             </article>
           </div>
 
-          <svg class="connectors fragment" data-fragment-index="1" viewBox="0 0 1920 1080" aria-hidden="true">
+          <svg class="connectors" viewBox="0 0 1920 1080" aria-hidden="true">
             <path class="connector" style="--len: 80; --i: 0" d="M386 524 V604" />
             <circle class="node" style="--i: 0" cx="386" cy="524" r="9" />
           </svg>
-          <svg class="connectors fragment" data-fragment-index="3" viewBox="0 0 1920 1080" aria-hidden="true">
+          <svg class="connectors" viewBox="0 0 1920 1080" aria-hidden="true">
             <path class="connector" style="--len: 608; --i: 0" d="M1031 723 H1260 V560 H1476" />
             <circle class="node" style="--i: 0" cx="1031" cy="723" r="9" />
             <circle class="node node--last" style="--i: 1" cx="1476" cy="560" r="9" />
           </svg>
-
-          <p class="footer"><span>TOKENS</span></p>
         </div>
         <aside class="notes">
           [3 min] O texto não é lido em palavras: o tokenizer corta em pedaços (tokens) e troca cada um por um número. Repare que "fatiado" virou três pedaços e que o espaço vai junto com a palavra seguinte. O modelo nunca vê letras, só esses números.
@@ -162,37 +160,37 @@
               <tr><th>Original</th><th>Tokens</th><th>Mudou para</th><th>Tokens</th></tr>
             </thead>
             <tbody>
-              <tr class="fragment rise">
+              <tr class="enter" style="--i: 0">
                 <td>amor</td>
                 <td><span class="cut"><span class="toks"><span class="tok"><i class="tok__sp">·</i>amor</span></span><span class="tok-n">1</span></span></td>
                 <td>amora</td>
                 <td><span class="cut"><span class="toks"><span class="tok"><i class="tok__sp">·</i>am</span><span class="tok">ora</span></span><span class="tok-n">2</span></span></td>
               </tr>
-              <tr class="fragment rise">
+              <tr class="enter" style="--i: 1">
                 <td>sistema</td>
                 <td><span class="cut"><span class="toks"><span class="tok"><i class="tok__sp">·</i>sistema</span></span><span class="tok-n">1</span></span></td>
                 <td>sitema</td>
                 <td><span class="cut"><span class="toks"><span class="tok"><i class="tok__sp">·</i>s</span><span class="tok">item</span><span class="tok">a</span></span><span class="tok-n">3</span></span></td>
               </tr>
-              <tr class="fragment rise">
+              <tr class="enter" style="--i: 2">
                 <td>funcionalidade</td>
                 <td><span class="cut"><span class="toks"><span class="tok"><i class="tok__sp">·</i>funcional</span><span class="tok">idade</span></span><span class="tok-n">2</span></span></td>
                 <td>funcionalidades</td>
                 <td><span class="cut"><span class="toks"><span class="tok"><i class="tok__sp">·</i>funcionalidades</span></span><span class="tok-n">1</span></span></td>
               </tr>
-              <tr class="fragment rise">
+              <tr class="enter" style="--i: 3">
                 <td>pão</td>
                 <td><span class="cut"><span class="toks"><span class="tok"><i class="tok__sp">·</i>pão</span></span><span class="tok-n">1</span></span></td>
                 <td>pao</td>
                 <td><span class="cut"><span class="toks"><span class="tok"><i class="tok__sp">·</i>pa</span><span class="tok">o</span></span><span class="tok-n">2</span></span></td>
               </tr>
-              <tr class="fragment rise">
+              <tr class="enter" style="--i: 4">
                 <td>obrigado</td>
                 <td><span class="cut"><span class="toks"><span class="tok"><i class="tok__sp">·</i>obrigado</span></span><span class="tok-n">1</span></span></td>
                 <td>obrigadão</td>
                 <td><span class="cut"><span class="toks"><span class="tok"><i class="tok__sp">·</i>obrig</span><span class="tok">ad</span><span class="tok">ão</span></span><span class="tok-n">3</span></span></td>
               </tr>
-              <tr class="fragment rise">
+              <tr class="enter" style="--i: 5">
                 <td>Inteligência</td>
                 <td><span class="cut"><span class="toks"><span class="tok"><i class="tok__sp">·</i>Intelig</span><span class="tok">ência</span></span><span class="tok-n">2</span></span></td>
                 <td>INTELIGÊNCIA</td>
@@ -200,11 +198,9 @@
               </tr>
             </tbody>
           </table>
-
-          <p class="footer"><span>TOKENS</span></p>
         </div>
         <aside class="notes">
-          [3 min] Uma linha por clique. Palavras comuns viram um token só; um erro de digitação, um acento a menos ou as maiúsculas quebram em vários pedaços. Curiosidade: "funcionalidades", no plural, é um token só, e o singular são dois. O tokenizer aprendeu os pedaços mais frequentes, não as regras do português.
+          [3 min] Palavras comuns viram um token só; um erro de digitação, um acento a menos ou as maiúsculas quebram em vários pedaços. Curiosidade: "funcionalidades", no plural, é um token só, e o singular são dois. O tokenizer aprendeu os pedaços mais frequentes, não as regras do português.
         </aside>
       </section>
 
@@ -221,12 +217,12 @@
               <tr><th>Frase</th><th>Tokens</th><th>Caracteres</th></tr>
             </thead>
             <tbody>
-              <tr class="fragment rise">
+              <tr class="enter" style="--i: 0">
                 <td>você é muito especial</td>
                 <td><span class="cut"><span class="toks"><span class="tok">v</span><span class="tok">ocê</span><span class="tok"><i class="tok__sp">·</i>é</span><span class="tok"><i class="tok__sp">·</i>muito</span><span class="tok"><i class="tok__sp">·</i>especial</span></span><span class="tok-n">5</span></span></td>
                 <td class="table__num">21</td>
               </tr>
-              <tr class="fragment rise">
+              <tr class="enter" style="--i: 1">
                 <td>vc é mt especial</td>
                 <td><span class="cut"><span class="toks"><span class="tok">vc</span><span class="tok"><i class="tok__sp">·</i>é</span><span class="tok"><i class="tok__sp">·</i>mt</span><span class="tok"><i class="tok__sp">·</i>especial</span></span><span class="tok-n">4</span></span></td>
                 <td class="table__num">16</td>
@@ -234,9 +230,7 @@
             </tbody>
           </table>
 
-          <p class="lead fragment rise">Cinco letras a menos, um token a menos. O modelo conta tokens, não letras: “vc” e “mt” também são pedaços conhecidos.</p>
-
-          <p class="footer"><span>TOKENS</span></p>
+          <p class="lead enter" style="--i: 2">Cinco letras a menos, um token a menos. O modelo conta tokens, não letras: “vc” e “mt” também são pedaços conhecidos.</p>
         </div>
         <aside class="notes">
           [2 min] A frase abreviada tem 5 caracteres a menos, mas só 1 token a menos. "vc" e "mt" aparecem tanto em texto da internet que viraram um token cada. E repare que "você", no começo da frase, foi cortado em "v" + "ocê". Quem conta é o tokenizer, não o número de letras.
@@ -265,21 +259,19 @@
             <div class="layout-text-figure__figure">
               <div class="hatch">
                 <div class="panel prob" role="img" aria-label="Probabilidades ilustrativas do próximo token depois de 'O céu hoje está': azul 45%, nublado 25%, limpo 12%, cinzento 8%">
-                  <p class="prob__legend">[ Próximo token · probabilidade ]</p>
-                  <p class="prob__prompt">O céu hoje está <span class="prob__pick fragment" data-fragment-index="2">nublado</span><span class="cursor" aria-hidden="true"></span></p>
+                  <p class="prob__legend">[ Probabilidade · ilustrativo ]</p>
+                  <p class="prob__prompt">O céu hoje está <span class="prob__pick">nublado</span><span class="cursor" aria-hidden="true"></span></p>
                   <div class="prob__rows">
                     <div class="prob__row"><span class="prob__tok">azul</span><span class="prob__track"><span class="prob__bar" style="--p: 0.45; --i: 0"></span></span><span class="prob__pct">45%</span></div>
-                    <div class="prob__row"><span class="prob__tok">nublado</span><span class="prob__track"><span class="prob__bar" style="--p: 0.25; --i: 1"></span></span><span class="prob__pct">25%<i class="fragment" data-fragment-index="1"></i></span></div>
+                    <div class="prob__row prob__row--pick"><span class="prob__tok">nublado</span><span class="prob__track"><span class="prob__bar" style="--p: 0.25; --i: 1"></span></span><span class="prob__pct">25%</span></div>
                     <div class="prob__row"><span class="prob__tok">limpo</span><span class="prob__track"><span class="prob__bar" style="--p: 0.12; --i: 2"></span></span><span class="prob__pct">12%</span></div>
                     <div class="prob__row"><span class="prob__tok">cinzento</span><span class="prob__track"><span class="prob__bar" style="--p: 0.08; --i: 3"></span></span><span class="prob__pct">8%</span></div>
                   </div>
-                  <span class="chip chip--green fragment rise" data-fragment-index="1">SORTEADO: NUBLADO</span>
+                  <span class="chip chip--green enter" style="--i: 4">SORTEADO: NUBLADO</span>
                 </div>
               </div>
             </div>
           </div>
-
-          <p class="footer"><span>TOKENS</span><span>Números ilustrativos</span></p>
         </div>
         <aside class="notes">
           [3 min] O modelo não "sabe" a resposta: a cada passo ele calcula uma probabilidade para cada token do vocabulário, escolhe um, cola no texto e recomeça. Clique 1: ele sorteou "nublado", que nem era o mais provável. Clique 2: o token entra no texto e o ciclo recomeça. Os números são ilustrativos.
@@ -295,7 +287,7 @@
           </div>
 
           <div class="layout-two-cards__row">
-            <div class="hatch fragment rise">
+            <div class="hatch enter" style="--i: 0">
               <article class="card">
                 <span class="chip chip--back chip--blue">TEMPERATURA</span>
                 <h3>Sorteia entre os prováveis</h3>
@@ -307,7 +299,7 @@
               </article>
             </div>
 
-            <div class="hatch fragment rise">
+            <div class="hatch enter" style="--i: 1">
               <article class="card card--accent">
                 <span class="chip chip--hex">ALUCINAÇÃO</span>
                 <h3>Soa provável, não verdadeiro</h3>
@@ -325,8 +317,6 @@
             <circle class="node" style="--i: 0" cx="912" cy="588" r="9" />
             <circle class="node node--last" style="--i: 1" cx="1008" cy="588" r="9" />
           </svg>
-
-          <p class="footer"><span>TOKENS</span><span>Por que a IA “inventa” com confiança</span></p>
         </div>
         <aside class="notes">
           [2 min] Por isso o mesmo prompt pode gerar respostas diferentes: há um sorteio, e a temperatura regula o quanto ele arrisca. E o mais importante: ele escolhe o que soa provável, não o que é verdade. Quando falta informação, completa com algo plausível, no mesmo tom confiante. Isso é a alucinação, e ela volta no Dia 2.
@@ -358,8 +348,6 @@
               </div>
             </div>
           </div>
-
-          <p class="footer"><span>TOKENS</span><span>Tudo o que entra ocupa espaço</span></p>
         </div>
         <aside class="notes">
           [2 min] A janela de contexto é a memória de trabalho do modelo, medida em tokens. Não é só o seu prompt: as respostas dele, cada arquivo que ele lê e cada saída de comando entram nela.
@@ -383,7 +371,7 @@
 
             <div class="layout-text-figure__figure">
               <div class="hatch">
-                  <div class="janela" role="img" aria-label="Janela de contexto cheia: prompt, respostas, arquivos lidos e saídas de comandos; as linhas mais antigas são resumidas">
+                  <div class="janela janela--resumido" role="img" aria-label="Janela de contexto cheia: prompt, respostas, arquivos lidos e saídas de comandos; as linhas mais antigas são resumidas">
                     <div class="janela__head">janela de contexto</div>
                     <div class="janela__body">
                       <div class="janela__linha janela__linha--velho enter" style="--i: 0"><b>01</b><i class="janela__sinal" aria-hidden="true"></i><span class="janela__rotulo">prompt</span><i class="janela__barra" style="--w: 62%; --i: 0"></i></div>
@@ -394,16 +382,229 @@
                       <div class="janela__linha enter" style="--i: 5"><b>06</b><i class="janela__sinal" aria-hidden="true"></i><span class="janela__rotulo">arquivo</span><i class="janela__barra" style="--w: 68%; --i: 5"></i></div>
                     </div>
                     <div class="janela__foot">Limite da janela</div>
-                    <span class="stamp fragment stamp">RESUMIDO</span>
+                    <span class="stamp">RESUMIDO</span>
                   </div>
               </div>
             </div>
           </div>
-
-          <p class="footer"><span>TOKENS</span><span>Detalhes se perdem no resumo</span></p>
         </div>
         <aside class="notes">
-          [2 min] A janela tem limite. O que está fora dela não existe para o modelo. Quando enche, o harness resume ou corta a conversa (clique: o selo) e os detalhes do começo se perdem. O tamanho varia por modelo, de dezenas de milhares a mais de um milhão de tokens. Guardem isso: é a primeira dor do Dia 2.
+          [2 min] A janela tem limite. O que está fora dela não existe para o modelo. Quando enche, o harness resume ou corta a conversa e os detalhes do começo se perdem. O tamanho varia por modelo, de dezenas de milhares a mais de um milhão de tokens. Guardem isso: é a primeira dor do Dia 2.
+        </aside>
+      </section>
+
+      <!-- 1.2 Modelos: proprietários e abertos -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-two-cards">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ MODELOS ]</p>
+            <h2>Dois grupos</h2>
+          </div>
+
+          <div class="layout-two-cards__row">
+            <div class="hatch enter" style="--i: 0">
+              <article class="card">
+                <span class="chip chip--back chip--blue">PROPRIETÁRIOS</span>
+                <h3>Só pela empresa</h3>
+                <p>Você usa pelo serviço da empresa que fez o modelo.</p>
+                <ul>
+                  <li>Claude (Anthropic)</li>
+                  <li>GPT (OpenAI)</li>
+                  <li>Gemini (Google)</li>
+                </ul>
+              </article>
+            </div>
+
+            <div class="hatch enter" style="--i: 1">
+              <article class="card card--accent">
+                <span class="chip chip--hex">ABERTOS · OPEN-WEIGHT</span>
+                <h3>Pesos públicos</h3>
+                <p>Os pesos do modelo estão disponíveis, entre outros:</p>
+                <ul>
+                  <li>DeepSeek</li>
+                  <li>Qwen (Alibaba)</li>
+                  <li>GLM (Zhipu AI) e Kimi (Moonshot AI)</li>
+                  <li>MiniMax</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+
+          <svg class="connectors" viewBox="0 0 1920 1080" aria-hidden="true">
+            <path class="connector" style="--len: 96; --i: 0" d="M912 588 H1008" />
+            <circle class="node" style="--i: 0" cx="912" cy="588" r="9" />
+            <circle class="node node--last" style="--i: 1" cx="1008" cy="588" r="9" />
+          </svg>
+        </div>
+        <aside class="notes">
+          [2 min] Dois grupos. Proprietários (Claude, GPT, Gemini): acesso pelo serviço da empresa. Abertos, ou open-weight (DeepSeek, Qwen, GLM, Kimi, MiniMax, entre outros): os pesos do modelo estão disponíveis.
+        </aside>
+      </section>
+
+      <!-- 1.2 Modelos: modelo não é produto -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-table">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ MODELOS ]</p>
+            <h2>Modelo não é produto</h2>
+          </div>
+
+          <table class="table table--compact">
+            <thead>
+              <tr><th>Produto ou família</th><th>Modelos</th></tr>
+            </thead>
+            <tbody>
+              <tr class="enter" style="--i: 0">
+                <td>ChatGPT</td>
+                <td>GPT-6 Astra, GPT-6.1 Sol, GPT-6.1 Terra, GPT-6 Luna</td>
+              </tr>
+              <tr class="enter" style="--i: 1">
+                <td>App Claude</td>
+                <td>Claude Fable 5.2, Opus 5.5, Sonnet 5.5, Haiku 5.5</td>
+              </tr>
+              <tr class="enter" style="--i: 2">
+                <td>App Gemini</td>
+                <td>Gemini 4 Carbon, Argon e Hydrogen</td>
+              </tr>
+              <tr class="enter" style="--i: 3">
+                <td>Llama (Meta)</td>
+                <td>Llama 4 (Scout e Maverick)</td>
+              </tr>
+              <tr class="enter" style="--i: 4">
+                <td>Qwen (Alibaba)</td>
+                <td>Qwen3.8</td>
+              </tr>
+              <tr class="enter" style="--i: 5">
+                <td>MiMo (Xiaomi)</td>
+                <td>MiMo-V2.6 (Pro e Flash)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p class="lead enter" style="--i: 6">O mesmo modelo pode aparecer no chat, numa API ou dentro de outras ferramentas.</p>
+        </div>
+        <aside class="notes">
+          [2 min] ChatGPT é o produto; GPT-6 (Astra, Sol, Terra, Luna) são os modelos. O app Claude é o produto; Fable, Opus, Sonnet e Haiku são os modelos. Gemini 4 (Carbon, Argon, Hydrogen) é a família mais recente do Google. Meta (Llama 4), Alibaba (Qwen3.8) e Xiaomi (MiMo-V2.6) publicam pesos abertos. O mesmo modelo aparece em lugares diferentes: no chat, numa API ou em outras ferramentas. Gancho para o próximo bloco: a ferramenta em volta do modelo muda o que ele consegue fazer. Nomes de modelos mudam rápido: confira antes da aula.
+        </aside>
+      </section>
+
+      <!-- 1.2 Modelos: tamanhos e modelos de raciocínio -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-two-cards">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ MODELOS ]</p>
+            <h2>Tamanhos e raciocínio</h2>
+          </div>
+
+          <div class="layout-two-cards__row">
+            <div class="hatch enter" style="--i: 0">
+              <article class="card">
+                <span class="chip chip--back chip--blue">TAMANHOS</span>
+                <h3>Rápido ou forte</h3>
+                <p>Cada família tem versões rápidas e baratas e versões mais fortes e lentas.</p>
+                <ul>
+                  <li>Claude: Haiku (rápido), Sonnet, Opus (forte)</li>
+                  <li>Gemini: Flash (rápido), Pro (forte)</li>
+                  <li>Pergunta simples: o rápido basta</li>
+                  <li>Tarefa difícil: vale o forte</li>
+                </ul>
+              </article>
+            </div>
+
+            <div class="hatch enter" style="--i: 1">
+              <article class="card card--accent">
+                <span class="chip chip--hex">RACIOCÍNIO</span>
+                <h3>Pensa antes</h3>
+                <p>Modelos de raciocínio pensam antes de responder.</p>
+                <ul>
+                  <li>Demoram mais</li>
+                  <li>Erram menos em tarefas com várias etapas</li>
+                  <li>Bom para: planejar um sistema inteiro</li>
+                  <li>Exagero para: uma pergunta simples</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+
+          <svg class="connectors" viewBox="0 0 1920 1080" aria-hidden="true">
+            <path class="connector" style="--len: 96; --i: 0" d="M912 588 H1008" />
+            <circle class="node" style="--i: 0" cx="912" cy="588" r="9" />
+            <circle class="node node--last" style="--i: 1" cx="1008" cy="588" r="9" />
+          </svg>
+        </div>
+        <aside class="notes">
+          [2 min] Cada família tem versões rápidas e baratas (Haiku, Flash) e versões mais fortes e lentas (Opus, Pro). Modelos de raciocínio pensam antes de responder: demoram mais, mas erram menos em tarefas com várias etapas. Por isso um modelo gratuito, geralmente menor, pode errar mais.
+        </aside>
+      </section>
+
+      <!-- 1.2 Modelos: data de corte -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-text-figure">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ MODELOS ]</p>
+            <h2>Data de corte</h2>
+          </div>
+
+          <div class="layout-text-figure__row">
+            <div class="layout-text-figure__text">
+              <p class="lead">O modelo só conhece o que existia até o fim do treino. Pode sugerir uma versão antiga de uma biblioteca, com a mesma confiança de sempre.</p>
+              <span class="chip chip--arrow chip--pink">SABE ATÉ O FIM DO TREINO</span>
+            </div>
+
+            <div class="layout-text-figure__figure">
+              <div class="hatch">
+                <div class="panel">
+                  <div class="tempo" role="img" aria-label="Linha do tempo: o modelo viu tudo até o fim do treino; o que veio depois, até hoje, não existe para ele">
+                    <div class="tempo__head">linha do tempo</div>
+                    <div class="tempo__trilho">
+                      <div class="tempo__viu">o modelo viu</div>
+                      <div class="tempo__nao">não existe para ele</div>
+                      <i class="tempo__marca tempo__marca--corte" aria-hidden="true"></i>
+                      <i class="tempo__marca tempo__marca--hoje" aria-hidden="true"></i>
+                    </div>
+                    <div class="tempo__eixo"><span>fim do treino</span><span>hoje</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          [2 min] O modelo só conhece o que existia até o fim do treino. Depois disso, ele não sabe de nada. Pode sugerir uma versão antiga de uma biblioteca ou uma função que já mudou, com a mesma confiança de sempre.
+        </aside>
+      </section>
+
+      <!-- 1.2 Modelos: gratuito vs. pago, local vs. nuvem, privacidade -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-text-figure">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ MODELOS ]</p>
+            <h2>Gratuito ou pago</h2>
+          </div>
+
+          <div class="layout-text-figure__row">
+            <div class="layout-text-figure__text">
+              <p class="lead">Vamos usar os modelos gratuitos do OpenCode. Serviços gratuitos podem usar o que você envia para treinar modelos: leia os termos.</p>
+              <span class="chip chip--arrow chip--accent">MODELOS FREE DO OPENCODE</span>
+            </div>
+
+            <div class="layout-text-figure__figure">
+              <div class="hatch">
+                <article class="card">
+                  <span class="chip chip--back chip--orange">PRIVACIDADE</span>
+                  <h3>Fica fora do chat</h3>
+                  <ul>
+                    <li>Senhas</li>
+                    <li>Chaves de API</li>
+                    <li>Dados pessoais</li>
+                  </ul>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          [2 min] Gratuito ou pago, local ou na nuvem: hoje usaremos os modelos free do OpenCode. Cuidado: serviços gratuitos podem usar o que você envia para treinar modelos. Vale ler os termos e nunca colar senhas, chaves de API ou dados pessoais.
         </aside>
       </section>
 

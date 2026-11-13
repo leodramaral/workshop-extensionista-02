@@ -1,7 +1,7 @@
 # DESIGN.md: fundação do site de apresentação
 
 > Workshop de Desenvolvimento com IA. Slides servidos como site no GitHub Pages.
-> Versão 1.16 · 2026-10-30 · Leandro Amaral
+> Versão 1.21 · 2026-11-13 · Leandro Amaral
 
 Este arquivo é a **fonte da verdade** do projeto. Ele vale para quem escreve código à mão e para agentes de IA (OpenCode, Claude, Copilot). Faça o `AGENTS.md` do repositório apontar para cá, com a linha: *"Antes de criar ou alterar qualquer slide, leia o DESIGN.md e siga-o à risca."*
 
@@ -216,7 +216,6 @@ Regras:
   --s-5: 48px; --s-6: 64px; --s-7: 96px; --s-8: 128px;
 
   --slide-pad: 128px;       /* margem interna do slide → área útil 1664×824 */
-  --slide-pad-bottom: 160px;/* quando o slide tem rodapé */
   --frame-inset: 64px;      /* moldura tracejada */
   --grid-cell: 48px;        /* quadriculado */
 
@@ -451,7 +450,7 @@ Para mostrar prompts, specs e trechos de código: cabeçalho com o caminho do ar
 
 ### 8.10 Rodapé
 
-`.footer`: linha fixa a `bottom: 64px`, Space Mono 24px, `--c-muted`, com fonte, tema do slide (ex.: `TOKENS`, `DOR 02`) ou link. Sem número do bloco (seção 11). O slide com rodapé usa `padding-bottom: var(--slide-pad-bottom)`.
+**Slides não têm rodapé.** O tema já aparece no eyebrow, então a linha repetia informação e poluía. Se um slide precisar de uma nota (ex.: "ilustrativo"), ela entra no próprio conteúdo: na legenda do painel ou num rótulo junto da figura.
 
 ### 8.11 Marcadores decorativos
 
@@ -509,7 +508,7 @@ Mostra como o tokenizer cortou um texto, no estilo do tokenizer da OpenAI (platf
 ```
 
 - `.tok`: Space Mono 28px, padding `4px 10px`, borda de 1px `--c-ink`, cantos retos, texto `--c-ink`. A cor de fundo segue a ordem dentro de `.toks` (rosa, azul, verde, âmbar, violeta, laranja) e recomeça a cada `.toks`.
-- O espaço que faz parte do token aparece como `·` (`.tok__sp`). O rodapé do slide explica: `· = ESPAÇO`.
+- O espaço que faz parte do token aparece como `·` (`.tok__sp`). O slide explica: `· = ESPAÇO`.
 - `.tok-col` empilha o token e o número dele (`.tok-id`, Space Mono 24px, `--c-muted`), para mostrar que o modelo só enxerga números.
 - `.tok-n`: contagem ao lado do corte (Space Mono 24px, `--c-muted`).
 - Cortes e números vêm do tokenizer de verdade (o200k_base, o do GPT-4o), nunca inventados. Palavra solta é cortada diferente da mesma palavra no meio da frase; os exemplos do roteiro usam **espaço antes da palavra**.
@@ -526,9 +525,13 @@ Segue o cartão de diff da Greptile (8.9), em tons apagados: `.hatch` > `.janela
 - **Só dois tons, como no diff:** sálvia para o que entrou (`color-mix` de 30% `--c-green` com `--c-muted-dark`, fundo da linha verde a 7%) e malva para o que saiu (35% `--c-pink`, fundo rosa a 16%). Nada de cores de apoio puras nas barras.
 - As linhas entram com `.enter` e as barras crescem com `barra`. Um fragment com o selo `RESUMIDO` faz as linhas antigas (`.janela__linha--velho`) virarem "linha removida": o sinal passa a `-` e a barra e o fundo passam a malva.
 
+### 8.18 Linha do tempo (data de corte)
+
+Figura do slide "Data de corte": `.hatch` > `.panel` (8.8) > `.tempo`, com cabeçalho mono (`linha do tempo`, `--c-muted-dark`) e um trilho horizontal dividido em dois trechos: **"o modelo viu"** (fundo `--c-tint` a 15%, texto `--c-eggshell`, ~60% da largura) e **"não existe para ele"** (borda tracejada `--frame-dark`, texto `--c-muted-dark`). Dois marcadores **quadrados** de 24px sobre o trilho (`--c-accent` no fim do treino, `--c-tint` em "hoje"), rótulos mono em HTML abaixo (`FIM DO TREINO`, `HOJE`) e o selo `DESATUALIZADO` (8.14) como fragment `stamp`, no fluxo abaixo do eixo, alinhado à direita. Sem datas nem versões reais.
+
 ## 9. Layouts (`css/layouts.css`)
 
-Cada slide usa **um** layout, num `div` wrapper que ocupa o slide inteiro. A área útil é de 1664×824 (ou 1664×792 com rodapé).
+Cada slide usa **um** layout, num `div` wrapper que ocupa o slide inteiro. A área útil é de 1664×824 .
 
 | Layout | Estrutura | Superfície típica |
 |---|---|---|
@@ -582,6 +585,8 @@ Os fragments do reveal.js recebem a classe `.visible` ao aparecer. Os nossos:
 /* Marcador "carimba" (Greptile: keyframe stamp) */
 .reveal .fragment.stamp.visible { animation: stamp var(--d-base) var(--ease-out) both; }
 ```
+
+**Padrão: todo o conteúdo do slide aparece sozinho.** Nada de fragment (clique) por padrão: tabelas, cartões, listas e figuras ficam visíveis ao chegar no slide, entrando com `.enter` escalonado por `--i` (cada item sobe um a um, sem clique). Fragment só quando o autor pedir a exceção, slide a slide (hoje nenhum slide do Dia 1 usa). Figuras com estado "antes e depois" mostram o estado final: sorteio com o token escolhido em verde (`.prob__row--pick`) e janela já resumida (`.janela--resumido`, com o selo `RESUMIDO` fixo).
 
 Também há **entrada automática** ao chegar no slide, sem clique: elementos com `.enter` animam quando o `section` ganha `.present`, com atraso escalonado por `style="--i: 0..n"` × `--stagger`. Use `.enter` para a decoração e o que é sempre visível, e fragment para o que o apresentador revela na hora.
 
@@ -654,8 +659,8 @@ E no JS: se `matchMedia('(prefers-reduced-motion: reduce)').matches`, a esfera d
 - Idioma **pt-BR**. Termos técnicos consagrados ficam em inglês (*prompt*, *harness*, *one-shot*, *vibe coding*).
 - Os títulos são **substantivos ou frases curtas**, com a mesma gramática ao longo do deck. Nada de títulos de efeito do tipo "Não é X, é Y".
 - O texto vem do roteiro: cada slide começa com um comentário que aponta o bloco de origem (`<!-- 2.2 Dor 2 -->`).
-- **O número do bloco (1.2, 2.3…) não aparece no slide**, só no comentário do HTML. Eyebrow e rodapé levam o tema (`[ TOKENS ]`, `[ HARNESS ]`). Motivo: o deck não percorre todos os blocos em ordem, e um número solto (abrir no 1.2 sem ter passado pelo 1.1) confunde a turma.
-- **Nunca invente número, estatística ou citação.** Gráficos ilustrativos levam no rodapé "ilustrativo".
+- **O número do bloco (1.2, 2.3…) não aparece no slide**, só no comentário do HTML. O eyebrow leva o tema (`[ TOKENS ]`, `[ HARNESS ]`). Motivo: o deck não percorre todos os blocos em ordem, e um número solto (abrir no 1.2 sem ter passado pelo 1.1) confunde a turma.
+- **Nunca invente número, estatística ou citação.** Gráficos ilustrativos levam "ilustrativo" na legenda do painel.
 - Para o público iniciante, o corpo tem no máximo 25 palavras por bloco. O detalhe vai para as notas.
 
 ## 12. Notas do apresentador
@@ -728,6 +733,11 @@ Um slide ou mudança só está **pronto** quando:
 | 2026-10-30 | v1.14: número do bloco sai dos slides (abertura de bloco, eyebrows e rodapés) e fica só nos comentários do HTML; `layout-section` passa a barra âmbar + título longo em 96px |
 | 2026-10-30 | v1.15: janela de contexto (8.17) refeita no estilo do diff da Greptile: painel escuro, dois tons apagados (sálvia entra, malva sai) e sinais `+`/`-`, no lugar dos blocos em cores de apoio puras |
 | 2026-10-30 | v1.16: Dia 1 passa a se chamar "Um prompt só" (era "O jeito rápido"); o rótulo do dia sai da linha de base da capa e do eyebrow da abertura de bloco, e o corpo da abertura fica preso à base com `margin-top: auto` |
+| 2026-11-13 | v1.17: slides de Panorama de modelos do Dia 1 (bloco 1.2, eyebrow `[ MODELOS ]`): 5 slides com layouts existentes; nova peça linha do tempo (8.18) |
+| 2026-11-13 | v1.18: rodapé removido de todos os slides (8.10); selos saem de "Data de corte" e "Privacidade"; mais exemplos nos 3 primeiros slides de Panorama de modelos |
+| 2026-11-13 | v1.19: slide "Modelo não é produto" lista modelos recentes de OpenAI, Anthropic, Google, Meta, Alibaba e Xiaomi; nova variante `.table--compact` (linhas de 16px de respiro, 6 linhas cabem com o texto de apoio) |
+| 2026-11-13 | v1.20: tabelas e fileiras de cartões passam a aparecer com um clique só, mantendo a animação item por item (`fragment seq` + `rise-item`, seção 10.2) |
+| 2026-11-13 | v1.21: slides do Dia 1 sem fragments: todo o conteúdo aparece ao chegar no slide, com entrada escalonada (`.enter`); substitui a regra `seq` da v1.20; sorteio e janela de contexto mostram o estado final |
 
 ## 17. Referências
 

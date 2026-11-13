@@ -148,23 +148,6 @@
 .node { fill: var(--c-basalt); }
 .node--last { fill: var(--c-green); stroke: var(--c-basalt); stroke-width: 2; }
 
-/* 8.10 Rodapé */
-.reveal .footer {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: calc(64px - var(--slide-pad));
-  font-family: var(--f-mono);
-  font-size: var(--t-label);
-  line-height: 1.4;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--c-muted);
-  display: flex;
-  justify-content: space-between;
-}
-.surface-dark .footer { color: var(--c-muted-dark); }
-
 /* 8.11 Marcadores decorativos */
 .mark {
   position: absolute;
@@ -213,6 +196,11 @@
 .table tr:nth-child(2) td:first-child::before { background: var(--c-pink); }
 .table tr:nth-child(3) td:first-child::before { background: var(--c-orange); }
 .table tr:nth-child(4) td:first-child::before { background: var(--c-green); }
+
+/* Tabela compacta (6 linhas) */
+.table--compact td { padding-top: var(--s-2); padding-bottom: var(--s-2); }
+.table--compact tr:nth-child(5) td:first-child::before { background: var(--c-accent); }
+.table--compact tr:nth-child(6) td:first-child::before { background: var(--c-violet); }
 
 /* 8.2 Formas de chip e glifos */
 .chip--hex, .chip--back, .chip--arrow { padding-left: 32px; padding-right: 32px; }
@@ -480,7 +468,7 @@
   transform: scaleX(var(--p, 0));
   transform-origin: left center;
 }
-.prob__row:has(.fragment.visible) .prob__bar { background: var(--c-green); }
+.prob__row--pick .prob__bar { background: var(--c-green); }
 .prob__row .chip { font-size: var(--t-label); }
 
 /* 8.17 Janela de contexto (figura), no estilo do cartão de diff da Greptile */
@@ -531,10 +519,10 @@
   text-align: center;
 }
 /* resumido: as linhas antigas viram "linha removida" do diff */
-.janela:has(.fragment.visible) .janela__linha--velho { background: rgba(250, 80, 181, 0.16); }
-.janela:has(.fragment.visible) .janela__linha--velho .janela__sinal { color: var(--c-pink); }
-.janela:has(.fragment.visible) .janela__linha--velho .janela__sinal::before { content: '-'; }
-.janela:has(.fragment.visible) .janela__linha--velho .janela__barra { background: color-mix(in srgb, var(--c-pink) 35%, var(--c-muted-dark)); }
+.janela--resumido .janela__linha--velho { background: rgba(250, 80, 181, 0.16); }
+.janela--resumido .janela__linha--velho .janela__sinal { color: var(--c-pink); }
+.janela--resumido .janela__linha--velho .janela__sinal::before { content: '-'; }
+.janela--resumido .janela__linha--velho .janela__barra { background: color-mix(in srgb, var(--c-pink) 35%, var(--c-muted-dark)); }
 .janela .stamp { position: absolute; right: var(--s-5); top: 92px; z-index: 1; }
 
 /* Fileira de chips (sequência de passos) */
@@ -547,3 +535,21 @@
   font-weight: 400;
   color: var(--c-muted);
 }
+
+/* 8.18 Linha do tempo (data de corte) */
+.tempo { position: relative; display: flex; flex-direction: column; gap: var(--s-3); }
+.tempo__head { font-family: var(--f-mono); font-size: var(--t-label); text-transform: uppercase; letter-spacing: 0.08em; color: var(--c-muted-dark); }
+.tempo__trilho { position: relative; display: grid; grid-template-columns: 3fr 2fr; height: 120px; margin-top: var(--s-5); }
+.tempo__viu, .tempo__nao {
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  font-family: var(--f-mono); font-size: var(--t-label); text-transform: uppercase; letter-spacing: 0.08em;
+}
+.tempo__viu { background: color-mix(in srgb, var(--c-tint) 15%, transparent); color: var(--c-eggshell); }
+.tempo__nao { border: 2px dashed var(--frame-dark); border-left: 0; color: var(--c-muted-dark); }
+.tempo__marca { position: absolute; top: 50%; width: 24px; height: 24px; margin-top: -12px; border: 2px solid var(--c-ink); box-sizing: border-box; }
+.tempo__marca--corte { left: 60%; margin-left: -12px; background: var(--c-accent); }
+.tempo__marca--hoje { right: -12px; background: var(--c-tint); }
+.tempo__eixo { position: relative; height: 40px; font-family: var(--f-mono); font-size: var(--t-label); text-transform: uppercase; letter-spacing: 0.08em; color: var(--c-sand); }
+.tempo__eixo span { position: absolute; top: 0; white-space: nowrap; }
+.tempo__eixo span:first-child { left: 60%; transform: translateX(-50%); }
+.tempo__eixo span:last-child { right: 0; }
