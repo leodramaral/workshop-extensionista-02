@@ -714,3 +714,21 @@ canvas.mcp-fig__mesh { display: block; color: var(--c-blue); }
 .chip--blue-claro    { background: var(--c-blue-claro);    color: var(--c-basalt); }
 .chip--green-claro   { background: var(--c-green-claro);   color: var(--c-basalt); }
 .chip--violet-claro  { background: var(--c-violet-claro);  color: var(--c-basalt); }
+
+/* 8.25 Comando em destaque: o que a turma vai digitar, como o "/greptile" da Greptile */
+.reveal code.cmd {
+  display: inline-block;
+  font-family: var(--f-mono);
+  font-size: var(--t-lead);
+  font-weight: 700;
+  line-height: 1.3;
+  padding: 6px 18px;
+  background: var(--c-accent);
+  color: var(--c-ink);
+  white-space: nowrap;
+  justify-self: start; /* na grade, o chip abraça o texto */
+}
+.reveal code.cmd--pink { background: var(--c-pink); }
+.reveal code.cmd--blue { background: var(--c-blue); }
+.reveal code.cmd--green { background: var(--c-green); }
+.reveal code.cmd--violet { background: var(--c-violet); }

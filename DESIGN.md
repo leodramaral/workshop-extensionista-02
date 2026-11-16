@@ -1,19 +1,19 @@
 # DESIGN.md: fundação do site de apresentação
 
-> Workshop de Desenvolvimento com IA. Slides servidos como site no GitHub Pages.
-> Versão 1.29 · 2026-11-16 · Leandro Amaral
+> Oficina de Desenvolvimento com IA. Slides servidos como site no GitHub Pages.
+> Versão 1.30 · 2026-11-16 · Leandro Amaral
 
 Este arquivo é a **fonte da verdade** do projeto. Ele vale para quem escreve código à mão e para agentes de IA (OpenCode, Claude, Copilot). Faça o `AGENTS.md` do repositório apontar para cá, com a linha: *"Antes de criar ou alterar qualquer slide, leia o DESIGN.md e siga-o à risca."*
 
-Se algo aqui estiver errado ou faltando, **corrija este arquivo primeiro** e só depois o código. É a mesma regra de ouro que o workshop ensina.
+Se algo aqui estiver errado ou faltando, **corrija este arquivo primeiro** e só depois o código. É a mesma regra de ouro que a oficina ensina.
 
 ---
 
 ## 1. Objetivo e escopo
 
-- **O que é:** um site estático com as apresentações dos dois dias do workshop, construído com reveal.js e publicado no GitHub Pages.
+- **O que é:** um site estático com as apresentações dos dois dias da oficina, construído com reveal.js e publicado no GitHub Pages.
 - **Por que site e não PowerPoint:** a identidade visual depende de animação, CSS e efeitos em canvas, que se perdem em .pptx ou PDF.
-- **De onde vem o conteúdo:** do documento *Roteiro Final, Workshop de Desenvolvimento com IA*. Este arquivo define só **forma e regras**. O roteiro define **o que** cada slide diz.
+- **De onde vem o conteúdo:** do documento *Roteiro Final, Oficina de Desenvolvimento com IA*. Este arquivo define só **forma e regras**. O roteiro define **o que** cada slide diz.
 - **Fora do escopo:** backend, login, analytics e frameworks de UI (React, Vue etc.).
 
 ## 2. Stack e restrições
@@ -50,7 +50,7 @@ URLs base (cdnjs, reveal.js 6.0.1):
 
 ```
 /
-├── index.html            # página inicial: título do workshop + dois cartões, um para cada dia
+├── index.html            # página inicial: título da oficina + dois cartões, um para cada dia
 ├── dia-1.html            # apresentação do Dia 1 (Um prompt só)
 ├── dia-2.html            # apresentação do Dia 2 (O jeito estruturado)
 ├── referencia-ui.html    # deck de referência de UI (todas as peças); NÃO apagar, NÃO linkar: acesso só pela URL
@@ -346,7 +346,7 @@ Cada slide tem **exatamente uma** classe de superfície no `section`. A textura 
 
 > Use `data-background-color` do reveal.js **junto** com a classe (`data-background-color="#242628"`) para que o fundo da viewport acompanhe a transição.
 
-**Regra da projeção.** O deck é lido num telão, do fundo da sala. Texto em fundo escuro perde leitura na projeção, então o escuro fica para slides de título grande e pouco texto (a abertura de bloco). Slide com frase, lista, código ou instrução para a turma (inclusive demo e hands-on) vai no claro. Na dúvida, claro.
+**Regra da projeção.** O deck é lido num telão, do fundo da sala. Texto em fundo escuro perde leitura na projeção, então o escuro fica para slides de título grande e pouco texto (a abertura de bloco). Slide com frase, lista, código ou instrução para a turma (inclusive demo e mão na massa) vai no claro. Na dúvida, claro.
 
 ## 8. Componentes (`css/componentes.css`)
 
@@ -570,7 +570,7 @@ Figura do slide "MCP" (`layout-text-figure` com `.layout-text-figure__figure--wi
 - **Centro, dois quadrados encostados:** o cheio (`.mcp-fig__host`, 220px, `--c-accent`) com um prompt de terminal `>_` em vetor (`.prompt-icon`, compartilhado com a figura do harness, 8.19: chevron de 14px de traço com cantos vivos e cursor piscando, em `--c-ink`), que representa qualquer harness; e o claro (`.mcp-fig__mcp`, 240px, `--c-tint`) com a marca oficial do MCP (os 3 traços de `docs/logo/light.svg` do repositório `modelcontextprotocol/modelcontextprotocol`, em `--c-basalt`, 12px de traço com pontas redondas). É o par "cor cheia + tom claro da mesma cor" da Greptile. O robô não entra aqui: no quadrado pequeno ele perde a leitura.
 - **Cantos:** 3 marcadores `.mark--pink` (8.11) nos cantos dos quadrados.
 - **Ferramentas:** 6 etiquetas brancas (`.mcp-fig__tool`), 3 em cima e 3 embaixo, com a do meio deslocada. Cada etiqueta tem glifo colorido e texto mono de 24px em `--c-ink`, sem borda nem sombra, e é centralizada pelo `left` com `translate: -50% 0`, que não briga com o `transform` do `.enter`.
-- **Ligação:** cada etiqueta desce (ou sobe) até a malha ou o quadrado por uma linha azul de 2px (`.connector.connector--blue`), com um triângulo azul (`.node.mcp-fig__tip`) colado na etiqueta. Nas figuras em estilo Greptile, o conector azul com ponta triangular substitui o conector basalt com nó redondo (8.7).
+- **Ligação:** cada etiqueta desce (ou sobe) até um dos quadrados do centro por uma linha azul de 2px, reta quando a etiqueta fica sobre o quadrado e em cotovelo até a borda lateral do quadrado mais próximo quando não fica. **A linha nunca termina solta na malha:** a malha se mexe (8.22), e uma ponta no meio dela fica apontando para lugar nenhum (`.connector.connector--blue`), com um triângulo azul (`.node.mcp-fig__tip`) colado na etiqueta. Nas figuras em estilo Greptile, o conector azul com ponta triangular substitui o conector basalt com nó redondo (8.7).
 - **Entrada:** quadrados e etiquetas entram com `.enter` escalonado e as linhas se desenham em sequência.
 - **Figura viva (8.22):** a malha é um canvas (`js/efeitos/rede.js`, `data-efeito="rede"`) que respira: o estreitamento do centro abre e fecha devagar e as linhas deslizam. Depois de desenhadas, as linhas azuis levam um **pulso** (um traço curto que corre da etiqueta até o centro, `pulso`, escalonado por `--i`) e os 3 marcadores rosa derivam (`float-square-*`). No PDF e com movimento reduzido, o canvas desenha um quadro só.
 
@@ -581,7 +581,7 @@ Figura nova que explica um conceito (como algo se liga a algo, o que fica em vol
 - **Centro forte:** um par de quadrados encostados, um em cor cheia e outro no tom claro da mesma cor (`--c-accent` + `--c-tint`, por exemplo), ou um quadrado só. Dentro, um ícone vetorial grande e simples, legível de longe.
 - **Fundo com malha:** linhas `--c-blue` finas (1,5px, ~45% de opacidade) que se curvam ou se estreitam em volta do centro, como na malha em canvas (8.13). A malha é fundo: nunca compete com o centro.
 - **Etiquetas:** retângulos brancos, sem borda nem sombra, com glifo colorido e texto mono de 24px em `--c-ink`. São o que se liga ao centro.
-- **Ligações:** linhas `--c-blue` de 2px com um triângulo pequeno colado na etiqueta (`.connector--blue` + ponta em `polygon`). O conector basalt com nó redondo (8.7) continua valendo para fluxos e cartões; o azul com triângulo é o das figuras neste estilo.
+- **Ligações:** linhas `--c-blue` de 2px com um triângulo pequeno colado na etiqueta (`.connector--blue` + ponta em `polygon`). O conector basalt com nó redondo (8.7) continua valendo para fluxos e cartões; o azul com triângulo é o das figuras neste estilo. Toda ligação termina num elemento sólido (quadrado, etiqueta), nunca no meio da malha.
 - **Detalhe:** até 3 marcadores `.mark--pink` nos cantos dos quadrados. Tudo dentro de uma moldura `.hatch`, em fundo `--c-paper` ou branco.
 - **Sem mascote dentro da figura** (8.12). Para representar um padrão, produto ou ferramenta real, use a **marca oficial**: copie os caminhos do SVG publicado pelo próprio projeto para o HTML, pinte com um token (traço ou preenchimento) sem mudar o desenho e deixe um comentário com a origem do arquivo. Nunca redesenhe uma marca de memória.
 - **Figura viva:** toda figura nova neste estilo tem um movimento contínuo e calmo que reforça a ideia (8.22).
@@ -610,6 +610,14 @@ Como nos cards da Greptile, a figura principal do slide **não fica parada** dep
 
 Faixa de texto mono que corre devagar, como o "TEST · RUN · EXECUTE" da Greptile: Space Mono 24px, maiúsculas, tracking 0.3em, cor `--c-blue` (no escuro, `--c-eggshell` a 60%), entre duas linhas tracejadas `--s-rule`. O texto vem **duplicado** dentro do trilho, e a animação `marquee` leva o trilho de 0 a −50% em 40s linear, para emendar sem salto. Sempre `aria-hidden`: é decoração, o conteúdo de verdade está no título. Usada na base da abertura de bloco, com os temas do bloco.
 
+### 8.25 Comando em destaque
+
+`<code class="cmd cmd--accent">/models</code>`: o comando que a turma vai **digitar**, no estilo do `/greptile` da Greptile. Space Mono 700 em 36px (`--t-lead`), padding `6px 18px`, fundo em cor cheia (`cmd--accent|pink|blue|green|violet`) e texto `--c-ink`. O chip abraça o texto e não leva glifo: a cor já faz esse papel.
+
+- Use quando o comando é o conteúdo do slide (lista de comandos de uma demo ou de um mão na massa). Comando citado de passagem numa frase continua em `<code>` simples (8.9).
+- Na lista "o que observar" do `layout-demo`, a variante `.layout-demo__watch--cmds` põe os comandos numa coluna própria e as descrições alinhadas ao lado (grade com `subgrid`), cada linha entrando com `.enter`.
+- O texto do chip é exatamente o que se digita: sem `>` nem outro prefixo.
+
 ## 9. Layouts (`css/layouts.css`)
 
 Cada slide usa **um** layout, num `div` wrapper que ocupa o slide inteiro. A área útil é de 1664×824 .
@@ -628,7 +636,7 @@ Cada slide usa **um** layout, num `div` wrapper que ocupa o slide inteiro. A ár
 | `layout-table` | `layout-title` + tabela (Space Mono nos cabeçalhos, DM Sans 28px nas células, linhas de 1px `--c-line`) | light |
 | `layout-quote` | aspas grandes `--c-accent`, citação DM Sans 600 48px, autor em chip | light |
 | `layout-section` | abertura de bloco do roteiro: régua no topo · barra `--c-accent` (`.layout-section__bar`) e título em 96px · faixa corrente (8.24) na base, com os temas do bloco · 3 marcadores flutuando (`float`). Sem número do bloco, horário nem duração | dark |
-| `layout-demo` | aviso de demo ao vivo (eyebrow `[ DEMO AO VIVO ]`) ou de prática dos alunos (eyebrow `[ HANDS-ON ]`), com cursor piscante e título no topo · frase e lista "o que observar" (até 3 itens com glifo de 20px, no mesmo tamanho da frase, `--t-lead`) no meio · linha tracejada com botão para a ferramenta e, se precisar, pílula de configuração na base. Frase e lista herdam a cor do texto da superfície | light (regra da projeção, seção 7) |
+| `layout-demo` | aviso de demo ao vivo (eyebrow `[ DEMO AO VIVO ]`) ou de prática dos alunos (eyebrow `[ MÃO NA MASSA ]`), com cursor piscante e título no topo · frase e lista "o que observar" (até 3 itens com glifo de 20px, no mesmo tamanho da frase, `--t-lead`; quando os itens são comandos, comando em destaque, 8.25) no meio · linha tracejada com botão para a ferramenta e, se precisar, pílula de configuração na base. Frase e lista herdam a cor do texto da superfície | light (regra da projeção, seção 7) |
 
 Regras:
 
@@ -755,6 +763,7 @@ E no JS: se `matchMedia('(prefers-reduced-motion: reduce)').matches`, a esfera d
 ## 11. Conteúdo e voz
 
 - Idioma **pt-BR**. Termos técnicos consagrados ficam em inglês (*prompt*, *harness*, *one-shot*, *vibe coding*).
+- **O evento se chama "oficina", nunca "workshop"**: no slide, nas notas, nos títulos de página, no certificado e na documentação (`[ OFICINA · 2 DIAS ]`, "Oficina de Desenvolvimento com IA", "participou da oficina"). Atenção ao gênero: **a** oficina. Pelo mesmo motivo, prática dos alunos é "mão na massa", não "hands-on".
 - Os títulos são **substantivos ou frases curtas**, com a mesma gramática ao longo do deck. Nada de títulos de efeito do tipo "Não é X, é Y".
 - O texto vem do roteiro: cada slide começa com um comentário que aponta o bloco de origem (`<!-- 2.2 Dor 2 -->`).
 - **O número do bloco (1.2, 2.3…) não aparece no slide**, só no comentário do HTML. O eyebrow leva o tema (`[ TOKENS ]`, `[ HARNESS ]`). Motivo: o deck não percorre todos os blocos em ordem, e um número solto (abrir no 1.2 sem ter passado pelo 1.1) confunde a turma.
@@ -782,7 +791,7 @@ E no JS: se `matchMedia('(prefers-reduced-motion: reduce)').matches`, a esfera d
 
 ## 14. Publicação no GitHub Pages
 
-1. O repositório público do workshop, com `index.html` na raiz da branch `main`.
+1. O repositório público da oficina, com `index.html` na raiz da branch `main`.
 2. Crie um `.nojekyll` vazio na raiz.
 3. Em *Settings → Pages*, escolha *Deploy from a branch*, depois `main` e `/ (root)`.
 4. A URL fica `https://<usuario>.github.io/<repositorio>/`. Gere o link curto e o QR code para o telão.
@@ -800,6 +809,7 @@ E no JS: se `matchMedia('(prefers-reduced-motion: reduce)').matches`, a esfera d
 - Mudar a versão do reveal.js num arquivo só.
 - Animações que rodam fora do slide ativo.
 - Data, horário ou duração em qualquer slide.
+- "Workshop" ou "hands-on" em qualquer texto exibido: use "oficina" e "mão na massa" (seção 11).
 - Frase, lista ou instrução em fundo escuro (o escuro é só para abertura de bloco).
 - Robô dentro de quadro, painel ou quadrado de figura.
 - Marca ou logo redesenhado de memória, em vez do SVG oficial.
@@ -863,6 +873,7 @@ Um slide ou mudança só está **pronto** quando:
 | 2026-11-16 | v1.25: lista "o que observar" do `layout-demo` sobe de 28px para 36px (`--t-lead`), com glifo de 20px, para ler melhor na projeção (slides 3, 23 e 25); pílula de configuração da demo passa a ser opcional e sai da demo Build vs. Plan |
 | 2026-11-16 | v1.26: no `layout-text-figure`, a figura passa a ser centralizada na vertical como o texto (antes ficava presa no topo; afetava os slides 9, 13, 14, 17, 22 e 24) |
 | 2026-11-16 | v1.27: figura do harness (8.19, slide 16) troca o painel basalt com o robô Modelo por um quadrado violeta com o ícone de prompt `>_`; o ícone vira a peça `.prompt-icon`, usada também na figura do MCP (8.20) |
+| 2026-11-16 | v1.30: comando em destaque (8.25) e lista de comandos no `layout-demo` (slide 23); ligações das figuras sempre terminam num elemento sólido, nunca na malha (8.20, 8.21), com as linhas do MCP (slide 22) em cotovelo até os quadrados; o eyebrow de prática dos alunos passa de `[ HANDS-ON ]` a `[ MÃO NA MASSA ]`; o evento passa a se chamar **oficina** em todo lugar (diretriz na seção 11): home, certificado, referência de UI, README e este arquivo |
 | 2026-11-16 | v1.29: carga visual da Greptile. Paleta com os mesmos matizes e a intensidade da Greptile (acentos menos vívidos e tons claros `--c-*-claro`), contraste medido de novo; títulos em Anybody 700, largura normal, caixa de frase e tracking negativo; fundo liso com granulado, trilhos tracejados com nós e calha quadriculada no lugar do quadriculado de 48px; hachura fina a −55°; peças novas: eyebrow marcado (8.1), régua (8.23) e faixa corrente (8.24); entrada `.enter` de 8px em 700ms; figuras vivas (8.22) no MCP, no harness, na janela de contexto e na linha do tempo, com o novo `js/efeitos/rede.js` |
 | 2026-11-16 | v1.28: regras permanentes tiradas da revisão do bloco 1.3: regra da projeção (seção 7); onde o robô entra (8.12); linguagem das figuras no estilo vetorial da Greptile, com marca oficial e ícones reutilizáveis (8.21); colunas alinhadas pelo centro, texto lido de longe em 36px e armadilhas de CSS (9); sem data e horário, só citar o que existe, fatos conferidos na fonte e cada slide com algo novo (11); tempo por slide e soma por bloco nas notas (12); itens novos em "O que evitar" (15) e nos critérios de aceitação, com citação de slide pelo número da URL (16); referências de Greptile, MCP e OpenCode (17) |
 

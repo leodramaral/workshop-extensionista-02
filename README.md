@@ -1,4 +1,4 @@
-# Workshop de Desenvolvimento com IA
+# Oficina de Desenvolvimento com IA
 
 ## Stack
 
