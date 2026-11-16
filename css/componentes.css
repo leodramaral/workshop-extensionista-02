@@ -196,11 +196,11 @@
 .table tr:nth-child(2) td:first-child::before { background: var(--c-pink); }
 .table tr:nth-child(3) td:first-child::before { background: var(--c-orange); }
 .table tr:nth-child(4) td:first-child::before { background: var(--c-green); }
+.table tr:nth-child(5) td:first-child::before { background: var(--c-accent); }
+.table tr:nth-child(6) td:first-child::before { background: var(--c-violet); }
 
 /* Tabela compacta (6 linhas) */
 .table--compact td { padding-top: var(--s-2); padding-bottom: var(--s-2); }
-.table--compact tr:nth-child(5) td:first-child::before { background: var(--c-accent); }
-.table--compact tr:nth-child(6) td:first-child::before { background: var(--c-violet); }
 
 /* 8.2 Formas de chip e glifos */
 .chip--hex, .chip--back, .chip--arrow { padding-left: 32px; padding-right: 32px; }
@@ -553,3 +553,81 @@
 .tempo__eixo span { position: absolute; top: 0; white-space: nowrap; }
 .tempo__eixo span:first-child { left: 60%; transform: translateX(-50%); }
 .tempo__eixo span:last-child { right: 0; }
+
+/* Código em linha (comandos como /init dentro do texto) */
+.reveal code { font-family: var(--f-mono); font-size: 0.9em; }
+
+/* 8.9 Cartão de código: títulos de Markdown e chaves em âmbar */
+.code .code__h { color: var(--c-accent); }
+
+/* 8.19 Harness em volta do modelo: o modelo no centro, as 4 partes do harness em volta */
+.harness {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  background: var(--c-white);
+  border: 2px dashed var(--c-basalt);
+  padding: 44px 32px 32px;
+}
+.harness__tag { position: absolute; top: -20px; left: 24px; }
+.harness__row { display: flex; justify-content: space-between; }
+.harness__row .chip { align-self: center; }
+.harness__core {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 24px 64px;
+}
+.harness__model {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  height: 180px;
+  background: var(--c-violet);
+}
+.harness__model .prompt-icon { width: 100px; height: auto; }
+.harness__core .chip { align-self: center; }
+
+/* Ícone de prompt de terminal ">_" (slides 16 e 22) */
+.prompt-icon { width: 120px; height: 100px; overflow: visible; }
+.prompt-icon path { fill: none; stroke: var(--c-ink); stroke-width: 14; stroke-linecap: square; stroke-linejoin: miter; }
+.prompt-icon__caret { fill: var(--c-ink); animation: blink 1s steps(1) infinite; }
+
+/* MCP: um encaixe, várias ferramentas, no estilo das ilustrações da Greptile (8.20) */
+.mcp-fig {
+  position: relative;
+  width: 960px;
+  height: 500px;
+  background: var(--c-paper);
+  overflow: hidden;
+}
+.mcp-fig__mesh, .mcp-fig__wires { position: absolute; inset: 0; width: 100%; height: 100%; }
+.mcp-fig__mesh path { fill: none; stroke: var(--c-blue); stroke-width: 1.5; opacity: 0.45; }
+.mcp-fig__host, .mcp-fig__mcp { position: absolute; display: flex; align-items: center; justify-content: center; }
+.mcp-fig__host { left: 270px; top: 140px; width: 220px; height: 220px; background: var(--c-accent); }
+.mcp-fig__mcp { left: 490px; top: 160px; width: 240px; height: 240px; background: var(--c-tint); }
+.mcp-fig__logo { width: 150px; height: auto; overflow: visible; }
+.mcp-fig__logo path { fill: none; stroke: var(--c-basalt); stroke-width: 12; stroke-linecap: round; }
+.mcp-fig .mark { z-index: 1; }
+.mcp-fig__tool {
+  position: absolute;
+  translate: -50% 0; /* centraliza no left sem brigar com o transform do .enter */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 54px;
+  padding: 0 20px;
+  background: var(--c-white);
+  color: var(--c-ink);
+  font-family: var(--f-mono);
+  font-size: var(--t-label);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+.connector--blue { stroke: var(--c-blue); }
+.node.mcp-fig__tip { fill: var(--c-blue); }

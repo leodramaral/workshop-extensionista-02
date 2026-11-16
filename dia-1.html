@@ -26,12 +26,11 @@
       <!-- 1.1 Abertura: capa -->
       <section class="surface-light" data-background-color="#E2E4DD">
         <div class="layout-cover">
-          <p class="eyebrow enter" style="--i: 0">[ DIA 1 · 26/11 ]<span class="cursor" aria-hidden="true"></span></p>
+          <p class="eyebrow enter" style="--i: 0">[ DIA 1 ]<span class="cursor" aria-hidden="true"></span></p>
 
           <div class="layout-cover__body">
             <h1 class="enter" style="--i: 1">Um prompt<br>só</h1>
             <p class="lead layout-cover__sub enter" style="--i: 2">Do zero a um sistema em one-shot.</p>
-            <span class="pill enter" style="--i: 3">18:20–21:40 · 190 MIN</span>
           </div>
 
           <div class="layout-cover__rule">
@@ -51,7 +50,6 @@
           <div class="layout-section__body">
             <i class="layout-section__bar enter" style="--i: 1" aria-hidden="true"></i>
             <h2 class="title-long enter" style="--i: 2">Como a IA “lê”: tokens e panorama de modelos</h2>
-            <p class="layout-section__time enter" style="--i: 3">18:35–19:00 · 25 min</p>
           </div>
         </div>
         <aside class="notes">
@@ -121,7 +119,7 @@
       </section>
 
       <!-- 1.2 Tokens: demo ao vivo no tokenizer da OpenAI -->
-      <section class="surface-dark" data-background-color="#242628">
+      <section class="surface-light" data-background-color="#E2E4DD">
         <div class="layout-demo">
           <div class="layout-title__head">
             <p class="eyebrow">[ DEMO AO VIVO ]<span class="cursor" aria-hidden="true"></span></p>
@@ -605,6 +603,505 @@
         </div>
         <aside class="notes">
           [2 min] Gratuito ou pago, local ou na nuvem: hoje usaremos os modelos free do OpenCode. Cuidado: serviços gratuitos podem usar o que você envia para treinar modelos. Vale ler os termos e nunca colar senhas, chaves de API ou dados pessoais.
+        </aside>
+      </section>
+
+      <!-- 1.3 Harness: abertura de bloco -->
+      <section class="surface-dark" data-background-color="#242628">
+        <div class="layout-section">
+          <div class="layout-section__body">
+            <i class="layout-section__bar enter" style="--i: 1" aria-hidden="true"></i>
+            <h2 class="title-long enter" style="--i: 2">Harness: o que fica em volta do modelo</h2>
+          </div>
+        </div>
+        <aside class="notes">
+          [40 min] Abertura do bloco. Primeiro o conceito e os harnesses conhecidos; depois como personalizar (AGENTS.md, Skills, MCP); por fim, mão na massa no OpenCode, fechando com a demo Build vs. Plan.
+        </aside>
+      </section>
+
+      <!-- 1.3 Harness: conceito -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-text-figure">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ HARNESS ]</p>
+            <h2>O que é harness</h2>
+          </div>
+
+          <div class="layout-text-figure__row">
+            <div class="layout-text-figure__text">
+              <p class="lead">O modelo só recebe texto e devolve texto. O harness é a estrutura em volta dele.</p>
+              <span class="chip chip--arrow chip--violet">TEXTO ENTRA, TEXTO SAI</span>
+            </div>
+
+            <div class="layout-text-figure__figure">
+              <div class="hatch">
+                <div class="harness" role="img" aria-label="O modelo no centro, cercado pelo harness: ferramentas, loop de execução, gestão de contexto e permissões">
+                  <span class="chip chip--orange harness__tag">HARNESS</span>
+                  <div class="harness__row">
+                    <span class="chip chip--hex chip--blue enter" style="--i: 1"><i class="glyph" aria-hidden="true"></i>FERRAMENTAS</span>
+                    <span class="chip chip--hex chip--green enter" style="--i: 2"><i class="glyph glyph--diamond" aria-hidden="true"></i>LOOP</span>
+                  </div>
+                  <div class="harness__core enter" style="--i: 0">
+                    <div class="harness__model">
+                      <svg class="prompt-icon" viewBox="0 0 120 100" aria-hidden="true">
+                        <path d="M12 18 L48 50 L12 82" />
+                        <rect class="prompt-icon__caret" x="62" y="72" width="46" height="12" />
+                      </svg>
+                    </div>
+                    <span class="chip chip--hex chip--violet">MODELO</span>
+                  </div>
+                  <div class="harness__row">
+                    <span class="chip chip--hex chip--pink enter" style="--i: 3"><i class="glyph glyph--triangle" aria-hidden="true"></i>CONTEXTO</span>
+                    <span class="chip chip--hex chip--accent enter" style="--i: 4"><i class="glyph" aria-hidden="true"></i>PERMISSÕES</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          [3 min] O modelo, sozinho, só recebe texto e devolve texto: ele não abre arquivo nem roda comando. O harness é tudo o que fica em volta. Ferramentas: ler e escrever arquivos, rodar comandos. Loop: o modelo pede uma ferramenta, o harness executa, o resultado volta para o modelo, e o ciclo se repete até terminar. Contexto: o harness decide o que entra na janela. Permissões: o que a IA pode fazer sem perguntar.
+        </aside>
+      </section>
+
+      <!-- 1.3 Harness: gestão de contexto (retoma a janela do 1.2) -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-text-figure">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ HARNESS ]</p>
+            <h2>Quem cuida da janela</h2>
+          </div>
+
+          <div class="layout-text-figure__row">
+            <div class="layout-text-figure__text">
+              <p class="lead">É o harness que decide o que entra na janela e resume a conversa quando ela enche.</p>
+              <span class="chip chip--arrow chip--accent">LEMBRA DA JANELA DE CONTEXTO?</span>
+            </div>
+
+            <div class="layout-text-figure__figure">
+              <div class="hatch">
+                <div class="janela janela--resumido" role="img" aria-label="Janela de contexto montada pelo harness: prompt, arquivos lidos, comandos e respostas; quando enche, as linhas mais antigas são resumidas">
+                  <div class="janela__head">janela de contexto</div>
+                  <div class="janela__body">
+                    <div class="janela__linha janela__linha--velho enter" style="--i: 0"><b>01</b><i class="janela__sinal" aria-hidden="true"></i><span class="janela__rotulo">prompt</span><i class="janela__barra" style="--w: 70%; --i: 0"></i></div>
+                    <div class="janela__linha janela__linha--velho enter" style="--i: 1"><b>02</b><i class="janela__sinal" aria-hidden="true"></i><span class="janela__rotulo">arquivo</span><i class="janela__barra" style="--w: 100%; --i: 1"></i></div>
+                    <div class="janela__linha janela__linha--velho enter" style="--i: 2"><b>03</b><i class="janela__sinal" aria-hidden="true"></i><span class="janela__rotulo">resposta</span><i class="janela__barra" style="--w: 80%; --i: 2"></i></div>
+                    <div class="janela__linha enter" style="--i: 3"><b>04</b><i class="janela__sinal" aria-hidden="true"></i><span class="janela__rotulo">comando</span><i class="janela__barra" style="--w: 64%; --i: 3"></i></div>
+                    <div class="janela__linha enter" style="--i: 4"><b>05</b><i class="janela__sinal" aria-hidden="true"></i><span class="janela__rotulo">arquivo</span><i class="janela__barra" style="--w: 88%; --i: 4"></i></div>
+                    <div class="janela__linha enter" style="--i: 5"><b>06</b><i class="janela__sinal" aria-hidden="true"></i><span class="janela__rotulo">resposta</span><i class="janela__barra" style="--w: 72%; --i: 5"></i></div>
+                  </div>
+                  <div class="janela__foot">Limite da janela</div>
+                  <span class="stamp">RESUMIDO</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          [2 min] Retomando o 1.2: a janela de contexto tem limite. Quem decide o que entra nela (o seu prompt, os arquivos lidos, a saída dos comandos) é o harness. Quando ela enche, é o harness que resume a conversa, e é aí que detalhes se perdem.
+        </aside>
+      </section>
+
+      <!-- 1.3 Harness: chat vs. implementação via harness -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-two-cards">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ HARNESS ]</p>
+            <h2>Chat vs. harness</h2>
+          </div>
+
+          <div class="layout-two-cards__row">
+            <div class="hatch enter" style="--i: 0">
+              <article class="card">
+                <span class="chip chip--back chip--blue">NO CHAT</span>
+                <h3>Você é a ponte</h3>
+                <p>A IA sugere o código. Você leva o erro de volta.</p>
+                <ul>
+                  <li>Copia e cola</li>
+                  <li>Salva e executa</li>
+                  <li>Cola o erro no chat</li>
+                </ul>
+              </article>
+            </div>
+
+            <div class="hatch enter" style="--i: 1">
+              <article class="card card--accent">
+                <span class="chip chip--hex">NO HARNESS</span>
+                <h3>A IA executa</h3>
+                <p>Ela lê o projeto, escreve os arquivos e roda os comandos.</p>
+                <ul>
+                  <li>Você descreve</li>
+                  <li>Você aprova</li>
+                  <li>Você valida</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+
+          <svg class="connectors" viewBox="0 0 1920 1080" aria-hidden="true">
+            <path class="connector" style="--len: 96; --i: 0" d="M912 588 H1008" />
+            <circle class="node" style="--i: 0" cx="912" cy="588" r="9" />
+            <circle class="node node--last" style="--i: 1" cx="1008" cy="588" r="9" />
+          </svg>
+        </div>
+        <aside class="notes">
+          [3 min] No chat, a IA sugere o código e você faz o resto: copia, cola, salva, executa e leva o erro de volta. No harness, a IA lê o projeto, escreve os arquivos e roda os comandos; você descreve, aprova e valida. O modelo pode ser exatamente o mesmo nos dois casos: o que muda é o que ele consegue fazer.
+        </aside>
+      </section>
+
+      <!-- 1.3 Harness: harnesses conhecidos -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-table">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ HARNESS ]</p>
+            <h2>Harnesses conhecidos</h2>
+          </div>
+
+          <table class="table">
+            <thead>
+              <tr><th>Harness</th><th>Onde roda</th><th>Destaque</th></tr>
+            </thead>
+            <tbody>
+              <tr class="enter" style="--i: 0">
+                <td>OpenCode</td>
+                <td>Terminal</td>
+                <td>Código aberto; aceita vários modelos, inclusive gratuitos <span class="chip chip--accent">VAMOS USAR</span></td>
+              </tr>
+              <tr class="enter" style="--i: 1">
+                <td>Cursor</td>
+                <td>Editor baseado no VS Code</td>
+                <td>Agente integrado ao editor</td>
+              </tr>
+              <tr class="enter" style="--i: 2">
+                <td>Antigravity</td>
+                <td>IDE do Google</td>
+                <td>Pensada para agentes, com o Gemini</td>
+              </tr>
+              <tr class="enter" style="--i: 3">
+                <td>Claude Code</td>
+                <td>Terminal, IDE e app</td>
+                <td>Harness da Anthropic</td>
+              </tr>
+              <tr class="enter" style="--i: 4">
+                <td>Codex</td>
+                <td>Terminal, IDE e app</td>
+                <td>Harness da OpenAI</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <aside class="notes">
+          [3 min] Cinco exemplos. OpenCode: código aberto, roda no terminal e aceita vários modelos, inclusive gratuitos; é o que vamos usar. Cursor: um editor de código baseado no VS Code, com agente integrado. Antigravity: a IDE do Google pensada para agentes, com o Gemini. Claude Code: o harness da Anthropic, no terminal, na IDE e no app. Codex: o harness da OpenAI, também no terminal, na IDE e no app. Ideia-chave para fechar: a interface muda (terminal, editor ou app), mas por baixo todos têm as mesmas peças: modelo, ferramentas, ciclo de execução e contexto. Quem entende isso troca de ferramenta sem medo.
+        </aside>
+      </section>
+
+      <!-- 1.3 Personalizando o harness: AGENTS.md / CLAUDE.md -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-code">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ PERSONALIZAR ]</p>
+            <h2>AGENTS.md</h2>
+          </div>
+
+          <div class="layout-code__row">
+            <div class="layout-code__card enter" style="--i: 0">
+              <div class="hatch">
+                <article class="code">
+                  <div class="code__head">AGENTS.md · exemplo</div>
+                  <div class="code__body">
+                    <div class="diff__line"><b>01</b><span class="code__h"># Lista de tarefas</span></div>
+                    <div class="diff__line"><b>02</b><span class="code__h">## Stack</span></div>
+                    <div class="diff__line"><b>03</b><span>- Python 3, Flask e SQLite</span></div>
+                    <div class="diff__line"><b>04</b><span class="code__h">## Comandos</span></div>
+                    <div class="diff__line"><b>05</b><span>- rodar: python app.py</span></div>
+                    <div class="diff__line"><b>06</b><span>- testar: pytest</span></div>
+                    <div class="diff__line"><b>07</b><span class="code__h">## Regras</span></div>
+                    <div class="diff__line"><b>08</b><span>- interface em português do Brasil</span></div>
+                    <div class="diff__line"><b>09</b><span>- nunca apagar dados sem confirmar</span></div>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <div class="layout-code__side">
+              <div class="layout-code__robot enter" style="--i: 1">
+                <div class="robot-slot" data-robo="agents"></div>
+              </div>
+              <span class="chip chip--arrow chip--blue enter" style="--i: 2">LIDO EM TODA SESSÃO</span>
+              <p class="enter" style="--i: 3">Instruções do projeto que o harness entrega à IA no começo. No Claude Code, o equivalente é o CLAUDE.md.</p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          [3 min] Só teoria por enquanto. O AGENTS.md é um arquivo de instruções do projeto: a stack, os comandos para rodar e testar e as regras. O harness entrega esse arquivo à IA no começo de toda sessão, então ela não precisa adivinhar. AGENTS.md é o padrão aberto, lido pela maioria dos harnesses; o CLAUDE.md é o equivalente no Claude Code. No hands-on vamos gerar um com o /init.
+        </aside>
+      </section>
+
+      <!-- 1.3 Personalizando o harness: Skills -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-code">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ PERSONALIZAR ]</p>
+            <h2>Skills</h2>
+          </div>
+
+          <div class="layout-code__row">
+            <div class="layout-code__card enter" style="--i: 0">
+              <div class="hatch">
+                <article class="code">
+                  <div class="code__head">.opencode/skills/commit/SKILL.md · exemplo</div>
+                  <div class="code__body">
+                    <div class="diff__line"><b>01</b><span>---</span></div>
+                    <div class="diff__line"><b>02</b><span><span class="code__h">name:</span> commit</span></div>
+                    <div class="diff__line"><b>03</b><span><span class="code__h">description:</span> escreve a mensagem de commit</span></div>
+                    <div class="diff__line"><b>04</b><span>---</span></div>
+                    <div class="diff__line"><b>05</b><span class="code__h"># Como escrever o commit</span></div>
+                    <div class="diff__line"><b>06</b><span>1. Rode git diff e leia a mudança</span></div>
+                    <div class="diff__line"><b>07</b><span>2. Resuma em uma linha</span></div>
+                    <div class="diff__line"><b>08</b><span>3. Siga os exemplos em exemplos.md</span></div>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <div class="layout-code__side">
+              <div class="layout-code__robot enter" style="--i: 1">
+                <div class="robot-slot" data-robo="skills"></div>
+              </div>
+              <span class="chip chip--arrow chip--accent enter" style="--i: 2">CARREGA SÓ QUANDO PRECISA</span>
+              <p class="enter" style="--i: 3">A IA vê só o nome e a descrição. O resto entra na janela quando a tarefa pede.</p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          [3 min] Uma skill é uma pasta com instruções (o SKILL.md) e arquivos de apoio para uma tarefa específica. A diferença para o AGENTS.md: o AGENTS.md é lido em toda sessão; da skill, a IA vê só o nome e a descrição, e carrega o resto apenas quando a tarefa pede. Isso economiza contexto. No OpenCode as skills ficam em .opencode/skills/; ele também lê .claude/skills/.
+        </aside>
+      </section>
+
+      <!-- 1.3 Personalizando o harness: MCP -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-text-figure">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ PERSONALIZAR ]</p>
+            <h2>MCP</h2>
+          </div>
+
+          <div class="layout-text-figure__row">
+            <div class="layout-text-figure__text">
+              <p class="lead enter" style="--i: 0">Um padrão para ligar o harness a ferramentas de fora.</p>
+              <p class="lead enter" style="--i: 1">Cada ferramenta ligada vira uma ferramenta nova para a IA.</p>
+              <span class="chip chip--arrow chip--blue enter" style="--i: 2">COMO UMA PORTA USB-C</span>
+            </div>
+
+            <div class="layout-text-figure__figure layout-text-figure__figure--wide">
+              <div class="hatch">
+                <div class="mcp-fig" role="img" aria-label="O harness (um prompt de terminal) ligado pelo MCP a seis ferramentas: GitHub, navegador, banco de dados, Google Drive, Figma e Slack">
+                  <svg class="mcp-fig__mesh" viewBox="0 0 960 500" aria-hidden="true">
+                      <path d="M90 73.5 L105 74.4 L120 75.6 L135 76.9 L150 78.5 L165 80.4 L180 82.6 L195 85.1 L210 88.0 L225 91.1 L240 94.6 L255 98.5 L270 102.6 L285 106.9 L300 111.5 L315 116.2 L330 120.9 L345 125.6 L360 130.2 L375 134.5 L390 138.5 L405 142.1 L420 145.2 L435 147.7 L450 149.5 L465 150.6 L480 151.0 L495 150.6 L510 149.5 L525 147.7 L540 145.2 L555 142.1 L570 138.5 L585 134.5 L600 130.2 L615 125.6 L630 120.9 L645 116.2 L660 111.5 L675 106.9 L690 102.6 L705 98.5 L720 94.6 L735 91.1 L750 88.0 L765 85.1 L780 82.6 L795 80.4 L810 78.5 L825 76.9 L840 75.6 L855 74.4 L870 73.5" />
+                      <path d="M90 108.8 L105 109.5 L120 110.5 L135 111.5 L150 112.8 L165 114.3 L180 116.1 L195 118.1 L210 120.4 L225 122.9 L240 125.7 L255 128.8 L270 132.1 L285 135.5 L300 139.2 L315 142.9 L330 146.7 L345 150.5 L360 154.1 L375 157.6 L390 160.8 L405 163.7 L420 166.2 L435 168.1 L450 169.6 L465 170.5 L480 170.8 L495 170.5 L510 169.6 L525 168.1 L540 166.2 L555 163.7 L570 160.8 L585 157.6 L600 154.1 L615 150.5 L630 146.7 L645 142.9 L660 139.2 L675 135.5 L690 132.1 L705 128.8 L720 125.7 L735 122.9 L750 120.4 L765 118.1 L780 116.1 L795 114.3 L810 112.8 L825 111.5 L840 110.5 L855 109.5 L870 108.8" />
+                      <path d="M90 144.1 L105 144.7 L120 145.3 L135 146.2 L150 147.1 L165 148.3 L180 149.6 L195 151.1 L210 152.8 L225 154.7 L240 156.8 L255 159.1 L270 161.5 L285 164.2 L300 166.9 L315 169.7 L330 172.5 L345 175.4 L360 178.1 L375 180.7 L390 183.1 L405 185.3 L420 187.1 L435 188.6 L450 189.7 L465 190.4 L480 190.6 L495 190.4 L510 189.7 L525 188.6 L540 187.1 L555 185.3 L570 183.1 L585 180.7 L600 178.1 L615 175.4 L630 172.5 L645 169.7 L660 166.9 L675 164.2 L690 161.5 L705 159.1 L720 156.8 L735 154.7 L750 152.8 L765 151.1 L780 149.6 L795 148.3 L810 147.1 L825 146.2 L840 145.3 L855 144.7 L870 144.1" />
+                      <path d="M90 179.4 L105 179.8 L120 180.2 L135 180.8 L150 181.4 L165 182.2 L180 183.0 L195 184.0 L210 185.2 L225 186.5 L240 187.9 L255 189.4 L270 191.0 L285 192.8 L300 194.6 L315 196.5 L330 198.4 L345 200.2 L360 202.1 L375 203.8 L390 205.4 L405 206.8 L420 208.1 L435 209.1 L450 209.8 L465 210.2 L480 210.4 L495 210.2 L510 209.8 L525 209.1 L540 208.1 L555 206.8 L570 205.4 L585 203.8 L600 202.1 L615 200.2 L630 198.4 L645 196.5 L660 194.6 L675 192.8 L690 191.0 L705 189.4 L720 187.9 L735 186.5 L750 185.2 L765 184.0 L780 183.0 L795 182.2 L810 181.4 L825 180.8 L840 180.2 L855 179.8 L870 179.4" />
+                      <path d="M90 214.7 L105 214.9 L120 215.1 L135 215.4 L150 215.7 L165 216.1 L180 216.5 L195 217.0 L210 217.6 L225 218.2 L240 218.9 L255 219.7 L270 220.5 L285 221.4 L300 222.3 L315 223.2 L330 224.2 L345 225.1 L360 226.0 L375 226.9 L390 227.7 L405 228.4 L420 229.0 L435 229.5 L450 229.9 L465 230.1 L480 230.2 L495 230.1 L510 229.9 L525 229.5 L540 229.0 L555 228.4 L570 227.7 L585 226.9 L600 226.0 L615 225.1 L630 224.2 L645 223.2 L660 222.3 L675 221.4 L690 220.5 L705 219.7 L720 218.9 L735 218.2 L750 217.6 L765 217.0 L780 216.5 L795 216.1 L810 215.7 L825 215.4 L840 215.1 L855 214.9 L870 214.7" />
+                      <path d="M90 250.0 L105 250.0 L120 250.0 L135 250.0 L150 250.0 L165 250.0 L180 250.0 L195 250.0 L210 250.0 L225 250.0 L240 250.0 L255 250.0 L270 250.0 L285 250.0 L300 250.0 L315 250.0 L330 250.0 L345 250.0 L360 250.0 L375 250.0 L390 250.0 L405 250.0 L420 250.0 L435 250.0 L450 250.0 L465 250.0 L480 250.0 L495 250.0 L510 250.0 L525 250.0 L540 250.0 L555 250.0 L570 250.0 L585 250.0 L600 250.0 L615 250.0 L630 250.0 L645 250.0 L660 250.0 L675 250.0 L690 250.0 L705 250.0 L720 250.0 L735 250.0 L750 250.0 L765 250.0 L780 250.0 L795 250.0 L810 250.0 L825 250.0 L840 250.0 L855 250.0 L870 250.0" />
+                      <path d="M90 285.3 L105 285.1 L120 284.9 L135 284.6 L150 284.3 L165 283.9 L180 283.5 L195 283.0 L210 282.4 L225 281.8 L240 281.1 L255 280.3 L270 279.5 L285 278.6 L300 277.7 L315 276.8 L330 275.8 L345 274.9 L360 274.0 L375 273.1 L390 272.3 L405 271.6 L420 271.0 L435 270.5 L450 270.1 L465 269.9 L480 269.8 L495 269.9 L510 270.1 L525 270.5 L540 271.0 L555 271.6 L570 272.3 L585 273.1 L600 274.0 L615 274.9 L630 275.8 L645 276.8 L660 277.7 L675 278.6 L690 279.5 L705 280.3 L720 281.1 L735 281.8 L750 282.4 L765 283.0 L780 283.5 L795 283.9 L810 284.3 L825 284.6 L840 284.9 L855 285.1 L870 285.3" />
+                      <path d="M90 320.6 L105 320.2 L120 319.8 L135 319.2 L150 318.6 L165 317.8 L180 317.0 L195 316.0 L210 314.8 L225 313.5 L240 312.1 L255 310.6 L270 309.0 L285 307.2 L300 305.4 L315 303.5 L330 301.6 L345 299.8 L360 297.9 L375 296.2 L390 294.6 L405 293.2 L420 291.9 L435 290.9 L450 290.2 L465 289.8 L480 289.6 L495 289.8 L510 290.2 L525 290.9 L540 291.9 L555 293.2 L570 294.6 L585 296.2 L600 297.9 L615 299.8 L630 301.6 L645 303.5 L660 305.4 L675 307.2 L690 309.0 L705 310.6 L720 312.1 L735 313.5 L750 314.8 L765 316.0 L780 317.0 L795 317.8 L810 318.6 L825 319.2 L840 319.8 L855 320.2 L870 320.6" />
+                      <path d="M90 355.9 L105 355.3 L120 354.7 L135 353.8 L150 352.9 L165 351.7 L180 350.4 L195 348.9 L210 347.2 L225 345.3 L240 343.2 L255 340.9 L270 338.5 L285 335.8 L300 333.1 L315 330.3 L330 327.5 L345 324.6 L360 321.9 L375 319.3 L390 316.9 L405 314.7 L420 312.9 L435 311.4 L450 310.3 L465 309.6 L480 309.4 L495 309.6 L510 310.3 L525 311.4 L540 312.9 L555 314.7 L570 316.9 L585 319.3 L600 321.9 L615 324.6 L630 327.5 L645 330.3 L660 333.1 L675 335.8 L690 338.5 L705 340.9 L720 343.2 L735 345.3 L750 347.2 L765 348.9 L780 350.4 L795 351.7 L810 352.9 L825 353.8 L840 354.7 L855 355.3 L870 355.9" />
+                      <path d="M90 391.2 L105 390.5 L120 389.5 L135 388.5 L150 387.2 L165 385.7 L180 383.9 L195 381.9 L210 379.6 L225 377.1 L240 374.3 L255 371.2 L270 367.9 L285 364.5 L300 360.8 L315 357.1 L330 353.3 L345 349.5 L360 345.9 L375 342.4 L390 339.2 L405 336.3 L420 333.8 L435 331.9 L450 330.4 L465 329.5 L480 329.2 L495 329.5 L510 330.4 L525 331.9 L540 333.8 L555 336.3 L570 339.2 L585 342.4 L600 345.9 L615 349.5 L630 353.3 L645 357.1 L660 360.8 L675 364.5 L690 367.9 L705 371.2 L720 374.3 L735 377.1 L750 379.6 L765 381.9 L780 383.9 L795 385.7 L810 387.2 L825 388.5 L840 389.5 L855 390.5 L870 391.2" />
+                      <path d="M90 426.5 L105 425.6 L120 424.4 L135 423.1 L150 421.5 L165 419.6 L180 417.4 L195 414.9 L210 412.0 L225 408.9 L240 405.4 L255 401.5 L270 397.4 L285 393.1 L300 388.5 L315 383.8 L330 379.1 L345 374.4 L360 369.8 L375 365.5 L390 361.5 L405 357.9 L420 354.8 L435 352.3 L450 350.5 L465 349.4 L480 349.0 L495 349.4 L510 350.5 L525 352.3 L540 354.8 L555 357.9 L570 361.5 L585 365.5 L600 369.8 L615 374.4 L630 379.1 L645 383.8 L660 388.5 L675 393.1 L690 397.4 L705 401.5 L720 405.4 L735 408.9 L750 412.0 L765 414.9 L780 417.4 L795 419.6 L810 421.5 L825 423.1 L840 424.4 L855 425.6 L870 426.5" />
+                      <path d="M90 73.5 L90 426.5" />
+                      <path d="M142 77.6 L142 422.4" />
+                      <path d="M194 84.9 L194 415.1" />
+                      <path d="M246 96.1 L246 403.9" />
+                      <path d="M298 110.9 L298 389.1" />
+                      <path d="M350 127.1 L350 372.9" />
+                      <path d="M402 141.4 L402 358.6" />
+                      <path d="M454 149.9 L454 350.1" />
+                      <path d="M506 149.9 L506 350.1" />
+                      <path d="M558 141.4 L558 358.6" />
+                      <path d="M610 127.1 L610 372.9" />
+                      <path d="M662 110.9 L662 389.1" />
+                      <path d="M714 96.1 L714 403.9" />
+                      <path d="M766 84.9 L766 415.1" />
+                      <path d="M818 77.6 L818 422.4" />
+                      <path d="M870 73.5 L870 426.5" />
+                  </svg>
+                  <div class="mcp-fig__mcp enter" style="--i: 1">
+                    <!-- Marca oficial do MCP (modelcontextprotocol/modelcontextprotocol, docs/logo/light.svg) -->
+                    <svg class="mcp-fig__logo" viewBox="13 13 170 183" aria-hidden="true">
+                      <path d="M25 97.8528L92.8823 29.9706C102.255 20.598 117.451 20.598 126.823 29.9706C136.196 39.3431 136.196 54.5391 126.823 63.9117L75.5581 115.177" />
+                      <path d="M76.2653 114.47L126.823 63.9117C136.196 54.5391 151.392 54.5391 160.765 63.9117L161.118 64.2652C170.491 73.6378 170.491 88.8338 161.118 98.2063L99.7248 159.6C96.6006 162.724 96.6006 167.789 99.7248 170.913L112.331 183.52" />
+                      <path d="M109.853 46.9411L59.6482 97.1457C50.2757 106.518 50.2757 121.714 59.6482 131.087C69.0208 140.459 84.2168 140.459 93.5894 131.087L143.794 80.8822" />
+                    </svg>
+                  </div>
+                  <div class="mcp-fig__host enter" style="--i: 0">
+                    <svg class="prompt-icon" viewBox="0 0 120 100" aria-hidden="true">
+                      <path d="M12 18 L48 50 L12 82" />
+                      <rect class="prompt-icon__caret" x="62" y="72" width="46" height="12" />
+                    </svg>
+                  </div>
+                  <i class="mark mark--pink" style="left: 261px; top: 131px" aria-hidden="true"></i>
+                  <i class="mark mark--pink" style="left: 721px; top: 151px" aria-hidden="true"></i>
+                  <i class="mark mark--pink" style="left: 721px; top: 391px" aria-hidden="true"></i>
+                  <svg class="mcp-fig__wires" viewBox="0 0 960 500" aria-hidden="true">
+                    <path class="connector connector--blue" style="--len: 78; --i: 0" d="M160 72 V150" />
+                    <path class="connector connector--blue" style="--len: 42; --i: 1" d="M470 98 V140" />
+                    <path class="connector connector--blue" style="--len: 78; --i: 2" d="M790 72 V150" />
+                    <path class="connector connector--blue" style="--len: 58; --i: 3" d="M190 428 V370" />
+                    <path class="connector connector--blue" style="--len: 86; --i: 4" d="M480 446 V360" />
+                    <path class="connector connector--blue" style="--len: 58; --i: 5" d="M790 428 V370" />
+                    <polygon class="node mcp-fig__tip" style="--i: 0" points="152,72 168,72 160,82" />
+                    <polygon class="node mcp-fig__tip" style="--i: 1" points="462,98 478,98 470,108" />
+                    <polygon class="node mcp-fig__tip" style="--i: 2" points="782,72 798,72 790,82" />
+                    <polygon class="node mcp-fig__tip" style="--i: 3" points="182,428 198,428 190,418" />
+                    <polygon class="node mcp-fig__tip" style="--i: 4" points="472,446 488,446 480,436" />
+                    <polygon class="node mcp-fig__tip" style="--i: 5" points="782,428 798,428 790,418" />
+                  </svg>
+                    <span class="mcp-fig__tool enter" style="left: 160px; top: 18px; --i: 2"><i class="glyph glyph--blue" aria-hidden="true"></i>GITHUB</span>
+                    <span class="mcp-fig__tool enter" style="left: 470px; top: 44px; --i: 3"><i class="glyph glyph--diamond glyph--green" aria-hidden="true"></i>NAVEGADOR</span>
+                    <span class="mcp-fig__tool enter" style="left: 790px; top: 18px; --i: 4"><i class="glyph glyph--triangle glyph--pink" aria-hidden="true"></i>BANCO DE DADOS</span>
+                    <span class="mcp-fig__tool enter" style="left: 190px; top: 428px; --i: 5"><i class="glyph glyph--accent" aria-hidden="true"></i>GOOGLE DRIVE</span>
+                    <span class="mcp-fig__tool enter" style="left: 480px; top: 446px; --i: 6"><i class="glyph glyph--diamond glyph--violet" aria-hidden="true"></i>FIGMA</span>
+                    <span class="mcp-fig__tool enter" style="left: 790px; top: 428px; --i: 7"><i class="glyph glyph--triangle glyph--orange" aria-hidden="true"></i>SLACK</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          [2 min] MCP (Model Context Protocol) é um padrão para ligar o harness a ferramentas e dados de fora: GitHub, o navegador, um banco de dados, o Google Drive, o Figma, o Slack. A própria documentação compara o MCP a uma porta USB-C: um encaixe padrão em que qualquer aparelho se liga. Em vez de cada harness inventar a sua integração, todos falam o mesmo protocolo, e cada ferramenta ligada vira uma ferramenta nova para a IA. O OpenCode aceita servidores MCP locais e remotos. Hoje fica só na teoria.
+        </aside>
+      </section>
+
+      <!-- 1.3 Hands-on no OpenCode: interface, modelo gratuito e sessões -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-demo">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ HANDS-ON ]<span class="cursor" aria-hidden="true"></span></p>
+            <h2>Primeiros passos no OpenCode</h2>
+          </div>
+
+          <div class="layout-demo__body">
+            <p class="lead">Cada um na sua máquina: abra o OpenCode na sua pasta de trabalho.</p>
+            <ul class="layout-demo__watch">
+              <li><i class="glyph glyph--square glyph--accent" aria-hidden="true"></i><code>/models</code>&nbsp;escolhe um modelo gratuito</li>
+              <li><i class="glyph glyph--diamond glyph--pink" aria-hidden="true"></i><code>/new</code>&nbsp;abre uma sessão nova</li>
+              <li><i class="glyph glyph--triangle glyph--blue" aria-hidden="true"></i><code>/sessions</code>&nbsp;volta a uma sessão anterior</li>
+            </ul>
+          </div>
+
+          <div class="layout-demo__foot">
+            <a class="btn-hex" href="https://opencode.ai/docs" target="_blank" rel="noopener">opencode.ai/docs</a>
+            <span class="pill pill--outline">MODELO: GRATUITO</span>
+          </div>
+        </div>
+        <aside class="notes">
+          [6 min] Todo mundo abre o OpenCode na pasta de trabalho. Mostrar a interface: a caixa de mensagem, o modelo e o agente atuais. Com /models, escolher um modelo gratuito. Cada conversa é uma sessão: /new abre uma nova e /sessions lista as anteriores para voltar a elas. Monitores circulam: ninguém avança sem um modelo respondendo.
+        </aside>
+      </section>
+
+      <!-- 1.3 Hands-on no OpenCode: gerar o AGENTS.md com /init -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-text-figure">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ OPENCODE ]</p>
+            <h2>AGENTS.md com /init</h2>
+          </div>
+
+          <div class="layout-text-figure__row">
+            <div class="layout-text-figure__text">
+              <p class="lead">Rode <code>/init</code>: a IA lê o projeto e cria o AGENTS.md. Depois, abra o arquivo e leia o que ela escreveu.</p>
+              <span class="chip chip--arrow chip--blue">LEIA ANTES DE CONFIAR</span>
+            </div>
+
+            <div class="layout-text-figure__figure">
+              <div class="hatch">
+                <article class="code">
+                  <div class="code__head">AGENTS.md · o que conferir</div>
+                  <div class="code__body">
+                    <div class="diff__line enter" style="--i: 0"><b>01</b><span class="code__h"># Ao abrir o arquivo</span></div>
+                    <div class="diff__line enter" style="--i: 1"><b>02</b><span>- Que stack a IA descreveu?</span></div>
+                    <div class="diff__line enter" style="--i: 2"><b>03</b><span>- Que comandos ela anotou?</span></div>
+                    <div class="diff__line enter" style="--i: 3"><b>04</b><span>- Tem algo que ninguém pediu?</span></div>
+                    <div class="diff__line enter" style="--i: 4"><b>05</b><span>- Falta alguma regra sua?</span></div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          [4 min] Cada um roda /init. O OpenCode lê os arquivos importantes do projeto, pode fazer uma ou duas perguntas e cria (ou melhora) o AGENTS.md. Abrir o arquivo e ler junto: que stack ela descreveu, que comandos anotou, se inventou algo. Se a pasta estiver vazia, o arquivo sai curto: tudo bem, o objetivo agora é conhecer o formato.
+        </aside>
+      </section>
+
+      <!-- 1.3 Hands-on no OpenCode: demo Build vs. Plan -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-demo">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ DEMO AO VIVO ]<span class="cursor" aria-hidden="true"></span></p>
+            <h2>Build vs. Plan</h2>
+          </div>
+
+          <div class="layout-demo__body">
+            <p class="lead">O mesmo pedido, por dois caminhos.</p>
+            <ul class="layout-demo__watch">
+              <li><i class="glyph glyph--square glyph--green" aria-hidden="true"></i>Direto no Build: a IA já sai escrevendo código</li>
+              <li><i class="glyph glyph--diamond glyph--pink" aria-hidden="true"></i>Plan antes: a IA propõe, você ajusta, o Build executa</li>
+              <li><i class="glyph glyph--triangle glyph--accent" aria-hidden="true"></i>No fim, compare os dois resultados</li>
+            </ul>
+          </div>
+
+          <div class="layout-demo__foot">
+            <a class="btn-hex" href="https://opencode.ai/docs/agents/" target="_blank" rel="noopener">opencode.ai/docs/agents</a>
+          </div>
+        </div>
+        <aside class="notes">
+          [10 min] Antes da demo, apresentar os dois agentes do OpenCode. Plan: explora e planeja, mas não edita os arquivos do projeto. Build: o agente padrão, que escreve arquivos e roda comandos. Por cima dos dois, as permissões: para cada ação o harness permite (allow), pergunta antes (ask) ou bloqueia (deny). Mostrar como trocar de agente na interface (conferir o atalho na máquina antes da aula) e um pedido de permissão aparecendo. Depois, demo no telão com o prompt de dia-1/prompts-demos.md. Primeiro, enviar o pedido direto ao Build: a IA já sai escrevendo código. Depois, numa sessão nova, o mesmo pedido no Plan: a IA propõe um plano, a turma sugere ajustes, e só então trocamos para o Build executar. Comparar os dois resultados sem dar o veredito.
+        </aside>
+      </section>
+
+      <!-- 1.3 Hands-on no OpenCode: planejar antes vale a pena? -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-two-cards">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ OPENCODE ]</p>
+            <h2>Planejar antes vale a pena?</h2>
+          </div>
+
+          <div class="layout-two-cards__row">
+            <div class="hatch enter" style="--i: 0">
+              <article class="card">
+                <span class="chip chip--back chip--green">DIRETO NO BUILD</span>
+                <h3>Sai fazendo</h3>
+                <p>A IA começa a escrever código na hora.</p>
+                <ul>
+                  <li>Começa mais rápido</li>
+                  <li>A IA decide o que faltou dizer</li>
+                </ul>
+              </article>
+            </div>
+
+            <div class="hatch enter" style="--i: 1">
+              <article class="card card--accent">
+                <span class="chip chip--hex">PLAN, DEPOIS BUILD</span>
+                <h3>Combina antes</h3>
+                <p>A IA propõe um plano, você ajusta e só então o Build executa.</p>
+                <ul>
+                  <li>Leva um passo a mais</li>
+                  <li>Você decide o que faltou dizer</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+
+          <svg class="connectors" viewBox="0 0 1920 1080" aria-hidden="true">
+            <path class="connector" style="--len: 96; --i: 0" d="M912 588 H1008" />
+            <circle class="node" style="--i: 0" cx="912" cy="588" r="9" />
+            <circle class="node node--last" style="--i: 1" cx="1008" cy="588" r="9" />
+          </svg>
+        </div>
+        <aside class="notes">
+          [1 min] Fechamento do bloco: deixar a pergunta no ar, sem responder. Quem achou que o plano ajudou? Quem achou que só atrasou? Guardem a resposta: ela volta no Dia 2.
         </aside>
       </section>
 

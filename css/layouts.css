@@ -87,13 +87,6 @@
   background: var(--c-accent);
 }
 .layout-section__body { display: flex; flex-direction: column; gap: var(--s-3); }
-.layout-section__time {
-  font-family: var(--f-mono);
-  font-size: var(--t-label);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--s-meta);
-}
 
 /* Layouts novos (validação visual v1.4) */
 .layout-robots,
@@ -130,7 +123,14 @@
   justify-content: center;
   gap: var(--s-4);
 }
-.layout-text-figure__figure { width: 850px; flex: none; }
+.layout-text-figure__figure {
+  width: 850px;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* figura centralizada na vertical, como o texto ao lado */
+}
+.layout-text-figure__figure--wide { width: 984px; } /* figura do MCP (8.20) */
 .panel--light { position: relative; background: var(--c-white); padding: 32px; }
 .panel--light canvas { display: block; color: var(--c-blue); }
 
@@ -226,11 +226,11 @@
 /* Demo ao vivo */
 .layout-demo { justify-content: space-between; }
 .layout-demo__body { display: flex; flex-direction: column; gap: var(--s-5); max-width: 1300px; }
-.layout-demo__body .lead { color: var(--c-sand); }
+.layout-demo__body .lead { color: inherit; } /* sand no escuro, basalt no claro */
 .layout-demo__watch { list-style: none; display: flex; flex-direction: column; gap: var(--s-3); }
-.reveal .layout-demo__watch { padding-left: 0; }
-.layout-demo__watch li { display: flex; align-items: center; color: var(--c-eggshell); }
-.layout-demo__watch .glyph { flex: none; margin-right: var(--s-3); }
+.reveal .layout-demo__watch { padding-left: 0; display: flex; } /* o reveal força ul em block e anula o gap */
+.layout-demo__watch li { display: flex; align-items: center; color: inherit; font-size: var(--t-lead); line-height: 1.35; } /* mesmo tamanho da frase: legível na projeção */
+.layout-demo__watch .glyph { flex: none; width: 20px; height: 20px; margin-right: var(--s-3); }
 .layout-demo__foot {
   display: flex;
   align-items: center;
@@ -262,3 +262,13 @@
 
 /* Abertura de bloco sem eyebrow (v1.16): o corpo continua preso à base */
 .layout-section__body { margin-top: auto; }
+
+/* Cartão de código com robô na coluna lateral (AGENTS.md, Skills) */
+.layout-code__robot {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  border-bottom: 2px solid var(--c-basalt);
+  padding-left: var(--s-4);
+}
+.layout-code__robot .robot { width: 220px; }
