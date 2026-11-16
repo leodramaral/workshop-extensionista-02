@@ -206,3 +206,58 @@
 
 /* Cursor piscante também só no slide ativo (seção 10.4) */
 .reveal .slides section:not(.present) .cursor { animation-play-state: paused; }
+
+/* v1.31: figuras vivas do Dia 2. Só no slide ativo; o bloco de reduced-motion desliga. */
+@keyframes cresce { from { transform: scaleY(0); } }
+@keyframes respira { 50% { opacity: 0.45; } }
+@keyframes vez {
+  0%        { stroke-dashoffset: 14; opacity: 1; }
+  20%       { stroke-dashoffset: calc(0px - var(--len, 80) * 1px); opacity: 1; }
+  21%, 100% { stroke-dashoffset: calc(0px - var(--len, 80) * 1px); opacity: 0; }
+}
+
+/* Gráfico: a curva cresce a partir da base ao chegar no slide; a zona de perda respira */
+.reveal .slides section.present .chart__dados { animation: cresce 1.2s var(--ease-out) 300ms both; }
+.reveal .slides section.present .chart__zona { animation: respira 4s ease-in-out infinite; }
+
+/* Arquivos na hora certa: uma etiqueta acende e o pulso dela corre até a IA, uma de cada vez */
+.reveal .slides section.present .ponte-fig__tool {
+  animation:
+    enter-up 700ms ease-out both,
+    acende 8s ease-in-out infinite both;
+  animation-delay:
+    calc(var(--i, 0) * var(--stagger)),
+    calc(3s + var(--k, 0) * 2s);
+}
+.reveal .slides section.present .ponte-fig__pulso {
+  animation: vez 8s ease-in infinite;
+  animation-delay: calc(3s + var(--k, 0) * 2s);
+}
+
+/* A conversa some (8.27): ciclo de 12s. Ontem aparece e se apaga, a janela fica vazia, a sessão nova relê os arquivos. */
+@keyframes apaga {
+  0%        { opacity: 0; }
+  4%, 26%   { opacity: 1; }
+  31%       { opacity: 1; background-color: color-mix(in srgb, var(--c-pink) 16%, transparent); }
+  38%, 100% { opacity: 0; background-color: color-mix(in srgb, var(--c-pink) 16%, transparent); }
+}
+@keyframes relendo {
+  0%, 62%  { opacity: 0; }
+  66%, 96% { opacity: 1; }
+  100%     { opacity: 0; }
+}
+@keyframes titulo-ontem { 0%, 40% { opacity: 1; } 44%, 96% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes titulo-hoje  { 0%, 40% { opacity: 0; } 44%, 96% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes vazio { 0%, 46% { opacity: 0; } 50%, 58% { opacity: 1; } 62%, 100% { opacity: 0; } }
+
+.reveal .slides section.present .amnesia__camada--ontem .janela__linha {
+  animation: apaga 12s ease-in-out infinite both;
+  animation-delay: calc(var(--k, 0) * 0.25s);
+}
+.reveal .slides section.present .amnesia__camada--hoje .janela__linha {
+  animation: relendo 12s ease-in-out infinite both;
+  animation-delay: calc(var(--k, 0) * 0.25s);
+}
+.reveal .slides section.present .amnesia__h--ontem { animation: titulo-ontem 12s ease-in-out infinite both; }
+.reveal .slides section.present .amnesia__h--hoje { animation: titulo-hoje 12s ease-in-out infinite both; }
+.reveal .slides section.present .amnesia__vazio { animation: vazio 12s ease-in-out infinite both; }

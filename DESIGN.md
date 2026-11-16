@@ -1,7 +1,7 @@
 # DESIGN.md: fundação do site de apresentação
 
 > Oficina de Desenvolvimento com IA. Slides servidos como site no GitHub Pages.
-> Versão 1.30 · 2026-11-16 · Leandro Amaral
+> Versão 1.31 · 2026-11-16 · Leandro Amaral
 
 Este arquivo é a **fonte da verdade** do projeto. Ele vale para quem escreve código à mão e para agentes de IA (OpenCode, Claude, Copilot). Faça o `AGENTS.md` do repositório apontar para cá, com a linha: *"Antes de criar ou alterar qualquer slide, leia o DESIGN.md e siga-o à risca."*
 
@@ -465,6 +465,10 @@ Liga cartões ou etapas de um fluxo. É um SVG em camada absoluta sobre o layout
 
 - Dentro do SVG: linhas de grade `--c-tint` a 15% de opacidade, curva principal `--c-tint` de 6px e marcadores **quadrados** (não círculos) de 24px.
 - Textos de eixo e legenda ficam em HTML, nunca em `<text>` do SVG, para usar as fontes do projeto.
+- **Implementação (`.chart`, v1.31, slide "Curva em U" do Dia 2, que também apresenta o estudo):** `.hatch` > `.panel.chart` com `.chart__legend` (marcador quadrado `.chart__key`; `.chart__key--base` é um traço tracejado para a linha de referência), `.chart__plot` de 760×240 com o SVG em pixels (`viewBox` igual ao tamanho, sem distorcer os quadrados), rótulos de valor em HTML (`.chart__val`, Space Mono 24px `--c-tint`, posicionados por `left`/`top`), `.chart__axis` e `.chart__fonte` (título do eixo; Space Mono 24px, `--c-muted-dark`). Linha de referência tracejada `--c-eggshell`. Faixa `.chart__zona` em `--c-pink` a ~15% com rótulo `.chart__zona-rotulo` em `--c-pink` (par aprovado no escuro, 24px). O eixo x é proporcional à grandeza (posição 1 a 20), nunca espaçado por igual quando os pontos não são.
+- **Dados reais, com a fonte fora do quadro.** Quando o gráfico vem de um artigo, os números são os da tabela publicada. Dentro do painel fica só o dado (legenda, valores, eixo); artigo, autores e modelo testado vão na coluna de texto, como chip (`ARTIGO · …`) e rótulo mono (`.flow__label`). Sem fonte conferida, a legenda diz "ilustrativo".
+- **Entrada:** a curva e os marcadores (`<g class="chart__dados">`) crescem a partir da base do gráfico ao chegar no slide (`cresce`, `scaleY` com `transform-origin` na base, 1,2s); os valores entram depois, com `.enter`. A linha de referência e a grade já estão lá.
+- **Figura viva (8.22):** depois de crescer, o dado fica parado; só a faixa da zona respira (`respira`, opacidade). Nada percorre a curva: um elemento andando sobre a linha disputa atenção com os valores.
 
 ### 8.9 Cartão de código / diff (Greptile)
 
@@ -618,6 +622,28 @@ Faixa de texto mono que corre devagar, como o "TEST · RUN · EXECUTE" da Grepti
 - Na lista "o que observar" do `layout-demo`, a variante `.layout-demo__watch--cmds` põe os comandos numa coluna própria e as descrições alinhadas ao lado (grade com `subgrid`), cada linha entrando com `.enter`.
 - O texto do chip é exatamente o que se digita: sem `>` nem outro prefixo.
 
+### 8.26 Arquivos na hora certa (figura)
+
+Figura da ponte para o SDD no Dia 2 ("Vários arquivos pequenos"), no estilo vetorial da Greptile (8.21) e com a mesma caixa da figura do MCP (8.20): `layout-text-figure__figure--wide` > `.hatch` > `.ponte-fig` (960×500, `--c-paper`, `role="img"`).
+
+- **Fundo:** a malha em canvas do MCP (`data-efeito="rede"`), que já é desenhada para 960×500.
+- **Centro:** um quadrado `--c-accent` de 220px com o ícone de prompt `>_` (`.prompt-icon`), a IA no harness, a mesma ideia do quadrado cheio do MCP.
+- **Etiquetas:** 4 etiquetas brancas (as do MCP, 8.20: glifo colorido e texto mono de 24px), 2 em cima e 2 embaixo, com os papéis dos arquivos, sem nome de arquivo: `PROJETO`, `O QUÊ E POR QUÊ`, `COMO`, `TAREFA DA VEZ`. Cada uma liga a uma borda lateral do quadrado por linha `--c-blue` em cotovelo, com ponta triangular colada na etiqueta.
+- **Figura viva (8.22):** um arquivo por vez. A cada 2s, uma etiqueta acende (`acende`, a mesma do harness) e um pulso corre pela linha dela até o centro (`vez`, ciclo de 8s escalonado por `--k`): cada arquivo entra no momento certo. A malha respira ao fundo.
+
+### 8.27 A conversa some (figura)
+
+Figura do slide "Sessão nova é amnésia" do Dia 2. É a janela de contexto (8.17) contando uma história no tempo, em loop de 12s: `.hatch` > `.janela.amnesia` (`role="img"`, `aria-label` que descreve a sequência inteira).
+
+1. **Ontem:** o cabeçalho diz `sessão de ontem` e as linhas da conversa entram uma a uma (pedido, resposta, decisão, correção, decisão), em sálvia.
+2. **Apaga:** cada linha passa a malva (o "saiu" do diff) e some, de cima para baixo (`apaga`, escalonado por `--k`). O cabeçalho troca para `sessão nova`.
+3. **Vazio:** a janela fica vazia, só com `a IA não lembra de nada` no centro (`.amnesia__vazio`, Space Mono 24px `--c-eggshell`).
+4. **Relendo:** as linhas voltam, agora só o pedido e os arquivos relidos (`relendo`, escalonado por `--k`).
+
+- As duas camadas de linhas (`.amnesia__camada--ontem` e `--hoje`) e o texto do vazio ocupam a mesma célula de grade, então a janela não muda de altura. O título do cabeçalho troca do mesmo jeito (`.amnesia__titulo`).
+- **Estado parado** (fora do slide ativo, `prefers-reduced-motion` e `?print-pdf`): o passo 4, a sessão nova relendo arquivos. Por isso o estado padrão no CSS é esse, e só a animação mostra os passos 1 a 3.
+- Movimento calmo (8.22): uma história só, sem nada piscando além do cursor.
+
 ## 9. Layouts (`css/layouts.css`)
 
 Cada slide usa **um** layout, num `div` wrapper que ocupa o slide inteiro. A área útil é de 1664×824 .
@@ -720,6 +746,10 @@ Também há **entrada automática** ao chegar no slide, sem clique: elementos co
 | `shimmer` | faixa clara varrendo a barra da esquerda para a direita, escalonada por `--i` | janela de contexto (8.17) |
 | `pulso` | traço curto correndo pela linha azul até o centro (`stroke-dashoffset`), escalonado por `--i` | MCP (8.20) |
 | `rede` | malha azul em canvas que respira (estreitamento do centro abre e fecha) | MCP (8.20) |
+| `cresce` | curva e marcadores crescendo a partir da base do gráfico (`scaleY` de 0 a 1), 1,2s, só na entrada | painel de gráfico (8.8) |
+| `respira` | faixa da zona de perda ganhando e perdendo opacidade, 4s | painel de gráfico (8.8) |
+| `apaga` / `relendo` | linhas da conversa de ontem passando a malva e sumindo; depois as linhas da sessão nova voltando, uma a uma (ciclo de 12s, escalonado por `--k`) | a conversa some (8.27) |
+| `vez` | pulso correndo por uma linha só de cada vez (um quarto do ciclo cada), 8s escalonado por `--k` | arquivos na hora certa (8.26) |
 | `planta` | composição abstrata de 6 peças: primeiro as cotas, depois cada peça é traçada em tracejado azul e construída em degraus, uma de cada vez, com um marcador âmbar levando a vez para a próxima | capa do Dia 2 |
 
 Keyframes de referência, adaptados do CSS da Greptile:
@@ -876,6 +906,7 @@ Um slide ou mudança só está **pronto** quando:
 | 2026-11-16 | v1.30: comando em destaque (8.25) e lista de comandos no `layout-demo` (slide 23); ligações das figuras sempre terminam num elemento sólido, nunca na malha (8.20, 8.21), com as linhas do MCP (slide 22) em cotovelo até os quadrados; o eyebrow de prática dos alunos passa de `[ HANDS-ON ]` a `[ MÃO NA MASSA ]`; o evento passa a se chamar **oficina** em todo lugar (diretriz na seção 11): home, certificado, referência de UI, README e este arquivo |
 | 2026-11-16 | v1.29: carga visual da Greptile. Paleta com os mesmos matizes e a intensidade da Greptile (acentos menos vívidos e tons claros `--c-*-claro`), contraste medido de novo; títulos em Anybody 700, largura normal, caixa de frase e tracking negativo; fundo liso com granulado, trilhos tracejados com nós e calha quadriculada no lugar do quadriculado de 48px; hachura fina a −55°; peças novas: eyebrow marcado (8.1), régua (8.23) e faixa corrente (8.24); entrada `.enter` de 8px em 700ms; figuras vivas (8.22) no MCP, no harness, na janela de contexto e na linha do tempo, com o novo `js/efeitos/rede.js` |
 | 2026-11-16 | v1.28: regras permanentes tiradas da revisão do bloco 1.3: regra da projeção (seção 7); onde o robô entra (8.12); linguagem das figuras no estilo vetorial da Greptile, com marca oficial e ícones reutilizáveis (8.21); colunas alinhadas pelo centro, texto lido de longe em 36px e armadilhas de CSS (9); sem data e horário, só citar o que existe, fatos conferidos na fonte e cada slide com algo novo (11); tempo por slide e soma por bloco nas notas (12); itens novos em "O que evitar" (15) e nos critérios de aceitação, com citação de slide pelo número da URL (16); referências de Greptile, MCP e OpenCode (17) |
+| 2026-11-16 | v1.31: slides do bloco 2.2 do Dia 2 (As dores que o Dia 1 não mostrou; eyebrows `[ RETOMADA ]`, `[ LOST IN THE MIDDLE ]`, `[ AMNÉSIA ]` e `[ AGENTS.MD ]`): abertura e 7 slides. O 2.1 não vira slide: a fala e os 5 min dele vão para a nota da capa do Dia 2. Painel de gráfico (8.8) implementado como `.chart`, com dados reais do artigo Lost in the Middle, num slide só que apresenta o estudo (chip `ARTIGO`) e o resultado; peças novas: arquivos na hora certa (8.26) e a conversa some (8.27); animações `cresce`, `respira`, `vez`, `apaga` e `relendo` |
 
 ## 17. Referências
 
@@ -887,6 +918,7 @@ Um slide ou mudança só está **pronto** quando:
 - Greptile, ilustrações vetoriais de referência para figuras (8.21): seções "How it works" e "Ways Greptile plugs into your workflow" da home, em especial o card "Greptile MCP".
 - MCP, documentação oficial (arquitetura e a comparação com USB-C): https://modelcontextprotocol.io/docs/getting-started/intro e https://modelcontextprotocol.io/docs/learn/architecture. Marca oficial: `docs/logo/light.svg` em https://github.com/modelcontextprotocol/modelcontextprotocol
 - OpenCode, documentação (agentes, permissões, comandos, skills, MCP): https://opencode.ai/docs
+- Liu et al., *Lost in the Middle: How Language Models Use Long Contexts*, TACL 2023 (Stanford, UC Berkeley e Samaya AI): https://arxiv.org/abs/2307.03172. Valores do gráfico na Tabela 6 (20 documentos) e o closed-book na Tabela 1
 
 ## 18. Certificado
 
