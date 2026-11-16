@@ -21,8 +21,8 @@
   100% { transform: scale(1) rotate(-5deg); }
 }
 @keyframes draw { to { stroke-dashoffset: 0; } }
-@keyframes enter-up {
-  from { opacity: 0; transform: translateY(24px); }
+@keyframes enter-up { /* hero-fade-up da Greptile (v1.29): sobe só 8px */
+  from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: none; }
 }
 
@@ -48,7 +48,7 @@
 /* Entrada automática ao chegar no slide */
 .reveal .slides section .enter { opacity: 0; }
 .reveal .slides section.present .enter {
-  animation: enter-up var(--d-slow) var(--ease-out) both;
+  animation: enter-up 700ms ease-out both;
   animation-delay: calc(var(--i, 0) * var(--stagger));
 }
 
@@ -153,3 +153,56 @@
   animation: barra var(--d-slow) var(--ease-out) both;
   animation-delay: calc(var(--i, 0) * var(--stagger) + 300ms);
 }
+
+/* Figuras vivas (8.22, v1.29). Tudo só no slide ativo; o bloco de reduced-motion acima desliga. */
+@keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes volta { to { offset-distance: 100%; } }
+@keyframes acende {
+  0%, 30%, 100% { filter: saturate(0.75) opacity(0.8); scale: 1; }
+  4%, 24%       { filter: none; scale: 1.08; }
+}
+@keyframes shimmer {
+  0%        { transform: translateX(-100%); }
+  45%, 100% { transform: translateX(260%); }
+}
+@keyframes pulso {
+  0%   { stroke-dashoffset: 14; opacity: 1; }
+  60%  { stroke-dashoffset: calc(0px - var(--len, 80) * 1px); opacity: 1; }
+  61%, 100% { stroke-dashoffset: calc(0px - var(--len, 80) * 1px); opacity: 0; }
+}
+@keyframes ping-escala { 50% { scale: 1.35; } }
+
+/* Faixa corrente */
+.reveal .slides section.present .marquee__track { animation: marquee 40s linear infinite; }
+
+/* Borda tracejada que corre (harness, linha do tempo) */
+.reveal .slides section.present .ants--run rect { animation: ants 1.4s linear infinite; }
+
+/* Harness: o quadradinho dá a volta e as partes acendem em ciclo (sentido horário) */
+.reveal .slides section.present .harness__runner { animation: volta 8s linear infinite; }
+.reveal .slides section.present .harness__part {
+  animation:
+    enter-up 700ms ease-out both,
+    acende 8s ease-in-out infinite both;
+  animation-delay:
+    calc(var(--i, 0) * var(--stagger)),
+    calc(1.5s + var(--k, 0) * 2s);
+}
+
+/* Janela de contexto: brilho varrendo as barras das linhas que ficaram */
+.reveal .slides section.present .janela__linha:not(.janela__linha--velho) .janela__barra::after {
+  animation: shimmer 4s ease-in-out infinite;
+  animation-delay: calc(1.8s + var(--i, 0) * 0.5s);
+}
+
+/* Linha do tempo: o "hoje" pulsa */
+.reveal .slides section.present .tempo__marca--hoje { animation: ping-escala 2s ease-in-out infinite; }
+
+/* MCP: pulso correndo das etiquetas até o centro, depois que as linhas se desenham */
+.reveal .slides section.present .mcp-fig__pulso {
+  animation: pulso 3.6s ease-in infinite;
+  animation-delay: calc(4.4s + var(--i, 0) * 0.6s);
+}
+
+/* Cursor piscante também só no slide ativo (seção 10.4) */
+.reveal .slides section:not(.present) .cursor { animation-play-state: paused; }

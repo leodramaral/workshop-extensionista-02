@@ -11,16 +11,16 @@
 .layout-cover h1 { font-size: var(--t-h1); line-height: 1.05; }
 .layout-cover__sub { color: var(--s-sub); max-width: 900px; }
 .layout-cover__rule {
-  border-top: 1px dashed var(--s-rule);
-  padding-top: var(--s-3);
   font-family: var(--f-mono);
   font-size: var(--t-label);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--s-meta);
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: var(--s-3);
 }
+.layout-cover__rule::before { content: ''; } /* régua (8.23) no lugar da linha tracejada */
 .layout-cover__sphere {
   position: absolute;
   right: 0;
@@ -258,7 +258,7 @@
 /* Abertura de bloco sem número (v1.14): barra âmbar sobre o título */
 .layout-section__body { gap: var(--s-4); }
 .layout-section__bar { display: block; width: 160px; height: 24px; background: var(--c-accent); }
-.reveal .layout-section h2.title-long { font-size: var(--t-h1); line-height: 1.05; max-width: 1500px; }
+.reveal .layout-section h2.title-long { font-size: var(--t-h1); line-height: 1.0; max-width: 1500px; }
 
 /* Abertura de bloco sem eyebrow (v1.16): o corpo continua preso à base */
 .layout-section__body { margin-top: auto; }
@@ -272,3 +272,19 @@
   padding-left: var(--s-4);
 }
 .layout-code__robot .robot { width: 220px; }
+
+/* Abertura de bloco v1.29: régua no topo, faixa corrente na base e marcadores flutuando */
+.layout-section > .ruler { flex: none; }
+.layout-section__body { margin-bottom: var(--s-4); }
+.layout-section > .marquee {
+  position: absolute;
+  left: calc(0px - var(--slide-pad));
+  right: calc(0px - var(--slide-pad));
+  bottom: calc(var(--frame-inset) - var(--slide-pad));
+}
+.layout-section > .mark { z-index: 0; }
+
+/* Referência de UI: amostras das peças v1.29 */
+.layout-catalog__items .ruler--demo,
+.layout-catalog__items .marquee--demo { width: 1400px; }
+.layout-catalog__items .hatch--demo { width: 1400px; height: 72px; box-sizing: border-box; }

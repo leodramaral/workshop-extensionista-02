@@ -43,28 +43,27 @@
 .reveal .controls { color: var(--c-accent); }
 .reveal .progress { color: var(--c-accent); height: 4px; }
 
-/* Tipografia dos títulos */
+/* Tipografia dos títulos: estilo Greptile (v1.29), Anybody 700, largura normal, caixa de frase */
 .reveal h1, .reveal h2, .reveal h3 {
   color: var(--s-title);
   font-family: var(--f-display);
-  font-weight: 800;
-  font-stretch: 125%;
-  text-transform: uppercase;
+  font-weight: 700;
+  font-stretch: 100%;
+  text-transform: none;
+  letter-spacing: -0.03em;
 }
-.reveal h1 { font-size: var(--t-display); line-height: 1.02; }
-.reveal h2 { font-size: var(--t-h2); line-height: 1.1; }
-.reveal h3 { font-size: var(--t-h3); line-height: 1.1; font-weight: 700; }
-.reveal .title-long { font-weight: 700; font-stretch: 100%; text-transform: none; letter-spacing: -0.02em; }
+.reveal h1 { font-size: var(--t-display); line-height: 1.0; letter-spacing: -0.025em; }
+.reveal h2 { font-size: var(--t-h2); line-height: 1.05; }
+.reveal h3 { font-size: var(--t-h3); line-height: 1.1; }
+.reveal .title-long { font-weight: 700; font-stretch: 100%; text-transform: none; } /* hoje igual ao padrão */
 
 .reveal .lead { font-size: var(--t-lead); line-height: 1.35; }
 
 /* Superfícies (seção 7) */
 .surface-light {
   background-color: var(--c-paper);
-  background-image:
-    linear-gradient(var(--grid-line-light) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-line-light) 1px, transparent 1px);
-  background-size: var(--grid-cell) var(--grid-cell);
+  background-image: var(--grain);
+  --s-grid:    var(--grid-line-light);
   color: var(--c-basalt);
   --s-title:   var(--c-basalt);
   --s-sub:     var(--c-muted);
@@ -74,14 +73,13 @@
   --s-num:     var(--c-basalt);
   --s-dot:     var(--c-blue);
   --s-glow:    var(--c-blue);
+  --s-node:    var(--c-muted-dark);
 }
 
 .surface-dark {
   background-color: var(--c-basalt);
-  background-image:
-    linear-gradient(var(--grid-line-dark) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-line-dark) 1px, transparent 1px);
-  background-size: var(--grid-cell) var(--grid-cell);
+  background-image: var(--grain);
+  --s-grid:    var(--grid-line-dark);
   color: var(--c-sand);
   --s-title:   var(--c-tint);
   --s-sub:     var(--c-eggshell);
@@ -91,14 +89,13 @@
   --s-num:     var(--c-accent);
   --s-dot:     var(--c-tint);
   --s-glow:    var(--c-accent);
+  --s-node:    var(--c-muted);
 }
 
 .surface-accent {
   background-color: var(--c-accent);
-  background-image:
-    linear-gradient(var(--grid-line-accent) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-line-accent) 1px, transparent 1px);
-  background-size: var(--grid-cell) var(--grid-cell);
+  background-image: var(--grain);
+  --s-grid:    var(--grid-line-accent);
   color: var(--c-ink);
   --s-title:   var(--c-ink);
   --s-sub:     var(--c-basalt);
@@ -108,4 +105,41 @@
   --s-num:     var(--c-ink);
   --s-dot:     var(--c-ink);
   --s-glow:    var(--c-ink);
+  --s-node:    var(--c-basalt);
 }
+
+/* Trilhos, nós e calha (seção 7, v1.29): estrutura em volta do slide, no estilo da Greptile.
+   ::before = quadriculado fino só na calha (fora dos trilhos); ::after = trilhos tracejados e nós. */
+.reveal .slides > section[class*="surface-"]::before,
+.reveal .slides > section[class*="surface-"]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.reveal .slides > section[class*="surface-"]::before {
+  background-image:
+    linear-gradient(var(--s-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--s-grid) 1px, transparent 1px);
+  background-size: var(--grid-fine) var(--grid-fine);
+  -webkit-mask-image: linear-gradient(90deg, #000 var(--frame-inset), transparent var(--frame-inset), transparent calc(100% - var(--frame-inset)), #000 calc(100% - var(--frame-inset)));
+          mask-image: linear-gradient(90deg, #000 var(--frame-inset), transparent var(--frame-inset), transparent calc(100% - var(--frame-inset)), #000 calc(100% - var(--frame-inset)));
+}
+.reveal .slides > section[class*="surface-"]::after {
+  --tr-v: repeating-linear-gradient(180deg, var(--s-rule) 0 6px, transparent 6px 12px);
+  --tr-h: repeating-linear-gradient(90deg, var(--s-rule) 0 6px, transparent 6px 12px);
+  --no: linear-gradient(var(--s-node), var(--s-node));
+  background:
+    var(--no) calc(var(--frame-inset) - 5px) calc(var(--frame-inset) - 5px) / 10px 10px no-repeat,
+    var(--no) calc(100% - var(--frame-inset) + 5px) calc(var(--frame-inset) - 5px) / 10px 10px no-repeat,
+    var(--no) calc(var(--frame-inset) - 5px) calc(100% - var(--frame-inset) + 5px) / 10px 10px no-repeat,
+    var(--no) calc(100% - var(--frame-inset) + 5px) calc(100% - var(--frame-inset) + 5px) / 10px 10px no-repeat,
+    var(--tr-v) var(--frame-inset) 0 / 1px 100% no-repeat,
+    var(--tr-v) calc(100% - var(--frame-inset)) 0 / 1px 100% no-repeat,
+    var(--tr-h) 0 var(--frame-inset) / 100% 1px no-repeat,
+    var(--tr-h) 0 calc(100% - var(--frame-inset)) / 100% 1px no-repeat;
+}
+/* Slide com moldura própria (8.6) ou certificado em tela cheia: sem trilhos */
+.reveal .slides > section:has(.frame)::after,
+.reveal .slides > section:has(.layout-certfull)::after,
+.reveal .slides > section:has(.layout-certfull)::before { content: none; }

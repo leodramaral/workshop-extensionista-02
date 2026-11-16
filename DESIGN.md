@@ -1,7 +1,7 @@
 # DESIGN.md: fundação do site de apresentação
 
 > Workshop de Desenvolvimento com IA. Slides servidos como site no GitHub Pages.
-> Versão 1.28 · 2026-11-16 · Leandro Amaral
+> Versão 1.29 · 2026-11-16 · Leandro Amaral
 
 Este arquivo é a **fonte da verdade** do projeto. Ele vale para quem escreve código à mão e para agentes de IA (OpenCode, Claude, Copilot). Faça o `AGENTS.md` do repositório apontar para cá, com a linha: *"Antes de criar ou alterar qualquer slide, leia o DESIGN.md e siga-o à risca."*
 
@@ -67,6 +67,8 @@ URLs base (cdnjs, reveal.js 6.0.1):
 │       ├── esfera.js     # esfera pontilhada (canvas): referência de UI e certificado
 │       ├── codigo.js     # prompt que vira cascata de código (canvas): capa do Dia 1
 │       ├── planta.js     # peças traçadas e construídas em sequência (canvas): capa do Dia 2
+│       ├── malha.js      # duas esferas em wireframe (canvas): janela de contexto
+│       ├── rede.js       # malha azul que respira (canvas): figura do MCP
 │       └── flutuantes.js # quadrados flutuantes
 ├── assets/
 │   ├── img/              # imagens e capturas (PNG/WebP/SVG)
@@ -120,7 +122,7 @@ O canvas é sempre **1920×1080**, e o reveal.js escala para a tela. Todas as me
 
 ### 5.1 Cores
 
-A paleta segue o site da Mux: carvão e cinza-esverdeado de base, com um acento principal âmbar e cinco cores de apoio (laranja, rosa, azul, verde e violeta). O quadriculado também vem da Mux.
+Os matizes vêm do site da Mux: carvão e cinza-esverdeado de base, com um acento principal âmbar e cinco cores de apoio (laranja, rosa, azul, verde e violeta). A **intensidade** vem da Greptile: os acentos são um pouco menos vívidos, quase pastéis, e cada um tem um **tom claro** para o par "cor cheia + tom claro" das figuras (8.21).
 
 ```css
 :root {
@@ -136,14 +138,21 @@ A paleta segue o site da Mux: carvão e cinza-esverdeado de base, com um acento 
   --c-muted:      #4A525A;  /* texto secundário sobre claro */
   --c-muted-dark: #A3ACB6;  /* texto terciário sobre escuro */
 
-  /* Acentos */
-  --c-accent:     #FFB200;  /* acento principal (âmbar) */
-  --c-tint:       #FFF1CC;  /* títulos sobre escuro */
-  --c-orange:     #FF6100;  /* alerta / erro / "quebrou" */
-  --c-pink:       #FA50B5;  /* marcador rosa; "zona de perda" */
-  --c-blue:       #0091FF;  /* marcador azul; links e informação */
-  --c-green:      #00BE43;  /* marcador verde; "funcionou" */
-  --c-violet:     #A77BFF;  /* sexta cor de apoio; usada para dar cor própria ao 6º robô (Modelo) */
+  /* Acentos (intensidade da Greptile) */
+  --c-accent:     #FFC247;  /* acento principal (âmbar) */
+  --c-tint:       #FFF1CC;  /* títulos sobre escuro; tom claro do âmbar */
+  --c-orange:     #FF8650;  /* alerta / erro / "quebrou" */
+  --c-pink:       #FF9FDC;  /* marcador rosa; "zona de perda" */
+  --c-blue:       #5C8DFF;  /* marcador azul; links, informação e malhas */
+  --c-green:      #2FDB8F;  /* marcador verde; "funcionou" */
+  --c-violet:     #B497FF;  /* sexta cor de apoio; usada para dar cor própria ao 6º robô (Modelo) */
+
+  /* Tons claros (par "cor cheia + tom claro" das figuras) */
+  --c-orange-claro: #FFDCC8;
+  --c-pink-claro:   #FFD9F2;
+  --c-blue-claro:   #D3DFFF;
+  --c-green-claro:  #C5FFD6;  /* menta da Greptile */
+  --c-violet-claro: #E5DBFF;
 
   /* Linhas utilitárias */
   --grid-line-light:  rgba(36, 38, 40, 0.07);
@@ -161,15 +170,18 @@ A paleta segue o site da Mux: carvão e cinza-esverdeado de base, com um acento 
 | `--c-basalt` | `--c-white` | 15.2:1 | texto em cartão claro |
 | `--c-muted` | `--c-paper` | 6.2:1 | legendas, fontes, rodapé |
 | `--c-tint` | `--c-basalt` | 13.5:1 | títulos em slide escuro |
+| `--c-basalt` | `--c-*-claro` | 11.4 a 13.5:1 | texto sobre tom claro (figuras, eyebrow marcado) |
 | `--c-sand` | `--c-basalt` | 14.0:1 | corpo em slide escuro |
 | `--c-eggshell` | `--c-basalt` | 9.3:1 | texto secundário escuro |
 | `--c-muted-dark` | `--c-basalt` | 6.6:1 | texto terciário escuro |
-| `--c-accent` | `--c-basalt` | 8.4:1 | rótulos e destaques no escuro |
-| `--c-ink` | `--c-accent` | 10.0:1 | texto em slide de acento e pílulas |
-| `--c-ink` | `--c-orange` / `--c-pink` / `--c-blue` / `--c-green` / `--c-violet` | 6.0 / 5.9 / 5.6 / 7.3 / 6.0:1 | texto em chips e marcadores coloridos |
-| `--c-orange`, `--c-green`, `--c-pink`, `--c-blue`, `--c-violet` | `--c-basalt` | 5.0 / 6.1 / 5.0 / 4.7 / 5.0:1 | texto de alerta ou rótulo colorido no escuro (a partir de 24px) |
+| `--c-accent` | `--c-basalt` | 9.4:1 | rótulos e destaques no escuro |
+| `--c-ink` | `--c-accent` | 11.3:1 | texto em slide de acento e pílulas |
+| `--c-ink` | `--c-orange` / `--c-pink` / `--c-blue` / `--c-green` / `--c-violet` | 7.6 / 9.7 / 5.8 / 10.1 / 7.6:1 | texto em chips e marcadores coloridos |
+| `--c-orange`, `--c-green`, `--c-pink`, `--c-blue`, `--c-violet` | `--c-basalt` | 6.3 / 8.4 / 8.1 / 4.9 / 6.4:1 | texto de alerta ou rótulo colorido no escuro (a partir de 24px) |
 
-**Proibido:** texto na cor de acento (ou de qualquer cor de apoio) sobre fundo claro (âmbar sobre paper: 1.4:1). No claro, essas cores só aparecem como **preenchimento** (pílula, chip, marcador, cartão destaque) com texto `--c-ink` por cima.
+**Proibido:** texto na cor de acento (ou de qualquer cor de apoio) sobre fundo claro (âmbar sobre paper: 1.25:1). No claro, essas cores só aparecem como **preenchimento** (pílula, chip, marcador, cartão destaque) com texto `--c-ink` por cima.
+
+**Intensidade.** Nada de cor de apoio saturada "pura" (como o `#0091FF` ou o `#00BE43` das versões antigas): a cor cheia é a do token, e fundos de linha de diff, faixas e áreas grandes usam a cor do token misturada (`color-mix`) ou o tom claro. Cor nova entra já nessa intensidade.
 
 **Uso das cores de apoio:** laranja = problema ("quebrou"), verde = ok ("funcionou"), rosa e azul = categorias e marcadores. Cor nunca é o único sinal (seção 13): sempre há um rótulo de texto junto.
 
@@ -177,10 +189,9 @@ A paleta segue o site da Mux: carvão e cinza-esverdeado de base, com um acento 
 
 | Papel | Família | Peso | Largura | Caixa | Tracking |
 |---|---|---|---|---|---|
-| Display (capa, frase de efeito) | Anybody | 800 | `font-stretch: 125%` | MAIÚSCULAS | 0 |
-| Título de slide (h2) | Anybody | 800 | 125% | MAIÚSCULAS | 0 |
-| Título de cartão (h3) | Anybody | 700–800 | 125% | MAIÚSCULAS | 0 |
-| Título longo (mais de 30 caracteres) | Anybody | 700 | 100% | Frase | −0.02em |
+| Display (capa, frase de efeito) | Anybody | 700 | 100% | Frase | −0.025em |
+| Título de slide (h2) | Anybody | 700 | 100% | Frase | −0.03em |
+| Título de cartão (h3) | Anybody | 700 | 100% | Frase | −0.03em |
 | Corpo | DM Sans | 400; ênfase 600 | — | Frase | 0 |
 | Citação grande | DM Sans | 600 | — | Frase | −0.04em |
 | Rótulo, chip, código, rodapé | Space Mono | 400 | — | MAIÚSCULAS | 0.08em |
@@ -205,7 +216,8 @@ A paleta segue o site da Mux: carvão e cinza-esverdeado de base, com um acento 
 Regras:
 
 - **No máximo 3 tamanhos por slide**, sem contar rótulos. Para dar ênfase, use peso, cor ou itálico, nunca um tamanho novo.
-- **Estimativa de largura** do título largo em maiúsculas: cerca de 0,85 × tamanho da fonte por caractere. Uma linha de 1664px comporta uns 30 caracteres a 64px e uns 16 a 120px. Se não couber, quebre a linha com `<br>` num ponto natural ou use o título longo.
+- **Títulos no estilo da Greptile:** Anybody 700 em largura normal, caixa de frase (só a primeira letra e nomes próprios em maiúscula) e tracking negativo. Escreva o título no HTML já em caixa de frase; o CSS não muda a caixa. A classe `title-long` continua aceita, mas hoje é igual ao título padrão.
+- **Estimativa de largura:** cerca de 0,55 × tamanho da fonte por caractere. Uma linha de 1664px comporta uns 48 caracteres a 64px e uns 25 a 120px. Se não couber, quebre a linha com `<br>` num ponto natural.
 - Rótulos de seção ("eyebrow") vêm **entre colchetes**: `[ VISÃO GERAL ]`.
 
 ### 5.3 Espaço, grade e forma
@@ -221,10 +233,11 @@ Regras:
 
   --radius-0: 0;            /* padrão: cantos retos (Greptile) */
   --radius-pill: 999px;     /* pílulas (Mux) */
-  --hatch: repeating-linear-gradient(45deg, var(--c-line) 0 2px, transparent 2px 9px);
+  --hatch: repeating-linear-gradient(-55deg, var(--c-line) 0 1px, transparent 1px 4px);
 }
 ```
 
+- **Hachura da Greptile:** linhas de 1px a −55°, com 3px de vão. É fina e densa, quase uma textura.
 - **Cantos retos são a regra.** O arredondamento fica só nas pílulas e nos pontos dos conectores.
 - **Sem sombras.** A profundidade vem de hachura, borda de 1px e contraste de superfície.
 
@@ -301,9 +314,15 @@ O `reveal.css` cuida do mecanismo (posição, escala, transições, fragments). 
 
 ## 7. Superfícies (fundos de slide)
 
-Cada slide tem **exatamente uma** classe de superfície no `section`. O quadriculado faz parte da superfície.
+Cada slide tem **exatamente uma** classe de superfície no `section`. A textura e os trilhos fazem parte da superfície e vêm de graça: nenhum slide escreve isso no HTML.
 
-| Classe | Fundo | Texto | Quadriculado | Quando usar |
+**Fundo no estilo da Greptile.** O miolo do slide é liso, com **granulado** fino (ruído `feTurbulence` em SVG, ~5% de opacidade). O quadriculado de 48px saiu. A estrutura aparece em volta:
+
+- **Trilhos:** duas linhas verticais tracejadas de 1px, a `--frame-inset` (64px) das bordas, na cor `--s-rule`, com um **nó** quadrado de 10px no alto e na base de cada trilho (`section::before` e `section::after`).
+- **Calha:** fora dos trilhos (os 64px de cada lado), um quadriculado fino de 8px em `--grid-line-*`. É o único quadriculado do slide.
+- Slide com `.frame` (moldura com losangos, 8.6) já tem a sua moldura e esconde os trilhos.
+
+| Classe | Fundo | Texto | Linhas | Quando usar |
 |---|---|---|---|---|
 | `surface-light` | `--c-paper` | `--c-basalt` | `--grid-line-light` | **padrão de todo o deck**: capa, conteúdo, tabelas, cartões |
 | `surface-dark` | `--c-basalt` | `--c-sand`; títulos `--c-tint` | `--grid-line-dark` | só abertura de bloco, para marcar o ritmo (veja a regra da projeção abaixo); **no máximo 1 a cada ~4 slides** |
@@ -312,11 +331,9 @@ Cada slide tem **exatamente uma** classe de superfície no `section`. O quadricu
 ```css
 .surface-light {
   background-color: var(--c-paper);
-  background-image:
-    linear-gradient(var(--grid-line-light) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-line-light) 1px, transparent 1px);
-  background-size: var(--grid-cell) var(--grid-cell);
+  background-image: var(--grain);   /* granulado; nada de quadriculado no miolo */
 }
+/* trilhos, nós e calha: .reveal .slides > section[class*="surface-"]::before / ::after */
 /* surface-dark e surface-accent: mesmo padrão, trocando as variáveis */
 
 /* Cada superfície também define variáveis de tema que os layouts consomem,
@@ -343,6 +360,8 @@ Cada componente tem uma classe. Variações usam modificador `--`. Os nomes de c
 
 Space Mono 24px, maiúsculas, tracking 0.08em, cor `--s-eyebrow` da superfície (`--c-basalt` no claro, `--c-accent` no escuro, `--c-ink` no âmbar). Opcionalmente leva cursor piscante: `<span class="cursor" aria-hidden="true"></span>`, um bloco de 14×30px com cor `--c-accent` e animação `blink` de 1s em `steps(1)`.
 
+**Eyebrow marcado** (`.eyebrow--marca`): o rótulo ganha fundo `--c-tint` e texto `--c-basalt`, como o "WAYS GREPTILE PLUGS INTO YOUR WORKFLOW" da Greptile. Sem colchetes. Use para rótulo de seção dentro de uma figura ou de uma faixa, no máximo 1 por slide.
+
 ### 8.2 Chip
 
 ```html
@@ -360,7 +379,7 @@ Space Mono 24px, padding `4px 14px`, cantos retos. Padrão: fundo `--c-basalt` c
 <span class="chip chip--arrow">STEP 03</span> <!-- seta para a direita -->
 ```
 
-Formas combinam com as cores `chip--accent|orange|pink|blue|green|violet` (texto sempre `--c-ink`). **Glifos:** um marcador geométrico de 14px antes do texto, `<i class="glyph glyph--square|diamond|triangle glyph--accent" aria-hidden="true"></i>`. Círculo não entra: a regra de cantos retos só admite arredondar pílulas e nós de conector.
+Formas combinam com as cores `chip--accent|orange|pink|blue|green|violet` (texto sempre `--c-ink`) e com os tons claros `chip--tint|orange-claro|pink-claro|blue-claro|green-claro|violet-claro` (texto `--c-basalt`). **Glifos:** um marcador geométrico de 14px antes do texto, `<i class="glyph glyph--square|diamond|triangle glyph--accent" aria-hidden="true"></i>`. Círculo não entra: a regra de cantos retos só admite arredondar pílulas e nós de conector.
 
 ### 8.3 Pílula (Mux)
 
@@ -400,7 +419,7 @@ Para links clicáveis (repositório, QR code, "ver exemplo"):
 </div>
 ```
 
-- `.hatch`: `padding: 12px; border: 1px solid var(--c-line); background: var(--hatch)`.
+- `.hatch`: `padding: 12px; border: 1px solid var(--c-line); background: var(--hatch)` (hachura fina a −55°, 5.3). No escuro, a linha da hachura é `--c-tint` a 30%.
 - `.card`: fundo `--c-white`, padding 44px, `display:flex; flex-direction:column; gap: var(--s-3)`.
 - `.card--dark`: fundo `--c-basalt`, texto `--c-sand`, h3 `--c-tint`.
 - `.card--accent`: fundo `--c-accent`, texto `--c-ink`. É o destaque do grupo, **no máximo 1 por slide**.
@@ -422,6 +441,7 @@ Decoração de capa e de frase de efeito (Greptile):
 
 - `.frame`: `position:absolute; inset: var(--frame-inset); border: 1px dashed` (cor `--s-rule` da superfície).
 - `.frame__diamond`: quadrado de 16px rotacionado 45°, centrado no canto, com a cor `--s-eyebrow` da superfície.
+- A moldura ocupa o lugar dos trilhos da superfície (seção 7): o slide que a tem esconde os trilhos para não dobrar a linha.
 
 ### 8.7 Conector com pontos (Mux)
 
@@ -448,7 +468,7 @@ Liga cartões ou etapas de um fluxo. É um SVG em camada absoluta sobre o layout
 
 ### 8.9 Cartão de código / diff (Greptile)
 
-Para mostrar prompts, specs e trechos de código: cabeçalho com o caminho do arquivo (Space Mono, `--c-muted-dark`) e linhas numeradas com marcadores `01-` e `01+`. Linhas removidas têm fundo `--c-pink` a 25%; adicionadas, `--c-green` a 25%. Fonte Space Mono 24px, no máximo 12 linhas por cartão. Linhas sem modificador (`.diff__line` puro) mostram um arquivo de exemplo sem diff; títulos de Markdown e chaves de frontmatter vão em `.code__h` (`--c-accent` sobre basalt). Comando dentro do texto vai em `<code>` (Space Mono, 0,9em). As linhas adicionadas podem aparecer uma a uma (animação `digita`, seção 10.3) e o bloco pode ganhar a borda `marching-ants` enquanto "processa".
+Para mostrar prompts, specs e trechos de código: cabeçalho com o caminho do arquivo (Space Mono, `--c-muted-dark`) e linhas numeradas com marcadores `01-` e `01+`. Linhas removidas têm fundo `--c-pink` a 25%; adicionadas, `--c-green` a 25% (sempre `color-mix` com o token, nunca `rgba` com a cor escrita à mão). Fonte Space Mono 24px, no máximo 12 linhas por cartão. Linhas sem modificador (`.diff__line` puro) mostram um arquivo de exemplo sem diff; títulos de Markdown e chaves de frontmatter vão em `.code__h` (`--c-accent` sobre basalt). Comando dentro do texto vai em `<code>` (Space Mono, 0,9em). As linhas adicionadas podem aparecer uma a uma (animação `digita`, seção 10.3) e o bloco pode ganhar a borda `marching-ants` enquanto "processa".
 
 ### 8.10 Rodapé
 
@@ -526,11 +546,12 @@ Segue o cartão de diff da Greptile (8.9), em tons apagados: `.hatch` > `.janela
 
 - Cada linha (`.janela__linha`): número (`--c-muted-dark`), sinal `+` (`--c-green`), rótulo em minúsculas (`--c-eggshell`) e uma barra de comprimento `style="--w: 70%"`. O rótulo diz o tipo (prompt, resposta, arquivo, comando); a barra não usa uma cor por tipo.
 - **Só dois tons, como no diff:** sálvia para o que entrou (`color-mix` de 30% `--c-green` com `--c-muted-dark`, fundo da linha verde a 7%) e malva para o que saiu (35% `--c-pink`, fundo rosa a 16%). Nada de cores de apoio puras nas barras.
+- **Figura viva (8.22):** depois da entrada, um brilho (`shimmer`) varre as barras das linhas que ficaram, uma de cada vez, e um cursor de bloco (`.janela__cursor`) pisca no cabeçalho, como se a conversa continuasse. O estado (RESUMIDO) não muda.
 - As linhas entram com `.enter` e as barras crescem com `barra`. Um fragment com o selo `RESUMIDO` faz as linhas antigas (`.janela__linha--velho`) virarem "linha removida": o sinal passa a `-` e a barra e o fundo passam a malva.
 
 ### 8.18 Linha do tempo (data de corte)
 
-Figura do slide "Data de corte": `.hatch` > `.panel` (8.8) > `.tempo`, com cabeçalho mono (`linha do tempo`, `--c-muted-dark`) e um trilho horizontal dividido em dois trechos: **"o modelo viu"** (fundo `--c-tint` a 15%, texto `--c-eggshell`, ~60% da largura) e **"não existe para ele"** (borda tracejada `--frame-dark`, texto `--c-muted-dark`). Dois marcadores **quadrados** de 24px sobre o trilho (`--c-accent` no fim do treino, `--c-tint` em "hoje"), rótulos mono em HTML abaixo (`FIM DO TREINO`, `HOJE`) e o selo `DESATUALIZADO` (8.14) como fragment `stamp`, no fluxo abaixo do eixo, alinhado à direita. Sem datas nem versões reais.
+Figura do slide "Data de corte": `.hatch` > `.panel` (8.8) > `.tempo`, com cabeçalho mono (`linha do tempo`, `--c-muted-dark`) e um trilho horizontal dividido em dois trechos: **"o modelo viu"** (fundo `--c-tint` a 15%, texto `--c-eggshell`, ~60% da largura) e **"não existe para ele"** (borda tracejada `--frame-dark`, texto `--c-muted-dark`). Dois marcadores **quadrados** de 24px sobre o trilho (`--c-accent` no fim do treino, `--c-tint` em "hoje"), rótulos mono em HTML abaixo (`FIM DO TREINO`, `HOJE`) e o selo `DESATUALIZADO` (8.14) como fragment `stamp`, no fluxo abaixo do eixo, alinhado à direita. Sem datas nem versões reais. **Figura viva (8.22):** o marcador "hoje" pulsa (`ping`) e a borda tracejada do trecho "não existe para ele" corre (`dash-run`), como algo que continua andando sem o modelo saber.
 
 ### 8.19 Harness em volta do modelo (figura)
 
@@ -539,6 +560,7 @@ Figura do slide "O que é harness": `.hatch` > `.harness` (`role="img"`, `aria-l
 - No centro (`.harness__core`), um quadrado `--c-violet` de 180px (`.harness__model`) com o ícone de prompt `>_` (`.prompt-icon`, o mesmo do slide de MCP, 8.20) e, embaixo, o chip `chip--violet` `MODELO`. Sem painel escuro nem robô.
 - Em volta, duas fileiras (`.harness__row`, `space-between`) com as 4 partes em `chip--hex` colorido e glifo: `FERRAMENTAS` (azul), `LOOP` (verde), `CONTEXTO` (rosa), `PERMISSÕES` (âmbar). Os chips entram com `.enter` escalonado.
 - Sem setas nem texto em SVG; o loop é explicado nas notas.
+- **Figura viva (8.22):** a borda tracejada do harness corre (`dash-run`), um quadradinho âmbar (`.harness__runner`) dá a volta na borda (`offset-path`) e as 4 partes acendem uma de cada vez, em ciclo (`.harness__part`, `acende`, escalonado por `--k`): é o loop do harness.
 
 ### 8.20 MCP: um encaixe, várias ferramentas (figura)
 
@@ -550,6 +572,7 @@ Figura do slide "MCP" (`layout-text-figure` com `.layout-text-figure__figure--wi
 - **Ferramentas:** 6 etiquetas brancas (`.mcp-fig__tool`), 3 em cima e 3 embaixo, com a do meio deslocada. Cada etiqueta tem glifo colorido e texto mono de 24px em `--c-ink`, sem borda nem sombra, e é centralizada pelo `left` com `translate: -50% 0`, que não briga com o `transform` do `.enter`.
 - **Ligação:** cada etiqueta desce (ou sobe) até a malha ou o quadrado por uma linha azul de 2px (`.connector.connector--blue`), com um triângulo azul (`.node.mcp-fig__tip`) colado na etiqueta. Nas figuras em estilo Greptile, o conector azul com ponta triangular substitui o conector basalt com nó redondo (8.7).
 - **Entrada:** quadrados e etiquetas entram com `.enter` escalonado e as linhas se desenham em sequência.
+- **Figura viva (8.22):** a malha é um canvas (`js/efeitos/rede.js`, `data-efeito="rede"`) que respira: o estreitamento do centro abre e fecha devagar e as linhas deslizam. Depois de desenhadas, as linhas azuis levam um **pulso** (um traço curto que corre da etiqueta até o centro, `pulso`, escalonado por `--i`) e os 3 marcadores rosa derivam (`float-square-*`). No PDF e com movimento reduzido, o canvas desenha um quadro só.
 
 ### 8.21 Linguagem das figuras (estilo vetorial da Greptile)
 
@@ -561,7 +584,31 @@ Figura nova que explica um conceito (como algo se liga a algo, o que fica em vol
 - **Ligações:** linhas `--c-blue` de 2px com um triângulo pequeno colado na etiqueta (`.connector--blue` + ponta em `polygon`). O conector basalt com nó redondo (8.7) continua valendo para fluxos e cartões; o azul com triângulo é o das figuras neste estilo.
 - **Detalhe:** até 3 marcadores `.mark--pink` nos cantos dos quadrados. Tudo dentro de uma moldura `.hatch`, em fundo `--c-paper` ou branco.
 - **Sem mascote dentro da figura** (8.12). Para representar um padrão, produto ou ferramenta real, use a **marca oficial**: copie os caminhos do SVG publicado pelo próprio projeto para o HTML, pinte com um token (traço ou preenchimento) sem mudar o desenho e deixe um comentário com a origem do arquivo. Nunca redesenhe uma marca de memória.
+- **Figura viva:** toda figura nova neste estilo tem um movimento contínuo e calmo que reforça a ideia (8.22).
 - **Ícones reutilizáveis** viram peça do CSS (por exemplo, `.prompt-icon`, o `>_` de terminal) para manter o mesmo desenho em todos os slides. Não use o mesmo ícone para duas ideias diferentes no mesmo bloco sem diferenciar pela cor e pela legenda.
+
+### 8.22 Figuras vivas
+
+Como nos cards da Greptile, a figura principal do slide **não fica parada** depois de entrar: ela tem um movimento contínuo, lento e em loop que conta a ideia da figura. Exemplos no Dia 1: a malha que respira e os pulsos do MCP (8.20), o loop dando a volta no harness (8.19), o brilho correndo na janela de contexto (8.17) e o "hoje" que pulsa na linha do tempo (8.18).
+
+- **O movimento reforça a ideia,** nunca muda o dado: barras de probabilidade (8.16) não mexem no comprimento, porque mostram porcentagens.
+- **Calmo:** ciclos de 2 a 8s, nada piscando rápido além do cursor. No máximo 2 movimentos simultâneos por figura, além da decoração.
+- **Só no slide ativo** (seção 10.4): CSS sob `section.present` e canvas ligado por `data-efeito`.
+- **Sem movimento** com `prefers-reduced-motion` e no `?print-pdf`: a figura mostra o estado final.
+
+### 8.23 Régua
+
+`<div class="ruler" aria-hidden="true"></div>`: faixa de 24px com marcas verticais de 1px a cada 8px (12px de altura) e uma marca maior a cada 64px (24px), na cor `--s-rule`, como as réguas entre seções da Greptile. Ocupa a largura do layout. Usada na base da capa (no lugar da linha tracejada) e no topo da abertura de bloco.
+
+### 8.24 Faixa corrente
+
+```html
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track"><span>TOKENS · MODELOS · JANELA DE CONTEXTO · </span>…</div>
+</div>
+```
+
+Faixa de texto mono que corre devagar, como o "TEST · RUN · EXECUTE" da Greptile: Space Mono 24px, maiúsculas, tracking 0.3em, cor `--c-blue` (no escuro, `--c-eggshell` a 60%), entre duas linhas tracejadas `--s-rule`. O texto vem **duplicado** dentro do trilho, e a animação `marquee` leva o trilho de 0 a −50% em 40s linear, para emendar sem salto. Sempre `aria-hidden`: é decoração, o conteúdo de verdade está no título. Usada na base da abertura de bloco, com os temas do bloco.
 
 ## 9. Layouts (`css/layouts.css`)
 
@@ -569,7 +616,7 @@ Cada slide usa **um** layout, num `div` wrapper que ocupa o slide inteiro. A ár
 
 | Layout | Estrutura | Superfície típica |
 |---|---|---|
-| `layout-cover` | eyebrow (topo) · display + subtítulo (meio), sem data nem horário · linha de rodapé tracejada (base) · figura animada à direita (`.layout-cover__fig`, 640×620): **cada dia tem a sua**, código no Dia 1 e planta no Dia 2 | light |
+| `layout-cover` | eyebrow (topo) · display + subtítulo (meio), sem data nem horário · régua (8.23) e rótulo mono (base) · figura animada à direita (`.layout-cover__fig`, 640×620): **cada dia tem a sua**, código no Dia 1 e planta no Dia 2 | light |
 | `layout-title` | eyebrow + h2 no topo, conteúdo livre abaixo (`gap: 64px`) | light |
 | `layout-two-cards` | `layout-title` + 2 cartões lado a lado (`gap: 96px`) ligados por conector com nós | light |
 | `layout-statement` | eyebrow (topo) · frase display em até 2 linhas · linha de apoio (base) · moldura + flutuantes | accent ou dark |
@@ -580,7 +627,7 @@ Cada slide usa **um** layout, num `div` wrapper que ocupa o slide inteiro. A ár
 | `layout-steps` | `layout-title` + grade 3×2 (colunas de 512px, linhas de 276px, gap de 64px) + conectores em serpentina | light |
 | `layout-table` | `layout-title` + tabela (Space Mono nos cabeçalhos, DM Sans 28px nas células, linhas de 1px `--c-line`) | light |
 | `layout-quote` | aspas grandes `--c-accent`, citação DM Sans 600 48px, autor em chip | light |
-| `layout-section` | abertura de bloco do roteiro: eyebrow do dia no topo · barra `--c-accent` (`.layout-section__bar`), título longo em 96px na base. Sem número do bloco, horário nem duração | dark |
+| `layout-section` | abertura de bloco do roteiro: régua no topo · barra `--c-accent` (`.layout-section__bar`) e título em 96px · faixa corrente (8.24) na base, com os temas do bloco · 3 marcadores flutuando (`float`). Sem número do bloco, horário nem duração | dark |
 | `layout-demo` | aviso de demo ao vivo (eyebrow `[ DEMO AO VIVO ]`) ou de prática dos alunos (eyebrow `[ HANDS-ON ]`), com cursor piscante e título no topo · frase e lista "o que observar" (até 3 itens com glifo de 20px, no mesmo tamanho da frase, `--t-lead`) no meio · linha tracejada com botão para a ferramenta e, se precisar, pílula de configuração na base. Frase e lista herdam a cor do texto da superfície | light (regra da projeção, seção 7) |
 
 Regras:
@@ -631,12 +678,13 @@ Os fragments do reveal.js recebem a classe `.visible` ao aparecer. Os nossos:
 
 **Padrão: todo o conteúdo do slide aparece sozinho.** Nada de fragment (clique) por padrão: tabelas, cartões, listas e figuras ficam visíveis ao chegar no slide, entrando com `.enter` escalonado por `--i` (cada item sobe um a um, sem clique). Fragment só quando o autor pedir a exceção, slide a slide (hoje nenhum slide do Dia 1 usa). Figuras com estado "antes e depois" mostram o estado final: sorteio com o token escolhido em verde (`.prob__row--pick`) e janela já resumida (`.janela--resumido`, com o selo `RESUMIDO` fixo).
 
-Também há **entrada automática** ao chegar no slide, sem clique: elementos com `.enter` animam quando o `section` ganha `.present`, com atraso escalonado por `style="--i: 0..n"` × `--stagger`. Use `.enter` para a decoração e o que é sempre visível, e fragment para o que o apresentador revela na hora.
+Também há **entrada automática** ao chegar no slide, sem clique: elementos com `.enter` animam quando o `section` ganha `.present`, com atraso escalonado por `style="--i: 0..n"` × `--stagger`. A entrada é a `hero-fade-up` da Greptile: sobe só **8px** e aparece em **700ms** `ease-out`, discreta. Use `.enter` para a decoração e o que é sempre visível, e fragment para o que o apresentador revela na hora.
 
 ### 10.3 Catálogo de animações
 
 | Nome | O quê | Onde |
 |---|---|---|
+| `enter-up` | entrada do `.enter`: sobe 8px e aparece, 700ms (`hero-fade-up` da Greptile) | todo conteúdo que entra sozinho |
 | `blur-in` | título desfocado → nítido, 900ms | display e títulos de abertura |
 | `blink` | cursor de bloco piscando, 1s em steps | eyebrow da capa e `layout-demo` |
 | `float-square-1..3` | quadrados derivando (translate + rotate), 7 a 13s em loop | `layout-statement` |
@@ -657,6 +705,13 @@ Também há **entrada automática** ao chegar no slide, sem clique: elementos co
 | `barra` | barra crescendo da esquerda (`scaleX` a partir de 0), escalonada por `--i` | barras de probabilidade (8.16) e janela de contexto (8.17) |
 | `esfera` | esfera pontilhada (dithering Bayer 4×4) girando, em canvas, com brilho do acento | referência de UI e certificado |
 | `codigo` | um prompt curto é digitado num cartão, "enviado" com um piscar âmbar, e dispara uma cascata rápida de linhas de código num painel escuro; no fim, as linhas com defeito piscam em laranja | capa do Dia 1 |
+| `marquee` | trilho da faixa corrente de 0 a −50%, 40s linear | faixa corrente (8.24) |
+| `dash-run` | borda tracejada correndo (gradiente tracejado deslizando), loop | harness (8.19), trecho "não existe para ele" (8.18) |
+| `volta` | quadradinho percorrendo a borda (`offset-distance` 0 → 100%), 8s linear | harness (8.19) |
+| `acende` | parte do harness acende (contorno `--c-ink` de 3px e leve escala) e apaga, ciclo de 8s escalonado por `--k` | harness (8.19) |
+| `shimmer` | faixa clara varrendo a barra da esquerda para a direita, escalonada por `--i` | janela de contexto (8.17) |
+| `pulso` | traço curto correndo pela linha azul até o centro (`stroke-dashoffset`), escalonado por `--i` | MCP (8.20) |
+| `rede` | malha azul em canvas que respira (estreitamento do centro abre e fecha) | MCP (8.20) |
 | `planta` | composição abstrata de 6 peças: primeiro as cotas, depois cada peça é traçada em tracejado azul e construída em degraus, uma de cada vez, com um marcador âmbar levando a vez para a próxima | capa do Dia 2 |
 
 Keyframes de referência, adaptados do CSS da Greptile:
@@ -748,6 +803,9 @@ E no JS: se `matchMedia('(prefers-reduced-motion: reduce)').matches`, a esfera d
 - Frase, lista ou instrução em fundo escuro (o escuro é só para abertura de bloco).
 - Robô dentro de quadro, painel ou quadrado de figura.
 - Marca ou logo redesenhado de memória, em vez do SVG oficial.
+- Cor de apoio saturada escrita à mão (`rgba(0, 190, 67, …)`, `#0091FF`): use o token ou `color-mix` com ele.
+- Quadriculado no miolo do slide (ele fica só na calha, fora dos trilhos) e títulos em caixa alta forçada por CSS.
+- Figura viva cujo movimento muda o dado (comprimento de barra, número) ou pisca rápido.
 - Citar no slide um arquivo, link ou comando que não existe ou não foi conferido.
 
 ## 16. Critérios de aceitação
@@ -762,6 +820,7 @@ Um slide ou mudança só está **pronto** quando:
 - [ ] o conteúdo cabe em 1664×824 sem reduzir a fonte;
 - [ ] decorações têm `aria-hidden`, imagens têm `alt` e gráficos têm `aria-label`;
 - [ ] animações em loop param fora do slide ativo e somem com `prefers-reduced-motion`;
+- [ ] a figura principal, se houver, tem movimento contínuo e calmo que reforça a ideia (8.22);
 - [ ] há notas do apresentador com o tempo do slide, e a soma do bloco bate com o roteiro;
 - [ ] não há data, horário nem duração no slide;
 - [ ] frase, lista e instrução estão em fundo claro, e o texto lido de longe está em 36px;
@@ -804,6 +863,7 @@ Um slide ou mudança só está **pronto** quando:
 | 2026-11-16 | v1.25: lista "o que observar" do `layout-demo` sobe de 28px para 36px (`--t-lead`), com glifo de 20px, para ler melhor na projeção (slides 3, 23 e 25); pílula de configuração da demo passa a ser opcional e sai da demo Build vs. Plan |
 | 2026-11-16 | v1.26: no `layout-text-figure`, a figura passa a ser centralizada na vertical como o texto (antes ficava presa no topo; afetava os slides 9, 13, 14, 17, 22 e 24) |
 | 2026-11-16 | v1.27: figura do harness (8.19, slide 16) troca o painel basalt com o robô Modelo por um quadrado violeta com o ícone de prompt `>_`; o ícone vira a peça `.prompt-icon`, usada também na figura do MCP (8.20) |
+| 2026-11-16 | v1.29: carga visual da Greptile. Paleta com os mesmos matizes e a intensidade da Greptile (acentos menos vívidos e tons claros `--c-*-claro`), contraste medido de novo; títulos em Anybody 700, largura normal, caixa de frase e tracking negativo; fundo liso com granulado, trilhos tracejados com nós e calha quadriculada no lugar do quadriculado de 48px; hachura fina a −55°; peças novas: eyebrow marcado (8.1), régua (8.23) e faixa corrente (8.24); entrada `.enter` de 8px em 700ms; figuras vivas (8.22) no MCP, no harness, na janela de contexto e na linha do tempo, com o novo `js/efeitos/rede.js` |
 | 2026-11-16 | v1.28: regras permanentes tiradas da revisão do bloco 1.3: regra da projeção (seção 7); onde o robô entra (8.12); linguagem das figuras no estilo vetorial da Greptile, com marca oficial e ícones reutilizáveis (8.21); colunas alinhadas pelo centro, texto lido de longe em 36px e armadilhas de CSS (9); sem data e horário, só citar o que existe, fatos conferidos na fonte e cada slide com algo novo (11); tempo por slide e soma por bloco nas notas (12); itens novos em "O que evitar" (15) e nos critérios de aceitação, com citação de slide pelo número da URL (16); referências de Greptile, MCP e OpenCode (17) |
 
 ## 17. Referências

@@ -12,14 +12,21 @@
   --c-muted:      #4A525A;
   --c-muted-dark: #A3ACB6;
 
-  /* Acentos */
-  --c-accent:     #FFB200;
+  /* Acentos: matizes da Mux, intensidade da Greptile (v1.29) */
+  --c-accent:     #FFC247;
   --c-tint:       #FFF1CC;
-  --c-orange:     #FF6100;
-  --c-pink:       #FA50B5;
-  --c-blue:       #0091FF;
-  --c-green:      #00BE43;
-  --c-violet:     #A77BFF;
+  --c-orange:     #FF8650;
+  --c-pink:       #FF9FDC;
+  --c-blue:       #5C8DFF;
+  --c-green:      #2FDB8F;
+  --c-violet:     #B497FF;
+
+  /* Tons claros: par "cor cheia + tom claro" das figuras */
+  --c-orange-claro: #FFDCC8;
+  --c-pink-claro:   #FFD9F2;
+  --c-blue-claro:   #D3DFFF;
+  --c-green-claro:  #C5FFD6;
+  --c-violet-claro: #E5DBFF;
 
   /* Linhas utilitárias */
   --grid-line-light: rgba(36, 38, 40, 0.07);
@@ -51,7 +58,12 @@
 
   --radius-0: 0;
   --radius-pill: 999px;
-  --hatch: repeating-linear-gradient(45deg, var(--c-line) 0 2px, transparent 2px 9px);
+  --hatch: repeating-linear-gradient(-55deg, var(--c-line) 0 1px, transparent 1px 4px);
+  --hatch-dark: repeating-linear-gradient(-55deg, rgba(255, 241, 204, 0.3) 0 1px, transparent 1px 4px);
+
+  /* Granulado do fundo (ruído fractal em SVG, estilo Greptile) */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --grid-fine: 8px;
 
   /* Movimento */
   --ease-out:  cubic-bezier(0.2, 0.8, 0.2, 1);

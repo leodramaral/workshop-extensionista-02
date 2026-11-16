@@ -13,6 +13,14 @@
   gap: var(--s-2);
 }
 
+/* Eyebrow marcado (v1.29): rótulo com fundo de tom claro, como o "WAYS GREPTILE PLUGS…" */
+.reveal .eyebrow--marca {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 2px 12px;
+  background: var(--c-tint);
+  color: var(--c-basalt);
+}
 
 .cursor {
   display: inline-block;
@@ -79,6 +87,7 @@
   border: 1px solid var(--c-line);
   background: var(--hatch);
 }
+.surface-dark .hatch { border-color: var(--frame-dark); background: var(--hatch-dark); }
 .card {
   background: var(--c-white);
   color: var(--c-basalt);
@@ -261,8 +270,8 @@
   color: var(--c-muted-dark);
 }
 .diff__line span { white-space: nowrap; }
-.diff__line--del { background: rgba(250, 80, 181, 0.25); }
-.diff__line--add { background: rgba(0, 190, 67, 0.25); }
+.diff__line--del { background: color-mix(in srgb, var(--c-pink) 25%, transparent); }
+.diff__line--add { background: color-mix(in srgb, var(--c-green) 25%, transparent); }
 
 /* 8.14 Selo */
 .stamp {
@@ -460,7 +469,7 @@
 }
 .prob__tok { color: var(--c-sand); }
 .prob__pct { color: var(--c-tint); text-align: right; }
-.prob__track { display: block; height: 32px; background: rgba(255, 241, 204, 0.15); }
+.prob__track { display: block; height: 32px; background: color-mix(in srgb, var(--c-tint) 15%, transparent); }
 .prob__bar {
   display: block;
   height: 100%;
@@ -493,7 +502,7 @@
   gap: 20px;
   align-items: center;
   padding: 7px 28px;
-  background: rgba(0, 190, 67, 0.07);
+  background: color-mix(in srgb, var(--c-green) 7%, transparent);
   transition: background var(--d-base) var(--ease-out);
 }
 .janela__linha b { font-weight: 400; color: var(--c-muted-dark); }
@@ -519,7 +528,7 @@
   text-align: center;
 }
 /* resumido: as linhas antigas viram "linha removida" do diff */
-.janela--resumido .janela__linha--velho { background: rgba(250, 80, 181, 0.16); }
+.janela--resumido .janela__linha--velho { background: color-mix(in srgb, var(--c-pink) 16%, transparent); }
 .janela--resumido .janela__linha--velho .janela__sinal { color: var(--c-pink); }
 .janela--resumido .janela__linha--velho .janela__sinal::before { content: '-'; }
 .janela--resumido .janela__linha--velho .janela__barra { background: color-mix(in srgb, var(--c-pink) 35%, var(--c-muted-dark)); }
@@ -631,3 +640,77 @@
 }
 .connector--blue { stroke: var(--c-blue); }
 .node.mcp-fig__tip { fill: var(--c-blue); }
+
+/* 8.23 Régua: marcas a cada 8px e marca maior a cada 64px, sobre uma linha de base */
+.ruler,
+.layout-cover__rule::before {
+  display: block;
+  height: 24px;
+  background:
+    linear-gradient(90deg, var(--s-rule) 1px, transparent 1px) 0 100% / 64px 24px repeat-x,
+    linear-gradient(90deg, var(--s-rule) 1px, transparent 1px) 0 100% / 8px 12px repeat-x,
+    linear-gradient(var(--s-rule), var(--s-rule)) 0 100% / 100% 1px no-repeat;
+}
+
+/* 8.24 Faixa corrente: texto mono duplicado que corre devagar */
+.marquee {
+  overflow: hidden;
+  padding: 10px 0;
+  border-top: 1px dashed var(--s-rule);
+  border-bottom: 1px dashed var(--s-rule);
+  font-family: var(--f-mono);
+  font-size: var(--t-label);
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--c-blue);
+  white-space: nowrap;
+}
+.surface-dark .marquee { color: color-mix(in srgb, var(--c-eggshell) 60%, transparent); }
+.marquee__track { display: inline-flex; }
+.marquee__track span { white-space: pre; }
+
+/* 8.22 Figuras vivas: borda tracejada que corre (SVG, como o .ants) */
+.ants--run rect { stroke: var(--c-basalt); stroke-width: 2; stroke-dasharray: 8 6; }
+.harness { border: 0; }
+.harness .ants--run rect { x: 1px; y: 1px; width: calc(100% - 2px); height: calc(100% - 2px); }
+.harness__runner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  background: var(--c-accent);
+  border: 2px solid var(--c-ink);
+  box-sizing: border-box;
+  offset-path: inset(0);
+  offset-rotate: 0deg;
+  offset-distance: 0%;
+  z-index: 1;
+}
+/* Linha do tempo: a borda do trecho "não existe para ele" corre; a esquerda fica escondida */
+.tempo__nao { position: relative; border: 0; }
+.tempo__nao .ants--run { overflow: hidden; }
+.tempo__nao .ants--run rect { x: -4px; y: 1px; width: calc(100% + 3px); height: calc(100% - 2px); stroke: var(--frame-dark); }
+/* Janela de contexto: brilho que varre as barras */
+.janela__barra { position: relative; overflow: hidden; }
+.janela__barra::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: 40%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: translateX(-100%);
+}
+/* MCP: pulso que corre pela linha azul até o centro */
+.mcp-fig__pulso { fill: none; stroke: var(--c-ink); stroke-width: 3; stroke-dasharray: 14 1000; stroke-dashoffset: 14; opacity: 0; }
+canvas.mcp-fig__mesh { display: block; color: var(--c-blue); }
+.janela__cursor { width: 12px; height: 24px; vertical-align: -4px; margin-left: 4px; }
+
+/* Chips em tom claro (par "cor cheia + tom claro", v1.29); texto basalt */
+.chip--tint          { background: var(--c-tint);          color: var(--c-basalt); }
+.chip--orange-claro  { background: var(--c-orange-claro);  color: var(--c-basalt); }
+.chip--pink-claro    { background: var(--c-pink-claro);    color: var(--c-basalt); }
+.chip--blue-claro    { background: var(--c-blue-claro);    color: var(--c-basalt); }
+.chip--green-claro   { background: var(--c-green-claro);   color: var(--c-basalt); }
+.chip--violet-claro  { background: var(--c-violet-claro);  color: var(--c-basalt); }
