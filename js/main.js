@@ -42,3 +42,20 @@ Reveal.on('ready', () => {
   });
 });
 Reveal.on('slidechanged', syncEffects);
+
+// Cenas de filme (DESIGN.md 8.29): o vídeo só roda no slide ativo e recomeça ao chegar.
+// Com movimento reduzido ou no PDF fica o pôster.
+const movimentoReduzido = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function syncVideos() {
+  const atual = Reveal.getCurrentSlide();
+  document.querySelectorAll('video.meme__media').forEach((v) => {
+    if (!movimentoReduzido && !Reveal.isPrintView() && atual && atual.contains(v)) {
+      v.currentTime = 0;
+      v.play().catch(() => {});
+    } else {
+      v.pause();
+    }
+  });
+}
+Reveal.on('ready', syncVideos);
+Reveal.on('slidechanged', syncVideos);

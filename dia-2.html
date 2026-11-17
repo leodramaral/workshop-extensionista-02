@@ -41,7 +41,36 @@
           <canvas class="layout-cover__fig layout-cover__fig--planta" data-efeito="planta" aria-hidden="true"></canvas>
         </div>
         <aside class="notes">
-          [5 min] Capa do Dia 2, com a retomada do 2.1 (sem slide próprio). Ontem fizemos com um prompt só; hoje refazemos o percurso especificando antes de gerar. Reativar em 3 minutos o quadro do Dia 1 (já diagnosticado no fim da aula): funcionou, quebrou, a IA decidiu sozinha, tecnologias escolhidas. Virada de chave: para evoluir um software, falta uma "fonte da verdade", algo que diga o que o sistema deve fazer e por quê.
+          [4 min] Capa do Dia 2, com a retomada do 2.1 (sem slide próprio). Ontem fizemos com um prompt só; hoje refazemos o percurso especificando antes de gerar. Reativar em 3 minutos o quadro do Dia 1 (já diagnosticado no fim da aula): funcionou, quebrou, a IA decidiu sozinha, tecnologias escolhidas. Virada de chave: para evoluir um software, falta uma "fonte da verdade", algo que diga o que o sistema deve fazer e por quê.
+        </aside>
+      </section>
+
+      <!-- 2.1 Retomada: meme do plano de ontem (8.31, Gru's Plan com legenda por cima) -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-meme">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ RETOMADA ]</p>
+            <h2>O plano de ontem</h2>
+          </div>
+          <div class="layout-meme__stage">
+            <figure class="meme enter" style="--i: 0">
+              <div class="hatch">
+                <div role="img" aria-label="Meme Gru's Plan em 4 quadros, o Gru apresentando o plano no quadro: pular o Plan; mandar direto pro Build; a IA construiu outra coisa; e, no último quadro, o Gru olha de novo e repete: a IA construiu outra coisa">
+                  <div class="meme-pic" style="--meme-h: 560px">
+                    <img src="assets/img/memes/grus-plan.jpg" alt="">
+                    <span class="meme-cap" style="--x: 38%; --y: 29%; --w: 19%">Pular o Plan</span>
+                    <span class="meme-cap" style="--x: 88%; --y: 30%; --w: 19%">Mandar direto pro Build</span>
+                    <span class="meme-cap" style="--x: 38%; --y: 80%; --w: 19%">A IA construiu outra coisa</span>
+                    <span class="meme-cap" style="--x: 88.5%; --y: 80%; --w: 19%">A IA construiu outra coisa</span>
+                  </div>
+                </div>
+              </div>
+              <figcaption class="meme__credit">MEME · GRU'S PLAN, ILLUMINATION, 2010</figcaption>
+            </figure>
+          </div>
+        </div>
+        <aside class="notes">
+          [1 min] Ler os quadros com a turma. Ontem a pergunta ficou no ar: planejar antes vale a pena? Quem mandou direto pro Build e recebeu outra coisa? É daí que o dia de hoje parte.
         </aside>
       </section>
 
@@ -403,6 +432,226 @@
         </div>
         <aside class="notes">
           [2 min] Ponte para o resto do dia. O problema não é ter um arquivo de instruções; é querer que um arquivo só faça tudo. Precisamos de vários artefatos pequenos, cada um usado no momento certo: um para o projeto inteiro, um para o que e o porquê de cada funcionalidade, um para o como e um para a tarefa da vez. A IA recebe só o que precisa naquele passo. Isso tem nome: Spec-Driven Development, o SDD. E o AGENTS.md não some: a constituição, que vamos ver daqui a pouco, é a versão completa dele.
+        </aside>
+      </section>
+
+      <!-- 2.3 Por que especificar antes de gerar: abertura de bloco -->
+      <section class="surface-dark" data-background-color="#242628">
+        <div class="layout-section">
+          <div class="ruler enter" style="--i: 0" aria-hidden="true"></div>
+          <i class="mark mark--pink float float--1" style="left: 1240px; top: 180px" aria-hidden="true"></i>
+          <i class="mark mark--green float float--2" style="left: 1480px; top: 330px" aria-hidden="true"></i>
+          <i class="mark float float--3" style="left: 1360px; top: 470px" aria-hidden="true"></i>
+          <div class="layout-section__body">
+            <i class="layout-section__bar enter" style="--i: 1" aria-hidden="true"></i>
+            <h2 class="title-long enter" style="--i: 2">Por que especificar<br>antes de gerar</h2>
+          </div>
+          <div class="marquee" aria-hidden="true">
+            <div class="marquee__track"><span>AMBIGUIDADE · SEM SPEC VS. COM SPEC · SPEC CURTA · ITERAR · UM CASO DE USO POR VEZ · </span><span>AMBIGUIDADE · SEM SPEC VS. COM SPEC · SPEC CURTA · ITERAR · UM CASO DE USO POR VEZ · </span><span>AMBIGUIDADE · SEM SPEC VS. COM SPEC · SPEC CURTA · ITERAR · UM CASO DE USO POR VEZ · </span><span>AMBIGUIDADE · SEM SPEC VS. COM SPEC · SPEC CURTA · ITERAR · UM CASO DE USO POR VEZ · </span></div>
+          </div>
+        </div>
+        <aside class="notes">
+          [10 min] Abertura do bloco. Abrir respondendo à pergunta que ficou no ar no Dia 1, depois do Build vs. Plan: planejar antes vale a pena? Com 10 minutos, o foco é a tabela "sem spec vs. com spec" e o "um caso de uso por vez". Tom: spec não é burocracia; é curta, viva e muda sempre que a gente aprende algo.
+        </aside>
+      </section>
+
+      <!-- 2.3 A IA tornou a spec mais importante: ambiguidade vira risco -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-code">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ SPEC ]</p>
+            <h2>Ambiguidade vira risco</h2>
+          </div>
+
+          <div class="layout-code__row">
+            <div class="layout-code__card enter" style="--i: 0">
+              <div class="hatch">
+                <article class="code">
+                  <div class="code__head">pedido · exemplo da lista de tarefas</div>
+                  <div class="code__body">
+                    <div class="diff__line"><b>01</b><span class="code__h"># Pedido</span></div>
+                    <div class="diff__line"><b>02</b><span>- adicionar uma tarefa (com título)</span></div>
+                    <div class="diff__line"><b>03</b><span>- excluir uma tarefa</span></div>
+                    <div class="diff__line enter" style="--i: 1"><b>04</b><span class="code__h">## A IA decidiu sozinha</span></div>
+                    <div class="diff__line diff__line--add enter" style="--i: 2"><b>05+</b><span>- título vazio: aceita</span></div>
+                    <div class="diff__line diff__line--add enter" style="--i: 3"><b>06+</b><span>- título repetido: aceita</span></div>
+                    <div class="diff__line diff__line--add enter" style="--i: 4"><b>07+</b><span>- excluir: sem confirmar</span></div>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <div class="layout-code__side">
+              <div class="layout-code__robot enter" style="--i: 1">
+                <div class="robot-slot" data-robo="plan"></div>
+              </div>
+              <span class="chip chip--arrow chip--orange enter" style="--i: 2">AMBIGUIDADE VIRA RISCO</span>
+              <p class="enter" style="--i: 3">A IA não tornou a spec obsoleta. Tornou-a mais importante.</p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          [2 min] Resposta à pergunta do Dia 1: sim, planejar antes vale a pena. Mas o plano do agente Plan vive na conversa e some com a sessão (a amnésia que acabamos de ver); a spec fica num arquivo. Ideia central do texto "Spec-Driven Development: Iterative and Agile": a IA não tornou a especificação obsoleta, tornou-a mais importante. Quando é a IA que escreve o código, ambiguidade vira risco: tudo o que o pedido não diz, ela decide sozinha, com confiança. No exemplo, o pedido da lista de tarefas não falava de título vazio, título repetido nem de confirmar a exclusão, e a IA escolheu por nós. Puxar do quadro do Dia 1 a coluna "a IA decidiu sozinha".
+        </aside>
+      </section>
+
+      <!-- 2.3 Sem spec vs. com spec -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-table">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ SPEC ]</p>
+            <h2>Sem spec vs. com spec</h2>
+          </div>
+
+          <table class="table">
+            <thead>
+              <tr><th></th><th>Sem spec</th><th>Com spec</th></tr>
+            </thead>
+            <tbody>
+              <tr class="enter" style="--i: 0">
+                <td>A IA</td>
+                <td>Adivinha e gera, com confiança, o código errado</td>
+                <td>A intenção está explícita e a IA fica previsível</td>
+              </tr>
+              <tr class="enter" style="--i: 1">
+                <td>A revisão</td>
+                <td>Olha sintaxe, não comportamento</td>
+                <td>Compara o resultado com a spec</td>
+              </tr>
+              <tr class="enter" style="--i: 2">
+                <td>Os erros</td>
+                <td>Aparecem tarde</td>
+                <td>As mudanças ficam localizadas e mais seguras</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <aside class="notes">
+          [3 min] A tabela é o coração do bloco. Linha a linha. A IA: sem spec, ela adivinha e gera, com confiança, o código errado; com spec, a intenção está escrita e a IA fica previsível. A revisão: sem spec, quem revisa só consegue olhar se o código "parece certo" (sintaxe); com spec, compara o comportamento com o que foi combinado. Os erros: sem spec, aparecem tarde, quando o usuário usa; com spec, cada mudança fica num lugar conhecido e é mais segura. Perguntar à turma: no Dia 1, como vocês sabiam que o sistema estava pronto?
+        </aside>
+      </section>
+
+      <!-- 2.3 Spec não é documentação gigante; iterar no entendimento, não no código -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-two-cards">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ SPEC ]</p>
+            <h2>Spec curta e viva</h2>
+          </div>
+
+          <div class="layout-two-cards__row">
+            <div class="hatch enter" style="--i: 0">
+              <article class="card">
+                <span class="chip chip--back chip--blue">CURTA E VERSIONADA</span>
+                <h3>Uma ou duas páginas</h3>
+                <p>Em Markdown, no Git, junto com o código.</p>
+                <ul>
+                  <li>Não é documentação gigante</li>
+                  <li>Muda sempre que se aprende algo</li>
+                </ul>
+              </article>
+            </div>
+
+            <div class="hatch enter" style="--i: 1">
+              <article class="card card--accent">
+                <span class="chip chip--hex">ITERAR</span>
+                <h3>Corrige a spec, não o código</h3>
+                <p>Comportamento errado se corrige na spec, e a IA gera de novo.</p>
+                <ul>
+                  <li>O entendimento fica registrado</li>
+                  <li>A próxima sessão já sabe</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+
+          <svg class="connectors" viewBox="0 0 1920 1080" aria-hidden="true">
+            <path class="connector" style="--len: 96; --i: 0" d="M912 588 H1008" />
+            <circle class="node" style="--i: 0" cx="912" cy="588" r="9" />
+            <circle class="node node--last" style="--i: 1" cx="1008" cy="588" r="9" />
+          </svg>
+        </div>
+        <aside class="notes">
+          [2 min] Para não virar burocracia. Spec não é documentação gigante: é curta (uma ou duas páginas), em Markdown, versionada no Git junto com o código, e alterada sempre que a gente aprende algo. E o principal: iterar no entendimento, não no código. Se o sistema fez a coisa errada, o conserto começa na spec, e a IA gera de novo a partir dela. Remendar o código direto deixa a decisão só na conversa, e a próxima sessão esquece; na spec, ela fica escrita.
+        </aside>
+      </section>
+
+      <!-- 2.3 Um caso de uso por vez -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-text-figure">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ CASO DE USO ]</p>
+            <h2>Um caso de uso por vez</h2>
+          </div>
+
+          <div class="layout-text-figure__row">
+            <div class="layout-text-figure__text">
+              <p class="lead">A cada caso de uso especificado e implementado, o sistema já funciona e pode ser testado.</p>
+              <span class="chip chip--arrow chip--green">FUNCIONA A CADA PASSO</span>
+            </div>
+
+            <div class="layout-text-figure__figure">
+              <div class="hatch">
+                <div class="casos-fig" role="img" aria-label="Animação em loop: o sistema da lista de tarefas cresce um caso de uso por vez. Caso 1, adicionar: o sistema tem um bloco e funciona. Caso 2, concluir: dois blocos, funciona. Caso 3, excluir: três blocos, funciona.">
+                  <svg class="casos-fig__wires" viewBox="0 0 824 470" aria-hidden="true">
+                    <line class="casos-fig__chao" x1="32" y1="380" x2="792" y2="380" />
+                    <path class="connector connector--blue" style="--len: 238; --i: 0" d="M137 82 V320" />
+                    <path class="connector connector--blue" style="--len: 170; --i: 1" d="M412 82 V252" />
+                    <path class="connector connector--blue" style="--len: 102; --i: 2" d="M687 82 V184" />
+                    <polygon class="node casos-fig__tip" style="--i: 0" points="129,82 145,82 137,92" />
+                    <polygon class="node casos-fig__tip" style="--i: 1" points="404,82 420,82 412,92" />
+                    <polygon class="node casos-fig__tip" style="--i: 2" points="679,82 695,82 687,92" />
+                  </svg>
+
+                  <span class="casos-fig__tool enter" style="left: 137px; top: 28px; --i: 0; --k: 0"><i class="glyph glyph--blue" aria-hidden="true"></i>ADICIONAR</span>
+                  <span class="casos-fig__tool enter" style="left: 412px; top: 28px; --i: 1; --k: 1"><i class="glyph glyph--diamond glyph--pink" aria-hidden="true"></i>CONCLUIR</span>
+                  <span class="casos-fig__tool enter" style="left: 687px; top: 28px; --i: 2; --k: 2"><i class="glyph glyph--triangle glyph--violet" aria-hidden="true"></i>EXCLUIR</span>
+
+                  <i class="casos-fig__vaga" style="left: 137px; top: 320px" aria-hidden="true"></i>
+                  <i class="casos-fig__bloco casos-fig__bloco--1 casos-fig__bloco--novo" style="left: 137px; top: 320px; --k: 0">CASO 1</i>
+
+                  <i class="casos-fig__bloco casos-fig__bloco--1" style="left: 412px; top: 320px">CASO 1</i>
+                  <i class="casos-fig__vaga" style="left: 412px; top: 252px" aria-hidden="true"></i>
+                  <i class="casos-fig__bloco casos-fig__bloco--2 casos-fig__bloco--novo" style="left: 412px; top: 252px; --k: 1">CASO 2</i>
+
+                  <i class="casos-fig__bloco casos-fig__bloco--1" style="left: 687px; top: 320px">CASO 1</i>
+                  <i class="casos-fig__bloco casos-fig__bloco--2" style="left: 687px; top: 252px">CASO 2</i>
+                  <i class="casos-fig__vaga" style="left: 687px; top: 184px" aria-hidden="true"></i>
+                  <i class="casos-fig__bloco casos-fig__bloco--3 casos-fig__bloco--novo" style="left: 687px; top: 184px; --k: 2">CASO 3</i>
+
+                  <span class="chip chip--green casos-fig__ok" style="left: 137px; --k: 0">FUNCIONA</span>
+                  <span class="chip chip--green casos-fig__ok" style="left: 412px; --k: 1">FUNCIONA</span>
+                  <span class="chip chip--green casos-fig__ok" style="left: 687px; --k: 2">FUNCIONA</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          [2 min] O jeito de avançar. No Dia 1, o sistema inteiro saiu de uma vez e só deu para testar no fim. Hoje, um caso de uso por vez: especifica o caso 1, implementa, testa, faz o commit. O sistema já funciona e pode ser testado. Depois o caso 2, depois o 3. Na figura, a lista de tarefas cresce assim: adicionar, concluir, excluir, e a cada passo ela funciona. É assim que vai ser a prática depois do intervalo: o caso 1 é obrigatório, e os outros seguem o ritmo de cada um. Cada caso termina com um commit, e quem termina antes puxa o próximo.
+        </aside>
+      </section>
+
+      <!-- 2.3 Frase de fechamento -->
+      <section class="surface-accent" data-background-color="#FFC247">
+        <div class="layout-statement">
+          <div class="frame" aria-hidden="true">
+            <i class="frame__diamond frame__diamond--tl"></i>
+            <i class="frame__diamond frame__diamond--tr"></i>
+            <i class="frame__diamond frame__diamond--bl"></i>
+            <i class="frame__diamond frame__diamond--br"></i>
+          </div>
+
+          <p class="eyebrow">[ FIO CONDUTOR ]</p>
+          <h1 class="enter" style="--i: 0">Código é barato.<br>Entendimento é caro.</h1>
+          <p class="layout-statement__support enter" style="--i: 1">Software errado é construído mais rápido do que nunca.</p>
+
+          <i class="mark float float--1" style="left: 1320px; top: 80px" aria-hidden="true"></i>
+          <i class="mark mark--pink float float--2" style="left: 1480px; top: 520px" aria-hidden="true"></i>
+          <i class="mark mark--green float float--3" style="left: 1180px; top: 640px" aria-hidden="true"></i>
+        </div>
+        <aside class="notes">
+          [1 min] Frase de fechamento do bloco e fio condutor da oficina. Ler devagar: código é barato, entendimento é caro. Com IA, software errado é construído mais rápido do que nunca. Por isso, antes de gerar, especificar. Agora vamos ver como: o fluxo, etapa por etapa.
         </aside>
       </section>
 

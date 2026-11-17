@@ -261,3 +261,37 @@
 .reveal .slides section.present .amnesia__h--ontem { animation: titulo-ontem 12s ease-in-out infinite both; }
 .reveal .slides section.present .amnesia__h--hoje { animation: titulo-hoje 12s ease-in-out infinite both; }
 .reveal .slides section.present .amnesia__vazio { animation: vazio 12s ease-in-out infinite both; }
+
+/* Um caso de uso por vez (8.28): ciclo de 9s por coluna, escalonado por --k. A etiqueta acende,
+   o bloco do caso novo desce para a pilha e o "FUNCIONA" carimba; depois a vez passa à coluna seguinte. */
+@keyframes sobe {
+  0%       { opacity: 0; transform: translateY(-40px); }
+  6%, 66%  { opacity: 1; transform: none; }
+  72%, 100% { opacity: 0; transform: none; }
+}
+@keyframes carimba {
+  0%, 8%    { opacity: 0; scale: 1.6; }
+  13%, 66%  { opacity: 1; scale: 1; }
+  72%, 100% { opacity: 0; scale: 1; }
+}
+.reveal .slides section.present .casos-fig__tool {
+  animation:
+    enter-up 700ms ease-out both,
+    acende 9s ease-in-out infinite both;
+  animation-delay:
+    calc(var(--i, 0) * var(--stagger)),
+    calc(2s + var(--k, 0) * 3s);
+}
+.reveal .slides section.present .casos-fig__bloco--novo {
+  animation: sobe 9s var(--ease-out) infinite both;
+  animation-delay: calc(2s + var(--k, 0) * 3s);
+}
+.reveal .slides section.present .casos-fig__ok {
+  animation: carimba 9s var(--ease-out) infinite both;
+  animation-delay: calc(2s + var(--k, 0) * 3s);
+}
+/* No ?print-pdf o reveal.js marca todos os slides como ativos: a figura fica no estado final, sem animação */
+html.print-pdf .reveal .slides section .casos-fig * { animation: none; }
+html.print-pdf .reveal .slides section .casos-fig .enter,
+html.print-pdf .reveal .slides section .casos-fig .node { opacity: 1; }
+html.print-pdf .reveal .slides section .casos-fig .connector { stroke-dashoffset: 0; }

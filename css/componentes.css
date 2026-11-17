@@ -622,7 +622,7 @@
 .mcp-fig__logo { width: 150px; height: auto; overflow: visible; }
 .mcp-fig__logo path { fill: none; stroke: var(--c-basalt); stroke-width: 12; stroke-linecap: round; }
 .mcp-fig .mark { z-index: 1; }
-.mcp-fig__tool, .ponte-fig__tool {
+.mcp-fig__tool, .ponte-fig__tool, .casos-fig__tool {
   position: absolute;
   translate: -50% 0; /* centraliza no left sem brigar com o transform do .enter */
   display: flex;
@@ -639,7 +639,7 @@
   white-space: nowrap;
 }
 .connector--blue { stroke: var(--c-blue); }
-.node.mcp-fig__tip, .node.ponte-fig__tip { fill: var(--c-blue); }
+.node.mcp-fig__tip, .node.ponte-fig__tip, .node.casos-fig__tip { fill: var(--c-blue); }
 
 /* 8.23 Régua: marcas a cada 8px e marca maior a cada 64px, sobre uma linha de base */
 .ruler,
@@ -813,3 +813,109 @@ canvas.ponte-fig__mesh { display: block; color: var(--c-blue); }
   letter-spacing: 0.08em;
 }
 .amnesia__h--ontem, .amnesia__camada--ontem .janela__linha, .reveal .amnesia__vazio { opacity: 0; }
+
+/* 8.28 Um caso de uso por vez: o sistema cresce um caso por coluna, e cada coluna funciona.
+   O estado padrão é o final (as três colunas prontas), que vale fora do slide ativo, no PDF e com movimento reduzido. */
+.casos-fig {
+  position: relative;
+  width: 824px;
+  height: 470px;
+  background: var(--c-paper);
+  overflow: hidden;
+}
+.casos-fig__wires { position: absolute; inset: 0; width: 100%; height: 100%; }
+.casos-fig__chao { stroke: var(--c-basalt); stroke-width: 2; }
+.casos-fig__bloco {
+  position: absolute;
+  translate: -50% 0;
+  width: 180px;
+  height: 60px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--c-ink);
+  color: var(--c-ink);
+  font: 400 var(--t-label)/1 var(--f-mono);
+  font-style: normal;
+  letter-spacing: 0.08em;
+}
+.casos-fig__vaga { /* lugar do caso novo: a linha termina aqui, e o bloco encaixa por cima */
+  position: absolute;
+  translate: -50% 0;
+  width: 180px;
+  height: 60px;
+  box-sizing: border-box;
+  border: 2px dashed var(--c-muted);
+}
+.casos-fig__bloco--1 { background: var(--c-blue); }
+.casos-fig__bloco--2 { background: var(--c-pink); }
+.casos-fig__bloco--3 { background: var(--c-violet); }
+.casos-fig__ok { position: absolute; top: 400px; translate: -50% 0; }
+
+/* Cena de filme / meme (8.29, v1.33): moldura hachurada com a imagem ou o vídeo e o crédito embaixo */
+.meme { display: flex; flex-direction: column; gap: var(--s-1); margin: 0; }
+.meme__media { display: block; width: 100%; height: auto; background: var(--c-basalt); }
+.meme__credit {
+  font: 400 var(--t-label)/1.4 var(--f-mono);
+  letter-spacing: 0.08em;
+  color: var(--c-muted);
+}
+
+/* Lista com chip (8.30, v1.33): chip do item + frase curta, em 36px */
+.reveal .chip-list {
+  list-style: none;
+  padding-left: 0;
+  display: grid; /* o reveal força ul em block (armadilha da seção 9) */
+  grid-template-columns: max-content 1fr;
+  column-gap: var(--s-4);
+  row-gap: var(--s-3);
+  align-items: center;
+}
+.chip-list li { display: grid; grid-template-columns: subgrid; grid-column: 1 / -1; align-items: center; font-size: var(--t-lead); line-height: 1.35; }
+.chip-list .chip { justify-self: start; }
+
+/* Meme alto (8.29): imagem em pé ou quadrada limitada pela altura, não pela largura */
+.meme--alto { align-self: center; }
+.meme--alto > .hatch { align-self: flex-start; } /* a moldura abraça a imagem, mesmo com crédito mais largo */
+.meme--alto .meme__media { width: auto; height: var(--meme-h, 440px); }
+
+/* Template com legenda por cima (8.31): a imagem do template e as legendas em HTML, posicionadas em % da imagem */
+.meme-pic { position: relative; display: block; width: fit-content; } /* do tamanho da imagem: as legendas se posicionam em % dela */
+.meme-pic > img { display: block; width: auto; height: var(--meme-h, 520px); }
+.meme-cap {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--w);
+  translate: -50% -50%;
+  rotate: var(--rot, 0deg);
+  font: 600 var(--t-body)/1.2 var(--f-body);
+  color: var(--c-ink);
+  text-align: center;
+}
+.meme-cap--box { background: var(--c-white); padding: 6px 14px; }
+.meme-pair { display: flex; gap: var(--s-3); }
+
+/* Expanding Brain em faixa (8.32): os 4 quadros lado a lado, legenda embaixo de cada um */
+.brain-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s-3);
+  background: var(--c-white);
+  padding: var(--s-3);
+}
+.brain-strip__step { display: flex; flex-direction: column; gap: var(--s-2); }
+.brain-strip__img { display: block; width: 100%; aspect-ratio: 431 / 290; object-fit: cover; }
+.brain-strip__cap { font-size: var(--t-body); line-height: 1.3; color: var(--c-basalt); }
+.brain-strip__cap b { font-weight: 600; display: block; }
+
+/* Faixa de legenda no topo do meme (8.29), como nos GIFs legendados: fundo branco, texto ink centralizado */
+.meme__band {
+  display: block;
+  background: var(--c-white);
+  color: var(--c-ink);
+  font: 700 var(--t-lead)/1.2 var(--f-body);
+  text-align: center;
+  padding: 10px 16px;
+}

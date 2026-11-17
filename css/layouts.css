@@ -292,3 +292,27 @@
 /* Demo com comandos (v1.29): comando em destaque numa coluna, descrição ao lado */
 .reveal .layout-demo__watch--cmds { display: grid; grid-template-columns: max-content 1fr; column-gap: var(--s-4); row-gap: var(--s-3); align-items: center; }
 .layout-demo__watch--cmds li { display: grid; grid-template-columns: subgrid; grid-column: 1 / -1; align-items: center; }
+
+/* Cena de filme (8.29) dentro das colunas: na coluna de texto, menor que a figura ao lado */
+.layout-text-figure__text .meme { width: 600px; }
+.layout-code__side .meme { width: 100%; }
+/* Cartão de código com cena de filme na coluna lateral (slide Skills): o código encolhe e a cena cresce, centralizada */
+.layout-code__row--meme { grid-template-columns: 820px 1fr; align-items: center; }
+
+/* Slide de meme (8.31): eyebrow + título no topo, a cena grande no centro. Vem logo antes do slide que explica o assunto */
+.layout-meme { gap: var(--s-6); }
+.layout-meme__stage {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--s-5);
+}
+.layout-meme__stage .meme { max-width: 100%; }
+
+/* Demo com cena ao lado da lista (8.29) */
+.layout-demo__row { display: flex; align-items: center; justify-content: space-between; gap: var(--s-7); }
+.layout-code__side .meme--alto { width: auto; align-self: flex-start; } /* capa em pé: a moldura abraça a imagem */
+/* Demo sem rodapé (slide 25): a linha ocupa a altura que sobra e centraliza texto e cena */
+.layout-demo__row--grow { flex: 1; min-height: 0; margin-bottom: var(--s-5); }
