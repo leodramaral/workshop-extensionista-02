@@ -1,7 +1,7 @@
 # DESIGN.md: fundação do site de apresentação
 
 > Oficina de Desenvolvimento com IA. Slides servidos como site no GitHub Pages.
-> Versão 1.35 · 2026-11-17 · Leandro Amaral
+> Versão 1.36 · 2026-11-17 · Leandro Amaral
 
 Este arquivo é a **fonte da verdade** do projeto. Ele vale para quem escreve código à mão e para agentes de IA (OpenCode, Claude, Copilot). Faça o `AGENTS.md` do repositório apontar para cá, com a linha: *"Antes de criar ou alterar qualquer slide, leia o DESIGN.md e siga-o à risca."*
 
@@ -629,6 +629,8 @@ Faixa de texto mono que corre devagar, como o "TEST · RUN · EXECUTE" da Grepti
 
 ### 8.26 Arquivos na hora certa (figura)
 
+> Fora do deck desde a v1.36: o slide "Vários arquivos pequenos" saiu do bloco 2.2, porque mostrava os arquivos do SDD antes do 2.3 e do 2.4. A figura volta no 2.4, quando os arquivos forem apresentados, com os nomes reais nas etiquetas.
+
 Figura da ponte para o SDD no Dia 2 ("Vários arquivos pequenos"), no estilo vetorial da Greptile (8.21) e com a mesma caixa da figura do MCP (8.20): `layout-text-figure__figure--wide` > `.hatch` > `.ponte-fig` (960×500, `--c-paper`, `role="img"`).
 
 - **Fundo:** a malha em canvas do MCP (`data-efeito="rede"`), que já é desenhada para 960×500.
@@ -987,6 +989,7 @@ Um slide ou mudança só está **pronto** quando:
 | 2026-11-16 | v1.32: slides do bloco 2.3 do Dia 2 (Por que especificar antes de gerar; eyebrows `[ SPEC ]`, `[ CASO DE USO ]` e `[ FIO CONDUTOR ]`): abertura e 5 slides (ambiguidade vira risco, sem spec vs. com spec, spec curta e viva, um caso de uso por vez e a frase de fechamento). Primeiro `surface-accent` do Dia 2, com `layout-statement` e moldura com losangos. Peça nova: um caso de uso por vez (8.28); animações `sobe` e `carimba` |
 | 2026-11-17 | v1.34: o AGENTS.md (e o CLAUDE.md) sai do Dia 1 e passa a ser apresentado só no Dia 2, no slide 7 (Um arquivo para tudo), como resposta à amnésia; saem do Dia 1 o slide do AGENTS.md (com a capa de "Como Se Fosse a Primeira Vez") e o de AGENTS.md com /init (que não faz sentido numa pasta vazia). Sai também o slide "Quando a janela enche" do bloco de tokens: o que acontece quando a janela enche é papel do harness, então o assunto vai para o slide 18 (Quem cuida da janela), e o slide 9 (Janela de contexto) fica no bloco de tokens com o limite (chip `DEZENAS DE MIL A +1 MILHÃO`). A cena da Dory e a capa de "Como Se Fosse a Primeira Vez" ficam fora do deck, à espera de um lugar novo. Dia 1 com 27 slides: Skills 21, MCP 22, OpenCode 23, meme Build ou Plan? 24, demo 25, Planejar antes vale a pena? 26. Tempos: slide 8 de 1,5 para 2,5 min, slide 9 de 2 para 3, mão na massa no OpenCode de 6 para 9 e demo Build vs. Plan de 9,5 para 13,5. O exemplo de AGENTS.md do Dia 2 passa de Flask a Django |
 | 2026-11-17 | v1.35: o AGENTS.md sai da oficina inteira: ele descreve um projeto que já existe e só faz sentido em sistemas legados; num sistema que nasce do zero, esse papel é da constituição. Saem do Dia 2 os slides "Um arquivo para tudo" e "O que falta no AGENTS.md", e também "Contexto e alucinação", que só retomava o Dia 1 (a alucinação passa para a nota de "Ambiguidade vira risco"). O bloco 2.2 fica com abertura, Curva em U (slide 3), Sessão nova é amnésia (4), O código não diz por quê (5) e Vários arquivos pequenos (6), agora com eyebrow `[ O PORQUÊ ]` e a frase "O porquê escrito em arquivos pequenos". Dia 2 com 13 slides; o 2.2 passa a 18 min e os 7 min liberados vão para a mão na massa da constituição no 2.4 |
+| 2026-11-17 | v1.36: sai do Dia 2 o slide "Vários arquivos pequenos" (ponte para o SDD): sem o AGENTS.md ele perdeu o contraste e adiantava os arquivos do 2.4. O bloco 2.2 vai de "O código não diz por quê" (slide 5) direto para a abertura do 2.3 (slide 6). A figura 8.26 fica fora do deck até o 2.4. Dia 2 com 12 slides; o 2.4 começa no slide 12 |
 
 ## 17. Referências
 
