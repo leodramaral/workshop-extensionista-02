@@ -40,7 +40,7 @@
           <canvas class="layout-cover__fig" data-efeito="codigo" aria-hidden="true"></canvas>
         </div>
         <aside class="notes">
-          [1 min] Capa do Dia 1. Hoje vamos desenvolver um sistema usando IA; amanhã vamos entender por que isso não basta.
+          [5 min] Capa do Dia 1, com a abertura (sem slide próprio). Apresentar a equipe e o projeto de extensão. A promessa dos dois dias: hoje vamos desenvolver um sistema usando IA; amanhã vamos entender por que isso não basta. Comentar o perfil da turma a partir da enquete do cadastro (terminal, Linux, Git, Docker, uso de IA). Checar o ambiente: OpenCode instalado, Python funcionando, um aluno por máquina.
         </aside>
       </section>
 
@@ -125,11 +125,11 @@
         </aside>
       </section>
 
-      <!-- 1.2 Tokens: demo ao vivo no tokenizer da OpenAI -->
+      <!-- 1.2 Tokens: mão na massa no tokenizer da OpenAI -->
       <section class="surface-light" data-background-color="#E2E4DD">
         <div class="layout-demo">
           <div class="layout-title__head">
-            <p class="eyebrow">[ DEMO AO VIVO ]<span class="cursor" aria-hidden="true"></span></p>
+            <p class="eyebrow">[ MÃO NA MASSA ]<span class="cursor" aria-hidden="true"></span></p>
             <h2>OpenAI Tokenizer</h2>
           </div>
 
@@ -148,7 +148,7 @@
           </div>
         </div>
         <aside class="notes">
-          [4 min] Abrir o tokenizer da OpenAI (platform.openai.com/tokenizer) e escolher o GPT-4o (as contagens dos slides usam a codificação dele, a o200k_base). Digitar sempre com um espaço antes da palavra (por exemplo "o amor"), porque é assim que ela aparece numa frase; sem o espaço o corte muda. Ir trocando as palavras do próximo slide e terminar com a frase abreviada ("você é muito especial" vs. "vc é mt especial").
+          [3 min] Abrir o tokenizer da OpenAI (platform.openai.com/tokenizer) e escolher o GPT-4o (as contagens dos slides usam a codificação dele, a o200k_base). Digitar sempre com um espaço antes da palavra (por exemplo "o amor"), porque é assim que ela aparece numa frase; sem o espaço o corte muda. Ir trocando as palavras do próximo slide e terminar com a frase abreviada ("você é muito especial" vs. "vc é mt especial").
         </aside>
       </section>
 
@@ -205,7 +205,7 @@
           </table>
         </div>
         <aside class="notes">
-          [3 min] Palavras comuns viram um token só; um erro de digitação, um acento a menos ou as maiúsculas quebram em vários pedaços. Curiosidade: "funcionalidades", no plural, é um token só, e o singular são dois. O tokenizer aprendeu os pedaços mais frequentes, não as regras do português.
+          [2 min] Palavras comuns viram um token só; um erro de digitação, um acento a menos ou as maiúsculas quebram em vários pedaços. Curiosidade: "funcionalidades", no plural, é um token só, e o singular são dois. O tokenizer aprendeu os pedaços mais frequentes, não as regras do português.
         </aside>
       </section>
 
@@ -238,7 +238,7 @@
           <p class="lead enter" style="--i: 2">Cinco letras a menos, um token a menos. O modelo conta tokens, não letras: “vc” e “mt” também são pedaços conhecidos.</p>
         </div>
         <aside class="notes">
-          [2 min] A frase abreviada tem 5 caracteres a menos, mas só 1 token a menos. "vc" e "mt" aparecem tanto em texto da internet que viraram um token cada. E repare que "você", no começo da frase, foi cortado em "v" + "ocê". Quem conta é o tokenizer, não o número de letras.
+          [1 min] A frase abreviada tem 5 caracteres a menos, mas só 1 token a menos. "vc" e "mt" aparecem tanto em texto da internet que viraram um token cada. E repare que "você", no começo da frase, foi cortado em "v" + "ocê". Quem conta é o tokenizer, não o número de letras.
         </aside>
       </section>
 
@@ -279,7 +279,7 @@
           </div>
         </div>
         <aside class="notes">
-          [3 min] O modelo não "sabe" a resposta: a cada passo ele calcula uma probabilidade para cada token do vocabulário, escolhe um, cola no texto e recomeça. Clique 1: ele sorteou "nublado", que nem era o mais provável. Clique 2: o token entra no texto e o ciclo recomeça. Os números são ilustrativos.
+          [2 min] O modelo não "sabe" a resposta: a cada passo ele calcula uma probabilidade para cada token do vocabulário, escolhe um, cola no texto e recomeça. Clique 1: ele sorteou "nublado", que nem era o mais provável. Clique 2: o token entra no texto e o ciclo recomeça. Os números são ilustrativos.
         </aside>
       </section>
 
@@ -379,7 +379,7 @@
           </div>
         </div>
         <aside class="notes">
-          [3 min] A janela de contexto é a memória de trabalho do modelo, medida em tokens. Não é só o seu prompt: as respostas dele, cada arquivo que ele lê e cada saída de comando entram nela. E ela tem limite: o tamanho varia por modelo, de dezenas de milhares a mais de um milhão de tokens. O que acontece quando ela enche fica para daqui a pouco, quando falarmos de harness.
+          [2 min] A janela de contexto é a memória de trabalho do modelo, medida em tokens. Não é só o seu prompt: as respostas dele, cada arquivo que ele lê e cada saída de comando entram nela. E ela tem limite: o tamanho varia por modelo, de dezenas de milhares a mais de um milhão de tokens. O que acontece quando ela enche fica para daqui a pouco, quando falarmos de harness.
         </aside>
       </section>
 
@@ -427,7 +427,7 @@
           </svg>
         </div>
         <aside class="notes">
-          [2 min] Dois grupos. Proprietários (Claude, GPT, Gemini): acesso pelo serviço da empresa. Abertos, ou open-weight (DeepSeek, Qwen, GLM, Kimi, MiniMax, entre outros): os pesos do modelo estão disponíveis.
+          [1,5 min] Dois grupos. Proprietários (Claude, GPT, Gemini): acesso pelo serviço da empresa. Abertos, ou open-weight (DeepSeek, Qwen, GLM, Kimi, MiniMax, entre outros): os pesos do modelo estão disponíveis.
         </aside>
       </section>
 
@@ -474,7 +474,7 @@
           <p class="lead enter" style="--i: 6">O mesmo modelo pode aparecer no chat, numa API ou dentro de outras ferramentas.</p>
         </div>
         <aside class="notes">
-          [2 min] ChatGPT é o produto; GPT-6 (Astra, Sol, Terra, Luna) são os modelos. O app Claude é o produto; Fable, Opus, Sonnet e Haiku são os modelos. Gemini 4 (Carbon, Argon, Hydrogen) é a família mais recente do Google. Meta (Llama 4), Alibaba (Qwen3.8) e Xiaomi (MiMo-V2.6) publicam pesos abertos. O mesmo modelo aparece em lugares diferentes: no chat, numa API ou em outras ferramentas. Gancho para o próximo bloco: a ferramenta em volta do modelo muda o que ele consegue fazer. Nomes de modelos mudam rápido: confira antes da aula.
+          [1,5 min] ChatGPT é o produto; GPT-6 (Astra, Sol, Terra, Luna) são os modelos. O app Claude é o produto; Fable, Opus, Sonnet e Haiku são os modelos. Gemini 4 (Carbon, Argon, Hydrogen) é a família mais recente do Google. Meta (Llama 4), Alibaba (Qwen3.8) e Xiaomi (MiMo-V2.6) publicam pesos abertos. O mesmo modelo aparece em lugares diferentes: no chat, numa API ou em outras ferramentas. Gancho para o próximo bloco: a ferramenta em volta do modelo muda o que ele consegue fazer. Nomes de modelos mudam rápido: confira antes da aula.
         </aside>
       </section>
 

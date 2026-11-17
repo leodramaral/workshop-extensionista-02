@@ -1,7 +1,7 @@
 # DESIGN.md: fundação do site de apresentação
 
 > Oficina de Desenvolvimento com IA. Slides servidos como site no GitHub Pages.
-> Versão 1.36 · 2026-11-17 · Leandro Amaral
+> Versão 1.37 · 2026-11-17 · Leandro Amaral
 
 Este arquivo é a **fonte da verdade** do projeto. Ele vale para quem escreve código à mão e para agentes de IA (OpenCode, Claude, Copilot). Faça o `AGENTS.md` do repositório apontar para cá, com a linha: *"Antes de criar ou alterar qualquer slide, leia o DESIGN.md e siga-o à risca."*
 
@@ -739,7 +739,7 @@ Cada slide usa **um** layout, num `div` wrapper que ocupa o slide inteiro. A ár
 | `layout-quote` | aspas grandes `--c-accent`, citação DM Sans 600 48px, autor em chip | light |
 | `layout-section` | abertura de bloco do roteiro: régua no topo · barra `--c-accent` (`.layout-section__bar`) e título em 96px · faixa corrente (8.24) na base, com os temas do bloco · 3 marcadores flutuando (`float`). Sem número do bloco, horário nem duração | dark |
 | `layout-meme` | eyebrow + título curto no topo · meme grande centralizado (`.layout-meme__stage`) · crédito embaixo. Slide que vem logo antes do assunto (8.31) | light |
-| `layout-demo` | aviso de demo ao vivo (eyebrow `[ DEMO AO VIVO ]`) ou de prática dos alunos (eyebrow `[ MÃO NA MASSA ]`), com cursor piscante e título no topo · frase e lista "o que observar" (até 3 itens com glifo de 20px, no mesmo tamanho da frase, `--t-lead`; quando os itens são comandos, comando em destaque, 8.25) no meio · linha tracejada com botão para a ferramenta e, se precisar, pílula de configuração na base. Frase e lista herdam a cor do texto da superfície | light (regra da projeção, seção 7) |
+| `layout-demo` | aviso de demo no telão ou de prática dos alunos, sempre com o eyebrow `[ MÃO NA MASSA ]` (o `[ DEMO AO VIVO ]` saiu na v1.37), com cursor piscante e título no topo · frase e lista "o que observar" (até 3 itens com glifo de 20px, no mesmo tamanho da frase, `--t-lead`; quando os itens são comandos, comando em destaque, 8.25) no meio · linha tracejada com botão para a ferramenta e, se precisar, pílula de configuração na base. Frase e lista herdam a cor do texto da superfície | light (regra da projeção, seção 7) |
 
 Regras:
 
@@ -990,6 +990,7 @@ Um slide ou mudança só está **pronto** quando:
 | 2026-11-17 | v1.34: o AGENTS.md (e o CLAUDE.md) sai do Dia 1 e passa a ser apresentado só no Dia 2, no slide 7 (Um arquivo para tudo), como resposta à amnésia; saem do Dia 1 o slide do AGENTS.md (com a capa de "Como Se Fosse a Primeira Vez") e o de AGENTS.md com /init (que não faz sentido numa pasta vazia). Sai também o slide "Quando a janela enche" do bloco de tokens: o que acontece quando a janela enche é papel do harness, então o assunto vai para o slide 18 (Quem cuida da janela), e o slide 9 (Janela de contexto) fica no bloco de tokens com o limite (chip `DEZENAS DE MIL A +1 MILHÃO`). A cena da Dory e a capa de "Como Se Fosse a Primeira Vez" ficam fora do deck, à espera de um lugar novo. Dia 1 com 27 slides: Skills 21, MCP 22, OpenCode 23, meme Build ou Plan? 24, demo 25, Planejar antes vale a pena? 26. Tempos: slide 8 de 1,5 para 2,5 min, slide 9 de 2 para 3, mão na massa no OpenCode de 6 para 9 e demo Build vs. Plan de 9,5 para 13,5. O exemplo de AGENTS.md do Dia 2 passa de Flask a Django |
 | 2026-11-17 | v1.35: o AGENTS.md sai da oficina inteira: ele descreve um projeto que já existe e só faz sentido em sistemas legados; num sistema que nasce do zero, esse papel é da constituição. Saem do Dia 2 os slides "Um arquivo para tudo" e "O que falta no AGENTS.md", e também "Contexto e alucinação", que só retomava o Dia 1 (a alucinação passa para a nota de "Ambiguidade vira risco"). O bloco 2.2 fica com abertura, Curva em U (slide 3), Sessão nova é amnésia (4), O código não diz por quê (5) e Vários arquivos pequenos (6), agora com eyebrow `[ O PORQUÊ ]` e a frase "O porquê escrito em arquivos pequenos". Dia 2 com 13 slides; o 2.2 passa a 18 min e os 7 min liberados vão para a mão na massa da constituição no 2.4 |
 | 2026-11-17 | v1.36: sai do Dia 2 o slide "Vários arquivos pequenos" (ponte para o SDD): sem o AGENTS.md ele perdeu o contraste e adiantava os arquivos do 2.4. O bloco 2.2 vai de "O código não diz por quê" (slide 5) direto para a abertura do 2.3 (slide 6). A figura 8.26 fica fora do deck até o 2.4. Dia 2 com 12 slides; o 2.4 começa no slide 12 |
+| 2026-11-17 | v1.37: o eyebrow `[ DEMO AO VIVO ]` sai do deck: toda demo e toda prática usam `[ MÃO NA MASSA ]`, como já era desde a v1.33 nos slides do OpenCode. Muda o slide 3 do Dia 1 (OpenAI Tokenizer) e o slide de exemplo da referência de UI |
 
 ## 17. Referências
 

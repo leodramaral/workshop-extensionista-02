@@ -223,7 +223,7 @@
 }
 .flow__text { font-weight: 600; }
 
-/* Demo ao vivo */
+/* Demo e mão na massa (eyebrow [ MÃO NA MASSA ]) */
 .layout-demo { justify-content: space-between; }
 .layout-demo__body { display: flex; flex-direction: column; gap: var(--s-5); max-width: 1300px; }
 .layout-demo__body .lead { color: inherit; } /* sand no escuro, basalt no claro */
