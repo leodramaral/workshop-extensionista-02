@@ -1,7 +1,7 @@
 # DESIGN.md: fundação do site de apresentação
 
 > Oficina de Desenvolvimento com IA. Slides servidos como site no GitHub Pages.
-> Versão 1.33 · 2026-11-17 · Leandro Amaral
+> Versão 1.34 · 2026-11-17 · Leandro Amaral
 
 Este arquivo é a **fonte da verdade** do projeto. Ele vale para quem escreve código à mão e para agentes de IA (OpenCode, Claude, Copilot). Faça o `AGENTS.md` do repositório apontar para cá, com a linha: *"Antes de criar ou alterar qualquer slide, leia o DESIGN.md e siga-o à risca."*
 
@@ -547,7 +547,7 @@ Dentro de `.hatch` > `.panel` (8.8): o texto de entrada no topo (DM Sans 36px, `
 
 ### 8.17 Janela de contexto (figura)
 
-> Fora do Dia 1 desde a v1.33: no slide 10 (Quando a janela enche) a cena da Dory (8.29) ocupa o lugar desta figura. A versão em história (8.27) segue no Dia 2.
+> No Dia 1, só no slide 18 (Quem cuida da janela). O slide "Quando a janela enche" do bloco de tokens saiu na v1.34, e a cena da Dory (8.29) está fora do deck até ganhar um lugar novo. A versão em história (8.27) segue no Dia 2.
 
 Segue o cartão de diff da Greptile (8.9), em tons apagados: `.hatch` > `.janela`, painel `--c-basalt` com borda tracejada `--frame-dark`, cabeçalho mono (`janela de contexto`, `--c-muted-dark`) e uma faixa de base `LIMITE DA JANELA` (`--c-basalt-2`, texto `--c-eggshell`).
 
@@ -562,7 +562,7 @@ Figura do slide "Data de corte": `.hatch` > `.panel` (8.8) > `.tempo`, com cabe�
 
 ### 8.19 Harness em volta do modelo (figura)
 
-> Fora do deck desde a v1.33: no slide 18 a cena de Ratatouille (8.29) ocupa o lugar desta figura. O CSS continua em `componentes.css` para quem quiser voltar.
+> Fora do deck desde a v1.33: no slide 17 a cena de Ratatouille (8.29) ocupa o lugar desta figura. O CSS continua em `componentes.css` para quem quiser voltar.
 
 Figura do slide "O que é harness": `.hatch` > `.harness` (`role="img"`, `aria-label`), fundo `--c-white` com borda tracejada de 2px `--c-basalt` (o harness) e o chip `chip--orange` `HARNESS` preso no canto superior esquerdo da borda (cor do robô Harness).
 
@@ -660,7 +660,7 @@ Figura do slide "Um caso de uso por vez" do Dia 2, na caixa de 850px do `layout-
 
 ### 8.29 Cena de filme / meme
 
-Trecho curto de filme, GIF ou meme que ilustra a ideia do slide com humor. Usado em poucos slides, para não sobrecarregar o deck. Pode ficar ao lado da figura do slide, ocupar o lugar dela quando o autor pedir (slide 18, onde a cena substitui a figura do harness, 8.19) ou ganhar um slide próprio logo antes do slide que explica o assunto, quando o slide tem conteúdo que não pode sair (8.31).
+Trecho curto de filme, GIF ou meme que ilustra a ideia do slide com humor. Usado em poucos slides, para não sobrecarregar o deck. Pode ficar ao lado da figura do slide, ocupar o lugar dela quando o autor pedir (slide 17, onde a cena substitui a figura do harness, 8.19) ou ganhar um slide próprio logo antes do slide que explica o assunto, quando o slide tem conteúdo que não pode sair (8.31).
 
 ```html
 <figure class="meme enter" style="--i: 5">
@@ -684,7 +684,7 @@ Trecho curto de filme, GIF ou meme que ilustra a ideia do slide com humor. Usado
   - **Num slide próprio, antes do slide do assunto:** `layout-meme` (8.31), quando o slide do assunto tem cartões ou figura que não podem sair.
   
   Se não couber, o meme sai; o slide não é dividido nem a fonte diminui por causa dele.
-- **Faixa de legenda** (`.meme__band`): a legenda do GIF no topo, em HTML (DM Sans 700, 36px, `--c-ink` sobre `--c-white`), dentro da moldura, acima da mídia. A legenda que já vem escrita no GIF é cortada do vídeo e refeita assim, para poder ser corrigida (slide 10, Dory).
+- **Faixa de legenda** (`.meme__band`): a legenda do GIF no topo, em HTML (DM Sans 700, 36px, `--c-ink` sobre `--c-white`), dentro da moldura, acima da mídia. A legenda que já vem escrita no GIF é cortada do vídeo e refeita assim, para poder ser corrigida (cena da Dory, hoje fora do deck).
 - **Meme alto** (`.meme--alto`): imagem ou vídeo quadrado ou em pé, limitado pela altura (`style="--meme-h: 440px"`), com a moldura abraçando a mídia mesmo quando o crédito é mais largo.
 - **Vídeo, não GIF:** GIF animado também vira vídeo (mesmo formato abaixo), para tocar só no slide ativo e ter pôster no PDF. Imagem parada fica em `assets/img/memes/` (`.jpg`/`.png`). Meme que é só texto em imagem pequena é refeito em alta resolução, com a mesma aparência.
 - **Cenas de filme:** recorte de 4 a 9s, sem áudio, 30 fps, até 1280px de largura, em formato de cinema (sem faixas pretas nem selo de canal), em `assets/video/` como `.webm` (VP9) + `.mp4` (H.264, `+faststart`) + pôster `.png`. Cerca de 1 MB por arquivo.
@@ -695,11 +695,11 @@ Trecho curto de filme, GIF ou meme que ilustra a ideia do slide com humor. Usado
 
 ### 8.30 Lista com chip
 
-`<ul class="chip-list">` com itens `<li><span class="chip chip--blue"><i class="glyph" aria-hidden="true"></i>FERRAMENTAS</span><span>arquivos e comandos</span></li>`: um termo em chip e uma frase curta que o explica. Grade de duas colunas (chip do tamanho do maior | frase), com os itens em `subgrid` para as frases ficarem alinhadas; frase em 36px (`--t-lead`), porque é conteúdo lido de longe, curta o bastante para caber em uma linha. Chips com cor e glifo (8.2). Até 4 itens, entrando com `.enter` escalonado. Primeiro uso: slide 18 (O que é harness), com as 4 partes do harness nas cores que tinham na figura 8.19.
+`<ul class="chip-list">` com itens `<li><span class="chip chip--blue"><i class="glyph" aria-hidden="true"></i>FERRAMENTAS</span><span>arquivos e comandos</span></li>`: um termo em chip e uma frase curta que o explica. Grade de duas colunas (chip do tamanho do maior | frase), com os itens em `subgrid` para as frases ficarem alinhadas; frase em 36px (`--t-lead`), porque é conteúdo lido de longe, curta o bastante para caber em uma linha. Chips com cor e glifo (8.2). Até 4 itens, entrando com `.enter` escalonado. Primeiro uso: slide 17 (O que é harness), com as 4 partes do harness nas cores que tinham na figura 8.19.
 
 ### 8.31 Slide de meme e template com legenda
 
-**Slide de meme** (`layout-meme`, seção 9): eyebrow do bloco, título curto (uma pergunta direta, como "De onde veio isso?") e o meme grande no centro, dentro de `.meme` (8.29). Vem **logo antes** do slide que explica o assunto e abre a conversa; o slide seguinte responde. Nota de `[30 s]` a `[1 min]`, tirada do tempo do slide vizinho para a soma do bloco continuar batendo. Usos: Dia 1, slides 7 (antes de "Sorteio e alucinação"), 13 (antes de "Tamanhos e raciocínio") e 27 (antes da demo "Build vs. Plan"); Dia 2, slide 1 (retomada).
+**Slide de meme** (`layout-meme`, seção 9): eyebrow do bloco, título curto (uma pergunta direta, como "De onde veio isso?") e o meme grande no centro, dentro de `.meme` (8.29). Vem **logo antes** do slide que explica o assunto e abre a conversa; o slide seguinte responde. Nota de `[30 s]` a `[1 min]`, tirada do tempo do slide vizinho para a soma do bloco continuar batendo. Usos: Dia 1, slides 7 (antes de "Sorteio e alucinação"), 12 (antes de "Tamanhos e raciocínio") e 24 (antes da demo "Build vs. Plan"); Dia 2, slide 1 (retomada).
 
 **Template com legenda por cima:** a imagem em branco do template (de `api.imgflip.com/get_memes`) e as legendas em HTML, na fonte do deck, nunca escritas na imagem:
 
@@ -985,6 +985,7 @@ Um slide ou mudança só está **pronto** quando:
 | 2026-11-16 | v1.31: slides do bloco 2.2 do Dia 2 (As dores que o Dia 1 não mostrou; eyebrows `[ RETOMADA ]`, `[ LOST IN THE MIDDLE ]`, `[ AMNÉSIA ]` e `[ AGENTS.MD ]`): abertura e 7 slides. O 2.1 não vira slide: a fala e os 5 min dele vão para a nota da capa do Dia 2. Painel de gráfico (8.8) implementado como `.chart`, com dados reais do artigo Lost in the Middle, num slide só que apresenta o estudo (chip `ARTIGO`) e o resultado; peças novas: arquivos na hora certa (8.26) e a conversa some (8.27); animações `cresce`, `respira`, `vez`, `apaga` e `relendo` |
 | 2026-11-17 | v1.33: memes e cenas de filme para dar um tom mais leve ao deck (8.29): moldura hachurada com vídeo ou imagem e crédito mono; vídeos em `assets/video/` (GIF também vira vídeo), tocados só no slide ativo por `syncVideos()` em `js/main.js`; imagens em `assets/img/memes/`. Peças novas: meme alto, lista com chip (8.30), slide de meme `layout-meme` e template com legenda em HTML (8.31), Expanding Brain em faixa (8.32), `layout-code__row--meme` e `layout-demo__row`. Dia 1: slides de meme novos 7, 13 e 27 (numeração depois de 7 sobe 1, depois de 13 sobe 2, depois de 27 sobe 3); Dory no lugar da janela de contexto no 10 (8.17 sai do Dia 1); Ratatouille no lugar da figura do harness no 18 (8.19 sai do deck), com as 4 partes do harness em lista com chip; capa de "Como Se Fosse a Primeira Vez", recortada no título e nos atores, no lugar do robô, do chip e do texto de apoio no 22 (AGENTS.md), com `layout-code__row--meme`; Matrix no lugar do robô, do chip e do texto de apoio no 23 (Skills); gato hacker ao lado dos comandos no 25, que perde o rodapé (botão da documentação e pílula do modelo vão para as notas) e usa `layout-demo__row--grow`. Os slides 25 a 29 (mão na massa no OpenCode, inclusive a demo Build vs. Plan) passam a usar o mesmo eyebrow `[ MÃO NA MASSA ]`, no lugar de `[ OPENCODE ]` e `[ DEMO AO VIVO ]`. Dia 2: slide de meme (Gru's Plan) na retomada, slide 1; a capa passa de 5 para 4 min. Regra: o texto do slide explica o conceito e não narra a cena |
 | 2026-11-16 | v1.32: slides do bloco 2.3 do Dia 2 (Por que especificar antes de gerar; eyebrows `[ SPEC ]`, `[ CASO DE USO ]` e `[ FIO CONDUTOR ]`): abertura e 5 slides (ambiguidade vira risco, sem spec vs. com spec, spec curta e viva, um caso de uso por vez e a frase de fechamento). Primeiro `surface-accent` do Dia 2, com `layout-statement` e moldura com losangos. Peça nova: um caso de uso por vez (8.28); animações `sobe` e `carimba` |
+| 2026-11-17 | v1.34: o AGENTS.md (e o CLAUDE.md) sai do Dia 1 e passa a ser apresentado só no Dia 2, no slide 7 (Um arquivo para tudo), como resposta à amnésia; saem do Dia 1 o slide do AGENTS.md (com a capa de "Como Se Fosse a Primeira Vez") e o de AGENTS.md com /init (que não faz sentido numa pasta vazia). Sai também o slide "Quando a janela enche" do bloco de tokens: o que acontece quando a janela enche é papel do harness, então o assunto vai para o slide 18 (Quem cuida da janela), e o slide 9 (Janela de contexto) fica no bloco de tokens com o limite (chip `DEZENAS DE MIL A +1 MILHÃO`). A cena da Dory e a capa de "Como Se Fosse a Primeira Vez" ficam fora do deck, à espera de um lugar novo. Dia 1 com 27 slides: Skills 21, MCP 22, OpenCode 23, meme Build ou Plan? 24, demo 25, Planejar antes vale a pena? 26. Tempos: slide 8 de 1,5 para 2,5 min, slide 9 de 2 para 3, mão na massa no OpenCode de 6 para 9 e demo Build vs. Plan de 9,5 para 13,5. O exemplo de AGENTS.md do Dia 2 passa de Flask a Django |
 
 ## 17. Referências
 
