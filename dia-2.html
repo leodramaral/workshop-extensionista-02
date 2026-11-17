@@ -466,6 +466,228 @@
         </aside>
       </section>
 
+      <!-- 2.4 O fluxo do Spec Kit, etapa por etapa, e a constituição: abertura de bloco -->
+      <section class="surface-dark" data-background-color="#242628">
+        <div class="layout-section">
+          <div class="ruler enter" style="--i: 0" aria-hidden="true"></div>
+          <i class="mark mark--accent float float--1" style="left: 1240px; top: 180px" aria-hidden="true"></i>
+          <i class="mark mark--pink float float--2" style="left: 1480px; top: 330px" aria-hidden="true"></i>
+          <i class="mark mark--green float float--3" style="left: 1360px; top: 470px" aria-hidden="true"></i>
+          <div class="layout-section__body">
+            <i class="layout-section__bar enter" style="--i: 1" aria-hidden="true"></i>
+            <h2 class="title-long enter" style="--i: 2">O fluxo, etapa por etapa</h2>
+          </div>
+          <div class="marquee" aria-hidden="true">
+            <div class="marquee__track"><span>CONSTITUIÇÃO · ESPECIFICAÇÃO · CLARIFICAÇÃO · PLANO · TAREFAS · IMPLEMENTAÇÃO · COMMIT · </span><span>CONSTITUIÇÃO · ESPECIFICAÇÃO · CLARIFICAÇÃO · PLANO · TAREFAS · IMPLEMENTAÇÃO · COMMIT · </span><span>CONSTITUIÇÃO · ESPECIFICAÇÃO · CLARIFICAÇÃO · PLANO · TAREFAS · IMPLEMENTAÇÃO · COMMIT · </span><span>CONSTITUIÇÃO · ESPECIFICAÇÃO · CLARIFICAÇÃO · PLANO · TAREFAS · IMPLEMENTAÇÃO · COMMIT · </span></div>
+          </div>
+        </div>
+        <aside class="notes">
+          [67 min] Abertura do bloco: 45 min de conceito e 22 min de mão na massa (a constituição de cada aluno, com o primeiro commit, antes do intervalo). Os slides da mão na massa ainda vão entrar depois do slide tarefas.md. Seguimos o padrão do Spec Kit, mas à mão: cada etapa vira um arquivo Markdown que a gente escreve e versiona. O exemplo de todos os arquivos é a lista de tarefas da demo do Dia 1.
+        </aside>
+      </section>
+
+      <!-- 2.4 Os arquivos do ciclo, com o prompt final da demo do 1.4 recortado -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-table">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ ARQUIVOS ]</p>
+            <h2>Quatro arquivos</h2>
+          </div>
+
+          <table class="table table--arquivos">
+            <thead>
+              <tr><th>Arquivo</th><th>O que guarda</th><th>Do prompt de ontem</th></tr>
+            </thead>
+            <tbody>
+              <tr class="enter" style="--i: 0">
+                <td><code>constituicao.md</code></td>
+                <td>Os princípios do projeto todo</td>
+                <td>“Apenas HTML, CSS e JavaScript puro”</td>
+              </tr>
+              <tr class="enter" style="--i: 1">
+                <td><code>spec.md</code></td>
+                <td>O quê e por quê de um caso de uso</td>
+                <td>“adicionar uma tarefa (com título)”</td>
+              </tr>
+              <tr class="enter" style="--i: 2">
+                <td><code>plano.md</code></td>
+                <td>O como: arquivos, dados e bibliotecas</td>
+                <td>“salvas no navegador (localStorage)”</td>
+              </tr>
+              <tr class="enter" style="--i: 3">
+                <td><code>tarefas.md</code></td>
+                <td>Passos pequenos e verificáveis</td>
+                <td><span class="chip chip--orange">NADA NO PROMPT</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <aside class="notes">
+          [5 min] O ciclo: a constituição é escrita uma vez, no começo, e vale para o projeto todo. Depois, para cada caso de uso, um laço: especificação, clarificação, plano, tarefas, implementação e commit. Fechou o commit, o sistema funciona com aquele caso, e a próxima volta é o caso seguinte. Uma spec por caso de uso, nunca a do sistema inteiro de uma vez. O roteiro diz que o Spec Kit cria uma branch para cada spec, o que equivale a uma spec por caso de uso; a documentação oficial não confirma: conferir na máquina antes da aula. Pontes com o Dia 1: os templates dos arquivos são few-shot (a IA recebe o formato pronto); o ciclo é prompt chaining (a saída de uma etapa alimenta a próxima); a clarificação é meta-prompting (a IA pergunta antes de responder). Agora, os arquivos que vamos criar, um para cada etapa que gera texto. Para mostrar o que vai em cada um, recortamos o prompt final da demo de ontem, a lista de tarefas. A restrição de usar só HTML, CSS e JavaScript vale para o projeto todo: vai para a constituição. "Adicionar uma tarefa com título" é o que o usuário faz: vai para a spec. Salvar no navegador é decisão de como fazer: vai para o plano. E a lista de tarefas ficou vazia: o prompt não dividia o trabalho em passos. Também não tinha critério de aceitação (como saber que ficou pronto?) nem fluxo alternativo (e se o título vier vazio?). Dois trechos não cabem em arquivo nenhum: o papel ("você é um desenvolvedor experiente") e o formato de saída ("gere só o index.html"), que eram instruções para uma resposta só. O que não cabe em nenhum arquivo, ou o arquivo que fica vazio, mostra o que faltou especificar.
+        </aside>
+      </section>
+
+      <!-- 2.4 Constituição, com a identidade visual -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-code">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ CONSTITUIÇÃO ]</p>
+            <h2>constituicao.md</h2>
+          </div>
+
+          <div class="layout-code__row layout-code__row--center">
+            <div class="layout-code__card enter" style="--i: 0">
+              <div class="hatch">
+                <article class="code">
+                  <div class="code__head">constituicao.md · lista de tarefas</div>
+                  <div class="code__body">
+                    <div class="diff__line"><b>01</b><span class="code__h"># Constituição</span></div>
+                    <div class="diff__line"><b>02</b><span class="code__h">## Linguagem e bibliotecas</span></div>
+                    <div class="diff__line"><b>03</b><span>- nenhuma biblioteca fora desta lista</span></div>
+                    <div class="diff__line"><b>04</b><span class="code__h">## Padrões de código</span></div>
+                    <div class="diff__line"><b>05</b><span>- interface toda em português do Brasil</span></div>
+                    <div class="diff__line"><b>06</b><span class="code__h">## Nunca fazer</span></div>
+                    <div class="diff__line"><b>07</b><span>- apagar dados sem pedir confirmação</span></div>
+                    <div class="diff__line"><b>08</b><span class="code__h">## Identidade visual</span></div>
+                    <div class="diff__line"><b>09</b><span>- referência: link ou print de um site real</span></div>
+                    <div class="diff__line"><b>10</b><span>- cores, tipografia, espaçamento e densidade</span></div>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <div class="layout-code__side">
+              <span class="chip chip--hex chip--accent enter" style="--i: 1">ESCRITA UMA VEZ</span>
+              <p class="enter" style="--i: 2">Princípios que valem para o projeto todo, inclusive a stack que, no Dia 1, a IA escolheu sozinha.</p>
+              <p class="enter" style="--i: 3">O visual também: sem referência, a IA escolhe pela média.</p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          [8 min] Primeiro arquivo, escrito uma vez só. A constituição guarda os princípios que valem para o projeto inteiro, e toda etapa depois dela é conferida contra ela. Linguagem e bibliotecas: é a stack, a escolha que no Dia 1 a IA fez sozinha, cada um com uma diferente. Na prática, o template já traz a stack. Padrões de código: como escrever (aqui, a interface em português). Nunca fazer: o que a IA não pode fazer em nenhum caso de uso. Identidade visual: sem referência, a IA escolhe o design pela média, do mesmo jeito que escolheu a stack. Para dar referência, envie à IA o link ou um print de um site real e descreva o que você quer dele: cores, tipografia, espaçamento, densidade. Liste também o que evitar. Cada linha do cartão é só um exemplo da lista de tarefas; o arquivo de verdade tem mais itens em cada seção.
+        </aside>
+      </section>
+
+      <!-- 2.4 Especificação, com a clarificação -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-code">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ ESPECIFICAÇÃO ]</p>
+            <h2>spec.md</h2>
+          </div>
+
+          <div class="layout-code__row layout-code__row--center">
+            <div class="layout-code__card enter" style="--i: 0">
+              <div class="hatch">
+                <article class="code">
+                  <div class="code__head">spec.md · caso 1: adicionar tarefa</div>
+                  <div class="code__body">
+                    <div class="diff__line"><b>01</b><span class="code__h"># Caso 1: adicionar tarefa</span></div>
+                    <div class="diff__line"><b>02</b><span class="code__h">## Ator e objetivo</span></div>
+                    <div class="diff__line"><b>03</b><span>- quem usa quer anotar algo para não esquecer</span></div>
+                    <div class="diff__line"><b>04</b><span class="code__h">## Fluxo principal</span></div>
+                    <div class="diff__line"><b>05</b><span>- digita o título e confirma; a tarefa aparece</span></div>
+                    <div class="diff__line"><b>06</b><span class="code__h">## Fluxo alternativo</span></div>
+                    <div class="diff__line"><b>07</b><span>- título vazio: avisa e não salva</span></div>
+                    <div class="diff__line"><b>08</b><span class="code__h">## Critérios de aceitação</span></div>
+                    <div class="diff__line"><b>09</b><span>- [ ] a tarefa nova aparece como pendente</span></div>
+                    <div class="diff__line"><b>10</b><span>- [ ] título vazio não é salvo</span></div>
+                    <div class="diff__line diff__line--add enter" style="--i: 3"><b>11+</b><span>- [ ] título repetido é aceito</span></div>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <div class="layout-code__side">
+              <span class="chip chip--back chip--blue enter" style="--i: 1">O QUÊ E POR QUÊ</span>
+              <p class="enter" style="--i: 2">Sem tecnologia. Uma spec por caso de uso, escrita na vez dele.</p>
+              <span class="chip chip--back chip--violet enter" style="--i: 3">CLARIFICAÇÃO</span>
+              <p class="enter" style="--i: 4">A IA pergunta o que está ambíguo. A resposta volta para a spec.</p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          [11 min] Segundo arquivo: o quê e por quê, sem falar de tecnologia. Uma spec por caso de uso, escrita só quando chega a vez dele; aqui, o caso 1 da lista de tarefas. Ator e objetivo: quem usa e o que quer. Fluxo principal: o caminho feliz. Fluxos alternativos: o que acontece quando algo sai do caminho (título vazio). Critérios de aceitação: frases que dá para testar, com resposta sim ou não. "Funcionar bem" não é critério; "título vazio não é salvo" é. Lembram do slide "Ambiguidade vira risco"? Título vazio, título repetido e exclusão sem confirmar: a IA decidiu sozinha. Aqui a decisão está escrita. Clarificação (cerca de 4 min): antes do plano, pedir à IA que leia a spec e faça perguntas sobre o que está ambíguo, sem escrever código. Exemplo de pergunta: "pode haver duas tarefas com o mesmo título?". A resposta não fica na conversa: volta para a spec, como a linha 11 em verde. É o meta-prompting do Dia 1.
+        </aside>
+      </section>
+
+      <!-- 2.4 Plano -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-code">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ PLANO ]</p>
+            <h2>plano.md</h2>
+          </div>
+
+          <div class="layout-code__row layout-code__row--center">
+            <div class="layout-code__card enter" style="--i: 0">
+              <div class="hatch">
+                <article class="code">
+                  <div class="code__head">plano.md · caso 1: adicionar tarefa</div>
+                  <div class="code__body">
+                    <div class="diff__line"><b>01</b><span class="code__h"># Plano: adicionar tarefa</span></div>
+                    <div class="diff__line"><b>02</b><span class="code__h">## Estrutura de arquivos</span></div>
+                    <div class="diff__line"><b>03</b><span>- a tela, a regra do título e o armazenamento</span></div>
+                    <div class="diff__line"><b>04</b><span class="code__h">## Modelo de dados</span></div>
+                    <div class="diff__line"><b>05</b><span>- Tarefa: título (texto), concluída (sim/não)</span></div>
+                    <div class="diff__line"><b>06</b><span class="code__h">## Bibliotecas</span></div>
+                    <div class="diff__line"><b>07</b><span>- só as que a constituição permite</span></div>
+                    <div class="diff__line"><b>08</b><span class="code__h">## Checagem</span></div>
+                    <div class="diff__line"><b>09</b><span>- [x] respeita a constituição</span></div>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <div class="layout-code__side">
+              <span class="chip chip--back chip--pink enter" style="--i: 1">O COMO</span>
+              <p class="enter" style="--i: 2">Estrutura de arquivos, modelo de dados e bibliotecas do caso da vez.</p>
+              <p class="enter" style="--i: 3">Antes de seguir, conferir se o plano respeita a constituição.</p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          [5 min] Terceiro arquivo: agora sim, o como. A spec diz o que o caso faz; o plano diz como vamos construir. Estrutura de arquivos: onde fica cada parte (a tela, a regra que recusa título vazio, o lugar onde os dados ficam salvos). Modelo de dados: quais informações existem (uma tarefa tem título e um campo concluída). Bibliotecas: só as que a constituição permite. Por último, a checagem: o plano respeita a constituição? Se a IA sugerir uma biblioteca que não está na lista, o plano volta, não o código. A IA escreve o plano a partir da spec e da constituição; a gente lê e corrige.
+        </aside>
+      </section>
+
+      <!-- 2.4 Tarefas e revisão humana -->
+      <section class="surface-light" data-background-color="#E2E4DD">
+        <div class="layout-code">
+          <div class="layout-title__head">
+            <p class="eyebrow">[ TAREFAS ]</p>
+            <h2>tarefas.md</h2>
+          </div>
+
+          <div class="layout-code__row layout-code__row--center">
+            <div class="layout-code__card enter" style="--i: 0">
+              <div class="hatch">
+                <article class="code">
+                  <div class="code__head">tarefas.md · caso 1: adicionar tarefa</div>
+                  <div class="code__body">
+                    <div class="diff__line"><b>01</b><span class="code__h"># Tarefas: adicionar tarefa</span></div>
+                    <div class="diff__line"><b>02</b><span>- [ ] T1 guardar os dados da tarefa (critério 1)</span></div>
+                    <div class="diff__line"><b>03</b><span>- [ ] T2 campo e botão de nova tarefa (critério 1)</span></div>
+                    <div class="diff__line"><b>04</b><span>- [ ] T3 recusar título vazio (critério 2)</span></div>
+                    <div class="diff__line"><b>05</b><span>- [ ] T4 aceitar título repetido (critério 3)</span></div>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <div class="layout-code__side">
+              <span class="chip chip--back chip--green enter" style="--i: 1">PEQUENAS E VERIFICÁVEIS</span>
+              <p class="enter" style="--i: 2">Cada tarefa ligada a um critério de aceitação da spec.</p>
+              <span class="chip chip--hex chip--accent enter" style="--i: 3">REVISÃO HUMANA</span>
+              <p class="enter" style="--i: 4">Ler e corrigir spec, plano e tarefas antes de gerar qualquer código.</p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          [16 min] Quarto arquivo: o plano quebrado em tarefas pequenas, em ordem. Cada tarefa é verificável e aponta para um critério de aceitação da spec: dá para saber quando ela terminou. Tarefa grande, como "fazer a tela inteira", vira conversa longa e cai no Lost in the Middle. Antes de gerar qualquer código, a revisão humana: ler spec, plano e tarefas e corrigir o que estiver errado. Corrigir uma linha de texto agora custa menos do que corrigir código depois. É aqui que o "a IA decidiu sozinha" do Dia 1 deixa de acontecer. Implementação (11 min): agora a IA escreve código, uma tarefa por vez. Para cada tarefa, uma sessão nova no OpenCode, passando só os arquivos que ela pede: a constituição, a spec do caso, o plano e a tarefa da vez. É o Lost in the Middle aplicado: contexto curto, nada importante perdido no meio, e a sessão nova não precisa adivinhar nada, porque o porquê está escrito. Terminou a tarefa: validar contra os critérios de aceitação e marcar [x] no tarefas.md. Regra de ouro: se o comportamento está errado, corrigir a spec ou o plano e gerar de novo, e não remendar o código. Git, com poucos comandos e operado por vocês: git status (o que mudou), git add (o que entra), git commit (grava, com mensagem) e git log (o histórico). O primeiro commit leva só a constituição; cada caso de uso termina com um commit de mensagem no padrão "caso N: o que foi feito". .gitignore e segredos: arquivos gerados e chaves (o arquivo .env) nunca entram no repositório; voltamos a isso nas boas práticas. Fechou o commit, puxa o próximo caso. Aqui, para simplificar, todos os commits ficam na main, sem uma branch por caso de uso.
+        </aside>
+      </section>
+
     </div>
   </div>
 

@@ -919,3 +919,13 @@ canvas.ponte-fig__mesh { display: block; color: var(--c-blue); }
   text-align: center;
   padding: 10px 16px;
 }
+
+/* Tabela dos arquivos do SDD (v1.38): marcador na cor fixa de cada arquivo */
+.table--arquivos td { vertical-align: middle; }
+.table--arquivos tr:nth-child(1) td:first-child::before { background: var(--c-accent); }
+.table--arquivos tr:nth-child(2) td:first-child::before { background: var(--c-blue); }
+.table--arquivos tr:nth-child(3) td:first-child::before { background: var(--c-pink); }
+.table--arquivos tr:nth-child(4) td:first-child::before { background: var(--c-green); }
+.table--arquivos td:first-child code { font-size: var(--t-body); font-weight: 400; }
+.table--arquivos td:last-child { font-style: italic; }
+.table--arquivos td:last-child .chip { font-style: normal; }

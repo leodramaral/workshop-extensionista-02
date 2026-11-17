@@ -316,3 +316,6 @@
 .layout-code__side .meme--alto { width: auto; align-self: flex-start; } /* capa em pé: a moldura abraça a imagem */
 /* Demo sem rodapé (slide 25): a linha ocupa a altura que sobra e centraliza texto e cena */
 .layout-demo__row--grow { flex: 1; min-height: 0; margin-bottom: var(--s-5); }
+
+/* Cartão de arquivo com coluna lateral só de texto (slides do 2.4): as duas colunas centralizadas na vertical */
+.layout-code__row--center { align-items: center; }
