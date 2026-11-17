@@ -107,6 +107,7 @@
               <span class="chip chip--back chip--blue">ARTIGO · LIU ET AL., 2023</span>
               <p class="lead">Num estudo de Stanford, o modelo recebeu 20 textos, só um com a resposta. Quando ela estava no meio, ele acertou menos.</p>
               <p class="flow__label">Modelo testado: GPT-3.5-Turbo</p>
+              <span class="chip chip--arrow chip--orange">CONVERSA LONGA: O MEIO SE PERDE</span>
             </div>
 
             <div class="layout-text-figure__figure">
@@ -148,7 +149,7 @@
           </div>
         </div>
         <aside class="notes">
-          [11 min] Lembram da janela de contexto do Dia 1? Ela tem limite. Dor 1: mesmo cabendo na janela, a IA se perde. Isto não é opinião, é um estudo: o artigo "Lost in the Middle: How Language Models Use Long Contexts", de Nelson Liu e colegas (Stanford, UC Berkeley e Samaya AI), publicado na TACL em 2023. O experimento, em linguagem simples: o modelo recebe uma pergunta e 20 textos. Só um texto tem a resposta; os outros são parecidos, mas não respondem. Os pesquisadores repetem o teste mudando só o lugar do texto certo: primeiro, 5º, 10º, 15º, último. Tudo cabe na janela. O resultado é uma curva em U. Com a resposta no primeiro texto, o GPT-3.5-Turbo acerta 75,8%; no último, 63,2%; no meio (10º), cai para 53,8%. A linha tracejada é o acerto sem texto nenhum, só com o que o modelo já sabe: 56,1%. Ou seja, com a resposta no meio ele foi pior do que sem ler nada. Números da Tabela 6 do artigo (20 documentos) e o 56,1% da Tabela 1. E não é só modelo pequeno: a versão de contexto longo (GPT-3.5-Turbo 16K) teve uma curva quase igual; os autores concluem que modelos de contexto estendido não são necessariamente melhores em usar o contexto. Caber na janela não é o mesmo que ser bem usado. Para fechar, a ligação com o Dia 1: o prompt do one-shot era gigante, e o requisito que importava podia estar no meio dele. Na rodada 2, cada correção, cada resposta e cada erro colado empurraram o que vocês disseram antes para o meio da conversa. Exemplo: "o preço não pode ser negativo", dito na terceira mensagem, some no meio de tudo. Perguntar à turma: alguém pediu uma coisa, a IA fez, e duas correções depois ela desfez?
+          [11 min] Lembram da janela de contexto do Dia 1? Ela tem limite. Dor 1: mesmo cabendo na janela, a IA se perde. Isto não é opinião, é um estudo: o artigo "Lost in the Middle: How Language Models Use Long Contexts", de Nelson Liu e colegas (Stanford, UC Berkeley e Samaya AI), publicado na TACL em 2023. O experimento, em linguagem simples: o modelo recebe uma pergunta e 20 textos. Só um texto tem a resposta; os outros são parecidos, mas não respondem. Os pesquisadores repetem o teste mudando só o lugar do texto certo: primeiro, 5º, 10º, 15º, último. Tudo cabe na janela. O resultado é uma curva em U. Com a resposta no primeiro texto, o GPT-3.5-Turbo acerta 75,8%; no último, 63,2%; no meio (10º), cai para 53,8%. A linha tracejada é o acerto sem texto nenhum, só com o que o modelo já sabe: 56,1%. Ou seja, com a resposta no meio ele foi pior do que sem ler nada. Números da Tabela 6 do artigo (20 documentos) e o 56,1% da Tabela 1. E não é só modelo pequeno: a versão de contexto longo (GPT-3.5-Turbo 16K) teve uma curva quase igual; os autores concluem que modelos de contexto estendido não são necessariamente melhores em usar o contexto. Caber na janela não é o mesmo que ser bem usado. Para fechar, a ligação com o Dia 1: o prompt do one-shot era gigante, e o requisito que importava podia estar no meio dele. Na rodada 2, cada correção, cada resposta e cada erro colado empurraram o que vocês disseram antes para o meio da conversa. Exemplo: "o preço não pode ser negativo", dito na terceira mensagem, some no meio de tudo. Perguntar à turma: alguém pediu uma coisa, a IA fez, e duas correções depois ela desfez? Então continuar na mesma conversa não resolve. E se a gente abrir uma sessão nova?
         </aside>
       </section>
 
@@ -162,7 +163,7 @@
 
           <div class="layout-text-figure__row">
             <div class="layout-text-figure__text">
-              <p class="lead">A IA não lembra das conversas anteriores. Para entender o sistema, relê o código, e a janela enche de novo.</p>
+              <p class="lead">Abrir uma sessão nova limpa a conversa, mas a IA não lembra de nada. Para entender o sistema, relê o código, e a janela enche de novo.</p>
               <span class="chip chip--arrow chip--orange">CUSTA TOKENS E TEMPO</span>
             </div>
 
@@ -194,7 +195,7 @@
           </div>
         </div>
         <aside class="notes">
-          [3 min] Dor 2. A figura conta a história: ontem, na conversa, vocês tomaram decisões e fizeram correções. Hoje, sessão nova: a janela começa vazia. Cada sessão nova começa do zero: a IA não lembra do que foi conversado ontem. Para entender a aplicação antes de mexer, ela precisa reler o código, arquivo por arquivo. Reler custa tokens e tempo, e volta a encher a janela: a Dor 1 aparece de novo, agora antes mesmo de começar o trabalho. No Dia 1 isso não apareceu porque tudo aconteceu numa sessão só.
+          [3 min] Dor 2, a outra saída: abrir uma sessão nova. A conversa fica limpa, mas a figura conta o preço: ontem, na conversa, vocês tomaram decisões e fizeram correções. Hoje, sessão nova: a janela começa vazia. Cada sessão nova começa do zero: a IA não lembra do que foi conversado ontem. Para entender a aplicação antes de mexer, ela precisa reler o código, arquivo por arquivo. Reler custa tokens e tempo, e volta a encher a janela: a Dor 1 aparece de novo, agora antes mesmo de começar o trabalho. No Dia 1 isso não apareceu porque tudo aconteceu numa sessão só.
         </aside>
       </section>
 
@@ -255,7 +256,7 @@
 
           <div class="layout-text-figure__row">
             <div class="layout-text-figure__text">
-              <p class="lead">O porquê escrito em arquivos pequenos, cada um usado no momento certo.</p>
+              <p class="lead">O porquê escrito em arquivos pequenos: a sessão nova lê só o que precisa, e nada fica perdido no meio.</p>
               <span class="chip chip--arrow chip--accent">PRÓXIMO: SDD</span>
             </div>
 
@@ -296,7 +297,7 @@
           </div>
         </div>
         <aside class="notes">
-          [2 min] Ponte para o resto do dia. Se o código não diz por quê, o porquê precisa estar escrito em algum lugar que a sessão nova possa ler. Mas não num arquivo só, que cresce e vira contexto longo (Lost in the Middle de novo): em vários arquivos pequenos, cada um usado no momento certo. Um para o projeto inteiro, um para o que e o porquê de cada funcionalidade, um para o como e um para a tarefa da vez. A IA recebe só o que precisa naquele passo. Isso tem nome: Spec-Driven Development, o SDD.
+          [2 min] Ponte para o resto do dia. Continuar na conversa longa perde o meio; abrir uma sessão nova perde a memória. Se o código não diz por quê, o porquê precisa estar escrito em algum lugar que a sessão nova possa ler. Mas não num arquivo só, que cresce e vira contexto longo (Lost in the Middle de novo): em vários arquivos pequenos, cada um usado no momento certo. Um para o projeto inteiro, um para o que e o porquê de cada funcionalidade, um para o como e um para a tarefa da vez. A IA recebe só o que precisa naquele passo. Isso tem nome: Spec-Driven Development, o SDD.
         </aside>
       </section>
 
