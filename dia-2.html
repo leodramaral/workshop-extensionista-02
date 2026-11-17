@@ -86,58 +86,11 @@
             <h2 class="title-long enter" style="--i: 2">As dores que o Dia 1 não mostrou</h2>
           </div>
           <div class="marquee" aria-hidden="true">
-            <div class="marquee__track"><span>CONTEXTO · ALUCINAÇÃO · LOST IN THE MIDDLE · AMNÉSIA · AGENTS.MD · </span><span>CONTEXTO · ALUCINAÇÃO · LOST IN THE MIDDLE · AMNÉSIA · AGENTS.MD · </span><span>CONTEXTO · ALUCINAÇÃO · LOST IN THE MIDDLE · AMNÉSIA · AGENTS.MD · </span><span>CONTEXTO · ALUCINAÇÃO · LOST IN THE MIDDLE · AMNÉSIA · AGENTS.MD · </span></div>
+            <div class="marquee__track"><span>LOST IN THE MIDDLE · AMNÉSIA · O PORQUÊ · ARQUIVOS PEQUENOS · </span><span>LOST IN THE MIDDLE · AMNÉSIA · O PORQUÊ · ARQUIVOS PEQUENOS · </span><span>LOST IN THE MIDDLE · AMNÉSIA · O PORQUÊ · ARQUIVOS PEQUENOS · </span><span>LOST IN THE MIDDLE · AMNÉSIA · O PORQUÊ · ARQUIVOS PEQUENOS · </span></div>
           </div>
         </div>
         <aside class="notes">
-          [25 min] Abertura do bloco. Primeiro, retomar rápido contexto e alucinação. Depois, duas dores novas: mesmo cabendo na janela, a IA se perde (Lost in the Middle); e sessão nova é amnésia. Por fim, por que o AGENTS.md sozinho não resolve, e a ponte para o SDD.
-        </aside>
-      </section>
-
-      <!-- 2.2 Retomada: contexto e alucinação -->
-      <section class="surface-light" data-background-color="#E2E4DD">
-        <div class="layout-two-cards">
-          <div class="layout-title__head">
-            <p class="eyebrow">[ RETOMADA ]</p>
-            <h2>Contexto e alucinação</h2>
-          </div>
-
-          <div class="layout-two-cards__row">
-            <div class="hatch enter" style="--i: 0">
-              <article class="card">
-                <span class="chip chip--back chip--blue">CONTEXTO</span>
-                <h3>A janela enche</h3>
-                <p>Tudo ocupa espaço. Quando enche, o harness resume e decisões se perdem.</p>
-                <ul>
-                  <li>Cada prompt de correção</li>
-                  <li>Cada arquivo lido</li>
-                  <li>Cada erro colado</li>
-                </ul>
-              </article>
-            </div>
-
-            <div class="hatch enter" style="--i: 1">
-              <article class="card card--accent">
-                <span class="chip chip--hex">ALUCINAÇÃO</span>
-                <h3>Preenche o que falta</h3>
-                <p>Onde falta informação, o modelo completa com o mais provável.</p>
-                <ul>
-                  <li>Funções que não existem</li>
-                  <li>Requisitos que ninguém pediu</li>
-                  <li>“Pronto, corrigi” sem ter corrigido</li>
-                </ul>
-              </article>
-            </div>
-          </div>
-
-          <svg class="connectors" viewBox="0 0 1920 1080" aria-hidden="true">
-            <path class="connector" style="--len: 96; --i: 0" d="M912 588 H1008" />
-            <circle class="node" style="--i: 0" cx="912" cy="588" r="9" />
-            <circle class="node node--last" style="--i: 1" cx="1008" cy="588" r="9" />
-          </svg>
-        </div>
-        <aside class="notes">
-          [3 min] Só retomar, sem reexplicar (visto no 1.2 e no 1.3). Contexto: cada prompt de correção, cada arquivo lido e cada erro colado ocupam a janela; quando ela enche, o harness resume (compacta) a conversa ou se recusa a continuar, e no resumo detalhes e decisões se perdem. Alucinação: onde falta informação, o modelo preenche com o mais provável. Puxar exemplos do quadro do Dia 1: funções que não existem, requisitos que ninguém pediu, o "pronto, corrigi" sem ter corrigido.
+          [18 min] Abertura do bloco. Duas dores que o Dia 1 não mostrou: mesmo cabendo na janela, a IA se perde (Lost in the Middle); e sessão nova é amnésia, e o código não diz por quê. Por fim, a ponte para o SDD.
         </aside>
       </section>
 
@@ -195,7 +148,7 @@
           </div>
         </div>
         <aside class="notes">
-          [10 min] Dor 1: mesmo cabendo na janela, a IA se perde. Isto não é opinião, é um estudo: o artigo "Lost in the Middle: How Language Models Use Long Contexts", de Nelson Liu e colegas (Stanford, UC Berkeley e Samaya AI), publicado na TACL em 2023. O experimento, em linguagem simples: o modelo recebe uma pergunta e 20 textos. Só um texto tem a resposta; os outros são parecidos, mas não respondem. Os pesquisadores repetem o teste mudando só o lugar do texto certo: primeiro, 5º, 10º, 15º, último. Tudo cabe na janela. O resultado é uma curva em U. Com a resposta no primeiro texto, o GPT-3.5-Turbo acerta 75,8%; no último, 63,2%; no meio (10º), cai para 53,8%. A linha tracejada é o acerto sem texto nenhum, só com o que o modelo já sabe: 56,1%. Ou seja, com a resposta no meio ele foi pior do que sem ler nada. Números da Tabela 6 do artigo (20 documentos) e o 56,1% da Tabela 1. E não é só modelo pequeno: a versão de contexto longo (GPT-3.5-Turbo 16K) teve uma curva quase igual; os autores concluem que modelos de contexto estendido não são necessariamente melhores em usar o contexto. Caber na janela não é o mesmo que ser bem usado. Para fechar, a ligação com o Dia 1: o prompt do one-shot era gigante, e o requisito que importava podia estar no meio dele. Na rodada 2, cada correção, cada resposta e cada erro colado empurraram o que vocês disseram antes para o meio da conversa. Exemplo: "o preço não pode ser negativo", dito na terceira mensagem, some no meio de tudo. Perguntar à turma: alguém pediu uma coisa, a IA fez, e duas correções depois ela desfez?
+          [11 min] Lembram da janela de contexto do Dia 1? Ela tem limite. Dor 1: mesmo cabendo na janela, a IA se perde. Isto não é opinião, é um estudo: o artigo "Lost in the Middle: How Language Models Use Long Contexts", de Nelson Liu e colegas (Stanford, UC Berkeley e Samaya AI), publicado na TACL em 2023. O experimento, em linguagem simples: o modelo recebe uma pergunta e 20 textos. Só um texto tem a resposta; os outros são parecidos, mas não respondem. Os pesquisadores repetem o teste mudando só o lugar do texto certo: primeiro, 5º, 10º, 15º, último. Tudo cabe na janela. O resultado é uma curva em U. Com a resposta no primeiro texto, o GPT-3.5-Turbo acerta 75,8%; no último, 63,2%; no meio (10º), cai para 53,8%. A linha tracejada é o acerto sem texto nenhum, só com o que o modelo já sabe: 56,1%. Ou seja, com a resposta no meio ele foi pior do que sem ler nada. Números da Tabela 6 do artigo (20 documentos) e o 56,1% da Tabela 1. E não é só modelo pequeno: a versão de contexto longo (GPT-3.5-Turbo 16K) teve uma curva quase igual; os autores concluem que modelos de contexto estendido não são necessariamente melhores em usar o contexto. Caber na janela não é o mesmo que ser bem usado. Para fechar, a ligação com o Dia 1: o prompt do one-shot era gigante, e o requisito que importava podia estar no meio dele. Na rodada 2, cada correção, cada resposta e cada erro colado empurraram o que vocês disseram antes para o meio da conversa. Exemplo: "o preço não pode ser negativo", dito na terceira mensagem, some no meio de tudo. Perguntar à turma: alguém pediu uma coisa, a IA fez, e duas correções depois ela desfez?
         </aside>
       </section>
 
@@ -292,105 +245,17 @@
         </aside>
       </section>
 
-      <!-- 2.2 Mas e o AGENTS.md? Um arquivo para tudo -->
-      <section class="surface-light" data-background-color="#E2E4DD">
-        <div class="layout-code">
-          <div class="layout-title__head">
-            <p class="eyebrow">[ AGENTS.MD ]</p>
-            <h2>Um arquivo para tudo</h2>
-          </div>
-
-          <div class="layout-code__row">
-            <div class="layout-code__card enter" style="--i: 0">
-              <div class="hatch">
-                <article class="code">
-                  <div class="code__head">AGENTS.md · exemplo, semanas depois</div>
-                  <div class="code__body">
-                    <div class="diff__line"><b>01</b><span class="code__h"># Lista de tarefas</span></div>
-                    <div class="diff__line"><b>02</b><span class="code__h">## Stack</span></div>
-                    <div class="diff__line"><b>03</b><span>- Python 3, Django e SQLite</span></div>
-                    <div class="diff__line diff__line--add enter" style="--i: 1"><b>04+</b><span class="code__h">## Cadastro</span></div>
-                    <div class="diff__line diff__line--add enter" style="--i: 2"><b>05+</b><span>- título obrigatório</span></div>
-                    <div class="diff__line diff__line--add enter" style="--i: 3"><b>06+</b><span class="code__h">## Busca</span></div>
-                    <div class="diff__line diff__line--add enter" style="--i: 4"><b>07+</b><span>- ignora acentos e maiúsculas</span></div>
-                    <div class="diff__line diff__line--add enter" style="--i: 5"><b>08+</b><span class="code__h">## Relatório</span></div>
-                    <div class="diff__line diff__line--add enter" style="--i: 6"><b>09+</b><span>- exportar em CSV, com data e status</span></div>
-                    <div class="diff__line diff__line--add enter" style="--i: 7"><b>10+</b><span class="code__h">## …</span></div>
-                  </div>
-                </article>
-              </div>
-            </div>
-
-            <div class="layout-code__side">
-              <div class="layout-code__robot enter" style="--i: 1">
-                <div class="robot-slot" data-robo="agents"></div>
-              </div>
-              <span class="chip chip--arrow chip--orange enter" style="--i: 2">VIRA CONTEXTO LONGO</span>
-              <p class="enter" style="--i: 3">Um arquivo único e global: descreve o projeto, não cada funcionalidade.</p>
-            </div>
-          </div>
-        </div>
-        <aside class="notes">
-          [3 min] "Mas e o AGENTS.md?" Primeira vez que ele aparece: é um arquivo de instruções do projeto (stack, comandos, regras) que o harness entrega à IA no começo de toda sessão. É a resposta natural à amnésia: o que a IA não lembra, ela lê ali. AGENTS.md é o padrão aberto, lido pela maioria dos harnesses; o CLAUDE.md é o equivalente no Claude Code. Ajuda, mas é um arquivo único e global: descreve o projeto, não cada funcionalidade. Se tudo vai para ele, a cada funcionalidade nova ele ganha uma seção, cresce e vira um contexto longo. E contexto longo é Lost in the Middle de novo: a regra da busca fica no meio do arquivo.
-        </aside>
-      </section>
-
-      <!-- 2.2 Mas e o AGENTS.md? O que falta nele -->
-      <section class="surface-light" data-background-color="#E2E4DD">
-        <div class="layout-two-cards">
-          <div class="layout-title__head">
-            <p class="eyebrow">[ AGENTS.MD ]</p>
-            <h2>O que falta no AGENTS.md</h2>
-          </div>
-
-          <div class="layout-two-cards__row">
-            <div class="hatch enter" style="--i: 0">
-              <article class="card">
-                <span class="chip chip--back chip--blue">SEM CRITÉRIO</span>
-                <h3>Qual é a tarefa de agora?</h3>
-                <p>Ele não tem critérios de aceitação nem diz o que fazer agora.</p>
-                <ul>
-                  <li>Quando a tarefa está pronta?</li>
-                  <li>Como saber se deu certo?</li>
-                </ul>
-              </article>
-            </div>
-
-            <div class="hatch enter" style="--i: 1">
-              <article class="card card--accent">
-                <span class="chip chip--hex">DESATUALIZADO</span>
-                <h3>Quem mantém?</h3>
-                <p>Se ninguém atualiza junto com o código, ele envelhece.</p>
-                <ul>
-                  <li>Descreve o sistema de ontem</li>
-                  <li>A IA confia mesmo assim</li>
-                </ul>
-              </article>
-            </div>
-          </div>
-
-          <svg class="connectors" viewBox="0 0 1920 1080" aria-hidden="true">
-            <path class="connector" style="--len: 96; --i: 0" d="M912 588 H1008" />
-            <circle class="node" style="--i: 0" cx="912" cy="588" r="9" />
-            <circle class="node node--last" style="--i: 1" cx="1008" cy="588" r="9" />
-          </svg>
-        </div>
-        <aside class="notes">
-          [2 min] Mais dois limites. Ele não tem critérios de aceitação nem diz qual é a tarefa de agora: a IA não sabe quando terminou nem como provar que deu certo. E fica desatualizado se ninguém o mantém junto com o código: passa a descrever o sistema de ontem, e a IA confia nele do mesmo jeito.
-        </aside>
-      </section>
-
       <!-- 2.2 Ponte para o SDD: vários arquivos pequenos -->
       <section class="surface-light" data-background-color="#E2E4DD">
         <div class="layout-text-figure">
           <div class="layout-title__head">
-            <p class="eyebrow">[ AGENTS.MD ]</p>
+            <p class="eyebrow">[ O PORQUÊ ]</p>
             <h2>Vários arquivos pequenos</h2>
           </div>
 
           <div class="layout-text-figure__row">
             <div class="layout-text-figure__text">
-              <p class="lead">Em vez de um arquivo para tudo, vários pequenos, cada um usado no momento certo.</p>
+              <p class="lead">O porquê escrito em arquivos pequenos, cada um usado no momento certo.</p>
               <span class="chip chip--arrow chip--accent">PRÓXIMO: SDD</span>
             </div>
 
@@ -431,7 +296,7 @@
           </div>
         </div>
         <aside class="notes">
-          [2 min] Ponte para o resto do dia. O problema não é ter um arquivo de instruções; é querer que um arquivo só faça tudo. Precisamos de vários artefatos pequenos, cada um usado no momento certo: um para o projeto inteiro, um para o que e o porquê de cada funcionalidade, um para o como e um para a tarefa da vez. A IA recebe só o que precisa naquele passo. Isso tem nome: Spec-Driven Development, o SDD. E o AGENTS.md não some: a constituição, que vamos ver daqui a pouco, é a versão completa dele.
+          [2 min] Ponte para o resto do dia. Se o código não diz por quê, o porquê precisa estar escrito em algum lugar que a sessão nova possa ler. Mas não num arquivo só, que cresce e vira contexto longo (Lost in the Middle de novo): em vários arquivos pequenos, cada um usado no momento certo. Um para o projeto inteiro, um para o que e o porquê de cada funcionalidade, um para o como e um para a tarefa da vez. A IA recebe só o que precisa naquele passo. Isso tem nome: Spec-Driven Development, o SDD.
         </aside>
       </section>
 
@@ -491,7 +356,7 @@
           </div>
         </div>
         <aside class="notes">
-          [2 min] Resposta à pergunta do Dia 1: sim, planejar antes vale a pena. Mas o plano do agente Plan vive na conversa e some com a sessão (a amnésia que acabamos de ver); a spec fica num arquivo. Ideia central do texto "Spec-Driven Development: Iterative and Agile": a IA não tornou a especificação obsoleta, tornou-a mais importante. Quando é a IA que escreve o código, ambiguidade vira risco: tudo o que o pedido não diz, ela decide sozinha, com confiança. No exemplo, o pedido da lista de tarefas não falava de título vazio, título repetido nem de confirmar a exclusão, e a IA escolheu por nós. Puxar do quadro do Dia 1 a coluna "a IA decidiu sozinha".
+          [2 min] Resposta à pergunta do Dia 1: sim, planejar antes vale a pena. Mas o plano do agente Plan vive na conversa e some com a sessão (a amnésia que acabamos de ver); a spec fica num arquivo. Ideia central do texto "Spec-Driven Development: Iterative and Agile": a IA não tornou a especificação obsoleta, tornou-a mais importante. Quando é a IA que escreve o código, ambiguidade vira risco: tudo o que o pedido não diz, ela decide sozinha, com confiança: preenche com o mais provável, a mesma alucinação do Dia 1. No exemplo, o pedido da lista de tarefas não falava de título vazio, título repetido nem de confirmar a exclusão, e a IA escolheu por nós. Puxar do quadro do Dia 1 a coluna "a IA decidiu sozinha".
         </aside>
       </section>
 
