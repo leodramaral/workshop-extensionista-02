@@ -1,0 +1,81 @@
+/* Ementa da oficina (DESIGN.md, seção 19). A4 em duas orientações, com o mesmo conteúdo:
+   retrato (ementa.html, canvas 1358×1920) e paisagem (ementa-paisagem.html, canvas 1920×1358).
+   O canvas é escalado para a tela por js/ementa.js e, na impressão, por zoom (A4 = 0,5845 do canvas nas duas orientações). */
+
+html, body { margin: 0; background: var(--c-basalt); }
+
+.ementa-viewport {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+/* --ew e --eh: tamanho do canvas, medido por js/ementa.js (o padrão é o retrato) */
+.ementa-stage {
+  width: calc(var(--ew, 1358px) * var(--k, 0.5));
+  height: calc(var(--eh, 1920px) * var(--k, 0.5));
+}
+.ementa {
+  width: 1358px;
+  height: 1920px;
+  padding: var(--s-7) 112px;
+  transform: scale(var(--k, 0.5));
+  transform-origin: 0 0;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--f-body);
+  font-size: var(--t-lead);
+  line-height: 1.35;
+}
+.ementa .frame { inset: var(--s-5); }
+
+/* Cabeçalho: título em 96px, esfera à direita, frase de convite */
+.ementa__head { position: relative; display: flex; flex-direction: column; gap: var(--s-3); }
+.reveal .ementa__head h1 { font-size: var(--t-h1); line-height: 1.0; }
+.ementa__lead { color: var(--s-title); }
+.ementa__esfera { display: block; position: absolute; right: 0; top: 8px; width: 260px; height: 260px; color: var(--s-dot); }
+
+/* Cartões dos dias: chip e data na linha de cima, nome do dia embaixo */
+.ementa .card { padding: 32px 44px; gap: var(--s-3); }
+.ementa__topo { display: flex; align-items: center; gap: var(--s-3); }
+.ementa__topo .pill { margin-left: auto; }
+.ementa .card--accent .pill { background: var(--c-white); color: var(--c-basalt); }
+
+/* Lista com glifo (36px, como a lista "o que observar" das demos) */
+.reveal .ementa__lista { list-style: none; padding-left: 0; display: flex; flex-direction: column; gap: var(--s-1); }
+.ementa .ementa__lista li + li { margin-top: 0; }
+.ementa__lista li { display: flex; align-items: baseline; }
+.ementa__lista .glyph { width: 18px; height: 18px; margin-right: var(--s-3); flex: none; vertical-align: 0; }
+
+/* Tecnologias: 8 chips em grade, para nenhum ficar sozinho na linha */
+.ementa__stack { margin-top: var(--s-4); display: flex; flex-direction: column; gap: var(--s-3); }
+.ementa__stack .chip-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-2); }
+.ementa__stack .chip { align-self: auto; text-align: center; }
+
+/* ---------- Retrato: dias empilhados ---------- */
+.ementa--retrato .ementa__dias { margin-top: var(--s-4); display: flex; flex-direction: column; gap: var(--s-3); }
+
+/* ---------- Paisagem: título em 2 linhas, dias lado a lado, chips numa linha só ---------- */
+.ementa--paisagem { width: 1920px; height: 1358px; page: paisagem; }
+.ementa--paisagem .ementa__lead { max-width: 1300px; }
+.ementa--paisagem .ementa__esfera { top: 0; width: 240px; height: 240px; }
+/* a sobra de altura se divide acima e abaixo dos cartões */
+.ementa--paisagem .ementa__dias { margin: auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-4); }
+/* frase com 2 linhas nos dois cartões, para as listas começarem na mesma altura */
+.ementa--paisagem .card > p { min-height: 2.7em; }
+.ementa--paisagem .ementa__stack { margin-top: 0; }
+.ementa--paisagem .ementa__stack .chip-row { grid-template-columns: repeat(8, 1fr); }
+
+/* ---------- Impressão: A4, 1 página, na orientação de cada arquivo ---------- */
+@page { size: 210mm 297mm; margin: 0; }
+@page paisagem { size: 297mm 210mm; margin: 0; }
+@media print {
+  html, body { background: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .ementa-viewport { display: block; width: auto; height: auto; overflow: visible; }
+  .ementa-stage { width: auto; height: auto; }
+  .ementa { transform: none; zoom: 0.5845; }
+}

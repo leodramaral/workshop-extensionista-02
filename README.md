@@ -30,6 +30,8 @@ index.html        home com os dois dias
 dia-1.html        slides do Dia 1
 dia-2.html        slides do Dia 2
 certificado-b.html  certificado de participação
+ementa.html         ementa da oficina em A4 retrato (acesso só pela URL)
+ementa-paisagem.html  a mesma ementa em A4 paisagem
 css/              tokens, base, layouts, componentes, animações
 js/               main, robôs, certificado e efeitos em canvas
 ```

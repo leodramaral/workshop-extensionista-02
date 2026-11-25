@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ementa da oficina, paisagem</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&family=DM+Sans:ital,wght@0,400..700;1,400..700&family=Space+Mono:wght@400;700&display=swap">
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/componentes.css">
+  <link rel="stylesheet" href="css/layouts.css">
+  <link rel="stylesheet" href="css/ementa.css">
+</head>
+<body>
+  <div class="reveal">
+    <div class="ementa-viewport">
+      <div class="ementa-stage">
+
+        <!-- Ementa em A4 paisagem: título em 2 linhas, dias lado a lado (DESIGN.md, seção 19) -->
+        <main class="ementa ementa--paisagem surface-light">
+          <div class="frame" aria-hidden="true">
+            <i class="frame__diamond frame__diamond--tl"></i>
+            <i class="frame__diamond frame__diamond--tr"></i>
+            <i class="frame__diamond frame__diamond--bl"></i>
+            <i class="frame__diamond frame__diamond--br"></i>
+          </div>
+
+          <header class="ementa__head">
+            <h1>Oficina de desenvolvimento<br>com IA</h1>
+            <p class="ementa__lead">Venha construir um sistema com IA em dois encontros: primeiro com um prompt só, depois especificando antes de gerar.</p>
+            <canvas class="ementa__esfera" data-efeito="esfera" aria-hidden="true"></canvas>
+          </header>
+
+          <section class="ementa__dias">
+            <div class="hatch">
+              <article class="card">
+                <div class="ementa__topo">
+                  <span class="chip chip--hex chip--blue">DIA 1</span>
+                  <span class="pill">26/11 · QUI · 18:20</span>
+                </div>
+                <h3>Vibe coding</h3>
+                <p>Um prompt descreve o sistema e a IA decide o resto.</p>
+                <ul class="ementa__lista">
+                  <li><i class="glyph glyph--blue" aria-hidden="true"></i>Tokens e modelos</li>
+                  <li><i class="glyph glyph--blue" aria-hidden="true"></i>Harness e OpenCode</li>
+                  <li><i class="glyph glyph--blue" aria-hidden="true"></i>Anatomia do prompt</li>
+                  <li><i class="glyph glyph--blue" aria-hidden="true"></i>Um sistema em one-shot</li>
+                </ul>
+              </article>
+            </div>
+
+            <div class="hatch">
+              <article class="card card--accent">
+                <div class="ementa__topo">
+                  <span class="chip chip--hex">DIA 2</span>
+                  <span class="pill">27/11 · SEX · 18:20</span>
+                </div>
+                <h3>Spec-Driven Development</h3>
+                <p>Primeiro a especificação, depois o código.</p>
+                <ul class="ementa__lista">
+                  <li><i class="glyph" aria-hidden="true"></i>Lost in the Middle e amnésia</li>
+                  <li><i class="glyph" aria-hidden="true"></i>Constituição, spec, plano e tarefas</li>
+                  <li><i class="glyph" aria-hidden="true"></i>Identidade visual com referência</li>
+                  <li><i class="glyph" aria-hidden="true"></i>Spec Kit e outras ferramentas</li>
+                </ul>
+              </article>
+            </div>
+          </section>
+
+          <section class="ementa__stack">
+            <p class="eyebrow eyebrow--marca">O QUE VAMOS USAR</p>
+            <div class="chip-row">
+              <span class="chip chip--accent">PYTHON</span>
+              <span class="chip chip--green">DJANGO</span>
+              <span class="chip chip--blue">SQLITE</span>
+              <span class="chip chip--pink">TAILWIND</span>
+              <span class="chip chip--violet">DOCKER</span>
+              <span class="chip chip--accent">OPENCODE</span>
+              <span class="chip chip--green">GIT</span>
+              <span class="chip chip--blue">SPEC KIT</span>
+            </div>
+          </section>
+        </main>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="js/efeitos/esfera.js"></script>
+  <script src="js/ementa.js"></script>
+</body>
+</html>

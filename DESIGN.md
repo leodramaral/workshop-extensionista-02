@@ -1,7 +1,7 @@
 # DESIGN.md: fundação do site de apresentação
 
 > Oficina de Desenvolvimento com IA. Slides servidos como site no GitHub Pages.
-> Versão 1.38 · 2026-11-17 · Leandro Amaral
+> Versão 1.41 · 2026-11-25 · Leandro Amaral
 
 Este arquivo é a **fonte da verdade** do projeto. Ele vale para quem escreve código à mão e para agentes de IA (OpenCode, Claude, Copilot). Faça o `AGENTS.md` do repositório apontar para cá, com a linha: *"Antes de criar ou alterar qualquer slide, leia o DESIGN.md e siga-o à risca."*
 
@@ -51,18 +51,23 @@ URLs base (cdnjs, reveal.js 6.0.1):
 ```
 /
 ├── index.html            # página inicial: título da oficina + dois cartões, um para cada dia
-├── dia-1.html            # apresentação do Dia 1 (Um prompt só)
-├── dia-2.html            # apresentação do Dia 2 (O jeito estruturado)
+├── dia-1.html            # apresentação do Dia 1 (Vibe coding)
+├── dia-2.html            # apresentação do Dia 2 (Spec-Driven Development)
 ├── referencia-ui.html    # deck de referência de UI (todas as peças); NÃO apagar, NÃO linkar: acesso só pela URL
 ├── certificado-b.html    # certificado de participação (seção 18)
+├── ementa.html           # ementa da oficina em A4 retrato (seção 19); NÃO linkar: acesso só pela URL
+├── ementa-paisagem.html  # a mesma ementa em A4 paisagem (seção 19); NÃO linkar
 ├── css/
 │   ├── tokens.css        # variáveis: cores, tipografia, espaços, movimento (seção 5)
 │   ├── base.css          # neutraliza padrões do reveal.js + estilos globais (seção 6)
 │   ├── componentes.css   # peças reutilizáveis (seção 8)
 │   ├── layouts.css       # esqueletos de slide (seção 9)
-│   └── animacoes.css     # keyframes, fragments customizados, reduced-motion (seção 10)
+│   ├── animacoes.css     # keyframes, fragments customizados, reduced-motion (seção 10)
+│   ├── certificado.css   # certificado (seção 18)
+│   └── ementa.css        # ementa (seção 19)
 ├── js/
 │   ├── main.js           # Reveal.initialize + liga/desliga efeitos por slide
+│   ├── ementa.js         # escala da ementa (retrato ou paisagem) e esfera (seção 19)
 │   └── efeitos/
 │       ├── esfera.js     # esfera pontilhada (canvas): referência de UI e certificado
 │       ├── codigo.js     # prompt que vira cascata de código (canvas): capa do Dia 1
@@ -849,9 +854,9 @@ Keyframes de referência, adaptados do CSS da Greptile:
 
 **Esfera** (`js/efeitos/esfera.js`): um canvas de 560×560 com grade de células de 7px. Para cada célula dentro do círculo, calcule a iluminação de Lambert com uma luz que gira, misture 20% de um padrão de faixas de longitude e latitude e acenda a célula se o valor passar o limiar da matriz Bayer 4×4. As células são quadrados de 5px na cor `--s-dot` da superfície (`--c-blue` no claro, `--c-tint` no escuro), lida do CSS do canvas, e o canvas leva `filter: drop-shadow(0 0 6px var(--s-glow))` (brilho azul no claro, âmbar no escuro). A rotação é de cerca de 0,015 rad por quadro.
 
-**Código** (`js/efeitos/codigo.js`, capa do Dia 1, "um prompt só"): canvas de 640×620. No topo, um cartão `--c-white` com borda `--c-ink` onde o prompt `> faz um sistema` é digitado em Space Mono 28px com cursor âmbar (1,4s); ao "enviar", o cartão pisca em `--c-accent` e o nó que o liga ao painel acende. Embaixo, um painel `--c-basalt` recebe 34 linhas de código em 2,6s (barras em `--c-tint`, `--c-blue`, `--c-pink`, `--c-green`, `--c-accent` e `--c-eggshell`, com recuo e numeração em quadradinhos), rolando quando enche. Terminada a cascata, ~14% das linhas ficam `--c-orange` e piscam com faixa laranja: o one-shot gera muito, rápido, e com defeito. O ciclo dura ~7,5s. Linhas geradas por semente fixa (sempre as mesmas). No PDF e com movimento reduzido, mostra o código pronto com os defeitos marcados.
+**Código** (`js/efeitos/codigo.js`, capa do Dia 1, "vibe coding"): canvas de 640×620. No topo, um cartão `--c-white` com borda `--c-ink` onde o prompt `> faz um sistema` é digitado em Space Mono 28px com cursor âmbar (1,4s); ao "enviar", o cartão pisca em `--c-accent` e o nó que o liga ao painel acende. Embaixo, um painel `--c-basalt` recebe 34 linhas de código em 2,6s (barras em `--c-tint`, `--c-blue`, `--c-pink`, `--c-green`, `--c-accent` e `--c-eggshell`, com recuo e numeração em quadradinhos), rolando quando enche. Terminada a cascata, ~14% das linhas ficam `--c-orange` e piscam com faixa laranja: o one-shot gera muito, rápido, e com defeito. O ciclo dura ~7,5s. Linhas geradas por semente fixa (sempre as mesmas). No PDF e com movimento reduzido, mostra o código pronto com os defeitos marcados.
 
-**Planta** (`js/efeitos/planta.js`, capa do Dia 2, "o jeito estruturado"): canvas de 640×620 com uma composição abstrata de 6 peças retangulares (lembra uma tela, sem ser literal), uma por etapa do SDD do roteiro, sem rótulos. Primeiro surgem as cotas (linhas `--c-muted` com marcas nas pontas): mede antes de construir. Depois, para cada peça, em ordem: um quadrado âmbar com borda `--c-ink` sai da peça anterior até a próxima, deixando um fio tracejado; a peça é traçada em tracejado `--c-blue` (lido do `color` do canvas) e então preenchida em 6 degraus com a sua cor (`--c-blue`, `--c-violet`, `--c-pink`, `--c-accent`, `--c-eggshell`, `--c-green`), ganhando contorno `--c-ink`. Ciclo de ~11s, ritmo calmo. No PDF e com movimento reduzido, mostra a composição pronta.
+**Planta** (`js/efeitos/planta.js`, capa do Dia 2, "Spec-Driven Development"): canvas de 640×620 com uma composição abstrata de 6 peças retangulares (lembra uma tela, sem ser literal), uma por etapa do SDD do roteiro, sem rótulos. Primeiro surgem as cotas (linhas `--c-muted` com marcas nas pontas): mede antes de construir. Depois, para cada peça, em ordem: um quadrado âmbar com borda `--c-ink` sai da peça anterior até a próxima, deixando um fio tracejado; a peça é traçada em tracejado `--c-blue` (lido do `color` do canvas) e então preenchida em 6 degraus com a sua cor (`--c-blue`, `--c-violet`, `--c-pink`, `--c-accent`, `--c-eggshell`, `--c-green`), ganhando contorno `--c-ink`. Ciclo de ~11s, ritmo calmo. No PDF e com movimento reduzido, mostra a composição pronta.
 
 ### 10.4 Desempenho e acessibilidade do movimento
 
@@ -877,7 +882,7 @@ E no JS: se `matchMedia('(prefers-reduced-motion: reduce)').matches`, a esfera d
 - **O número do bloco (1.2, 2.3…) não aparece no slide**, só no comentário do HTML. O eyebrow leva o tema (`[ TOKENS ]`, `[ HARNESS ]`). Motivo: o deck não percorre todos os blocos em ordem, e um número solto (abrir no 1.2 sem ter passado pelo 1.1) confunde a turma.
 - **Nunca invente número, estatística ou citação.** Gráficos ilustrativos levam "ilustrativo" na legenda do painel.
 - Para o público iniciante, o corpo tem no máximo 25 palavras por bloco. O detalhe vai para as notas.
-- **Nada de data, horário ou duração no slide:** nem na capa, nem na abertura de bloco, nem na home, nem em pílula. O cronograma muda e o slide não deve envelhecer junto; o tempo fica só nas notas (seção 12).
+- **Nada de data, horário ou duração no slide:** nem na capa, nem na abertura de bloco, nem na home, nem em pílula. O cronograma muda e o slide não deve envelhecer junto; o tempo fica só nas notas (seção 12). **Exceção: a ementa (seção 19)**, que é convite e mostra o dia e o horário de início de cada encontro, nunca o horário de fim nem a duração.
 - **Só cite no slide o que já existe.** Arquivo, link, repositório ou comando que a turma vai procurar precisa existir antes de entrar no slide. O que ainda está por fazer (por exemplo, o repositório da oficina previsto no roteiro) fica nas notas como pendência.
 - **Fatos de ferramenta são conferidos na documentação oficial:** comandos, atalhos, nomes de agentes e de modelos, onde ficam os arquivos. O que não se confirmar não entra no slide; vai para as notas como "conferir na máquina antes da aula".
 - **Cada slide traz algo novo.** Uma ideia-chave do roteiro que não rende um slide com conteúdo próprio (por exemplo, uma frase de efeito que só resume a tabela anterior) vira fala nas notas do slide mais próximo.
@@ -992,6 +997,9 @@ Um slide ou mudança só está **pronto** quando:
 | 2026-11-17 | v1.36: sai do Dia 2 o slide "Vários arquivos pequenos" (ponte para o SDD): sem o AGENTS.md ele perdeu o contraste e adiantava os arquivos do 2.4. O bloco 2.2 vai de "O código não diz por quê" (slide 5) direto para a abertura do 2.3 (slide 6). A figura 8.26 fica fora do deck até o 2.4. Dia 2 com 12 slides; o 2.4 começa no slide 12 |
 | 2026-11-17 | v1.38: slides do bloco 2.4 do Dia 2, itens 1 a 7, com um slide por arquivo (eyebrows `[ ARQUIVOS ]`, `[ CONSTITUIÇÃO ]`, `[ ESPECIFICAÇÃO ]`, `[ PLANO ]` e `[ TAREFAS ]`): abertura (slide 12), Quatro arquivos (13, com o prompt do 1.4 recortado e o ciclo na fala), constituicao.md (14, com a identidade visual), spec.md (15, com a clarificação), plano.md (16) e tarefas.md (17, com a implementação e o Git na fala). Etapa sem arquivo próprio (clarificação, implementação, Git) entra no slide do arquivo vizinho ou só nas notas. Cor fixa por arquivo: constituição âmbar, spec azul, plano rosa, tarefas verde (`.table--arquivos`). A mão na massa da constituição (item 8, 22 min) fica para depois. Dia 2 com 18 slides |
 | 2026-11-17 | v1.37: o eyebrow `[ DEMO AO VIVO ]` sai do deck: toda demo e toda prática usam `[ MÃO NA MASSA ]`, como já era desde a v1.33 nos slides do OpenCode. Muda o slide 3 do Dia 1 (OpenAI Tokenizer) e o slide de exemplo da referência de UI |
+| 2026-11-19 | v1.39: ementa da oficina (seção 19), em A4 retrato e fundo claro, para divulgar e imprimir: três propostas (`ementa-a.html`, cartaz com dias empilhados e esfera; `ementa-b.html`, faixa âmbar com esfera e dias em linhas; `ementa-c.html`, dois atos ligados por conector com nós), com `css/ementa.css` e `js/ementa.js`. Exceção à regra de data da seção 11: a ementa mostra o dia e o horário de início |
+| 2026-11-19 | v1.40: os dias passam a se chamar **Vibe coding** (Dia 1, era "Um prompt só") e **Spec-Driven Development** (Dia 2, era "O jeito estruturado"), com frase do processo: "Um prompt descreve o sistema e a IA decide o resto." e "Primeiro a especificação, depois o código." Muda na home, nas capas e nos `<title>` dos dois dias, no rótulo da capa da referência de UI, no certificado e na ementa. Sai o rótulo do dia da base da capa do Dia 2, que repetia o título (como no Dia 1 desde a v1.16). Ementa: título "Oficina de desenvolvimento com IA" sem eyebrow, sem rodapé; chips de tecnologia sem Markdown e SDD, com Tailwind e Docker; no Dia 2, o tema "Implementação e commit no Git" dá lugar a "Identidade visual com referência" (a referência do Showcase do Tailwind na constituição) |
+| 2026-11-25 | v1.41: ementa escolhida: a proposta A vira `ementa.html` (A4 retrato) e ganha a versão `ementa-paisagem.html` (A4 paisagem, título em 2 linhas, dias lado a lado, chips numa linha); saem as propostas B e C. `js/ementa.js` passa a medir o canvas pelo CSS, e a paisagem imprime pela página nomeada `@page paisagem` |
 
 ## 17. Referências
 
@@ -1014,3 +1022,18 @@ Certificado de participação (proposta B, escolhida), em `certificado-b.html` c
 - **No deck:** um slide em tela cheia logo após a capa (`layout-certfull`): iframe do certificado reduzido a 79,53% para ocupar a altura de 1080, centralizado sobre `surface-dark`, com botão "Abrir" para o tamanho real. Dentro do iframe a esfera fica parada.
 - **Parâmetros de URL:** `?nome=…&dia1=…&dia2=…`. Nome com mais de 28 caracteres usa o título longo (seção 5.2).
 - **Pendente de confirmação:** datas, nome do projeto de extensão e da instituição, e carga horária (6h20 = 2 × 190 min, derivada do roteiro).
+
+## 19. Ementa
+
+Banner de divulgação da oficina, para abrir na tela ou imprimir em PDF. Duas orientações com o mesmo conteúdo: `ementa.html` (A4 retrato) e `ementa-paisagem.html` (A4 paisagem), com `css/ementa.css` e `js/ementa.js`. Como a referência de UI, não aparece na home nem em nenhum link. Das três propostas da v1.39, a escolhida foi a A (cartaz com esfera); a B e a C saíram.
+
+- **Canvas:** retrato 1358×1920 (`.ementa--retrato`) e paisagem 1920×1358 (`.ementa--paisagem`). O tamanho fica só no CSS: `js/ementa.js` mede o `.ementa` e escala para a janela (`--k`, `--ew`, `--eh`), como no certificado.
+- **Impressão:** 1 página A4, margem zero, `zoom: 0.5845` nas duas orientações (o A4 tem a mesma proporção deitado ou em pé) e fundos ligados. O retrato usa o `@page` padrão; a paisagem usa a página nomeada `@page paisagem` (`page: paisagem` no `.ementa--paisagem`).
+- **Superfície:** `surface-light` com moldura e losangos (8.6).
+- **Conteúdo:** título "Oficina de desenvolvimento com IA" (sem eyebrow, porque o título já diz "oficina"), esfera à direita e uma frase de convite; os dois dias em cartões (o Dia 2 em `card--accent`), cada um com chip e pílula de data na linha de cima, nome (Vibe coding e Spec-Driven Development), frase do processo e 4 temas; as tecnologias em 8 chips com o nome, sem logo (8.21): Python, Django, SQLite, Tailwind, Docker, OpenCode, Git e Spec Kit. Sem rodapé.
+- **Retrato:** título em 3 linhas, dias empilhados, chips em grade 4×2.
+- **Paisagem:** título em 2 linhas ("Oficina de desenvolvimento / com IA"), dias lado a lado com as listas alinhadas (a frase do cartão reserva 2 linhas), chips numa linha só (grade de 8 colunas). A sobra de altura se divide acima e abaixo dos cartões.
+- **Tamanhos:** título em 96px, nome do dia em 44px e corpo em 36px (3 tamanhos fora os rótulos); nada abaixo de 24px.
+- **Datas:** dia e horário de início, nunca o de fim nem a duração (exceção da seção 11).
+- **Spec Kit:** aparece como referência (a oficina faz o SDD à mão, no padrão dele), nunca como ferramenta que a turma vai instalar.
+- **Esfera:** `js/efeitos/esfera.js`, anima na tela e para no `beforeprint`.
