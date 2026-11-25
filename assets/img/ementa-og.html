@@ -1,0 +1,74 @@
+<!doctype html>
+<!--
+  Molde da imagem de prévia da ementa (DESIGN.md, seção 19): gera assets/img/ementa-og.png.
+  Não é página do site. Para regerar (por exemplo, se as datas mudarem), abra este arquivo
+  pelo servidor local numa janela de 1200×630 e salve uma captura da tela inteira como PNG.
+-->
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Prévia da ementa (molde da imagem)</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&family=DM+Sans:ital,wght@0,400..700;1,400..700&family=Space+Mono:wght@400;700&display=swap">
+
+  <link rel="stylesheet" href="../../css/tokens.css">
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/componentes.css">
+  <style>
+    /* canvas fixo de 1200×630 (proporção 1,91:1 do Open Graph) */
+    html, body { margin: 0; }
+    .og {
+      --t-label: 22px;
+      width: 1200px;
+      height: 630px;
+      box-sizing: border-box;
+      padding: 64px 72px;
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      column-gap: 32px;
+      align-items: center;
+    }
+    .og .frame { inset: 22px; }
+    .og__texto { display: flex; flex-direction: column; gap: 36px; }
+    .reveal .og h1 { font-size: 70px; line-height: 1.0; }
+    .og__dias { display: grid; grid-template-columns: auto 1fr auto; column-gap: 18px; row-gap: 16px; align-items: center; }
+    .og__dia { display: contents; }
+    .og__dia > * { white-space: nowrap; }
+    .og__dia .chip { align-self: auto; justify-self: start; }
+    .og__nome { font-family: var(--f-display); font-weight: 700; font-size: 30px; letter-spacing: -0.03em; line-height: 1.1; }
+    .og__dia .pill { padding: 6px 18px; }
+    .og__esfera { display: block; width: 220px; height: 220px; color: var(--c-blue); }
+  </style>
+</head>
+<body class="reveal surface-light">
+  <main class="og">
+    <div class="frame" aria-hidden="true">
+      <i class="frame__diamond frame__diamond--tl"></i>
+      <i class="frame__diamond frame__diamond--tr"></i>
+      <i class="frame__diamond frame__diamond--bl"></i>
+      <i class="frame__diamond frame__diamond--br"></i>
+    </div>
+
+    <div class="og__texto">
+      <h1>Oficina de<br>desenvolvimento<br>com IA</h1>
+      <div class="og__dias">
+        <div class="og__dia"><span class="chip chip--hex chip--blue">DIA 1</span><span class="og__nome">Vibe coding</span><span class="pill">26/11 · 18:20</span></div>
+        <div class="og__dia"><span class="chip chip--hex">DIA 2</span><span class="og__nome">Spec-Driven Development</span><span class="pill">27/11 · 18:20</span></div>
+      </div>
+    </div>
+
+    <canvas class="og__esfera" data-efeito="esfera" aria-hidden="true"></canvas>
+  </main>
+
+  <script src="../../js/efeitos/esfera.js"></script>
+  <script>
+    // um quadro parado da esfera, para a captura
+    const esfera = document.querySelector('[data-efeito="esfera"]');
+    if (esfera && window.Efeitos && window.Efeitos.esfera) window.Efeitos.esfera.quadro(esfera);
+  </script>
+</body>
+</html>

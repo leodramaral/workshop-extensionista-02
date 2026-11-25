@@ -1,7 +1,7 @@
 # DESIGN.md: fundação do site de apresentação
 
 > Oficina de Desenvolvimento com IA. Slides servidos como site no GitHub Pages.
-> Versão 1.41 · 2026-11-25 · Leandro Amaral
+> Versão 1.44 · 2026-11-25 · Leandro Amaral
 
 Este arquivo é a **fonte da verdade** do projeto. Ele vale para quem escreve código à mão e para agentes de IA (OpenCode, Claude, Copilot). Faça o `AGENTS.md` do repositório apontar para cá, com a linha: *"Antes de criar ou alterar qualquer slide, leia o DESIGN.md e siga-o à risca."*
 
@@ -55,8 +55,7 @@ URLs base (cdnjs, reveal.js 6.0.1):
 ├── dia-2.html            # apresentação do Dia 2 (Spec-Driven Development)
 ├── referencia-ui.html    # deck de referência de UI (todas as peças); NÃO apagar, NÃO linkar: acesso só pela URL
 ├── certificado-b.html    # certificado de participação (seção 18)
-├── ementa.html           # ementa da oficina em A4 retrato (seção 19); NÃO linkar: acesso só pela URL
-├── ementa-paisagem.html  # a mesma ementa em A4 paisagem (seção 19); NÃO linkar
+├── ementa.html           # ementa da oficina, página responsiva para circular como link (seção 19); NÃO linkar na home
 ├── css/
 │   ├── tokens.css        # variáveis: cores, tipografia, espaços, movimento (seção 5)
 │   ├── base.css          # neutraliza padrões do reveal.js + estilos globais (seção 6)
@@ -67,7 +66,7 @@ URLs base (cdnjs, reveal.js 6.0.1):
 │   └── ementa.css        # ementa (seção 19)
 ├── js/
 │   ├── main.js           # Reveal.initialize + liga/desliga efeitos por slide
-│   ├── ementa.js         # escala da ementa (retrato ou paisagem) e esfera (seção 19)
+│   ├── ementa.js         # liga a esfera da ementa (seção 19)
 │   └── efeitos/
 │       ├── esfera.js     # esfera pontilhada (canvas): referência de UI e certificado
 │       ├── codigo.js     # prompt que vira cascata de código (canvas): capa do Dia 1
@@ -76,7 +75,7 @@ URLs base (cdnjs, reveal.js 6.0.1):
 │       ├── rede.js       # malha azul que respira (canvas): figura do MCP
 │       └── flutuantes.js # quadrados flutuantes
 ├── assets/
-│   ├── img/              # imagens e capturas (PNG/WebP/SVG); memes parados em img/memes/ (8.29)
+│   ├── img/              # imagens e capturas (PNG/WebP/SVG); memes parados em img/memes/ (8.29); prévia da ementa em img/ementa-og.png, com o molde img/ementa-og.html (seção 19)
 │   ├── svg/              # ilustrações e diagramas
 │   └── video/            # cenas de filme recortadas (8.29): .webm + .mp4 + pôster .png
 ├── .nojekyll             # evita o processamento Jekyll do GitHub Pages
@@ -1000,6 +999,9 @@ Um slide ou mudança só está **pronto** quando:
 | 2026-11-19 | v1.39: ementa da oficina (seção 19), em A4 retrato e fundo claro, para divulgar e imprimir: três propostas (`ementa-a.html`, cartaz com dias empilhados e esfera; `ementa-b.html`, faixa âmbar com esfera e dias em linhas; `ementa-c.html`, dois atos ligados por conector com nós), com `css/ementa.css` e `js/ementa.js`. Exceção à regra de data da seção 11: a ementa mostra o dia e o horário de início |
 | 2026-11-19 | v1.40: os dias passam a se chamar **Vibe coding** (Dia 1, era "Um prompt só") e **Spec-Driven Development** (Dia 2, era "O jeito estruturado"), com frase do processo: "Um prompt descreve o sistema e a IA decide o resto." e "Primeiro a especificação, depois o código." Muda na home, nas capas e nos `<title>` dos dois dias, no rótulo da capa da referência de UI, no certificado e na ementa. Sai o rótulo do dia da base da capa do Dia 2, que repetia o título (como no Dia 1 desde a v1.16). Ementa: título "Oficina de desenvolvimento com IA" sem eyebrow, sem rodapé; chips de tecnologia sem Markdown e SDD, com Tailwind e Docker; no Dia 2, o tema "Implementação e commit no Git" dá lugar a "Identidade visual com referência" (a referência do Showcase do Tailwind na constituição) |
 | 2026-11-25 | v1.41: ementa escolhida: a proposta A vira `ementa.html` (A4 retrato) e ganha a versão `ementa-paisagem.html` (A4 paisagem, título em 2 linhas, dias lado a lado, chips numa linha); saem as propostas B e C. `js/ementa.js` passa a medir o canvas pelo CSS, e a paisagem imprime pela página nomeada `@page paisagem` |
+| 2026-11-25 | v1.42: na tela, a ementa em paisagem cobre a janela (largura acompanha a proporção da janela, até 2880px; a impressão continua A4); os cartões dos dias passam a alinhar as listas por `subgrid`, no lugar da frase com altura fixa de 2 linhas |
+| 2026-11-25 | v1.43: a ementa deixa de ser A4 e vira uma página responsiva só, para circular como link: sai `ementa-paisagem.html` e o esquema de impressão; tamanhos de tela real com `clamp()`, dias em uma coluna no celular e lado a lado a partir de 960px, chips em 2, 4 ou 8 colunas; prévia do link por Open Graph |
+| 2026-11-25 | v1.44: imagem de prévia da ementa (`assets/img/ementa-og.png`, 1200×630), capturada do molde `assets/img/ementa-og.html`, e tags `og:image`, `og:url` e `twitter:card` na `ementa.html` |
 
 ## 17. Referências
 
@@ -1025,15 +1027,14 @@ Certificado de participação (proposta B, escolhida), em `certificado-b.html` c
 
 ## 19. Ementa
 
-Banner de divulgação da oficina, para abrir na tela ou imprimir em PDF. Duas orientações com o mesmo conteúdo: `ementa.html` (A4 retrato) e `ementa-paisagem.html` (A4 paisagem), com `css/ementa.css` e `js/ementa.js`. Como a referência de UI, não aparece na home nem em nenhum link. Das três propostas da v1.39, a escolhida foi a A (cartaz com esfera); a B e a C saíram.
+Página de divulgação da oficina, feita para **circular como link** (WhatsApp, e-mail, redes): `ementa.html`, com `css/ementa.css` e `js/ementa.js`. Como a referência de UI, não aparece na home nem em nenhum link do deck. Das três propostas da v1.39, a escolhida foi a A (cartaz com esfera).
 
-- **Canvas:** retrato 1358×1920 (`.ementa--retrato`) e paisagem 1920×1358 (`.ementa--paisagem`). O tamanho fica só no CSS: `js/ementa.js` mede o `.ementa` e escala para a janela (`--k`, `--ew`, `--eh`), como no certificado.
-- **Impressão:** 1 página A4, margem zero, `zoom: 0.5845` nas duas orientações (o A4 tem a mesma proporção deitado ou em pé) e fundos ligados. O retrato usa o `@page` padrão; a paisagem usa a página nomeada `@page paisagem` (`page: paisagem` no `.ementa--paisagem`).
-- **Superfície:** `surface-light` com moldura e losangos (8.6).
-- **Conteúdo:** título "Oficina de desenvolvimento com IA" (sem eyebrow, porque o título já diz "oficina"), esfera à direita e uma frase de convite; os dois dias em cartões (o Dia 2 em `card--accent`), cada um com chip e pílula de data na linha de cima, nome (Vibe coding e Spec-Driven Development), frase do processo e 4 temas; as tecnologias em 8 chips com o nome, sem logo (8.21): Python, Django, SQLite, Tailwind, Docker, OpenCode, Git e Spec Kit. Sem rodapé.
-- **Retrato:** título em 3 linhas, dias empilhados, chips em grade 4×2.
-- **Paisagem:** título em 2 linhas ("Oficina de desenvolvimento / com IA"), dias lado a lado com as listas alinhadas (a frase do cartão reserva 2 linhas), chips numa linha só (grade de 8 colunas). A sobra de altura se divide acima e abaixo dos cartões.
-- **Tamanhos:** título em 96px, nome do dia em 44px e corpo em 36px (3 tamanhos fora os rótulos); nada abaixo de 24px.
+- **Página web, não slide.** Não há canvas de tamanho fixo nem escala por `transform`: a página é responsiva e rola quando o conteúdo passa da altura da tela. O reveal.js não é carregado; o `<body class="reveal surface-light">` só herda a tipografia do `base.css` e o fundo claro com granulado.
+- **Tamanhos de tela real.** Os tokens `--t-h1`, `--t-h3`, `--t-lead` e `--t-label` são redefinidos no `.ementa` com `clamp()`, e chip, pílula, cartão e eyebrow herdam esses valores: título de 34 a 72px, nome do dia de 24 a 36px, corpo de 17 a 24px e rótulos mono de 13 a 16px. A regra "nada abaixo de 24px" (seção 13) vale para o canvas de 1920 do deck, não para esta página.
+- **Larguras:** até 599px (celular), esfera acima do título, dias em uma coluna e chips em 2 colunas; de 600px, chips em 4 colunas; de 960px, dias lado a lado, com as listas alinhadas por `subgrid` (as 4 linhas do cartão são as mesmas nos dois dias) e a sobra de altura dividida acima e abaixo dos cartões; de 1200px, chips numa linha só. Conteúdo com no máximo 1600px de largura, centralizado.
+- **Superfície:** `surface-light` com moldura e losangos (8.6), recuada da borda por `clamp()` (12 a 48px).
+- **Conteúdo:** título "Oficina de desenvolvimento com IA" (sem eyebrow, porque o título já diz "oficina"), esfera e uma frase de convite; os dois dias em cartões (o Dia 2 em `card--accent`), cada um com chip e pílula de data na linha de cima, nome (Vibe coding e Spec-Driven Development), frase do processo e 4 temas; as tecnologias em 8 chips com o nome, sem logo (8.21): Python, Django, SQLite, Tailwind, Docker, OpenCode, Git e Spec Kit. Sem rodapé.
+- **Prévia do link:** `<title>`, `meta description`, Open Graph (`og:title`, `og:description`, `og:url`, `og:image`) e `twitter:card` `summary_large_image`. A imagem é `assets/img/ementa-og.png` (1200×630, PNG abaixo de 300 KB, para o WhatsApp mostrar a prévia), capturada do molde `assets/img/ementa-og.html`: título, os dois dias com chip, nome e pílula de data, e a esfera parada, no mesmo visual da página. **Se o conteúdo mudar (datas, nomes dos dias), atualize o molde e capture de novo** numa janela de 1200×630. As URLs de `og:url` e `og:image` são absolutas, no endereço do GitHub Pages.
 - **Datas:** dia e horário de início, nunca o de fim nem a duração (exceção da seção 11).
 - **Spec Kit:** aparece como referência (a oficina faz o SDD à mão, no padrão dele), nunca como ferramenta que a turma vai instalar.
-- **Esfera:** `js/efeitos/esfera.js`, anima na tela e para no `beforeprint`.
+- **Esfera:** `js/efeitos/esfera.js`, ligada por `js/ementa.js`; com `prefers-reduced-motion`, desenha um quadro só.
