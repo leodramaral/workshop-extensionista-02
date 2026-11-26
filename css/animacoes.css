@@ -1,4 +1,4 @@
-/* Movimento (DESIGN.md, seção 10) */
+/* Movimento (DESIGN.md, seção 7) */
 
 @keyframes blink { 50% { opacity: 0; } }
 @keyframes float-square-1 {
@@ -142,19 +142,19 @@
 @keyframes onda-move { to { transform: translateX(-24px); } }
 .reveal .slides section.present .robot .r-onda-move { animation: onda-move 1.2s linear infinite; }
 
-/* Barras de probabilidade crescem quando o slide fica ativo (8.16) */
+/* Barras de probabilidade crescem quando o slide fica ativo (5.16) */
 @keyframes barra { from { transform: scaleX(0); } }
 .reveal .slides section.present .prob__bar {
   animation: barra var(--d-slow) var(--ease-out) both;
   animation-delay: calc(var(--i, 0) * var(--stagger) + 300ms);
 }
-/* Barras da janela de contexto crescem junto com a entrada das linhas (8.17) */
+/* Barras da janela de contexto crescem junto com a entrada das linhas (5.17) */
 .reveal .slides section.present .janela__barra {
   animation: barra var(--d-slow) var(--ease-out) both;
   animation-delay: calc(var(--i, 0) * var(--stagger) + 300ms);
 }
 
-/* Figuras vivas (8.22, v1.29). Tudo só no slide ativo; o bloco de reduced-motion acima desliga. */
+/* Figuras vivas (5.22, v1.29). Tudo só no slide ativo; o bloco de reduced-motion acima desliga. */
 @keyframes marquee { to { transform: translateX(-50%); } }
 @keyframes volta { to { offset-distance: 100%; } }
 @keyframes acende {
@@ -204,7 +204,7 @@
   animation-delay: calc(4.4s + var(--i, 0) * 0.6s);
 }
 
-/* Cursor piscante também só no slide ativo (seção 10.4) */
+/* Cursor piscante também só no slide ativo (seção 7.4) */
 .reveal .slides section:not(.present) .cursor { animation-play-state: paused; }
 
 /* v1.31: figuras vivas do Dia 2. Só no slide ativo; o bloco de reduced-motion desliga. */
@@ -234,7 +234,7 @@
   animation-delay: calc(3s + var(--k, 0) * 2s);
 }
 
-/* A conversa some (8.27): ciclo de 12s. Ontem aparece e se apaga, a janela fica vazia, a sessão nova relê os arquivos. */
+/* A conversa some (5.27): ciclo de 12s. Ontem aparece e se apaga, a janela fica vazia, a sessão nova relê os arquivos. */
 @keyframes apaga {
   0%        { opacity: 0; }
   4%, 26%   { opacity: 1; }
@@ -262,7 +262,7 @@
 .reveal .slides section.present .amnesia__h--hoje { animation: titulo-hoje 12s ease-in-out infinite both; }
 .reveal .slides section.present .amnesia__vazio { animation: vazio 12s ease-in-out infinite both; }
 
-/* Um caso de uso por vez (8.28): ciclo de 9s por coluna, escalonado por --k. A etiqueta acende,
+/* Um caso de uso por vez (5.28): ciclo de 9s por coluna, escalonado por --k. A etiqueta acende,
    o bloco do caso novo desce para a pilha e o "FUNCIONA" carimba; depois a vez passa à coluna seguinte. */
 @keyframes sobe {
   0%       { opacity: 0; transform: translateY(-40px); }

@@ -1,4 +1,4 @@
-/* Robôs (mascotes) gerados em SVG inline. DESIGN.md, seção 8.12.
+/* Robôs (mascotes) gerados em SVG inline. DESIGN.md, seção 5.12.
  *
  * Cada papel tem uma silhueta própria (um "arquétipo"), como nos mascotes da Mux:
  * monitor alto, gordinho com mãos flutuantes, monitor em pedestal, microfone com

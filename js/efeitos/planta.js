@@ -1,6 +1,6 @@
 /* Planta: composição abstrata de peças; primeiro as cotas, depois cada peça é traçada e
    construída em sequência, com um marcador levando a vez de uma peça para a próxima.
-   Canvas. Capa do Dia 2. DESIGN.md, seção 10.3 */
+   Canvas. Capa do Dia 2. DESIGN.md, seção 7.3 */
 (function () {
   const LARGURA = 640;
   const ALTURA = 620;

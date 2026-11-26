@@ -1,4 +1,4 @@
-/* Ementa: liga a esfera do cabeçalho. DESIGN.md, seção 19.
+/* Ementa: liga a esfera do cabeçalho. DESIGN.md, seção 13.
    Com prefers-reduced-motion, o próprio efeito desenha um quadro só e para. */
 (function () {
   const esfera = document.querySelector('[data-efeito="esfera"]');

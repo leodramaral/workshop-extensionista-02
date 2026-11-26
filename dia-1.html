@@ -23,7 +23,7 @@
   <div class="reveal">
     <div class="slides">
 
-      <!-- 1.1 Abertura: capa -->
+      <!-- Abertura: capa -->
       <section class="surface-light" data-background-color="#E2E4DD">
         <div class="layout-cover">
           <p class="eyebrow enter" style="--i: 0">[ DIA 1 ]<span class="cursor" aria-hidden="true"></span></p>
@@ -39,12 +39,9 @@
 
           <canvas class="layout-cover__fig" data-efeito="codigo" aria-hidden="true"></canvas>
         </div>
-        <aside class="notes">
-          [5 min] Capa do Dia 1, com a abertura (sem slide próprio). Apresentar a equipe e o projeto de extensão. A promessa dos dois dias: hoje vamos desenvolver um sistema usando IA; amanhã vamos entender por que isso não basta. Comentar o perfil da turma a partir da enquete do cadastro (terminal, Linux, Git, Docker, uso de IA). Checar o ambiente: OpenCode instalado, Python funcionando, um aluno por máquina.
-        </aside>
       </section>
 
-      <!-- 1.2 Tokens e panorama de modelos: abertura de bloco -->
+      <!-- Tokens e panorama de modelos: abertura de bloco -->
       <section class="surface-dark" data-background-color="#242628">
         <div class="layout-section">
           <div class="ruler enter" style="--i: 0" aria-hidden="true"></div>
@@ -64,7 +61,7 @@
         </aside>
       </section>
 
-      <!-- 1.2 Tokens: o tokenizer -->
+      <!-- Tokens: o tokenizer -->
       <section class="surface-light" data-background-color="#E2E4DD">
         <div class="layout-flow">
           <div class="layout-title__head">
@@ -100,24 +97,11 @@
                 <span class="tok-id enter" style="--i: 17">20290</span>
               </div>
             </div>
-
-            <article class="robot-card enter" style="--i: 18">
-              <div class="robot-card__stage">
-                <div class="robot-slot" data-robo="modelo"></div>
-              </div>
-              <span class="chip chip--hex chip--violet">MODELO</span>
-              <p>Só enxerga os números.</p>
-            </article>
           </div>
 
           <svg class="connectors" viewBox="0 0 1920 1080" aria-hidden="true">
-            <path class="connector" style="--len: 80; --i: 0" d="M386 524 V604" />
-            <circle class="node" style="--i: 0" cx="386" cy="524" r="9" />
-          </svg>
-          <svg class="connectors" viewBox="0 0 1920 1080" aria-hidden="true">
-            <path class="connector" style="--len: 608; --i: 0" d="M1031 723 H1260 V560 H1476" />
-            <circle class="node" style="--i: 0" cx="1031" cy="723" r="9" />
-            <circle class="node node--last" style="--i: 1" cx="1476" cy="560" r="9" />
+            <path class="connector" style="--len: 80; --i: 0" d="M400 510 V590" />
+            <circle class="node" style="--i: 0" cx="400" cy="510" r="9" />
           </svg>
         </div>
         <aside class="notes">
@@ -125,7 +109,7 @@
         </aside>
       </section>
 
-      <!-- 1.2 Tokens: mão na massa no tokenizer da OpenAI -->
+      <!-- Tokens: mão na massa no tokenizer da OpenAI -->
       <section class="surface-light" data-background-color="#E2E4DD">
         <div class="layout-demo">
           <div class="layout-title__head">
@@ -152,7 +136,7 @@
         </aside>
       </section>
 
-      <!-- 1.2 Tokens: mudar uma ou duas letras muda o corte -->
+      <!-- Tokens: mudar uma ou duas letras muda o corte -->
       <section class="surface-light" data-background-color="#E2E4DD">
         <div class="layout-table">
           <div class="layout-title__head">
@@ -209,7 +193,7 @@
         </aside>
       </section>
 
-      <!-- 1.2 Tokens: abreviação -->
+      <!-- Tokens: abreviação -->
       <section class="surface-light" data-background-color="#E2E4DD">
         <div class="layout-table">
           <div class="layout-title__head">
@@ -242,7 +226,7 @@
         </aside>
       </section>
 
-      <!-- 1.2 Tokens: o modelo prevê o próximo token -->
+      <!-- Tokens: o modelo prevê o próximo token (sorteio e temperatura) -->
       <section class="surface-light" data-background-color="#E2E4DD">
         <div class="layout-text-figure">
           <div class="layout-title__head">
@@ -252,10 +236,11 @@
 
           <div class="layout-text-figure__row">
             <div class="layout-text-figure__text">
-              <p class="lead">A cada passo, o modelo dá uma probabilidade para cada token, escolhe um, acrescenta ao texto e repete.</p>
+              <p class="lead">A cada passo, o modelo dá uma probabilidade para cada token, sorteia um, acrescenta ao texto e repete.</p>
+              <p>A temperatura regula o quanto o sorteio arrisca fora do mais provável. Por isso o mesmo prompt gera respostas diferentes.</p>
               <div class="chip-row">
                 <span class="chip chip--arrow">PREVÊ</span>
-                <span class="chip chip--arrow">ESCOLHE</span>
+                <span class="chip chip--arrow">SORTEIA</span>
                 <span class="chip chip--arrow">ACRESCENTA</span>
                 <span class="chip chip--arrow">REPETE</span>
               </div>
@@ -279,78 +264,11 @@
           </div>
         </div>
         <aside class="notes">
-          [2 min] O modelo não "sabe" a resposta: a cada passo ele calcula uma probabilidade para cada token do vocabulário, escolhe um, cola no texto e recomeça. Clique 1: ele sorteou "nublado", que nem era o mais provável. Clique 2: o token entra no texto e o ciclo recomeça. Os números são ilustrativos.
+          [4 min] O modelo não "sabe" a resposta: a cada passo ele calcula uma probabilidade para cada token do vocabulário, sorteia um, cola no texto e recomeça. Aqui ele sorteou "nublado", que nem era o mais provável. A temperatura regula o quanto ele arrisca: baixa, fica quase sempre no mais provável; alta, sai mais vezes do esperado. Por isso o mesmo prompt pode gerar respostas diferentes. Os números são ilustrativos. Consequência importante: ele escolhe o que soa provável, não o que é verdade. Quando falta informação, completa com algo plausível, no mesmo tom confiante. Isso é a alucinação, e ela volta no Dia 2.
         </aside>
       </section>
 
-      <!-- 1.2 Tokens: meme antes de sorteio e alucinação (8.31) -->
-      <section class="surface-light" data-background-color="#E2E4DD">
-        <div class="layout-meme">
-          <div class="layout-title__head">
-            <p class="eyebrow">[ TOKENS ]</p>
-            <h2>De onde veio isso?</h2>
-          </div>
-          <div class="layout-meme__stage">
-            <figure class="meme meme--alto enter" style="--i: 0; --meme-h: 520px">
-              <div class="hatch">
-                <img class="meme__media" src="assets/img/memes/source-trust-me.png"
-                     alt="Meme em texto cinza: Source(s): Dude trust me">
-              </div>
-              <figcaption class="meme__credit">MEME · SOURCE(S): DUDE TRUST ME</figcaption>
-            </figure>
-          </div>
-        </div>
-        <aside class="notes">
-          [30 s] Mostrar o meme e perguntar: de onde a IA tira a resposta quando não sabe? O próximo slide responde.
-        </aside>
-      </section>
-
-      <!-- 1.2 Tokens: sorteio, temperatura e alucinação -->
-      <section class="surface-light" data-background-color="#E2E4DD">
-        <div class="layout-two-cards">
-          <div class="layout-title__head">
-            <p class="eyebrow">[ TOKENS ]</p>
-            <h2>Sorteio e alucinação</h2>
-          </div>
-
-          <div class="layout-two-cards__row">
-            <div class="hatch enter" style="--i: 0">
-              <article class="card">
-                <span class="chip chip--back chip--blue">TEMPERATURA</span>
-                <h3>Sorteia entre os prováveis</h3>
-                <p>Ele não pega sempre o mais provável. A temperatura controla o quanto ele arrisca.</p>
-                <ul>
-                  <li>Mesmo prompt</li>
-                  <li>Respostas diferentes</li>
-                </ul>
-              </article>
-            </div>
-
-            <div class="hatch enter" style="--i: 1">
-              <article class="card card--accent">
-                <span class="chip chip--hex">ALUCINAÇÃO</span>
-                <h3>Soa provável, não verdadeiro</h3>
-                <p>Quando falta informação, ele preenche com algo plausível, no mesmo tom confiante.</p>
-                <ul>
-                  <li>Escolhe o que soa provável</li>
-                  <li>Não confere se é verdade</li>
-                </ul>
-              </article>
-            </div>
-          </div>
-
-          <svg class="connectors" viewBox="0 0 1920 1080" aria-hidden="true">
-            <path class="connector" style="--len: 96; --i: 0" d="M912 588 H1008" />
-            <circle class="node" style="--i: 0" cx="912" cy="588" r="9" />
-            <circle class="node node--last" style="--i: 1" cx="1008" cy="588" r="9" />
-          </svg>
-        </div>
-        <aside class="notes">
-          [2,5 min] Por isso o mesmo prompt pode gerar respostas diferentes: há um sorteio, e a temperatura regula o quanto ele arrisca. E o mais importante: ele escolhe o que soa provável, não o que é verdade. Quando falta informação, completa com algo plausível, no mesmo tom confiante. Isso é a alucinação, e ela volta no Dia 2.
-        </aside>
-      </section>
-
-      <!-- 1.2 Tokens: janela de contexto -->
+      <!-- Tokens: janela de contexto -->
       <section class="surface-light" data-background-color="#E2E4DD">
         <div class="layout-text-figure">
           <div class="layout-title__head">
@@ -383,7 +301,7 @@
         </aside>
       </section>
 
-      <!-- 1.2 Modelos: proprietários e abertos -->
+      <!-- Modelos: proprietários e abertos -->
       <section class="surface-light" data-background-color="#E2E4DD">
         <div class="layout-two-cards">
           <div class="layout-title__head">
@@ -431,7 +349,7 @@
         </aside>
       </section>
 
-      <!-- 1.2 Modelos: modelo não é produto -->
+      <!-- Modelos: modelo não é produto -->
       <section class="surface-light" data-background-color="#E2E4DD">
         <div class="layout-table">
           <div class="layout-title__head">
@@ -478,7 +396,7 @@
         </aside>
       </section>
 
-      <!-- 1.2 Modelos: meme antes de tamanhos e raciocínio (8.31, Expanding Brain em faixa, 8.32) -->
+      <!-- Modelos: meme antes de tamanhos e raciocínio (5.31, Expanding Brain em faixa, 5.32) -->
       <section class="surface-light" data-background-color="#E2E4DD">
         <div class="layout-meme">
           <div class="layout-title__head">
@@ -516,7 +434,7 @@
         </aside>
       </section>
 
-      <!-- 1.2 Modelos: tamanhos e modelos de raciocínio -->
+      <!-- Modelos: tamanhos e modelos de raciocínio -->
       <section class="surface-light" data-background-color="#E2E4DD">
         <div class="layout-two-cards">
           <div class="layout-title__head">
@@ -565,7 +483,7 @@
         </aside>
       </section>
 
-      <!-- 1.2 Modelos: data de corte -->
+      <!-- Modelos: data de corte -->
       <section class="surface-light" data-background-color="#E2E4DD">
         <div class="layout-text-figure">
           <div class="layout-title__head">
@@ -602,7 +520,7 @@
         </aside>
       </section>
 
-      <!-- 1.2 Modelos: gratuito vs. pago, local vs. nuvem, privacidade -->
+      <!-- Modelos: gratuito vs. pago, local vs. nuvem, privacidade -->
       <section class="surface-light" data-background-color="#E2E4DD">
         <div class="layout-text-figure">
           <div class="layout-title__head">
@@ -636,7 +554,7 @@
         </aside>
       </section>
 
-      <!-- 1.3 Harness: abertura de bloco -->
+      <!-- Harness: abertura de bloco -->
       <section class="surface-dark" data-background-color="#242628">
         <div class="layout-section">
           <div class="ruler enter" style="--i: 0" aria-hidden="true"></div>
@@ -656,7 +574,7 @@
         </aside>
       </section>
 
-      <!-- 1.3 Harness: conceito -->
+      <!-- Harness: conceito -->
       <section class="surface-light" data-background-color="#E2E4DD">
         <div class="layout-text-figure">
           <div class="layout-title__head">
@@ -675,7 +593,7 @@
               </ul>
             </div>
 
-            <!-- Cena de filme (8.29) no lugar da figura do harness (8.19). Alternativa: trocar "ratatouille-tomate" por "ratatouille-ovos" nos 3 caminhos -->
+            <!-- Cena de filme (5.29) no lugar da figura do harness (5.19). Alternativa: trocar "ratatouille-tomate" por "ratatouille-ovos" nos 3 caminhos -->
             <div class="layout-text-figure__figure">
               <figure class="meme enter" style="--i: 5">
                 <div class="hatch">
@@ -696,7 +614,7 @@
         </aside>
       </section>
 
-      <!-- 1.3 Harness: gestão de contexto (quando a janela enche) -->
+      <!-- Harness: gestão de contexto (quando a janela enche) -->
       <section class="surface-light" data-background-color="#E2E4DD">
         <div class="layout-text-figure">
           <div class="layout-title__head">
@@ -734,7 +652,7 @@
         </aside>
       </section>
 
-      <!-- 1.3 Harness: chat vs. implementação via harness -->
+      <!-- Harness: chat vs. implementação via harness -->
       <section class="surface-light" data-background-color="#E2E4DD">
         <div class="layout-two-cards">
           <div class="layout-title__head">
@@ -781,7 +699,7 @@
         </aside>
       </section>
 
-      <!-- 1.3 Harness: harnesses conhecidos -->
+      <!-- Harness: harnesses conhecidos -->
       <section class="surface-light" data-background-color="#E2E4DD">
         <div class="layout-table">
           <div class="layout-title__head">
@@ -827,7 +745,7 @@
         </aside>
       </section>
 
-      <!-- 1.3 Personalizando o harness: Skills -->
+      <!-- Personalizando o harness: Skills -->
       <section class="surface-light" data-background-color="#E2E4DD">
         <div class="layout-code">
           <div class="layout-title__head">
@@ -855,7 +773,7 @@
             </div>
 
             <div class="layout-code__side">
-              <!-- Cena de filme (8.29), no lugar do robô Skills. Alternativa: trocar "matrix-disco" por "matrix-upload" nos 3 caminhos -->
+              <!-- Cena de filme (5.29), no lugar do robô Skills. Alternativa: trocar "matrix-disco" por "matrix-upload" nos 3 caminhos -->
               <figure class="meme enter" style="--i: 1">
                 <div class="hatch">
                   <video class="meme__media" poster="assets/video/matrix-disco.png"
@@ -875,7 +793,7 @@
         </aside>
       </section>
 
-      <!-- 1.3 Personalizando o harness: MCP -->
+      <!-- Personalizando o harness: MCP -->
       <section class="surface-light" data-background-color="#E2E4DD">
         <div class="layout-text-figure">
           <div class="layout-title__head">
@@ -947,7 +865,7 @@
         </aside>
       </section>
 
-      <!-- 1.3 Hands-on no OpenCode: interface, modelo gratuito e sessões -->
+      <!-- Hands-on no OpenCode: interface, modelo gratuito e sessões -->
       <section class="surface-light" data-background-color="#E2E4DD">
         <div class="layout-demo">
           <div class="layout-title__head">
@@ -982,7 +900,7 @@
         </aside>
       </section>
 
-      <!-- 1.3 Hands-on no OpenCode: meme antes da demo Build vs. Plan (8.31, Two Buttons com legenda por cima) -->
+      <!-- Hands-on no OpenCode: meme antes da demo Build vs. Plan (5.31, Two Buttons com legenda por cima) -->
       <section class="surface-light" data-background-color="#E2E4DD">
         <div class="layout-meme">
           <div class="layout-title__head">
@@ -1013,7 +931,7 @@
         </aside>
       </section>
 
-      <!-- 1.3 Hands-on no OpenCode: demo Build vs. Plan -->
+      <!-- Hands-on no OpenCode: demo Build vs. Plan -->
       <section class="surface-light" data-background-color="#E2E4DD">
         <div class="layout-demo">
           <div class="layout-title__head">
@@ -1039,7 +957,7 @@
         </aside>
       </section>
 
-      <!-- 1.3 Hands-on no OpenCode: planejar antes vale a pena? -->
+      <!-- Hands-on no OpenCode: planejar antes vale a pena? -->
       <section class="surface-light" data-background-color="#E2E4DD">
         <div class="layout-two-cards">
           <div class="layout-title__head">

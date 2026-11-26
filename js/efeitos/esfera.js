@@ -1,4 +1,4 @@
-/* Esfera pontilhada (dithering Bayer 4×4), canvas. DESIGN.md, seção 10.3 */
+/* Esfera pontilhada (dithering Bayer 4×4), canvas. DESIGN.md, seção 7.3 */
 (function () {
   const TAMANHO = 560;
   const CELULA = 7;

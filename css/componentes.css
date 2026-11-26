@@ -1,6 +1,6 @@
-/* Componentes reutilizáveis (DESIGN.md, seção 8) */
+/* Componentes reutilizáveis (DESIGN.md, seção 5) */
 
-/* 8.1 Eyebrow */
+/* 5.1 Eyebrow */
 .reveal .eyebrow {
   font-family: var(--f-mono);
   font-size: var(--t-label);
@@ -29,7 +29,7 @@
   background: var(--c-accent);
 }
 
-/* 8.2 Chip */
+/* 5.2 Chip */
 .chip {
   display: inline-block;
   align-self: flex-start;
@@ -50,7 +50,7 @@
 .chip--blue,   .surface-dark .chip--blue   { background: var(--c-blue);   color: var(--c-ink); }
 .chip--green,  .surface-dark .chip--green  { background: var(--c-green);  color: var(--c-ink); }
 
-/* 8.3 Pílula */
+/* 5.3 Pílula */
 .pill {
   display: inline-block;
   align-self: flex-start;
@@ -66,7 +66,7 @@
 }
 .pill--outline { background: transparent; color: inherit; border: 1px solid currentColor; }
 
-/* 8.4 Botão hexagonal */
+/* 5.4 Botão hexagonal */
 .btn-hex {
   display: inline-flex;
   align-items: center;
@@ -81,7 +81,7 @@
 .btn-hex:hover { filter: brightness(1.08); }
 .btn-hex--dark { background: var(--c-basalt); color: var(--c-sand); }
 
-/* 8.5 Cartão e moldura hachurada */
+/* 5.5 Cartão e moldura hachurada */
 .hatch {
   padding: 12px;
   border: 1px solid var(--c-line);
@@ -119,7 +119,7 @@
 .reveal a.hatch--link:hover .card__action { filter: brightness(1.08); }
 .reveal a.hatch--link:focus-visible { outline: 2px dashed var(--c-basalt); outline-offset: 6px; }
 
-/* 8.6 Moldura tracejada com losangos */
+/* 5.6 Moldura tracejada com losangos */
 .frame {
   position: absolute;
   inset: calc(var(--frame-inset) - var(--slide-pad));
@@ -140,7 +140,7 @@
 .frame__diamond--bl { left: 0; top: 100%; }
 .frame__diamond--br { left: 100%; top: 100%; }
 
-/* 8.7 Conectores */
+/* 5.7 Conectores */
 .connectors {
   position: absolute;
   inset: calc(0px - var(--slide-pad));
@@ -157,7 +157,7 @@
 .node { fill: var(--c-basalt); }
 .node--last { fill: var(--c-green); stroke: var(--c-basalt); stroke-width: 2; }
 
-/* 8.11 Marcadores decorativos */
+/* 5.11 Marcadores decorativos */
 .mark {
   position: absolute;
   width: 18px;
@@ -211,7 +211,7 @@
 /* Tabela compacta (6 linhas) */
 .table--compact td { padding-top: var(--s-2); padding-bottom: var(--s-2); }
 
-/* 8.2 Formas de chip e glifos */
+/* 5.2 Formas de chip e glifos */
 .chip--hex, .chip--back, .chip--arrow { padding-left: 32px; padding-right: 32px; }
 .chip--hex {
   clip-path: polygon(14px 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 14px 100%, 0 50%);
@@ -240,10 +240,10 @@
 .glyph--blue   { --glyph: var(--c-blue); }
 .glyph--green  { --glyph: var(--c-green); }
 
-/* 8.4 Par de botões */
+/* 5.4 Par de botões */
 .btn-pair { display: inline-flex; gap: 6px; }
 
-/* 8.9 Cartão de código / diff */
+/* 5.9 Cartão de código / diff */
 .code {
   background: var(--c-basalt);
   color: var(--c-sand);
@@ -273,7 +273,7 @@
 .diff__line--del { background: color-mix(in srgb, var(--c-pink) 25%, transparent); }
 .diff__line--add { background: color-mix(in srgb, var(--c-green) 25%, transparent); }
 
-/* 8.14 Selo */
+/* 5.14 Selo */
 .stamp {
   display: inline-block;
   padding: 8px 24px;
@@ -310,7 +310,7 @@
   stroke-dasharray: 12 9;
 }
 
-/* 8.12 Robôs */
+/* 5.12 Robôs */
 .robot { display: block; width: 300px; height: auto; overflow: visible; }
 .robot .r-line { stroke: var(--c-ink); stroke-width: var(--r-sw); stroke-linejoin: round; stroke-linecap: round; }
 .robot .r-body { fill: var(--c-sand); }
@@ -332,7 +332,7 @@
 .reveal .btn-hex { color: var(--c-ink); }
 .reveal .btn-hex--dark { color: var(--c-sand); }
 
-/* 8.12 Robôs v1.5 (gerados por js/robos.js): variáveis de tema e partes novas */
+/* 5.12 Robôs v1.5 (gerados por js/robos.js): variáveis de tema e partes novas */
 .robot {
   --rline: var(--c-ink);
   --rbody: var(--c-sand);
@@ -408,10 +408,10 @@
 .robot .r-elo { fill: none; stroke: var(--rbody); stroke-width: 1; stroke-linecap: round; opacity: 0.5; }
 .robot .r-junta { fill: none; stroke: var(--rline); stroke-width: var(--r-sw-fino); stroke-linecap: round; }
 
-/* 8.8 Painel escuro de gráfico/diagrama */
+/* 5.8 Painel escuro de gráfico/diagrama */
 .panel { position: relative; background: var(--c-basalt); color: var(--c-sand); padding: 32px; }
 
-/* 8.15 Bloco de token: a cor segue a ordem dentro de .toks e recomeça a cada grupo */
+/* 5.15 Bloco de token: a cor segue a ordem dentro de .toks e recomeça a cada grupo */
 .toks { display: inline-flex; flex-wrap: wrap; gap: 6px; align-items: flex-start; }
 .tok {
   display: inline-block;
@@ -445,7 +445,7 @@
 .table--tok td:nth-child(3) { font-weight: 600; white-space: nowrap; }
 .table--tok td > .cut { display: flex; align-items: center; }
 
-/* 8.16 Barras de probabilidade */
+/* 5.16 Barras de probabilidade */
 .prob { display: flex; flex-direction: column; gap: var(--s-4); }
 .reveal .prob__legend {
   font-family: var(--f-mono);
@@ -480,7 +480,7 @@
 .prob__row--pick .prob__bar { background: var(--c-green); }
 .prob__row .chip { font-size: var(--t-label); }
 
-/* 8.17 Janela de contexto (figura), no estilo do cartão de diff da Greptile */
+/* 5.17 Janela de contexto (figura), no estilo do cartão de diff da Greptile */
 .janela {
   position: relative;
   background: var(--c-basalt);
@@ -545,7 +545,7 @@
   color: var(--c-muted);
 }
 
-/* 8.18 Linha do tempo (data de corte) */
+/* 5.18 Linha do tempo (data de corte) */
 .tempo { position: relative; display: flex; flex-direction: column; gap: var(--s-3); }
 .tempo__head { font-family: var(--f-mono); font-size: var(--t-label); text-transform: uppercase; letter-spacing: 0.08em; color: var(--c-muted-dark); }
 .tempo__trilho { position: relative; display: grid; grid-template-columns: 3fr 2fr; height: 120px; margin-top: var(--s-5); }
@@ -566,10 +566,10 @@
 /* Código em linha (comandos como /init dentro do texto) */
 .reveal code { font-family: var(--f-mono); font-size: 0.9em; }
 
-/* 8.9 Cartão de código: títulos de Markdown e chaves em âmbar */
+/* 5.9 Cartão de código: títulos de Markdown e chaves em âmbar */
 .code .code__h { color: var(--c-accent); }
 
-/* 8.19 Harness em volta do modelo: o modelo no centro, as 4 partes do harness em volta */
+/* 5.19 Harness em volta do modelo: o modelo no centro, as 4 partes do harness em volta */
 .harness {
   position: relative;
   display: flex;
@@ -606,7 +606,7 @@
 .prompt-icon path { fill: none; stroke: var(--c-ink); stroke-width: 14; stroke-linecap: square; stroke-linejoin: miter; }
 .prompt-icon__caret { fill: var(--c-ink); animation: blink 1s steps(1) infinite; }
 
-/* MCP: um encaixe, várias ferramentas, no estilo das ilustrações da Greptile (8.20) */
+/* MCP: um encaixe, várias ferramentas, no estilo das ilustrações da Greptile (5.20) */
 .mcp-fig {
   position: relative;
   width: 960px;
@@ -641,7 +641,7 @@
 .connector--blue { stroke: var(--c-blue); }
 .node.mcp-fig__tip, .node.ponte-fig__tip, .node.casos-fig__tip { fill: var(--c-blue); }
 
-/* 8.23 Régua: marcas a cada 8px e marca maior a cada 64px, sobre uma linha de base */
+/* 5.23 Régua: marcas a cada 8px e marca maior a cada 64px, sobre uma linha de base */
 .ruler,
 .layout-cover__rule::before {
   display: block;
@@ -652,7 +652,7 @@
     linear-gradient(var(--s-rule), var(--s-rule)) 0 100% / 100% 1px no-repeat;
 }
 
-/* 8.24 Faixa corrente: texto mono duplicado que corre devagar */
+/* 5.24 Faixa corrente: texto mono duplicado que corre devagar */
 .marquee {
   overflow: hidden;
   padding: 10px 0;
@@ -670,7 +670,7 @@
 .marquee__track { display: inline-flex; }
 .marquee__track span { white-space: pre; }
 
-/* 8.22 Figuras vivas: borda tracejada que corre (SVG, como o .ants) */
+/* 5.22 Figuras vivas: borda tracejada que corre (SVG, como o .ants) */
 .ants--run rect { stroke: var(--c-basalt); stroke-width: 2; stroke-dasharray: 8 6; }
 .harness { border: 0; }
 .harness .ants--run rect { x: 1px; y: 1px; width: calc(100% - 2px); height: calc(100% - 2px); }
@@ -715,7 +715,7 @@ canvas.mcp-fig__mesh { display: block; color: var(--c-blue); }
 .chip--green-claro   { background: var(--c-green-claro);   color: var(--c-basalt); }
 .chip--violet-claro  { background: var(--c-violet-claro);  color: var(--c-basalt); }
 
-/* 8.25 Comando em destaque: o que a turma vai digitar, como o "/greptile" da Greptile */
+/* 5.25 Comando em destaque: o que a turma vai digitar, como o "/greptile" da Greptile */
 .reveal code.cmd {
   display: inline-block;
   font-family: var(--f-mono);
@@ -733,7 +733,7 @@ canvas.mcp-fig__mesh { display: block; color: var(--c-blue); }
 .reveal code.cmd--green { background: var(--c-green); }
 .reveal code.cmd--violet { background: var(--c-violet); }
 
-/* 8.8 Painel de gráfico (v1.31): legenda, área do gráfico em pixels, eixo e fonte em HTML */
+/* 5.8 Painel de gráfico (v1.31): legenda, área do gráfico em pixels, eixo e fonte em HTML */
 .chart {
   display: flex;
   flex-direction: column;
@@ -774,7 +774,7 @@ canvas.mcp-fig__mesh { display: block; color: var(--c-blue); }
 .chart__axis span { position: absolute; top: 0; translate: -50% 0; white-space: nowrap; }
 .chart__fonte { color: var(--c-muted-dark); }
 
-/* 8.26 Arquivos na hora certa: 4 etiquetas ligadas à IA, uma de cada vez (mesma caixa do MCP) */
+/* 5.26 Arquivos na hora certa: 4 etiquetas ligadas à IA, uma de cada vez (mesma caixa do MCP) */
 .ponte-fig {
   position: relative;
   width: 960px;
@@ -798,7 +798,7 @@ canvas.ponte-fig__mesh { display: block; color: var(--c-blue); }
 .ponte-fig .mark { z-index: 1; }
 .ponte-fig__pulso { fill: none; stroke: var(--c-ink); stroke-width: 3; stroke-dasharray: 14 1000; stroke-dashoffset: 14; opacity: 0; }
 
-/* 8.27 A conversa some: a janela de ontem se apaga e a sessão nova enche só com arquivos relidos.
+/* 5.27 A conversa some: a janela de ontem se apaga e a sessão nova enche só com arquivos relidos.
    O estado padrão é o final (sessão nova relendo), que vale fora do slide ativo, no PDF e com movimento reduzido. */
 .amnesia__titulo { display: inline-grid; }
 .amnesia__h { grid-area: 1 / 1; }
@@ -814,7 +814,7 @@ canvas.ponte-fig__mesh { display: block; color: var(--c-blue); }
 }
 .amnesia__h--ontem, .amnesia__camada--ontem .janela__linha, .reveal .amnesia__vazio { opacity: 0; }
 
-/* 8.28 Um caso de uso por vez: o sistema cresce um caso por coluna, e cada coluna funciona.
+/* 5.28 Um caso de uso por vez: o sistema cresce um caso por coluna, e cada coluna funciona.
    O estado padrão é o final (as três colunas prontas), que vale fora do slide ativo, no PDF e com movimento reduzido. */
 .casos-fig {
   position: relative;
@@ -853,7 +853,7 @@ canvas.ponte-fig__mesh { display: block; color: var(--c-blue); }
 .casos-fig__bloco--3 { background: var(--c-violet); }
 .casos-fig__ok { position: absolute; top: 400px; translate: -50% 0; }
 
-/* Cena de filme / meme (8.29, v1.33): moldura hachurada com a imagem ou o vídeo e o crédito embaixo */
+/* Cena de filme / meme (5.29, v1.33): moldura hachurada com a imagem ou o vídeo e o crédito embaixo */
 .meme { display: flex; flex-direction: column; gap: var(--s-1); margin: 0; }
 .meme__media { display: block; width: 100%; height: auto; background: var(--c-basalt); }
 .meme__credit {
@@ -862,11 +862,11 @@ canvas.ponte-fig__mesh { display: block; color: var(--c-blue); }
   color: var(--c-muted);
 }
 
-/* Lista com chip (8.30, v1.33): chip do item + frase curta, em 36px */
+/* Lista com chip (5.30, v1.33): chip do item + frase curta, em 36px */
 .reveal .chip-list {
   list-style: none;
   padding-left: 0;
-  display: grid; /* o reveal força ul em block (armadilha da seção 9) */
+  display: grid; /* o reveal força ul em block (armadilha da seção 6) */
   grid-template-columns: max-content 1fr;
   column-gap: var(--s-4);
   row-gap: var(--s-3);
@@ -875,12 +875,12 @@ canvas.ponte-fig__mesh { display: block; color: var(--c-blue); }
 .chip-list li { display: grid; grid-template-columns: subgrid; grid-column: 1 / -1; align-items: center; font-size: var(--t-lead); line-height: 1.35; }
 .chip-list .chip { justify-self: start; }
 
-/* Meme alto (8.29): imagem em pé ou quadrada limitada pela altura, não pela largura */
+/* Meme alto (5.29): imagem em pé ou quadrada limitada pela altura, não pela largura */
 .meme--alto { align-self: center; }
 .meme--alto > .hatch { align-self: flex-start; } /* a moldura abraça a imagem, mesmo com crédito mais largo */
 .meme--alto .meme__media { width: auto; height: var(--meme-h, 440px); }
 
-/* Template com legenda por cima (8.31): a imagem do template e as legendas em HTML, posicionadas em % da imagem */
+/* Template com legenda por cima (5.31): a imagem do template e as legendas em HTML, posicionadas em % da imagem */
 .meme-pic { position: relative; display: block; width: fit-content; } /* do tamanho da imagem: as legendas se posicionam em % dela */
 .meme-pic > img { display: block; width: auto; height: var(--meme-h, 520px); }
 .meme-cap {
@@ -897,7 +897,7 @@ canvas.ponte-fig__mesh { display: block; color: var(--c-blue); }
 .meme-cap--box { background: var(--c-white); padding: 6px 14px; }
 .meme-pair { display: flex; gap: var(--s-3); }
 
-/* Expanding Brain em faixa (8.32): os 4 quadros lado a lado, legenda embaixo de cada um */
+/* Expanding Brain em faixa (5.32): os 4 quadros lado a lado, legenda embaixo de cada um */
 .brain-strip {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -910,7 +910,7 @@ canvas.ponte-fig__mesh { display: block; color: var(--c-blue); }
 .brain-strip__cap { font-size: var(--t-body); line-height: 1.3; color: var(--c-basalt); }
 .brain-strip__cap b { font-weight: 600; display: block; }
 
-/* Faixa de legenda no topo do meme (8.29), como nos GIFs legendados: fundo branco, texto ink centralizado */
+/* Faixa de legenda no topo do meme (5.29), como nos GIFs legendados: fundo branco, texto ink centralizado */
 .meme__band {
   display: block;
   background: var(--c-white);

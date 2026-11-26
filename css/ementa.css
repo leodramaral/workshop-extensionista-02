@@ -1,4 +1,4 @@
-/* Ementa da oficina (DESIGN.md, seção 19). Página web responsiva, feita para circular como link:
+/* Ementa da oficina (DESIGN.md, seção 13). Página web responsiva, feita para circular como link:
    não é canvas de slide. Os tokens de tamanho (--t-*) são redefinidos aqui em escala de tela real,
    com clamp(), e os componentes do deck (chip, pílula, cartão, eyebrow) herdam esses tamanhos. */
 

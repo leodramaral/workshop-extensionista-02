@@ -9,7 +9,7 @@
 - **Google Fonts**: Anybody, DM Sans e Space Mono.
 - **GitHub Pages**: publicação automática a partir da `main` (`.github/workflows/pages.yml`).
 
-As regras visuais e de conteúdo dos slides estão no [DESIGN.md](DESIGN.md), a fonte da verdade do projeto.
+O visual dos slides está no [DESIGN.md](DESIGN.md). Todo o resto (conteúdo, stack, arquivos e publicação) está no [AGENTS.md](AGENTS.md).
 
 ## Como rodar
 

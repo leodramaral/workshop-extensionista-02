@@ -1,4 +1,4 @@
-/* Certificado: escala para a tela e preenche nome e datas. DESIGN.md, seção 18.
+/* Certificado: escala para a tela e preenche nome e datas. DESIGN.md, seção 12.
  *
  * Parâmetros de URL (opcionais): ?nome=Maria%20Silva&dia1=12/11/2026&dia2=19/11/2026
  */

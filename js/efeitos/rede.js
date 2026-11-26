@@ -1,4 +1,4 @@
-/* Rede: malha azul que respira, em canvas, atrás da figura do MCP. DESIGN.md, seções 8.20, 8.22 e 10.3
+/* Rede: malha azul que respira, em canvas, atrás da figura do MCP. DESIGN.md, seções 5.20, 5.22 e 7.3
    Linhas horizontais que se estreitam no centro (como o card "Greptile MCP") e verticais retas.
    O estreitamento abre e fecha devagar e as verticais deslizam. A cor vem do `color` do canvas. */
 (function () {

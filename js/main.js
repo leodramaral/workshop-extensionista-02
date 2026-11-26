@@ -20,7 +20,7 @@ Reveal.initialize({
   plugins: [RevealNotes]
 });
 
-// Efeitos pesados rodam só no slide visível (DESIGN.md, seção 10.4)
+// Efeitos pesados rodam só no slide visível (DESIGN.md, seção 7.4)
 function syncEffects() {
   const atual = Reveal.getCurrentSlide();
   document.querySelectorAll('[data-efeito]').forEach((el) => {
@@ -43,7 +43,7 @@ Reveal.on('ready', () => {
 });
 Reveal.on('slidechanged', syncEffects);
 
-// Cenas de filme (DESIGN.md 8.29): o vídeo só roda no slide ativo e recomeça ao chegar.
+// Cenas de filme (DESIGN.md 5.29): o vídeo só roda no slide ativo e recomeça ao chegar.
 // Com movimento reduzido ou no PDF fica o pôster.
 const movimentoReduzido = matchMedia('(prefers-reduced-motion: reduce)').matches;
 function syncVideos() {

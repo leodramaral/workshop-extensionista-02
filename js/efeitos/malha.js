@@ -1,4 +1,4 @@
-/* Malha: duas esferas tangentes em wireframe, canvas. DESIGN.md, seções 8.13 e 10.3 */
+/* Malha: duas esferas tangentes em wireframe, canvas. DESIGN.md, seções 5.13 e 7.3 */
 (function () {
   const BAYER = [
     [0, 8, 2, 10],

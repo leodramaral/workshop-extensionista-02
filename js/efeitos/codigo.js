@@ -1,5 +1,5 @@
 /* Prompt vira código: um prompt curto é digitado e dispara uma cascata de código, com linhas
-   com defeito piscando. Canvas. Capa do Dia 1. DESIGN.md, seção 10.3 */
+   com defeito piscando. Canvas. Capa do Dia 1. DESIGN.md, seção 7.3 */
 (function () {
   const LARGURA = 640;
   const ALTURA = 620;

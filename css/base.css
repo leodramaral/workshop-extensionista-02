@@ -1,4 +1,4 @@
-/* Neutraliza os padrões do reveal.js e define estilos globais (DESIGN.md, seção 6 e 7) */
+/* Neutraliza os padrões do reveal.js e define estilos globais (DESIGN.md, seção 3 e 4) */
 .reveal-viewport { background: var(--c-paper); }
 
 .reveal {
@@ -59,7 +59,7 @@
 
 .reveal .lead { font-size: var(--t-lead); line-height: 1.35; }
 
-/* Superfícies (seção 7) */
+/* Superfícies (seção 4) */
 .surface-light {
   background-color: var(--c-paper);
   background-image: var(--grain);
@@ -108,7 +108,7 @@
   --s-node:    var(--c-basalt);
 }
 
-/* Trilhos, nós e calha (seção 7, v1.29): estrutura em volta do slide, no estilo da Greptile.
+/* Trilhos, nós e calha (seção 4, v1.29): estrutura em volta do slide, no estilo da Greptile.
    ::before = quadriculado fino só na calha (fora dos trilhos); ::after = trilhos tracejados e nós. */
 .reveal .slides > section[class*="surface-"]::before,
 .reveal .slides > section[class*="surface-"]::after {
@@ -139,7 +139,7 @@
     var(--tr-h) 0 var(--frame-inset) / 100% 1px no-repeat,
     var(--tr-h) 0 calc(100% - var(--frame-inset)) / 100% 1px no-repeat;
 }
-/* Slide com moldura própria (8.6) ou certificado em tela cheia: sem trilhos */
+/* Slide com moldura própria (5.6) ou certificado em tela cheia: sem trilhos */
 .reveal .slides > section:has(.frame)::after,
 .reveal .slides > section:has(.layout-certfull)::after,
 .reveal .slides > section:has(.layout-certfull)::before { content: none; }
