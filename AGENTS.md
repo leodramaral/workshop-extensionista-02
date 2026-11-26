@@ -104,7 +104,7 @@ Regras:
 - **Nunca invente número, estatística ou citação.** Gráfico ilustrativo leva "ilustrativo" na legenda do painel. Gráfico que vem de um artigo usa os números da tabela publicada.
 - **Tokens:** cortes e números vêm do tokenizer de verdade (o200k_base, o do GPT-4o), nunca inventados. Palavra solta é cortada diferente da mesma palavra no meio da frase; os exemplos do roteiro usam **espaço antes da palavra**.
 - Para o público iniciante, o corpo tem no máximo 25 palavras por bloco. O detalhe fica na fala do apresentador, fora do slide.
-- **Nada de data, horário ou duração no slide:** nem na capa, nem na abertura de bloco, nem na home, nem em pílula. O cronograma muda e o slide não deve envelhecer junto. **Exceção: a ementa (seção 7)**, que é convite e mostra o dia e o horário de início de cada encontro, nunca o horário de fim nem a duração.
+- **Nada de data, horário ou duração do evento no slide:** nem na capa, nem na abertura de bloco, nem na home, nem em pílula. O cronograma muda e o slide não deve envelhecer junto. **Exceções:** a ementa (seção 7), que é convite e mostra o dia e o horário de início de cada encontro, nunca o horário de fim nem a duração; e a data de lançamento de modelos (mês/ano) como dado factual no panorama de modelos gratuitos do OpenCode.
 - **Só cite no slide o que já existe.** Arquivo, link, repositório ou comando que a turma vai procurar precisa existir antes de entrar no slide. O que ainda está por fazer (por exemplo, o repositório da oficina previsto no roteiro) fica fora do slide; avise o autor da pendência.
 - **Fatos de ferramenta são conferidos na documentação oficial:** comandos, atalhos, nomes de agentes e de modelos, onde ficam os arquivos. O que não se confirmar não entra no slide; avise o autor para conferir na máquina antes da aula.
 - **Cada slide traz algo novo.** Uma ideia-chave do roteiro que não rende um slide com conteúdo próprio (por exemplo, uma frase de efeito que só resume a tabela anterior) entra no slide vizinho ou sai. Decida com o autor.
@@ -121,7 +121,7 @@ Onde as peças do DESIGN.md aparecem hoje. Os números de slide mudam quando sli
 - **Janela de contexto (DESIGN 5.17):** no Dia 1, só no slide 14 (Quem cuida da janela). O slide "Quando a janela enche" do bloco de tokens saiu na v1.34. A versão em história (5.27) segue no Dia 2.
 - **Harness em volta do modelo (DESIGN 5.19):** fora do deck desde a v1.33. No slide 13 do Dia 1 (O que é harness), a cena de Ratatouille (5.29) ocupa o lugar da figura, e as 4 partes do harness vão numa lista com chip (5.30, primeiro uso da peça), nas cores que tinham na figura.
 - **Arquivos na hora certa (DESIGN 5.26):** fora do deck desde a v1.36. O slide "Vários arquivos pequenos" saiu do Dia 2, porque mostrava os arquivos do SDD antes da hora. Desde a v1.38 cada arquivo tem um slide próprio, sem esta figura.
-- **Slides de meme (DESIGN 5.31):** Dia 1, slides 19 (antes de "Esforço de raciocínio") e 23 (antes da demo "Build vs. Plan"); Dia 2, slide 1 (retomada).
+- **Slides de meme (DESIGN 5.31):** Dia 1, slides 19 (antes de "Esforço de raciocínio") e 23 (antes de "Planejar antes vale a pena?"); Dia 2, slide 1 (retomada).
 - **`layout-code__row--center` (DESIGN 6):** slides de arquivo do Dia 2 (constituição, spec, plano e tarefas).
 - **Fora do deck, mas no repositório:** a cena da Dory e a capa de "Como Se Fosse a Primeira Vez" (à espera de um lugar novo) e o meme `assets/img/memes/source-trust-me.png` (saiu na v1.45).
 

@@ -675,7 +675,7 @@ Cada slide usa **um** layout, num `div` wrapper que ocupa o slide inteiro. A ár
 | `layout-quote` | aspas grandes `--c-accent`, citação DM Sans 600 48px, autor em chip | light |
 | `layout-section` | abertura de bloco do roteiro: régua no topo · barra `--c-accent` (`.layout-section__bar`) e título em 96px · faixa corrente (5.24) na base, com os temas do bloco · 3 marcadores flutuando (`float`). Sem número do bloco, horário nem duração | dark |
 | `layout-meme` | eyebrow + título curto no topo · meme grande centralizado (`.layout-meme__stage`) · crédito embaixo (5.31) | light |
-| `layout-demo` | aviso de demo no telão ou de prática dos alunos, sempre com o eyebrow `[ MÃO NA MASSA ]`, com cursor piscante e título no topo · frase e lista "o que observar" (até 3 itens com glifo de 20px, no mesmo tamanho da frase, `--t-lead`; quando os itens são comandos, comando em destaque, 5.25) no meio · linha tracejada com botão para a ferramenta e, se precisar, pílula de configuração na base. Frase e lista herdam a cor do texto da superfície | light (regra da projeção, seção 4) |
+| `layout-demo` | aviso de demo no telão ou de prática dos alunos, sempre com o eyebrow `[ MÃO NA MASSA ]`, com cursor piscante e título no topo · frase e lista "o que observar" (até 3 itens com glifo de 20px, ou até 4 quando os itens são comandos em destaque, 5.25, no mesmo tamanho da frase, `--t-lead`) no meio · linha tracejada com botão para a ferramenta e, se precisar, pílula de configuração na base. Frase e lista herdam a cor do texto da superfície | light (regra da projeção, seção 4) |
 
 Regras:
 
