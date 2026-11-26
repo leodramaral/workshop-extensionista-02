@@ -15,7 +15,7 @@ Se algo estiver errado ou faltando, **corrija o arquivo certo primeiro** e só d
 ## 1. Notas do apresentador
 
 - O autor não usa as notas (`<aside class="notes">`) na apresentação. **Ignore-as:** não escreva, não atualize, não leve conteúdo para elas e não conte com elas para cobrir um tópico. O que precisa ser dito fica no slide ou sai.
-- As notas que já existem continuam no HTML, mas não são mantidas e não servem de referência (nem os tempos `[N min]`).
+- O Dia 1 não tem notas: todas foram removidas em 2026-11-26. No Dia 2 e na referência de UI, as que já existem continuam no HTML, mas não são mantidas e não servem de referência (nem os tempos `[N min]`).
 - A tecla `S` continua abrindo a visão do apresentador (plugin Notes), com o próximo slide e o cronômetro.
 - Se um tópico muito específico parecer precisar de nota, pare e discuta com o autor antes. Só ele define o que vai para as notas.
 
@@ -116,11 +116,12 @@ Regras:
 Onde as peças do DESIGN.md aparecem hoje. Os números de slide mudam quando slides entram ou saem: confira antes de citar.
 
 - **Painel de gráfico `.chart` (DESIGN 5.8):** slide "Curva em U" do Dia 2, que também apresenta o estudo *Lost in the Middle*.
+- **Barras de probabilidade (DESIGN 5.16):** slide 6 do Dia 1 (O próximo token) e slide 20 (Esforço de raciocínio), que usa as barras para os tokens de raciocínio de low a max, sem porcentagem.
 - **Robô AGENTS.md (DESIGN 5.12):** sem uso nos decks desde a v1.35 (o AGENTS.md saiu da oficina), só na referência de UI.
-- **Janela de contexto (DESIGN 5.17):** no Dia 1, só no slide 16 (Quem cuida da janela). O slide "Quando a janela enche" do bloco de tokens saiu na v1.34. A versão em história (5.27) segue no Dia 2.
-- **Harness em volta do modelo (DESIGN 5.19):** fora do deck desde a v1.33. No slide 15 do Dia 1 (O que é harness), a cena de Ratatouille (5.29) ocupa o lugar da figura, e as 4 partes do harness vão numa lista com chip (5.30, primeiro uso da peça), nas cores que tinham na figura.
+- **Janela de contexto (DESIGN 5.17):** no Dia 1, só no slide 14 (Quem cuida da janela). O slide "Quando a janela enche" do bloco de tokens saiu na v1.34. A versão em história (5.27) segue no Dia 2.
+- **Harness em volta do modelo (DESIGN 5.19):** fora do deck desde a v1.33. No slide 13 do Dia 1 (O que é harness), a cena de Ratatouille (5.29) ocupa o lugar da figura, e as 4 partes do harness vão numa lista com chip (5.30, primeiro uso da peça), nas cores que tinham na figura.
 - **Arquivos na hora certa (DESIGN 5.26):** fora do deck desde a v1.36. O slide "Vários arquivos pequenos" saiu do Dia 2, porque mostrava os arquivos do SDD antes da hora. Desde a v1.38 cada arquivo tem um slide próprio, sem esta figura.
-- **Slides de meme (DESIGN 5.31):** Dia 1, slides 10 (antes de "Tamanhos e raciocínio") e 22 (antes da demo "Build vs. Plan"); Dia 2, slide 1 (retomada).
+- **Slides de meme (DESIGN 5.31):** Dia 1, slides 19 (antes de "Esforço de raciocínio") e 23 (antes da demo "Build vs. Plan"); Dia 2, slide 1 (retomada).
 - **`layout-code__row--center` (DESIGN 6):** slides de arquivo do Dia 2 (constituição, spec, plano e tarefas).
 - **Fora do deck, mas no repositório:** a cena da Dory e a capa de "Como Se Fosse a Primeira Vez" (à espera de um lugar novo) e o meme `assets/img/memes/source-trust-me.png` (saiu na v1.45).
 
@@ -153,6 +154,8 @@ O visual dos dois está no DESIGN.md (seções 12 e 13). Aqui fica o resto.
 
 ## 9. Revisão e critérios de aceitação
 
+**Fluxo antes de cada commit:** toda mudança de conteúdo nos slides (texto, ordem, slide que entra ou sai) volta para o roteiro (`Workshop de Desenvolvimento com IA.md`, na raiz) antes do commit. O roteiro é a fonte do conteúdo, então ele precisa descrever o deck como ele está. Em seguida, confira os números de slide citados neste arquivo (seção 6). O roteiro nunca entra no commit.
+
 Ao revisar e pedir ajustes, cite o slide pelo **número da URL** (`dia-1.html#/16` é o slide 16; a capa é o 0), não pelo bloco do roteiro. O número muda quando slides entram ou saem: confira antes de citar.
 
 Um slide ou mudança só está **pronto** quando cumpre os critérios visuais do DESIGN.md (seção 10) e também:
@@ -160,6 +163,7 @@ Um slide ou mudança só está **pronto** quando cumpre os critérios visuais do
 - [ ] não há data, horário nem duração no slide;
 - [ ] todo arquivo, link, comando e fato de ferramenta citado existe e foi conferido na fonte;
 - [ ] há um comentário com o tema antes do slide, sem número de bloco do roteiro;
+- [ ] o roteiro foi atualizado com a mudança, antes do commit;
 - [ ] foi conferido no navegador **com recarga sem cache**: o `http.server` local não invalida CSS, e o navegador pode mostrar a versão antiga.
 
 O que evitar, além do que o DESIGN.md lista (seção 9):
