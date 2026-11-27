@@ -124,7 +124,7 @@ Onde as peças do DESIGN.md aparecem hoje. Os números de slide mudam quando sli
 - **Slides de meme (DESIGN 5.31):** Dia 1, slides 19 (antes de "Esforço de raciocínio") e 23 (antes de "Planejar antes vale a pena?"); no Dia 2, nenhum (o meme do Gru saiu da retomada em 2026-11-27).
 - **`layout-code--stack` (DESIGN 6):** slides de arquivo do bloco do OpenSpec no Dia 2 (9, 12, 13, 16 a 20, 22, 23, 26 e 27); com o terminal em duas colunas nos slides 9, 13, 18, 19 e 20. `layout-code__row--solo`: slide 8 (Iniciar o OpenSpec), só com o terminal.
 - **Comando em destaque (DESIGN 5.25):** Dia 2, slides 24 (Conferir no terminal) e 25 (spek no VS Code).
-- **Lista com chip (DESIGN 5.30):** slide 13 do Dia 1 (O que é harness).
+- **Lista com chip (DESIGN 5.30):** slide 13 do Dia 1 (O que é harness) e slides 28 (Uma mudança no Meu Sympla), 30 (Testes) e 31 (Design) do Dia 2.
 - **Grade de stacks com logos (DESIGN 5.33):** slide 10 do Dia 2 (O que é uma stack), dentro do bloco do OpenSpec, logo antes do `config.yaml`, que juntou o conceito de camadas e a tabela de stacks conhecidas. Os mesmos cartões aparecem soltos no slide 11 (Qual é a sua stack?), com `.stack-tiles`: um por stack, com o arquivo que a entrega.
 - **Um caso de uso por vez (DESIGN 5.28):** slide 5 do Dia 2, agora "Uma mudança por vez", com os rótulos EVENTOS, INSCRIÇÕES e CHECK-IN.
 - **Fora do deck, mas no repositório:** a cena da Dory e a capa de "Como Se Fosse a Primeira Vez" (à espera de um lugar novo) e o meme `assets/img/memes/source-trust-me.png` (saiu na v1.45).
