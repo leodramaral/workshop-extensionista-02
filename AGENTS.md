@@ -82,7 +82,7 @@ URLs base (cdnjs, reveal.js 6.0.1):
 │       └── flutuantes.js # quadrados flutuantes
 ├── assets/
 │   ├── img/              # imagens e capturas (PNG/WebP/SVG); memes parados em img/memes/; prévia da ementa em img/ementa-og.png, com o molde img/ementa-og.html
-│   ├── svg/              # ilustrações e diagramas
+│   ├── svg/              # ilustrações e diagramas; logos de tecnologias (Devicon, MIT) em svg/logos/
 │   └── video/            # cenas de filme recortadas: .webm + .mp4 + pôster .png
 ├── .nojekyll             # evita o processamento Jekyll do GitHub Pages
 ├── AGENTS.md             # regras do projeto (tudo que não é visual)
@@ -115,14 +115,18 @@ Regras:
 
 Onde as peças do DESIGN.md aparecem hoje. Os números de slide mudam quando slides entram ou saem: confira antes de citar.
 
-- **Painel de gráfico `.chart` (DESIGN 5.8):** slide "Curva em U" do Dia 2, que também apresenta o estudo *Lost in the Middle*.
+- **Painel de gráfico `.chart` (DESIGN 5.8):** fora do deck desde 2026-11-27, quando o slide "Curva em U" (*Lost in the Middle*) saiu do Dia 2.
 - **Barras de probabilidade (DESIGN 5.16):** slide 6 do Dia 1 (O próximo token) e slide 20 (Esforço de raciocínio), que usa as barras para os tokens de raciocínio de low a max, sem porcentagem.
-- **Robô AGENTS.md (DESIGN 5.12):** sem uso nos decks desde a v1.35 (o AGENTS.md saiu da oficina), só na referência de UI.
-- **Janela de contexto (DESIGN 5.17):** no Dia 1, só no slide 14 (Quem cuida da janela). O slide "Quando a janela enche" do bloco de tokens saiu na v1.34. A versão em história (5.27) segue no Dia 2.
+- **Robô AGENTS.md (DESIGN 5.12):** só na referência de UI. O AGENTS.md voltou à oficina em 2026-11-27, só no Dia 2 (slide 13, logo depois do `config.yaml`), porque o Meu Sympla de cada aluno já existe; o robô saiu desse slide quando ele passou para o `layout-code--stack`.
+- **Janela de contexto (DESIGN 5.17):** no Dia 1, só no slide 14 (Quem cuida da janela); no Dia 2, no slide 3 (O custo de entender o código), sem animação de história. O slide "Quando a janela enche" do bloco de tokens saiu na v1.34. A versão em história (5.27) saiu do Dia 2 em 2026-11-27, com o slide "Sessão nova é amnésia".
 - **Harness em volta do modelo (DESIGN 5.19):** fora do deck desde a v1.33. No slide 13 do Dia 1 (O que é harness), a cena de Ratatouille (5.29) ocupa o lugar da figura, e as 4 partes do harness vão numa lista com chip (5.30, primeiro uso da peça), nas cores que tinham na figura.
 - **Arquivos na hora certa (DESIGN 5.26):** fora do deck desde a v1.36. O slide "Vários arquivos pequenos" saiu do Dia 2, porque mostrava os arquivos do SDD antes da hora. Desde a v1.38 cada arquivo tem um slide próprio, sem esta figura.
-- **Slides de meme (DESIGN 5.31):** Dia 1, slides 19 (antes de "Esforço de raciocínio") e 23 (antes de "Planejar antes vale a pena?"); Dia 2, slide 1 (retomada).
-- **`layout-code__row--center` (DESIGN 6):** slides de arquivo do Dia 2 (constituição, spec, plano e tarefas).
+- **Slides de meme (DESIGN 5.31):** Dia 1, slides 19 (antes de "Esforço de raciocínio") e 23 (antes de "Planejar antes vale a pena?"); no Dia 2, nenhum (o meme do Gru saiu da retomada em 2026-11-27).
+- **`layout-code--stack` (DESIGN 6):** slides de arquivo do bloco do OpenSpec no Dia 2 (9, 12, 13, 16 a 20, 22, 23, 26 e 27); com o terminal em duas colunas nos slides 9, 13, 18, 19 e 20. `layout-code__row--solo`: slide 8 (Iniciar o OpenSpec), só com o terminal.
+- **Comando em destaque (DESIGN 5.25):** Dia 2, slides 24 (Conferir no terminal) e 25 (spek no VS Code).
+- **Lista com chip (DESIGN 5.30):** slide 13 do Dia 1 (O que é harness).
+- **Grade de stacks com logos (DESIGN 5.33):** slide 10 do Dia 2 (O que é uma stack), dentro do bloco do OpenSpec, logo antes do `config.yaml`, que juntou o conceito de camadas e a tabela de stacks conhecidas. Os mesmos cartões aparecem soltos no slide 11 (Qual é a sua stack?), com `.stack-tiles`: um por stack, com o arquivo que a entrega.
+- **Um caso de uso por vez (DESIGN 5.28):** slide 5 do Dia 2, agora "Uma mudança por vez", com os rótulos EVENTOS, INSCRIÇÕES e CHECK-IN.
 - **Fora do deck, mas no repositório:** a cena da Dory e a capa de "Como Se Fosse a Primeira Vez" (à espera de um lugar novo) e o meme `assets/img/memes/source-trust-me.png` (saiu na v1.45).
 
 ## 7. Certificado e ementa
@@ -139,7 +143,7 @@ O visual dos dois está no DESIGN.md (seções 12 e 13). Aqui fica o resto.
 - Página de divulgação feita para **circular como link** (WhatsApp, e-mail, redes). Como a referência de UI, não aparece na home nem em nenhum link do deck. Das três propostas da v1.39, a escolhida foi a A.
 - **Conteúdo:** título "Oficina de desenvolvimento com IA" (sem eyebrow, porque o título já diz "oficina"); os dois dias com os nomes Vibe coding e Spec-Driven Development; as tecnologias Python, Django, SQLite, Tailwind, Docker, OpenCode, Git e Spec Kit.
 - **Datas:** dia e horário de início, nunca o de fim nem a duração (exceção da seção 5).
-- **Spec Kit:** aparece como referência (a oficina faz o SDD à mão, no padrão dele), nunca como ferramenta que a turma vai instalar.
+- **Spec Kit:** aparece como referência (a oficina faz o SDD à mão, no padrão dele), nunca como ferramenta que a turma vai instalar. **Pendente:** desde 2026-11-27 o Dia 2 usa o OpenSpec e não faz mais o SDD à mão; a ementa e a prévia ainda citam o Spec Kit e só mudam se o autor pedir.
 - **Prévia do link:** `<title>`, `meta description`, Open Graph (`og:title`, `og:description`, `og:url`, `og:image`) e `twitter:card` `summary_large_image`. A imagem `assets/img/ementa-og.png` fica abaixo de 300 KB, para o WhatsApp mostrar a prévia. As URLs de `og:url` e `og:image` são absolutas, no endereço do GitHub Pages. **Se o conteúdo mudar (datas, nomes dos dias), atualize o molde `assets/img/ementa-og.html` e capture de novo** numa janela de 1200×630.
 
 ## 8. Publicação no GitHub Pages
@@ -180,6 +184,10 @@ O que evitar, além do que o DESIGN.md lista (seção 9):
 - reveal.js, notas de versão (mudanças da 6.0): https://github.com/hakimel/reveal.js/releases
 - MCP, documentação oficial (arquitetura e a comparação com USB-C): https://modelcontextprotocol.io/docs/getting-started/intro e https://modelcontextprotocol.io/docs/learn/architecture. Marca oficial: `docs/logo/light.svg` em https://github.com/modelcontextprotocol/modelcontextprotocol
 - OpenCode, documentação (agentes, permissões, comandos, skills, MCP): https://opencode.ai/docs
+- OpenSpec, documentação (instalação, init, skills, formato das specs): https://openspec.dev/docs e https://github.com/Fission-AI/OpenSpec
+- OpenCode, AGENTS.md (instructions): https://opencode.ai/docs/rules/
+- Devicon, logos de tecnologias (SVG, MIT), usados em `assets/svg/logos/`: https://devicon.dev e https://github.com/devicons/devicon
+- spek, visualizador de OpenSpec para VS Code: https://spekterm.com/spek/docs/getting-started/install/
 - Liu et al., *Lost in the Middle: How Language Models Use Long Contexts*, TACL 2023 (Stanford, UC Berkeley e Samaya AI): https://arxiv.org/abs/2307.03172. Valores do gráfico na Tabela 6 (20 documentos) e o closed-book na Tabela 1
 
 Referências visuais (Greptile, Mux): DESIGN.md, seção 11.

@@ -929,3 +929,37 @@ canvas.ponte-fig__mesh { display: block; color: var(--c-blue); }
 .table--arquivos td:first-child code { font-size: var(--t-body); font-weight: 400; }
 .table--arquivos td:last-child { font-style: italic; }
 .table--arquivos td:last-child .chip { font-style: normal; }
+
+/* Grade de stacks com logos (5.33): uma coluna por camada, com chip, subtítulo e cartões de tecnologia com o logo (Devicon, assets/svg/logos/) */
+.reveal .stack-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: var(--s-5);
+  align-items: start;
+}
+.stack-col { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-2); }
+.reveal .stack-col__sub { margin: 0; font: 400 var(--t-label)/1.3 var(--f-mono); color: var(--c-muted); }
+.reveal .stack-col__list { list-style: none; padding: 0; margin: var(--s-1) 0 0; display: flex; flex-direction: column; gap: var(--s-2); width: 100%; }
+.stack-tile {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-2) var(--s-3);
+  background: var(--c-white);
+  border: 1px solid var(--c-line);
+}
+.stack-tile__logos { display: flex; gap: var(--s-1); flex: none; }
+.stack-tile__logos img { display: block; width: 48px; height: 48px; object-fit: contain; }
+.stack-tile__txt { display: flex; flex-direction: column; line-height: 1.2; }
+.stack-tile__txt b { font: 600 var(--t-body)/1.2 var(--f-body); color: var(--c-ink); }
+.stack-tile__txt small { font: 400 var(--t-label)/1.3 var(--f-mono); color: var(--c-muted); }
+/* Cartões de stack soltos em grade de 3 colunas (5.33): slide "Qual é a sua stack?" */
+.reveal .stack-tiles {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid; /* o reveal força ul em block (armadilha da seção 6) */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s-3) var(--s-5);
+}
+.stack-tile__txt small code { font: inherit; color: var(--c-ink); }

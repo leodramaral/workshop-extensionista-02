@@ -400,6 +400,8 @@ Liga cartões ou etapas de um fluxo. É um SVG em camada absoluta sobre o layout
 
 ### 5.8 Painel de gráfico/diagrama
 
+> Fora do deck desde 2026-11-27. O CSS continua em `componentes.css` (detalhes no `AGENTS.md`, seção 6).
+
 `.hatch` > `.panel`, com fundo `--c-basalt` e padding 32px. Dentro vêm a legenda (marcador quadrado de 20px + rótulo mono), o SVG e uma linha de rótulos do eixo (Space Mono 24px, `justify-content: space-between`).
 
 - Dentro do SVG: linhas de grade `--c-tint` a 15% de opacidade, curva principal `--c-tint` de 6px e marcadores **quadrados** (não círculos) de 24px.
@@ -577,6 +579,8 @@ Figura da ponte para o SDD no Dia 2 ("Vários arquivos pequenos"), no estilo vet
 
 ### 5.27 A conversa some (figura)
 
+> Fora do deck desde 2026-11-27. O CSS continua em `componentes.css` (detalhes no `AGENTS.md`, seção 6).
+
 Figura do slide "Sessão nova é amnésia" do Dia 2. É a janela de contexto (5.17) contando uma história no tempo, em loop de 12s: `.hatch` > `.janela.amnesia` (`role="img"`, `aria-label` que descreve a sequência inteira).
 
 1. **Ontem:** o cabeçalho diz `sessão de ontem` e as linhas da conversa entram uma a uma (pedido, resposta, decisão, correção, decisão), em sálvia.
@@ -590,9 +594,9 @@ Figura do slide "Sessão nova é amnésia" do Dia 2. É a janela de contexto (5.
 
 ### 5.28 Um caso de uso por vez (figura)
 
-Figura do slide "Um caso de uso por vez" do Dia 2, na caixa de 850px do `layout-text-figure`: `.hatch` > `.casos-fig` (824×470, `--c-paper`, `role="img"`, `aria-label` com a sequência inteira). Mostra o sistema crescendo um caso de uso por vez, com o exemplo da lista de tarefas do Dia 1.
+Figura do slide "Uma mudança por vez" do Dia 2 (antes "Um caso de uso por vez"), na caixa de 850px do `layout-text-figure`: `.hatch` > `.casos-fig` (824×470, `--c-paper`, `role="img"`, `aria-label` com a sequência inteira). Mostra o Meu Sympla crescendo uma mudança por vez.
 
-- **Três colunas**, uma por caso: no topo, a etiqueta do caso (as do MCP, 5.20: `ADICIONAR`, `CONCLUIR`, `EXCLUIR`, com glifo na cor do bloco); embaixo, a pilha do sistema sobre uma linha de chão de 2px `--c-basalt`. A coluna 1 tem 1 bloco, a 2 tem 2 e a 3 tem 3 (`.casos-fig__bloco`, 180×60, cor cheia `--c-blue` / `--c-pink` / `--c-violet`, contorno de 2px `--c-ink`, texto mono `CASO N` em `--c-ink`). Abaixo de cada coluna, o chip `chip--green` `FUNCIONA`.
+- **Três colunas**, uma por caso: no topo, a etiqueta do caso (as do MCP, 5.20: `EVENTOS`, `INSCRIÇÕES`, `CHECK-IN`, com glifo na cor do bloco); embaixo, a pilha do sistema sobre uma linha de chão de 2px `--c-basalt`. A coluna 1 tem 1 bloco, a 2 tem 2 e a 3 tem 3 (`.casos-fig__bloco`, 180×60, cor cheia `--c-blue` / `--c-pink` / `--c-violet`, contorno de 2px `--c-ink`, texto mono `MUDANÇA N` em `--c-ink`). Abaixo de cada coluna, o chip `chip--green` `FUNCIONA`.
 - **Ligação:** linha `--c-blue` de 2px da etiqueta até o bloco novo da coluna, com ponta triangular na etiqueta (5.21). Sob o bloco novo fica uma vaga tracejada (`.casos-fig__vaga`, 2px dashed `--c-muted`): enquanto o bloco não chegou, a linha termina na vaga, nunca no ar.
 - **Figura viva (5.22):** ciclo de 9s por coluna, escalonado por `--k` (3s): a etiqueta acende (`acende`), o bloco novo desce para a vaga (`sobe`) e o `FUNCIONA` carimba (`carimba`); a vez passa para a coluna seguinte.
 - **Estado parado** (fora do slide ativo, `prefers-reduced-motion` e `?print-pdf`): as três colunas prontas. No `?print-pdf` o reveal.js marca todos os slides como ativos, por isso a figura tem uma regra própria sob `html.print-pdf` que desliga a animação.
@@ -656,6 +660,16 @@ Trecho curto de filme, GIF ou meme que ilustra a ideia do slide com humor. Usado
 
 O meme Expanding Brain é vertical e estreito; na projeção as legendas ficariam pequenas. A versão do deck põe os 4 quadros do cérebro lado a lado (`.brain-strip`, fundo `--c-white`), cada um com a legenda embaixo (`.brain-strip__cap`, 28px, o nome em 600 numa linha e o resto embaixo). Os quadros são recortes da coluna direita do template (`assets/img/memes/expanding-brain-1..4.jpg`), com `object-fit: cover` para ficarem do mesmo tamanho. Entram com `.enter` escalonado, da esquerda para a direita.
 
+### 5.33 Grade de stacks com logos
+
+`.stack-grid`, dentro de um `layout-title`, logo abaixo da frase: uma coluna por camada (4 colunas iguais, `minmax(0, 1fr)`, gap de 48px). Cada coluna tem o chip da camada com glifo (5.2), um subtítulo mono de 24px em `--c-muted` e a lista de cartões de tecnologia.
+
+- **Cartão** (`.stack-tile`): fundo `--c-white`, borda de 1px `--c-line`, cantos retos, padding `16px 24px`. À esquerda, o logo (48px; até três lado a lado, como HTML, CSS e JS); à direita, o nome em DM Sans 600 28px e a linguagem em Space Mono 24px `--c-muted`.
+- **Logos:** SVG do pacote **Devicon** (MIT, v2.18.0), baixados para `assets/svg/logos/`, sem CDN. As cores são as originais de cada marca; não recolorir.
+- **Entrada:** chips e cartões com `.enter` escalonado, coluna por coluna.
+- **Cartões soltos** (`.stack-tiles`): os mesmos cartões numa grade de 3 colunas (gap de 24px × 48px), sem chip de camada. Na linha mono vai a pista, com o nome do arquivo em `<code>` na cor `--c-ink` (slide "Qual é a sua stack?").
+- Uso no deck: `AGENTS.md`, seção 6.
+
 ## 6. Layouts (`css/layouts.css`)
 
 Cada slide usa **um** layout, num `div` wrapper que ocupa o slide inteiro. A área útil é de 1664×824 .
@@ -669,7 +683,7 @@ Cada slide usa **um** layout, num `div` wrapper que ocupa o slide inteiro. A ár
 | `layout-text-figure` | `layout-title` + linha com texto (flex 1) e painel/figura (largura fixa de ~850px); os dois ficam centralizados na vertical, na mesma altura | light |
 | `layout-robots` | `layout-title` + 3 colunas, cada uma com robô sobre linha de chão e legenda (chip + 1 a 2 linhas). Variante `layout-robots--six`: 6 colunas, robô de 240px, legenda em 24px com até 3 linhas | light |
 | `layout-flow` | `layout-title` + estágios empilhados (rótulo mono de 200px + conteúdo), ligados por conectores verticais. Sem robô desde a v1.45: frase e tokens em 64px (`--t-h2`, token com padding `8px 14px`) e números em 36px (`--t-lead`), para ocupar a largura | light |
-| `layout-code` | `layout-title` + cartão de código/diff (~1000px) e coluna lateral com chips e selos; a coluna pode abrir com um robô de 220px sobre linha de chão (`.layout-code__robot`). Com a coluna só de texto, `layout-code__row--center` centraliza as duas colunas na vertical | light |
+| `layout-code` | `layout-title` + cartão de código/diff (~1000px) e coluna lateral com chips e selos; a coluna pode abrir com um robô de 220px sobre linha de chão (`.layout-code__robot`). Com a coluna só de texto, `layout-code__row--center` centraliza as duas colunas na vertical. Só com o cartão, sem coluna lateral (um comando no terminal), `layout-code__row--solo` põe o cartão (1400px) no centro da área abaixo do título, com letra de 44px (`--t-h3`), entrelinha 1.5 e linhas com padding `12px 48px`, para o comando ser lido de longe. **Empilhado** (`layout-code--stack`, passo a passo do OpenSpec): os textos em cima, em duas colunas (cada nota é `.layout-code__note`, com chip e frase; uma nota sem chip alinha a frase com as outras por `subgrid`), e o terminal embaixo, na largura toda, com letra de 30px. Arquivo com mais de 7 linhas divide o terminal em duas colunas (`.code__body--cols` com dois `.code__col`), cortando onde o arquivo já se separa (duas pastas, Requirement e Scenario). O cartão entra depois dos textos | light |
 | `layout-steps` | `layout-title` + grade 3×2 (colunas de 512px, linhas de 276px, gap de 64px) + conectores em serpentina | light |
 | `layout-table` | `layout-title` + tabela (Space Mono nos cabeçalhos, DM Sans 28px nas células, linhas de 1px `--c-line`) | light |
 | `layout-quote` | aspas grandes `--c-accent`, citação DM Sans 600 48px, autor em chip | light |

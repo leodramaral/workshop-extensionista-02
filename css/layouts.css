@@ -323,3 +323,34 @@
 
 /* Cartão de arquivo com coluna lateral só de texto (slides de arquivo do Dia 2): as duas colunas centralizadas na vertical */
 .layout-code__row--center { align-items: center; }
+/* Só o cartão, sem coluna lateral: o cartão fica no centro da área que sobra abaixo do título */
+.layout-code__row--solo { grid-template-columns: 1400px; justify-content: center; align-content: center; flex: 1; }
+/* Comando para a turma digitar: letra grande e linhas folgadas, para ler de longe */
+.layout-code__row--solo .code { font-size: var(--t-h3); line-height: 1.5; }
+.layout-code__row--solo .code__head { padding: 20px 48px; font-size: var(--t-body); }
+.layout-code__row--solo .code__body { padding: 24px 0; }
+.layout-code__row--solo .diff__line { gap: 40px; padding: 12px 48px; }
+
+/* layout-code empilhado (passo a passo do OpenSpec): os textos em duas colunas no alto e o terminal grande, na largura toda, embaixo */
+.layout-code--stack { gap: var(--s-5); }
+.layout-code--stack .layout-code__row { grid-template-columns: 1fr; gap: var(--s-5); align-content: start; }
+.layout-code--stack .layout-code__side {
+  order: -1; /* os textos vêm antes do terminal */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto; /* linha do chip e linha do texto, compartilhadas pelas duas notas */
+  column-gap: var(--s-7);
+  row-gap: var(--s-2);
+  align-items: start;
+}
+.layout-code__note { display: grid; grid-row: span 2; grid-template-rows: subgrid; justify-items: start; }
+.layout-code__note > p:only-child { grid-row: 2; } /* nota sem chip: o texto fica na linha dos outros textos */
+.reveal .layout-code__note p { margin: 0; }
+.layout-code--stack .code { font-size: 30px; line-height: 1.4; }
+.layout-code--stack .code__head { padding: 14px 40px; font-size: var(--t-label); }
+.layout-code--stack .code__body { padding: 10px 0; }
+.layout-code--stack .diff__line { gap: 32px; padding: 4px 40px; }
+/* Terminal em duas colunas, para arquivo longo: o corte segue a estrutura do arquivo (duas pastas, Requirement e Scenario) */
+.layout-code--stack .code__body--cols { display: grid; grid-template-columns: 1fr 1fr; }
+.layout-code--stack .code__body--cols .code__col + .code__col { border-left: 1px solid var(--frame-dark); }
+.layout-code--stack .layout-code__note:only-child { grid-column: 1 / -1; } /* uma nota só ocupa a largura toda */
